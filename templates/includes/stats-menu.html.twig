@@ -1,0 +1,116 @@
+{# @xarcachemanager/includes/stats-menu.html.twig #}
+
+{% block stats_menu %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+{#  Common Cache Statistics menu #}
+{{ xar_style({scope: "module", module: "base", file: "navtabs"}) }}
+
+    {% if not tab %}
+        {% set tab = 'none' %}
+    {% endif %}
+
+    <div>
+        <ul class="xar-tabs">
+            {# <!-- <dt class="help">
+                
+                    Statistics
+                
+                : 
+            </dt> --> #}
+		{% if tab == 'none' or tab == 'overview' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'overview'}) }}" class="{{ linkclass }}">
+                        Summary
+                    </a>
+                </li> 
+
+		{% if tab == 'page' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'page'}) }}" class="{{ linkclass }}">
+                        Pages
+                    </a>
+                </li>
+		
+		{% if tab == 'block' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'block'}) }}" class="{{ linkclass }}">
+                        Blocks
+                    </a>
+                </li>   
+		
+		 {% if tab == 'module' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+ 
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'module'}) }}" class="{{ linkclass }}">
+                        Modules
+                    </a>
+                </li>    
+ 
+  		{% if tab == 'object' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'object'}) }}" class="{{ linkclass }}">
+                        Objects
+                    </a>
+                </li>  
+
+  		{% if tab == 'variable' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'variable'}) }}" class="{{ linkclass }}">
+                        Variables
+                    </a>
+                </li>  
+
+		{% if tab == 'autocache' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+                <li class="{{ tabclass }}">
+                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'autocache'}) }}" class="{{ linkclass }}">
+                        Auto-Cache
+                    </a>
+                </li> 
+
+        </ul>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{# @xarcachemanager/admin/queries.html.twig #}
+
+{% block queries %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-body">
+    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    <h2>{{ xar_translate('Configure Query Caching') }}</h2>
+    <form action="{{ xar_moduleurl('xarcachemanager', 'admin', 'queries') }}" method="post">
+    <fieldset>
+        <legend>
+            {{ xar_translate('Query Caching Options') }}
+        </legend>
+      <p class="xar-form-input-wrapper-before">
+        {{ xar_translate('Queries in the following functions could be quite expensive for large sites.
+          Even if you don\'t use page or module output caching, you might consider using query caching
+          to save the results of individual database queries here.') }}
+      </p>
+
+      {#  TODO: enable $dbconn-LogSQL() and retrieve expensive SQL queries #}
+
+      <table border="0" cellpadding="4" cellspacing="0">
+        {% for module, querylist in queries %}
+          <tr>
+            <th>{{ module }}</th>
+            <th colspan="2">&#160;</th>
+          </tr>
+          {% for query, expire in querylist %}
+            <tr>
+              <td>&#160;</td>
+              <td><label for="expire_{{ module }}_{{ query }}">{{ query }}</label></td>
+              <td>
+                {% if not expire %}
+                  <input type="text" name="expire[{{ module }}][{{ query }}]" id="expire_{{ module }}_{{ query }}" size="5" value="0" />
+                  {% else %}
+                  <input type="text" name="expire[{{ module }}][{{ query }}]" id="expire_{{ module }}_{{ query }}" size="5" value="{{ expire }}" />
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        {% endfor %}
+
+      </table>
+    </fieldset>
+    <div class="xar-form-input-wrapper-after">
+            <input type="hidden" name="authid" value="{{ authid }}" />
+            <input type="submit" name="submit" value="{{ xar_translate('Submit') }}" />
+    </div>
+    </form>
+    <p class="xar-form-input-wrapper">
+      {{ xar_translate('Please note that cached query results will only be invalidated based on expiration time (for now ?).') }}
+    </p>
+
+</div>
+{% endblock %}

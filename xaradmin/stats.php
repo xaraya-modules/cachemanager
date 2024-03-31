@@ -57,6 +57,10 @@ function xarcachemanager_admin_stats($args)
     }
 
     $data = [];
+
+    // get cache status
+    $data['status'] = xarMod::apiFunc('xarcachemanager', 'admin', 'getstatus');
+
     $data['tab'] = $tab;
     $data['itemsperpage'] = $numitems;
 
@@ -64,33 +68,6 @@ function xarcachemanager_admin_stats($args)
     $data['settings'] = CacheManager::get_config(
         ['from' => 'file', 'tpl_prep' => true]
     );
-
-    $data['PageCachingEnabled'] = 0;
-    $data['BlockCachingEnabled'] = 0;
-    $data['ModuleCachingEnabled'] = 0;
-    $data['ObjectCachingEnabled'] = 0;
-    $data['VariableCachingEnabled'] = 0;
-    $data['AutoCachingEnabled'] = 0;
-    if (xarOutputCache::isPageCacheEnabled()) {
-        $data['PageCachingEnabled'] = 1;
-        if (file_exists($outputCacheDir . '/autocache.log')) {
-            $data['AutoCachingEnabled'] = 1;
-        }
-    }
-    if (xarOutputCache::isBlockCacheEnabled()) {
-        $data['BlockCachingEnabled'] = 1;
-    }
-    if (xarOutputCache::isModuleCacheEnabled()) {
-        $data['ModuleCachingEnabled'] = 1;
-    }
-    if (xarOutputCache::isObjectCacheEnabled()) {
-        $data['ObjectCachingEnabled'] = 1;
-    }
-    if (xarCache::isVariableCacheEnabled()) {
-        $data['VariableCachingEnabled'] = 1;
-    }
-    // TODO: bring in line with other cache systems ?
-    $data['QueryCachingEnabled'] = 0;
 
     switch ($tab) {
         case 'page':
@@ -127,7 +104,7 @@ function xarcachemanager_admin_stats($args)
                 ));
                 return true;
             }
-            if (!empty($data[$enabled]) && !empty($data['settings'][$storage])) {
+            if (!empty($data['status'][$enabled]) && !empty($data['settings'][$storage])) {
                 if (empty($data['settings'][$provider])) {
                     $data['settings'][$provider] = null;
                 }
@@ -341,7 +318,7 @@ function xarcachemanager_admin_stats($args)
                                          'hits'    => 0,
                                          'misses'  => 0,
                                          'modtime' => 0, ];
-                if ($data[$enabled] && !empty($data['settings'][$storage])) {
+                if ($data['status'][$enabled] && !empty($data['settings'][$storage])) {
                     if (empty($data['settings'][$provider])) {
                         $data['settings'][$provider] = null;
                     }
@@ -367,7 +344,7 @@ function xarcachemanager_admin_stats($args)
                     $data[$cachevar]['ratio'] = 0.0;
                 }
                 // get logfile stats
-                if ($data[$enabled] && !empty($data['settings'][$logfile])) {
+                if ($data['status'][$enabled] && !empty($data['settings'][$logfile])) {
                     $data[$logvar] = [];
                     // status field = 1
                     xarcachemanager_stats_filestats($data[$logvar], $data['settings'][$logfile], 1, 1);
@@ -382,7 +359,7 @@ function xarcachemanager_admin_stats($args)
             $data['settings']['QueryCacheStorage'] = 'filesystem';
             $data['querycache'] = ['size'  => 0,
                                         'items' => 0, ];
-            if ($data['QueryCachingEnabled'] && !empty($data['settings']['QueryCacheStorage'])) {
+            if ($data['status']['QueryCachingEnabled'] && !empty($data['settings']['QueryCacheStorage'])) {
                 $querystorage = xarCache::getStorage(['storage'  => $data['settings']['QueryCacheStorage'],
                                                            'type'     => 'database',
                                                            'cachedir' => sys::varpath() . '/cache', ]);
@@ -392,7 +369,7 @@ function xarcachemanager_admin_stats($args)
 
             // get auto-cache stats
             $data['settings']['AutoCacheLogFile'] = $outputCacheDir . '/autocache.log';
-            if ($data['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheLogFile'])) {
+            if ($data['status']['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheLogFile'])) {
                 $data['autocachelog'] = [];
                 // status field = 1
                 xarcachemanager_stats_filestats($data['autocachelog'], $data['settings']['AutoCacheLogFile'], 1, 1);
@@ -400,12 +377,12 @@ function xarcachemanager_admin_stats($args)
                     $data['autocachelog']['size'] = round($data['autocachelog']['size'] / 1048576, 2);
                 }
             }
-            if ($data['AutoCachingEnabled'] && file_exists($outputCacheDir . '/autocache.stats')) {
+            if ($data['status']['AutoCachingEnabled'] && file_exists($outputCacheDir . '/autocache.stats')) {
                 $data['settings']['AutoCacheStatFile'] = $outputCacheDir . '/autocache.stats';
             } else {
                 $data['settings']['AutoCacheStatFile'] = '';
             }
-            if ($data['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheStatFile'])) {
+            if ($data['status']['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheStatFile'])) {
                 $data['autocachestat'] = [];
                 // hit field = 1, miss field = 2
                 xarcachemanager_stats_filestats($data['autocachestat'], $data['settings']['AutoCacheStatFile'], 1, 2);

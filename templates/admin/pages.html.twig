@@ -1,0 +1,230 @@
+{# @xarcachemanager/admin/pages.html.twig #}
+
+{% block pages %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+<a name="config"></a>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-body">
+    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    <h2>{{ xar_translate('Configure Page Caching') }}</h2>
+
+    {% if not pages or pages|length < 1 %}
+        {{ xar_translate('Page caching is currently disabled...') }}
+    {% else %}
+    <form action="{{ xar_moduleurl('xarcachemanager','admin','pages') }}" method="post">
+
+    {#  this just shows the current rules for now #}
+    <fieldset>
+        <legend>
+            {{ xar_translate('Page Caching Options') }}
+        </legend>
+    <table border="1" cellpadding="4" cellspacing="0">
+    <tr>
+      <th colspan="3">
+        {{ xar_translate('Default page caching') }}
+      </th>
+    </tr>
+    <tr>
+      <td>&#160;</td>
+      <td>{{ xar_translate('Modules') }}</td>
+      {% if not settings['PageHookedOnly'] %}
+        <td>{{ xar_translate('All') }}</td>
+      {% else %}
+        <td>{{ xar_translate('Hooked to xarCacheManager') }}</td>
+      {% endif %}
+    </tr>
+    <tr>
+      <td>AND</td>
+      <td>{{ xar_translate('Type') }}</td>
+      <td>user</td>
+    </tr>
+    {% if not settings['PageDisplayView'] %}
+    <tr>
+      <td>AND NOT</td>
+      <td>{{ xar_translate('Function') }}</td>
+      <td>display</td>
+    </tr>
+    {% endif %}
+    <tr>
+      <td>AND</td>
+      <td>{{ xar_translate('Request Method') }}</td>
+      <td>GET or HEAD</td>
+    </tr>
+    <tr>
+      <td>AND</td>
+      <td>{{ xar_translate('Theme') }}</td>
+    {% if not settings['OutputDefaultTheme'] %}
+      <td>{{ xar_translate('All Themes') }}</td>
+    {% else %}
+      <td>{{ settings['OutputDefaultTheme'] }}</td>
+    {% endif %}
+    </tr>
+    <tr>
+      <td>AND</td>
+      <td>{{ xar_translate('Roles') }}</td>
+      <td>
+          {{ xar_translate('Anonymous') }}
+          {% for group in groups %}
+              {% if group['id'] == 1 %}
+                  {#  skip Everybody #}
+                  <xar:continue/>
+              {% endif %}
+              <br/>
+              {% if group['checked'] %}
+                 <input type="checkbox" name="groups[{{ group['id'] }}]" id="groups_{{ group['id'] }}" value="1" checked="checked">{{ group['name'] }} ({{ group['users'] }})</input>
+              {% else %}
+                 <input type="checkbox" name="groups[{{ group['id'] }}]" id="groups_{{ group['id'] }}" value="1">{{ group['name'] }} ({{ group['users'] }})</input>
+              {% endif %}
+          {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <th colspan="3">
+        {{ xar_translate('Session-less page caching') }}
+      </th>
+    </tr>
+    <tr>
+      <td colspan="3">
+        {{ xar_translate('Enable session-less page caching of the following URLs for your first-time visitors') }}
+        <br/>
+        {{ xar_translate('Example :') }}<br/>
+        {{ xar_baseurl() }}<br/>
+        {{ xar_baseurl() }}index.php<br/>
+        <textarea name="sessionless" id="sessionless" rows="10" cols="80">{{ sessionless }}</textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="autoregenerate">{{ xar_translate('Auto-regenerate session-less URL cache') }}</label>
+      </td>
+      <td>
+        {% if xar_modvar('xarcachemanager', 'AutoRegenSessionless') %}
+          <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
+        {% else %}
+          <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <th colspan="3">
+        {{ xar_translate('Auto-cache configuration') }}
+      </th>
+    </tr>
+    <tr>
+      <td colspan="3">
+        {{ xar_translate('Enable automatic caching of frequently-hit pages for your first-time visitors') }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="autocache_period">{{ xar_translate('Period of analysis') }}</label>
+      </td>
+  <td>
+    <input type="text" name="autocache[period]" id="autocache_period" size="9" value="{{ settings['AutoCachePeriod'] }}" />
+    {{ xar_translate('hh:mm:ss') }}
+    [ <a href="{{ xar_currenturl() }}#viewlog">{{ xar_translate('view log') }}</a> ]
+  </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="autocache_threshold">{{ xar_translate('Threshold for inclusion') }}</label>
+      </td>
+      <td>
+        <input type="text" name="autocache[threshold]" id="autocache_threshold" size="5" value="{{ settings['AutoCacheThreshold'] }}" />
+        {{ xar_translate('hits in that period') }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="autocache_maxpages">{{ xar_translate('Maximum number of pages') }}</label>
+      </td>
+      <td>
+        <input type="text" name="autocache[maxpages]" id="autocache_maxpages" size="5" value="{{ settings['AutoCacheMaxPages'] }}" />
+        {{ xar_translate('pages in cache') }}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2">
+        <label for="autocache_keepstats">{{ xar_translate('Keep auto-cache statistics') }}</label>
+      </td>
+      <td>
+        {% if settings['AutoCacheKeepStats'] %}
+          <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" checked="checked" />
+          [ <a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': 'autocache'}) }}">{{ xar_translate('view stats') }}</a> ]
+        {% else %}
+          <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" />
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <label for="autocache_include">{{ xar_translate('Pages to include in the auto-cache') }}</label>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <textarea name="autocache[include]" id="autocache_include" rows="5" cols="80">{{ settings['AutoCacheInclude'] }}</textarea>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <label for="autocache_exclude">{{ xar_translate('Pages to exclude from the auto-cache') }}</label>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3">
+        <textarea name="autocache[exclude]" id="autocache_exclude" rows="5" cols="80">{{ settings['AutoCacheExclude'] }}</textarea>
+      </td>
+    </tr>
+    </table>
+    </fieldset>
+    <div class="xar-form-input-wrapper">
+        <input type="hidden" name="authid" value="{{ authid }}" />
+        <input type="submit" name="submit" value=" }}{{ xar_translate('Submit') }} }}" />
+    </div>
+    </form>
+
+<a name="viewlog"></a>
+    <h2>{{ xar_translate('Current Auto-Cache Log') }} [ <a href="{{ xar_currenturl() }}#config">{{ xar_translate('up') }}</a> ]</h2>
+    {% if autocachepages %}
+    <p>{{ xar_translate('From #(1) to #(2)', xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',autocachestart]), xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',autocacheend])) }}</p>
+    <table border="1" cellpadding="4" cellspacing="0">
+    <tr>
+      {% for status in autocachehits|keys %}
+        <th>{{ status }}</th>
+      {% endfor %}
+      <th>{{ xar_translate('Page') }}</th>
+    </tr>
+    {% for page, count in autocachepages %}
+    <tr>
+      {% for status in autocachehits|keys %}
+    {% if count[status] %}
+          <td>{{ count[status] }}</td>
+        {% else %}
+          <td>-</td>
+        {% endif %}
+      {% endfor %}
+      <td>{{ page }}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+      {% for status in autocachehits|keys %}
+        <th>{{ autocachehits[status] }}</th>
+      {% endfor %}
+      <th>{{ xar_translate('Total') }}</th>
+    </tr>
+    </table>
+    {% if autocacheproposed %}
+    <p>{{ xar_translate('Current URLs proposed for session-less caching .') }}</p>
+    <ol>
+    {% for url, count in autocacheproposed %}
+  <li>{{ url }}({{ count }})</li>
+    {% endfor %}
+    </ol>
+    {% endif %}
+    {% endif %}
+
+    {% endif %}
+
+</div>
+{% endblock %}

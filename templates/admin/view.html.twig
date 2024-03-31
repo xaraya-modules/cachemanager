@@ -1,0 +1,81 @@
+{# @xarcachemanager/admin/view.html.twig #}
+
+{% block view %}
+{{ xar_style({scope: "module", module: "base", file: "navtabs"}) }}
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-body">
+  {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+  <h2>{{ xar_translate('View Cache Item') }}</h2>
+    {{ include('@xarcachemanager/includes/stats-menu.html.twig') }}
+
+    <div style="overflow:auto;">
+    <table class="xar-full-width xar-border-thin" cellspacing="2" cellpadding="0" valign="top">
+        <tr>
+            <td colspan="2" style="font-weight:bold;">
+                {{ xar_translate('Browsing:&#160;') }}{{ tab }} cache
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="font-weight:bold;">
+                Cache item:&#160;
+                {{ key }}
+                [ <a href="{{ xar_moduleurl('xarcachemanager','admin','flushcache',{('flushkey[' ~ tab ~ ']'): key, 'authid': authid, 'confirm': 1, 'return_url': return_url}) }}">flush key</a> ]
+                {{ code }}
+                [ <a href="{{ xar_moduleurl('xarcachemanager','admin','flushcache',{('flushkey[' ~ tab ~ ']'): key, ('cachecode[' ~ tab ~ ']'): code, 'authid': authid, 'confirm': 1, 'return_url': return_url}) }}">delete item</a> ]
+            </td>
+        </tr>
+        {% if link %}
+            <tr>
+                <td colspan="2">
+                    <strong>Link:</strong>&#160;<a href="{{ xar_prep_html(link) }}">{{ xar_prep_html(link) }}</a>
+                </td>
+            </tr>
+        {% endif %}
+        {% if title %}
+            <tr>
+                <td colspan="2">
+                    <strong>Title:</strong>&#160;{{ dump(title) }}
+                </td>
+            </tr>
+        {% endif %}
+        {% for style in styles %}
+            <tr>
+                <td colspan="2">
+                    <strong>Style:</strong>&#160;{{ dump(style) }}
+                </td>
+            </tr>
+        {% endfor %}
+        {% for info in script %}
+            <tr>
+                <td colspan="2">
+                    <strong>Script:</strong>&#160;{{ dump(info) }}
+                </td>
+            </tr>
+        {% endfor %}
+        {% if tab == 'variable' %}
+            <tr>
+                <td colspan="2">
+                {% set dummy = lines|join("\n") %}
+		<pre>{{ dummy }}</pre>
+                </td>
+            </tr>
+        {% else %}
+            {% for key, line in lines %}
+            <tr>
+                <td class="xar-align-left" valign="top" style="font-size:small; color:red">
+                    {{ key }}:&#160;&#160;
+                </td>
+                <td class="xar-align-left" valign="top" style="font-size:small">
+                   {{ xar_prep_display(line) }}
+                </td>
+            </tr>
+            {% endfor %}
+        {% endif %}
+    </table>
+    {% if not lines %}
+        This item is not in cache anymore
+    {% endif %}
+    </div>
+
+</div>
+{% endblock %}

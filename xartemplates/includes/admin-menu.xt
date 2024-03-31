@@ -3,11 +3,7 @@
 <xar:comment> License: GPL http://www.gnu.org/copyleft/gpl.html </xar:comment>
 <xar:comment>Common Administration menu</xar:comment>
 <xar:style scope="module" module="base" file="tabs" />
-<xar:set name="pagevarCacheDir">file_exists(sys::varpath() . '/cache/output/cache.pagelevel');</xar:set>
-<xar:set name="blockvarCacheDir">file_exists(sys::varpath() . '/cache/output/cache.blocklevel');</xar:set>
-<xar:set name="modulevarCacheDir">file_exists(sys::varpath() . '/cache/output/cache.modulelevel');</xar:set>
-<xar:set name="objectvarCacheDir">file_exists(sys::varpath() . '/cache/output/cache.objectlevel');</xar:set>
-<xar:set name="variablevarCacheDir">file_exists(sys::varpath() . '/cache/output/cache.variablelevel');</xar:set>
+<xar:set name="status">xarMod::apiFunc('xarcachemanager', 'admin', 'getstatus')</xar:set>
 <xar:set name="info">xarController::getRequest()->getInfo()</xar:set>
 <xar:set name="activetab">$info[2]</xar:set>
 <div>
@@ -31,7 +27,7 @@
           </a>
         </li>
 
-        <xar:if condition="$pagevarCacheDir">
+        <xar:if condition="$status['PageCachingEnabled']">
 		<xar:if condition="$activetab eq 'pages'">
 		    <xar:set name="tabclass">'xar-tab-active'</xar:set>
 		    <xar:set name="linkclass">'xar-accent xar-accent-outline'</xar:set>
@@ -46,7 +42,7 @@
             </li>
         </xar:if>
 
-        <xar:if condition="$blockvarCacheDir">
+        <xar:if condition="$status['BlockCachingEnabled']">
 		<xar:if condition="$activetab eq 'blocks'">
 		    <xar:set name="tabclass">'xar-tab-active'</xar:set>
 		    <xar:set name="linkclass">'xar-accent xar-accent-outline'</xar:set>
@@ -61,7 +57,7 @@
             </li>
         </xar:if>
 
-        <xar:if condition="$modulevarCacheDir">
+        <xar:if condition="$status['ModuleCachingEnabled']">
 		<xar:if condition="$activetab eq 'modules'">
 		    <xar:set name="tabclass">'xar-tab-active'</xar:set>
 		    <xar:set name="linkclass">'xar-accent xar-accent-outline'</xar:set>
@@ -76,7 +72,7 @@
             </li>
         </xar:if>
 
-        <xar:if condition="$objectvarCacheDir">
+        <xar:if condition="$status['ObjectCachingEnabled']">
 		<xar:if condition="$activetab eq 'objects'">
 		    <xar:set name="tabclass">'xar-tab-active'</xar:set>
 		    <xar:set name="linkclass">'xar-accent xar-accent-outline'</xar:set>
@@ -91,7 +87,7 @@
             </li>
         </xar:if>
 
-        <xar:if condition="$variablevarCacheDir">
+        <xar:if condition="$status['VariableCachingEnabled']">
 		<xar:if condition="$activetab eq 'variables'">
 		    <xar:set name="tabclass">'xar-tab-active'</xar:set>
 		    <xar:set name="linkclass">'xar-accent xar-accent-outline'</xar:set>

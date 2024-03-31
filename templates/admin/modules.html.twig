@@ -1,0 +1,97 @@
+{# @xarcachemanager/admin/modules.html.twig #}
+
+{% block modules %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-body">
+    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    <h2>{{ xar_translate('Configure Module Output Caching') }}</h2>
+
+    {% if not modules or modules|length < 1 %}
+      {{ xar_translate('Module caching is currently disabled') }}
+    {% else %}
+      {{ xar_javascript({module: "base", filename: "checkall.js"}) }}
+      <form action="{{ xar_moduleurl('xarcachemanager','admin','modules') }}" name="modulecache_form" id="modulecache_form" method="post">
+        <fieldset>
+        <legend>
+            Module Caching Options
+        </legend>
+        <table border="1" cellpadding="4" cellspacing="0">
+          <tr>
+            <th class="xar-align-center"><label title="Do you want to enable caching for this module function ?">Enable<br/>Caching</label></th>
+            <th class="xar-align-center">Module</th>
+            <th class="xar-align-center">User GUI<br/>Function</th>
+            <th class="xar-align-center"><label title="Which parameters will affect the output of this module function ?">Parameters</label></th>
+            <th class="xar-align-center"><label title="Is the output of this module function identical for all users, or for all members of the same group ?">User Sharing</label></th>
+            <th class="xar-align-center"><label title="Do you want to override the default expiration time for this module function ?">Expiration Time<br />(hh:mm:ss)</label></th>
+          </tr>
+        {# <!-- use the module name as key for easy lookup in xarModuleCache --> #}
+        {% for module in modules %}
+          {# <!-- show the cache configuration for each module function --> #}
+          {% for func, settings in module.cachesettings %}
+          <tr>
+            <td class="xar-align-center">
+              {# <!-- flip from nocache in settings to docache in template --> #}
+              {% if not settings['nocache'] %}
+                <input type="checkbox" name="docache[{{ module['name'] }}][{{ func }}]" id="docache_{{ module['name'] }}_{{ func }}" value="1" checked="checked"/>
+              {% else %}
+                <input type="checkbox" name="docache[{{ module['name'] }}][{{ func }}]" id="docache_{{ module['name'] }}_{{ func }}" value="1"/>
+              {% endif %}
+            </td>
+            <td>
+              <a href="{{ xar_moduleurl(module['name'],'admin','main') }}" title="{{ module['name'] }} module ({{ module['regid'] }})">{{ module['displayname'] }}</a>
+            </td>
+            <td>
+              {{ func }}
+            </td>
+            <td class="xar-align-center">
+              <input type="text" name="params[{{ module['name'] }}][{{ func }}]" id="params_{{ module['name'] }}_{{ func }}" value="{{ settings['params'] }}" size="20" />
+            </td>
+            <td class="xar-align-center">
+              <select name="usershared[{{ module['name'] }}][{{ func }}]" id="usershared_{{ module['name'] }}_{{ func }}" size="1">
+                <option value="0"> {{ xar_translate('No Sharing') }}</option>
+                {% if settings['usershared'] == 1 %}
+                  <option value="1" selected="selected">
+                    {{ xar_translate('Group Members') }}</option>
+                {% else %}
+                  <option value="1">
+                    {{ xar_translate('Group Members') }}</option>
+                {% endif %}
+                {% if settings['usershared'] == 2 %}
+                  <option value="2" selected="selected">
+                    {{ xar_translate('All Users') }}</option>
+                {% else %}
+                  <option value="2">
+                    {{ xar_translate('All Users') }}</option>
+                {% endif %}
+              </select>
+            </td>
+            <td class="xar-align-center">
+              <input type="text" name="cacheexpire[{{ module['name'] }}][{{ func }}]" id="cacheexpire_{{ module['name'] }}_{{ func }}" value="{{ settings['cacheexpire'] }}" size="9" maxlength="9" />
+            </td>
+          </tr>
+          {% endfor %}
+        {% endfor %}
+        <tr>
+          <td class="xar-align-center">
+            <a href="javascript:xar_base_checkall(document.forms['modulecache_form'],true)">{{ xar_translate('Check All') }}</a><br/>
+            <a href="javascript:xar_base_checkall(document.forms['modulecache_form'],false)">{{ xar_translate('Clear All') }}</a>
+          </td>
+          <td>
+            <input type="hidden" name="authid" value="{{ authid }}" />
+            <input type="submit" name="submit" value="{{ xar_translate('Submit') }}" />
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+        </tr>
+        </table>
+        </fieldset>
+      </form>
+    {% endif %}
+
+</div>
+{% endblock %}

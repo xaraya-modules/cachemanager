@@ -1,0 +1,156 @@
+{# @xarcachemanager/includes/admin-menu.html.twig #}
+
+{% block admin_menu %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+{#  Common Administration menu #}
+{{ xar_style({scope: "module", module: "base", file: "tabs"}) }}
+{# @todo handle this in functions #}
+{% set status = xar_apifunc('xarcachemanager', 'admin', 'getstatus') %}
+{% set info = xar_coremethod('xarController', 'getRequest').getInfo() %}
+{% set activetab = info[2] %}
+<div>
+  <ul class="xar-tabs">
+    {# <!-- <dt class="help" title="Choose an action to perform">
+      Actions:
+    </dt> --> #}
+    {% if xar_security_check('AdminXarCache') %}
+
+        {% if activetab == 'flushcache' %}
+            {% set tabclass = 'xar-tab-active' %}
+            {% set linkclass = 'xar-accent xar-accent-outline' %}
+        {% else %}
+            {% set tabclass = 'xar-tab' %}
+            {% set linkclass = 'xar-norm xar-norm-outline' %}
+        {% endif %}
+
+        <li class="{{ tabclass }}">
+          <a href="{{ xar_moduleurl('xarcachemanager','admin','flushcache') }}" class="{{ linkclass }}">
+            Flush Cache
+          </a>
+        </li>
+
+        {% if status['PageCachingEnabled'] %}
+		{% if activetab == 'pages' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+            <li class="{{ tabclass }}">
+                <a href="{{ xar_moduleurl('xarcachemanager','admin','pages') }}" class="{{ linkclass }}">
+                    Pages
+                </a>
+            </li>
+        {% endif %}
+
+        {% if status['BlockCachingEnabled'] %}
+		{% if activetab == 'blocks' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+            <li class="{{ tabclass }}">
+                <a href="{{ xar_moduleurl('xarcachemanager','admin','blocks') }}" class="{{ linkclass }}">
+                    Blocks
+                </a>
+            </li>
+        {% endif %}
+
+        {% if status['ModuleCachingEnabled'] %}
+		{% if activetab == 'modules' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+            <li class="{{ tabclass }}">
+                <a href="{{ xar_moduleurl('xarcachemanager','admin','modules') }}" class="{{ linkclass }}">
+                    Modules
+                </a>
+            </li>
+        {% endif %}
+
+        {% if status['ObjectCachingEnabled'] %}
+		{% if activetab == 'objects' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+            <li class="{{ tabclass }}">
+                <a href="{{ xar_moduleurl('xarcachemanager','admin','objects') }}" class="{{ linkclass }}">
+                    Objects
+                </a>
+            </li>
+        {% endif %}
+
+        {% if status['VariableCachingEnabled'] %}
+		{% if activetab == 'variables' %}
+		    {% set tabclass = 'xar-tab-active' %}
+		    {% set linkclass = 'xar-accent xar-accent-outline' %}
+		{% else %}
+		    {% set tabclass = 'xar-tab' %}
+		    {% set linkclass = 'xar-norm xar-norm-outline' %}
+		{% endif %}
+            <li class="{{ tabclass }}">
+                <a href="{{ xar_moduleurl('xarcachemanager','admin','variables') }}" class="{{ linkclass }}">
+                    Variables
+                </a>
+            </li>
+        {% endif %}
+{# <!-- Not supported with Creole
+       {% set tabclass = activetab=='queries'?'active'.'' %}
+        <li class="{{ tabclass }}">
+          <a href="{{ xar_moduleurl('xarcachemanager','admin','queries') }}">
+            Queries
+          </a>
+        </li>
+--> #}
+	{% if activetab == 'stats' %}
+	    {% set tabclass = 'xar-tab-active' %}
+	    {% set linkclass = 'xar-accent xar-accent-outline' %}
+	{% else %}
+	    {% set tabclass = 'xar-tab' %}
+	    {% set linkclass = 'xar-norm xar-norm-outline' %}
+	{% endif %}
+        <li class="{{ tabclass }}">
+          <a href="{{ xar_moduleurl('xarcachemanager','admin','stats') }}" class="{{ linkclass }}">
+            Statistics
+          </a>
+        </li>
+
+	{% if activetab == 'modifyconfig' %}
+	    {% set tabclass = 'xar-tab-active' %}
+	    {% set linkclass = 'xar-accent xar-accent-outline' %}
+	{% else %}
+	    {% set tabclass = 'xar-tab' %}
+	    {% set linkclass = 'xar-norm xar-norm-outline' %}
+	{% endif %}
+        <li class="{{ tabclass }}">
+          <a href="{{ xar_moduleurl('xarcachemanager','admin','modifyconfig') }}" class="{{ linkclass }}">
+            Modify Config
+          </a>
+        </li>
+
+	{% if activetab == 'overview' %}
+	    {% set tabclass = 'xar-tab-active' %}
+	    {% set linkclass = 'xar-accent xar-accent-outline' %}
+	{% else %}
+	    {% set tabclass = 'xar-tab' %}
+	    {% set linkclass = 'xar-norm xar-norm-outline' %}
+	{% endif %}
+       <li class="{{ tabclass }}">
+       <a href="{{ xar_moduleurl('xarcachemanager','admin','overview') }}" class="{{ linkclass }}">
+            Overview
+       </a>
+      </li>
+
+  {% endif %}
+  </ul>
+</div>
+{% endblock %}

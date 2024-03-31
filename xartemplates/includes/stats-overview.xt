@@ -9,7 +9,7 @@
 
         <h3><a href="#xarController::URL('xarcachemanager', 'admin', 'stats', array('tab' => 'page'))#">Page Cache</a></h3>
 
-        <xar:if condition="!empty($PageCachingEnabled)">
+        <xar:if condition="!empty($status['PageCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>
@@ -91,7 +91,7 @@
 
         <h3><a href="#xarController::URL('xarcachemanager', 'admin', 'stats', array('tab' => 'block'))#">Block Cache</a></h3>
 
-        <xar:if condition="!empty($BlockCachingEnabled)">
+        <xar:if condition="!empty($status['BlockCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>
@@ -175,7 +175,7 @@
 
         <h3><a href="#xarController::URL('xarcachemanager', 'admin', 'stats', array('tab' => 'module'))#">Module Cache</a></h3>
 
-        <xar:if condition="!empty($ModuleCachingEnabled)">
+        <xar:if condition="!empty($status['ModuleCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>
@@ -257,7 +257,7 @@
 
         <h3><a href="#xarController::URL('xarcachemanager', 'admin', 'stats', array('tab' => 'object'))#">Object Cache</a></h3>
 
-        <xar:if condition="!empty($ObjectCachingEnabled)">
+        <xar:if condition="!empty($status['ObjectCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>
@@ -341,7 +341,7 @@
 
         <h3><a href="#xarController::URL('xarcachemanager', 'admin', 'stats', array('tab' => 'autocache'))#">Auto-Cache</a></h3>
 
-        <xar:if condition="!empty($AutoCachingEnabled)">
+        <xar:if condition="!empty($status['AutoCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>
@@ -409,7 +409,7 @@
 
         <h3><a href="#xarController::URL('xarcachemanager', 'admin', 'stats', array('tab' => 'variable'))#">Variable Cache</a></h3>
 
-        <xar:if condition="!empty($VariableCachingEnabled)">
+        <xar:if condition="!empty($status['VariableCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>
@@ -492,7 +492,7 @@
 
         <h3><xar:mlstring>Query Cache</xar:mlstring></h3>
 
-        <xar:if condition="!empty($QueryCachingEnabled)">
+        <xar:if condition="!empty($status['QueryCachingEnabled'])">
         <table class="xar-norm">
             <tr>
                 <th>

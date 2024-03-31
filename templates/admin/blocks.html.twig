@@ -1,0 +1,90 @@
+{# @xarcachemanager/admin/blocks.html.twig #}
+
+{% block blocks %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-body">
+    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    <h2>{{ xar_translate('Configure Block Caching') }}</h2>
+
+    {% if not blocks or blocks|length < 1 %}
+        {{ xar_translate('Block caching is currently disabled') }}
+    {% else %}
+        <form action="{{ xar_moduleurl('xarcachemanager','admin','blocks') }}" method="post">
+        <fieldset>
+            <legend>
+            {{ xar_translate('Block Caching Options') }}
+        </legend>
+        <table border="1" cellpadding="4" cellspacing="0">
+        <tr>
+          <th class="xar-align-center"><label title="Do you want to enable caching for this block ?">Enable<br/>Caching</label></th>
+          <th class="xar-align-center">{{ xar_translate('Name') }}</th>
+          <th class="xar-align-center">{{ xar_translate('Module') }}</th>
+          <th class="xar-align-center">{{ xar_translate('Type') }}</th>
+          <th class="xar-align-center"><label title="Is the output of this block identical for all pages ?">Page Sharing</label></th>
+          <th class="xar-align-center"><label title="Is the output of this block identical for all users, or for all members of the same group ?">User Sharing</label></th>
+          <th class="xar-align-center"><label title="Do you want to override the default expiration time ?">Expiration Time<br />(hh:mm:ss)</label></th>
+        </tr>
+        {% for block in blocks %}
+        <tr>
+          {# <!-- flip from nocache in settings to docache in template --> #}
+          <td  class="xar-align-center">{% if not block['nocache'] %}
+                <input type="checkbox" name="docache[{{ block['bid'] }}]" id="docache_{{ block['bid'] }}" value="1" checked="checked"/>
+             {% else %}
+                <input type="checkbox" name="docache[{{ block['bid'] }}]" id="docache_{{ block['bid'] }}" value="1"/>
+              {% endif %}</td>
+          <td>
+              <a href="{{ xar_moduleurl('blocks','admin','modify_instance') }}&amp;bid={{ block['bid'] }}">{{ block['name'] }}</a>
+          </td>
+          <td>{{ block['module'] }}</td>
+          <td>{{ block['type'] }}</td>
+          <td  class="xar-align-center">{% if block['pageshared'] %}
+                <input type="checkbox" name="pageshared[{{ block['bid'] }}]" id="pageshared_{{ block['bid'] }}" value="1" checked="checked"/>
+              {% else %}
+                <input type="checkbox" name="pageshared[{{ block['bid'] }}]" id="pageshared_{{ block['bid'] }}" value="1"/>
+              {% endif %}</td>
+          <td  class="xar-align-center"><select name="usershared[{{ block['bid'] }}]" id="usershared_{{ block['bid'] }}" size="1">
+                <option value="0"> {{ xar_translate('No Sharing') }}</option>
+                {% if block['usershared'] == 1 %}
+                  <option value="1" selected="selected">
+                    {{ xar_translate('Group Members') }}</option>
+                {% else %}
+                  <option value="1">
+                    {{ xar_translate('Group Members') }}</option>
+                {% endif %}
+                {% if block['usershared'] == 2 %}
+                  <option value="2" selected="selected">
+                    {{ xar_translate('All Users') }}</option>
+                {% else %}
+                  <option value="2">
+                    {{ xar_translate('All Users') }}</option>
+                {% endif %}
+              </select></td>
+          <td  class="xar-align-center"><input type="text" name="cacheexpire[{{ block['bid'] }}]" id="cacheexpire_{{ block['bid'] }}" value="{{ block['cacheexpire'] }}" size="9" maxlength="9" /></td>
+        </tr>
+        {% endfor %}
+        <tr>
+          <td>
+          </td>
+          <td>
+            <input type="hidden" name="authid" value="{{ authid }}" />
+            <input type="submit" name="submit" value="{{ xar_translate('Submit') }}" />
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+          <td>
+          </td>
+        </tr>
+        </table>
+        </fieldset>
+        </form>
+    {% endif %}
+
+</div>
+{% endblock %}

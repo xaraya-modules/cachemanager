@@ -1,0 +1,77 @@
+{# @xarcachemanager/admin/flushcache.html.twig #}
+
+{% block flushcache %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-body">
+  {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+  <h2>{{ xar_translate('Flush Output Cache Files') }}</h2>
+
+  {% if message == false %}
+
+    <form action="{{ xar_moduleurl('xarcachemanager', 'admin', 'flushcache') }}" method="post" enctype="application/x-www-form-urlencoded">
+      <fieldset>
+            <legend>
+                {{ xar_translate('Select Cache for Flushing') }}
+            </legend>
+            <p class="xar-form-input-wrapper-before">
+                {{ instructions }} {{ instructionhelp }}
+            </p>
+
+            {% for type, keylist in cachekeys %}
+            <div class="xar-form-input-wrapper">
+                    <label class="xar-form-label" for="flushkey_{{ type }}">{{ type }}</label>
+                    <select name="flushkey[{{ type }}]" id="flushkey_{{ type }}">
+                        <option value="-" selected="selected"> - - - </option>
+                        {% for key, count in keylist %}
+                            <option value="{{ key }}">{{ key }} ({{ count }})</option>
+                        {% endfor %}
+                        {% if keylist|length > 0 %}
+                            <option value="*">
+                                 {{ xar_translate('* Flush all #(1) cache keys *', type) }}
+                            </option>
+                        {% endif %}
+                    </select>
+            </div>
+                {% endfor %}
+
+        <div class="xar-form-input-wrapper">
+            <input type="hidden" name="authid" id="authid" value="{{ authid }}" />
+            <input type="hidden" name="confirm" id="confirm" value="true" />
+            <input type="submit" value="{{ xar_translate('Flush Cache') }}"  />
+       </div>
+       </fieldset>
+    </form>
+    {% elseif message == true %}
+
+        <p class="xar-form-input-wrapper">
+            {{ notice }}
+        </p>
+        <p class="xar-form-input-wrapper">
+            <a href="{{ returnlink.url }}" title="{{ returnlink.title }}">{{ returnlink.label }}</a>
+        </p>
+    {% endif %}
+
+    <fieldset>
+        <legend>{{ xar_translate('Output Cache Size Reference') }}</legend>
+        <div class="xar-form-input-wrapper">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>{{ xar_translate('Cache Type') }}</th>
+                    <th>{{ xar_translate('Size in MB') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for type, size in cachesize %}
+                <tr>
+                    <td>{{ type }}</td>
+                    <td>{{ size }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </fieldset>
+</div>
+{% endblock %}

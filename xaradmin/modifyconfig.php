@@ -31,42 +31,8 @@ function xarcachemanager_admin_modifyconfig()
 
     $data = [];
 
-    $varCacheDir = sys::varpath() . '/cache';
-
-    // is output caching enabled?
-    if (file_exists($varCacheDir . '/output/cache.touch')) {
-        $data['CachingEnabled'] = 1;
-    } else {
-        $data['CachingEnabled'] = 0;
-    }
-
-    // is page level output caching enbabled?
-    if (file_exists($varCacheDir . '/output/cache.pagelevel')) {
-        $data['pageCachingEnabled'] = 1;
-    } else {
-        $data['pageCachingEnabled'] = 0;
-    }
-
-    // is block level output caching enabled?
-    if (file_exists($varCacheDir . '/output/cache.blocklevel')) {
-        $data['blockCachingEnabled'] = 1;
-    } else {
-        $data['blockCachingEnabled'] = 0;
-    }
-
-    // is module level output caching enabled?
-    if (file_exists($varCacheDir . '/output/cache.modulelevel')) {
-        $data['moduleCachingEnabled'] = 1;
-    } else {
-        $data['moduleCachingEnabled'] = 0;
-    }
-
-    // is object level output caching enabled?
-    if (file_exists($varCacheDir . '/output/cache.objectlevel')) {
-        $data['objectCachingEnabled'] = 1;
-    } else {
-        $data['objectCachingEnabled'] = 0;
-    }
+    // get cache status
+    $data['status'] = xarMod::apiFunc('xarcachemanager', 'admin', 'getstatus');
 
     $data['CookieName'] =  (xarConfigVars::get(null, 'Site.Session.CookieName') != '') ? xarConfigVars::get(null, 'Site.Session.CookieName') : 'XARAYASID';
     $data['cookieupdatelink'] = xarController::URL('base', 'admin', 'modifyconfig', ['tab' => 'security']);

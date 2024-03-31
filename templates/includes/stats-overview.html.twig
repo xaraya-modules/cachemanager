@@ -1,0 +1,547 @@
+{# @xarcachemanager/includes/stats-overview.html.twig #}
+
+{% block stats_overview %}
+{#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
+{#  Cache Statistics Overview #}
+
+    <table class="xar-norm">
+    <tr>
+      <td valign="top">
+
+        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'page'}) }}">Page Cache</a></h3>
+
+        {% if status['PageCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Storage') }}
+                </th>
+                <td>
+                    {% if settings['PageCacheStorage'] %}
+                        <strong>{{ settings['PageCacheStorage'] }}</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Size (MB)') }}
+                </th>
+                <td>
+                    {% if pagecache['size'] %}
+                        {{ pagecache['size'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Items') }}
+                </th>
+                <td>
+                    {% if pagecache['items'] %}
+                        {{ pagecache['items'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Ratio') }}
+                </th>
+                <td>
+                    {% if pagecache['ratio'] %}
+                        <strong>{{ pagecache['ratio'] }}%</strong>&#160;of&#160;{{ pagecache['total'] }}
+                    {% else %}
+                        <strong>N/A</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Log File') }}
+                </th>
+                <td>
+                    {% if settings['PageLogFile'] %}
+                        {{ settings['PageLogFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['PageLogFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ pagelog['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ pagelog['ratio'] }}%</strong>&#160;of&#160;{{ pagelog['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        {% else %}
+            {{ xar_translate('Disabled') }}
+        {% endif %}
+
+      </td>
+      <td valign="top">
+
+        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'block'}) }}">Block Cache</a></h3>
+
+        {% if status['BlockCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Storage') }}
+                </th>
+                <td>
+                    {% if settings['BlockCacheStorage'] %}
+                        <strong>{{ settings['BlockCacheStorage'] }}</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Size (MB)') }}
+                </th>
+                <td>
+                    {% if blockcache['size'] %}
+                        {{ blockcache['size'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Items') }}
+                </th>
+                <td>
+                    {% if blockcache['items'] %}
+                        {{ blockcache['items'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Ratio') }}
+                </th>
+                <td>
+                    {% if blockcache['ratio'] %}
+                        <strong>{{ blockcache['ratio'] }}%</strong>&#160;of&#160;{{ blockcache['total'] }}
+                    {% else %}
+                        <strong>N/A</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Log File') }}
+                </th>
+                <td>
+                    {% if settings['BlockLogFile'] %}
+                        {{ settings['BlockLogFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['BlockLogFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ blocklog['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ blocklog['ratio'] }}%</strong>&#160;of&#160;{{ blocklog['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        {% else %}
+            {{ xar_translate('Disabled') }}
+        {% endif %}
+
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">
+
+        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'module'}) }}">Module Cache</a></h3>
+
+        {% if status['ModuleCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Storage') }}
+                </th>
+                <td>
+                    {% if settings['ModuleCacheStorage'] %}
+                        <strong>{{ settings['ModuleCacheStorage'] }}</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Size (MB)') }}
+                </th>
+                <td>
+                    {% if modulecache['size'] %}
+                        {{ modulecache['size'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Items') }}
+                </th>
+                <td>
+                    {% if modulecache['items'] %}
+                        {{ modulecache['items'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Ratio') }}
+                </th>
+                <td>
+                    {% if modulecache['ratio'] %}
+                        <strong>{{ modulecache['ratio'] }}%</strong>&#160;of&#160;{{ modulecache['total'] }}
+                    {% else %}
+                        <strong>N/A</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Log File') }}
+                </th>
+                <td>
+                    {% if settings['ModuleLogFile'] %}
+                        {{ settings['ModuleLogFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['ModuleLogFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ modulelog['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ modulelog['ratio'] }}%</strong>&#160;of&#160;{{ modulelog['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        {% else %}
+            {{ xar_translate('Disabled') }}
+        {% endif %}
+
+      </td>
+      <td valign="top">
+
+        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'object'}) }}">Object Cache</a></h3>
+
+        {% if status['ObjectCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Storage') }}
+                </th>
+                <td>
+                    {% if settings['ObjectCacheStorage'] %}
+                        <strong>{{ settings['ObjectCacheStorage'] }}</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Size (MB)') }}
+                </th>
+                <td>
+                    {% if objectcache['size'] %}
+                        {{ objectcache['size'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Items') }}
+                </th>
+                <td>
+                    {% if objectcache['items'] %}
+                        {{ objectcache['items'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Ratio') }}
+                </th>
+                <td>
+                    {% if objectcache['ratio'] %}
+                        <strong>{{ objectcache['ratio'] }}%</strong>&#160;of&#160;{{ objectcache['total'] }}
+                    {% else %}
+                        <strong>N/A</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Log File') }}
+                </th>
+                <td>
+                    {% if settings['ObjectLogFile'] %}
+                        {{ settings['ObjectLogFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['ObjectLogFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ objectlog['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ objectlog['ratio'] }}%</strong>&#160;of&#160;{{ objectlog['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        {% else %}
+            {{ xar_translate('Disabled') }}
+        {% endif %}
+
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">
+
+        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'autocache'}) }}">Auto-Cache</a></h3>
+
+        {% if status['AutoCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Log File') }}
+                </th>
+                <td>
+                    {% if settings['AutoCacheLogFile'] %}
+                        {{ settings['AutoCacheLogFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['AutoCacheLogFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ autocachelog['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ autocachelog['ratio'] }}%</strong>&#160;of&#160;{{ autocachelog['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>
+                    {{ xar_translate('Stats File') }}
+                </th>
+                <td>
+                    {% if settings['AutoCacheStatFile'] %}
+                        {{ settings['AutoCacheStatFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['AutoCacheStatFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Stats Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ autocachestat['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Stats Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ autocachestat['ratio'] }}%</strong>&#160;of&#160;{{ autocachestat['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        {% else %}
+            {{ xar_translate('Disabled') }}
+        {% endif %}
+
+      </td>
+      <td valign="top">
+
+        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'variable'}) }}">Variable Cache</a></h3>
+
+        {% if status['VariableCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Storage') }}
+                </th>
+                <td>
+                    {% if settings['VariableCacheStorage'] %}
+                        <strong>{{ settings['VariableCacheStorage'] }}</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Size (MB)') }}
+                </th>
+                <td>
+                    {% if variablecache['size'] %}
+                        {{ variablecache['size'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Items') }}
+                </th>
+                <td>
+                    {% if variablecache['items'] %}
+                        {{ variablecache['items'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Cache Ratio') }}
+                </th>
+                <td>
+                    {% if variablecache['ratio'] %}
+                        <strong>{{ variablecache['ratio'] }}%</strong>&#160;of&#160;{{ variablecache['total'] }}
+                    {% else %}
+                        <strong>N/A</strong>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Log File') }}
+                </th>
+                <td>
+                    {% if settings['VariableLogFile'] %}
+                        {{ settings['VariableLogFile'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            {% if settings['VariableLogFile'] %}
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Size (MB)') }}
+                    </th>
+                    <td>
+                        {{ variablelog['size'] }}
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        {{ xar_translate('Log Ratio') }}
+                    </th>
+                    <td>
+                        <strong>{{ variablelog['ratio'] }}%</strong>&#160;of&#160;{{ variablelog['lines'] }}
+                    </td>
+                </tr>
+            {% endif %}
+        </table>
+        {% else %}
+            {{ xar_translate('Disabled') }}
+        {% endif %}
+
+      </td>
+{# <!-- Not supported with Creole
+      <td valign="top">
+
+        <h3>{{ xar_translate('Query Cache') }}</h3>
+
+        {% if status['QueryCachingEnabled'] %}
+        <table class="xar-norm">
+            <tr>
+                <th>
+                    {{ xar_translate('Storage') }}
+                </th>
+                <td>
+                    {% if settings['QueryCacheStorage'] %}
+                        {{ settings['QueryCacheStorage'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Items') }}
+                </th>
+                <td>
+                    {% if querycache['items'] %}
+                        {{ querycache['items'] }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    {{ xar_translate('Size') }}
+                </th>
+                <td>
+                    {% if querycache['size'] %}
+                        {{ querycache['size'] }}
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+        {% else %}
+            Disabled
+        {% endif %}
+
+      </td>
+--> #}
+    </tr>
+    </table>
+    <p>
+        Note: in-memory cache storage like apc, memcached or xcache shares the same statistics across all caches
+    </p>
+    <form method="post" action="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats') }}">
+      <input type="hidden" name="tab" id="tab" value="overview" />
+      {{ xar_translate('Items per page') }}
+      <input type="text" name="itemsperpage" id="itemsperpage" value="{{ itemsperpage }}" size="4" />
+      <input type="submit" name="change" id="change" value="{{ xar_translate('Change') }}" />
+    </form>
+
+{% endblock %}

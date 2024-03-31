@@ -1,0 +1,58 @@
+{# @xarcachemanager/admin/modifyhook.html.twig #}
+
+{% block modifyhook %}
+<fieldset>
+    <legend>{{ xar_translate('Cache Options') }}</legend>
+    <div class="xar-form-input-wrapper">
+        <label for="nocache" class="xar-form-label" title="{{ xar_translate('Check this box if you do not want the output of this block to ever be cached.') }}">
+            {{ xar_translate('Do Not Cache Output:') }}
+        </label>
+        {% if noCache %}
+            <input type="checkbox" name="nocache" id="nocache" value="1" checked="checked" />
+        {% else %}
+            <input type="checkbox" name="nocache" id="nocache" value="1" />
+        {% endif %}
+   </div>
+   <div class="xar-form-input-wrapper">
+       <label for="pageshared" class="xar-form-label" title="{{ xar_translate('Check this box if the content of this block is NOT generated dynamically based on the URI query string.') }}">
+           {{ xar_translate('Cache Sharing Between Pages:') }}
+       </label>
+       {% if pageShared == 1  %}
+           <input type="checkbox" name="pageshared" id="pageshared" value="1" checked="checked" />
+       {% else %}
+           <input type="checkbox" name="pageshared" id="pageshared" value="1" />
+       {% endif %}
+    </div>
+   <div class="xar-form-input-wrapper">
+       <label for="usershared" class="xar-form-label" title="{{ xar_translate('If the output cache of this block can be shared between users, select an appropriate level.') }}">
+           {{ xar_translate('Cache Sharing Between Users:') }}
+       </label>
+       <select name="usershared" id="usershared" size="1">
+            <option value="0"> No Sharing</option>
+            {% if userShared == 1 %}
+                <option value="1" selected="selected">
+                  {{ xar_translate('Group Members') }}
+                </option>
+                {% else %}
+                <option value="1">
+                  {{ xar_translate('Group Members') }}
+                </option>
+            {% endif %}
+            {% if userShared == 2 %}
+              <option value="2" selected="selected">
+                {{ xar_translate('All Users') }}
+              </option>
+            {% else %}
+              <option value="2">
+                {{ xar_translate('All Users') }}
+              </option>
+            {% endif %}
+        </select>
+   </div>
+   <div class="xar-form-input-wrapper">
+       <label for="cacheexpire" class="xar-form-label" title="{{ xar_translate('The maximum lifetime of the output cache of this block. Set to zero for no time based expiration.') }}">
+            {{ xar_translate('Output Cache Expiration Time (in hh:mm:ss):') }}
+       </label>
+       <input type="text" name="cacheexpire" id="cacheexpire" value="{{ cacheExpire }}" size="9" maxlength="9" />
+   </div>
+</fieldset>{% endblock %}
