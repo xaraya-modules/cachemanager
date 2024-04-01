@@ -38,7 +38,7 @@
               {% endif %}
             </td>
             <td>
-              <a href="{{ xar_moduleurl('dynamicdata','admin','modifyprop') }}&amp;itemid={{ object['objectid'] }}" title="{{ object['name'] }} object ({{ xar_coremethod('xarMod', 'getName', [object['moduleid']]) }}.{{ object['itemtype'] }})">{{ object['label'] }}</a>
+              <a href="{{ xar_moduleurl('dynamicdata','admin','modifyprop') }}&amp;itemid={{ object['objectid'] }}" title="{{ object['name'] }} object ({{ xar_modname(object['moduleid']) }}.{{ object['itemtype'] }})">{{ object['label'] }}</a>
             </td>
             <td>
               {{ method }}

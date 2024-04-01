@@ -6,7 +6,7 @@
 {{ xar_style({scope: "module", module: "base", file: "tabs"}) }}
 {# @todo handle this in functions #}
 {% set status = xar_apifunc('xarcachemanager', 'admin', 'getstatus') %}
-{% set info = xar_coremethod('xarController', 'getRequest').getInfo() %}
+{% set info = xar_request().getInfo() %}
 {% set activetab = info[2] %}
 <div>
   <ul class="xar-tabs">

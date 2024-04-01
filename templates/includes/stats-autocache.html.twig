@@ -15,7 +15,7 @@
           {% else %}
             <input type="hidden" name="withlog" id="withlog" value="0" />
           {% endif %}
-          <input type="hidden" name="authid" id="authid" value="{{ xar_coremethod('xarSec', 'genAuthKey') }}" />
+          <input type="hidden" name="authid" id="authid" value="{{ xar_security_authkey() }}" />
           <input type="submit" name="reset" value="{{ xar_translate('Reset') }}" />
           <br/>{{ xar_translate('Note: 304 \'Not Modified\' hits are not logged') }}
         </form>
@@ -37,8 +37,8 @@
           <td>{{ count['hit'] }}</td>
           <td>{{ count['miss'] }}</td>
           <td>{{ count['total'] }}</td>
-          <td>{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',count['first']]) }}</td>
-          <td>{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',count['last']]) }}</td>
+          <td>{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',count['first']) }}</td>
+          <td>{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',count['last']) }}</td>
         </tr>
         <tr>
           <td colspan="6">{{ count['page'] }}</td>
@@ -50,8 +50,8 @@
           <th>{{ totals['hit'] }}</th>
           <th>{{ totals['miss'] }}</th>
           <th>{{ totals['total'] }}</th>
-          <th>{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',totals['first']]) }}</th>
-          <th>{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',totals['last']]) }}</th>
+          <th>{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',totals['first']) }}</th>
+          <th>{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',totals['last']) }}</th>
         </tr>
         {% endif %}
         {% if pager %}

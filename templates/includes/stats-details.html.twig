@@ -35,7 +35,7 @@
       </td>
       <td>{{ item['key'] }}</td>
       <td>{{ item['code'] }}</td>
-      <td>{% if item['time'] %}{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',item['time']]) }}{% endif %}</td>
+      <td>{% if item['time'] %}{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',item['time']) }}{% endif %}</td>
     </tr>
     {% endfor %}
     </table>
@@ -53,7 +53,7 @@
       {% endif %}
       &#160;Log Hit Ratio:&#160;<strong>{{ totals['ratio'] }}%</strong>&#160;of&#160;{{ totals['total'] }}
       <input type="hidden" name="tab" id="tab" value="{{ tab }}" />
-      <input type="hidden" name="authid" id="authid" value="{{ xar_coremethod('xarSec', 'genAuthKey') }}" />
+      <input type="hidden" name="authid" id="authid" value="{{ xar_security_authkey() }}" />
       &#160;<input type="submit" name="reset" value="{{ xar_translate('Reset Logfile') }}" />
     </form>
 
@@ -84,7 +84,7 @@
       </td>
       <td colspan="4">{{ item['key'] }}</td>
       <td>{{ item['code'] }}</td>
-      <td>{% if item['time'] %}{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',item['time']]) }}{% endif %}</td>
+      <td>{% if item['time'] %}{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',item['time']) }}{% endif %}</td>
     </tr>
     <tr class="xar-alt">
       <td>{{ item['ratio'] }}%</td>
@@ -92,8 +92,8 @@
       <td>{{ item['miss'] }}</td>
       <td>{{ item['total'] }}</td>
       <td>{{ item['pages'] }}</td>
-      <td>{% if item['first'] %}{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',item['first']]) }}{% endif %}</td>
-      <td>{% if item['last'] %}{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',item['last']]) }}{% endif %}</td>
+      <td>{% if item['first'] %}{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',item['first']) }}{% endif %}</td>
+      <td>{% if item['last'] %}{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',item['last']) }}{% endif %}</td>
     </tr>
     {% endfor %}
     {% if totals %}
@@ -106,8 +106,8 @@
       <td>{{ totals['miss'] }}</td>
       <td>{{ totals['total'] }}</td>
       <td>{{ totals['pages'] }}</td>
-      <td>{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',totals['first']]) }}</td>
-      <td>{{ xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',totals['last']]) }}</td>
+      <td>{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',totals['first']) }}</td>
+      <td>{{ xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',totals['last']) }}</td>
     </tr>
     {% endif %}
     </table>

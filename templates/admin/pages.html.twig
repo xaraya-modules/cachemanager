@@ -68,12 +68,13 @@
               {% if group['id'] == 1 %}
                   {#  skip Everybody #}
                   <xar:continue/>
-              {% endif %}
+              {% else %}
               <br/>
               {% if group['checked'] %}
                  <input type="checkbox" name="groups[{{ group['id'] }}]" id="groups_{{ group['id'] }}" value="1" checked="checked">{{ group['name'] }} ({{ group['users'] }})</input>
               {% else %}
                  <input type="checkbox" name="groups[{{ group['id'] }}]" id="groups_{{ group['id'] }}" value="1">{{ group['name'] }} ({{ group['users'] }})</input>
+              {% endif %}
               {% endif %}
           {% endfor %}
       </td>
@@ -98,7 +99,7 @@
         <label for="autoregenerate">{{ xar_translate('Auto-regenerate session-less URL cache') }}</label>
       </td>
       <td>
-        {% if xar_modvar('xarcachemanager', 'AutoRegenSessionless') %}
+        {% if xar_modulevar('xarcachemanager', 'AutoRegenSessionless') %}
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
         {% else %}
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -180,14 +181,14 @@
     </fieldset>
     <div class="xar-form-input-wrapper">
         <input type="hidden" name="authid" value="{{ authid }}" />
-        <input type="submit" name="submit" value=" }}{{ xar_translate('Submit') }} }}" />
+        <input type="submit" name="submit" value="{{ xar_translate('Submit') }}" />
     </div>
     </form>
 
 <a name="viewlog"></a>
     <h2>{{ xar_translate('Current Auto-Cache Log') }} [ <a href="{{ xar_currenturl() }}#config">{{ xar_translate('up') }}</a> ]</h2>
     {% if autocachepages %}
-    <p>{{ xar_translate('From #(1) to #(2)', xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',autocachestart]), xar_coremethod('xarLocale', 'formatDate', ['%a, %d %B %Y %H.%M.%S %Z',autocacheend])) }}</p>
+    <p>{{ xar_translate('From #(1) to #(2)', xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',autocachestart), xar_coremethod('xarLocale', 'formatDate', '%a, %d %B %Y %H.%M.%S %Z',autocacheend)) }}</p>
     <table border="1" cellpadding="4" cellspacing="0">
     <tr>
       {% for status in autocachehits|keys %}

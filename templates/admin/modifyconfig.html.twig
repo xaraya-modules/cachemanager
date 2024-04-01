@@ -8,8 +8,8 @@
 <div class="xar-mod-body">
   {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
   <h2>{{ xar_translate('Configuration') }}</h2>
-  {% if xar_coremethod('xarSession', 'getVar', ['statusmsg']) != '' %}
-    <p>{{ xar_coremethod('xarSession', 'getVar', ['statusmsg']) }}</p>
+  {% if xar_coremethod('xarSession', 'getVar', 'statusmsg') != '' %}
+    <p>{{ xar_coremethod('xarSession', 'getVar', 'statusmsg') }}</p>
   {% endif %}
     <form action="{{ xar_moduleurl('xarcachemanager','admin','updateconfig') }}" method="post" enctype="application/x-www-form-urlencoded" >
         <fieldset>
@@ -139,7 +139,7 @@
             </div>
             {% if settings.PageDisplayView == 1  %}
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modvar('xarcachemanager', 'FlushOnNewComment') %}
+                {% if xar_modulevar('xarcachemanager', 'FlushOnNewComment') %}
                     <input type="checkbox" name="pageflushcomment" id="pageflushcomment" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="pageflushcomment" id="pageflushcomment" value="1" />
@@ -149,7 +149,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modvar('xarcachemanager', 'FlushOnNewRating') %}
+                {% if xar_modulevar('xarcachemanager', 'FlushOnNewRating') %}
                     <input type="checkbox" name="pageflushrating" id="pageflushrating" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="pageflushrating" id="pageflushrating" value="1" />
@@ -159,7 +159,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modvar('xarcachemanager', 'FlushOnNewPollvote') %}
+                {% if xar_modulevar('xarcachemanager', 'FlushOnNewPollvote') %}
                     <input type="checkbox" name="pageflushpollvote" id="pageflushpollvote" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="pageflushpollvote" id="pageflushpollvote" value="1" />
@@ -190,7 +190,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modvar('xarcachemanager', 'AutoRegenSessionless') %}
+                {% if xar_modulevar('xarcachemanager', 'AutoRegenSessionless') %}
                     <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -322,7 +322,7 @@
             {% endfor %}
 {# <!--
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modvar('xarcachemanager', 'FlushOnNewModule') %}
+                {% if xar_modulevar('xarcachemanager', 'FlushOnNewModule') %}
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" />
@@ -332,7 +332,7 @@
                 </label>
             </div>
 --> #}
-            {% set checkconfig = xar_modvar('modules', 'modulecache_settings') %}
+            {% set checkconfig = xar_modulevar('modules', 'modulecache_settings') %}
             {% if status['ModuleCachingEnabled'] == 1 and not checkconfig %}
             <div class="xar-form-input-wrapper">
                 <p>
@@ -401,7 +401,7 @@
                 </label>
             </div>
             {% endfor %}
-            {% set checkconfig = xar_modvar('dynamicdata', 'objectcache_settings') %}
+            {% set checkconfig = xar_modulevar('dynamicdata', 'objectcache_settings') %}
             {% if status['ObjectCachingEnabled'] == 1 and not checkconfig %}
             <div class="xar-form-input-wrapper">
                 <p>
@@ -411,7 +411,7 @@
             {% endif %}
 {# <!--
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modvar('xarcachemanager', 'FlushOnNewObject') %}
+                {% if xar_modulevar('xarcachemanager', 'FlushOnNewObject') %}
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" />
@@ -428,5 +428,5 @@
         </div>
     </form>
 </div>
-{% if xar_coremethod('xarSession', 'setVar', ['statusmsg', '']) %}{% endif %}
+{% if xar_coremethod('xarSession', 'setVar', 'statusmsg', '') %}{% endif %}
 {% endblock %}
