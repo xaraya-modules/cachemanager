@@ -121,7 +121,7 @@ class CacheHooks extends xarObject
                 'createhook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
         if (!isset($extrainfo) || !is_array($extrainfo)) {
             $extrainfo = [];
@@ -150,7 +150,7 @@ class CacheHooks extends xarObject
                 'createhook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         if (!isset($itemtype) || !is_numeric($itemtype)) {
@@ -292,7 +292,7 @@ class CacheHooks extends xarObject
                 'modifyhook',
                 'changelog'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         if (!isset($objectid) || !is_numeric($objectid)) {
@@ -303,7 +303,7 @@ class CacheHooks extends xarObject
                 'modifyhook',
                 'changelog'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         // When called via hooks, the module name may be empty, so we get it from
@@ -328,7 +328,7 @@ class CacheHooks extends xarObject
                 'modifyhook',
                 'changelog'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         if (!empty($extrainfo['itemtype']) && is_numeric($extrainfo['itemtype'])) {
@@ -423,7 +423,7 @@ class CacheHooks extends xarObject
                 'updatehook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
         if (!isset($extrainfo) || !is_array($extrainfo)) {
             $extrainfo = [];
@@ -447,7 +447,7 @@ class CacheHooks extends xarObject
                 'updatehook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         if (!isset($itemtype) || !is_numeric($itemtype)) {
@@ -623,7 +623,7 @@ class CacheHooks extends xarObject
                 'deletehook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
         if (!isset($extrainfo) || !is_array($extrainfo)) {
             $extrainfo = [];
@@ -647,7 +647,7 @@ class CacheHooks extends xarObject
                 'deletehook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         if (!isset($itemtype) || !is_numeric($itemtype)) {
@@ -813,7 +813,7 @@ class CacheHooks extends xarObject
                 'updatehook',
                 'xarcachemanager'
             );
-            throw new BadParameterException($msg);
+            throw new BadParameterException(null, $msg);
         }
 
         if (!isset($itemtype) || !is_numeric($itemtype)) {
