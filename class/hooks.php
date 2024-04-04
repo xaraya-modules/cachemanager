@@ -109,7 +109,7 @@ class CacheHooks extends xarObject
      * @throws BadParameterException
      * @todo - actually raise errors, get intelligent and specific about cache files to remove
      */
-    public static function createhook($args)
+    public static function createhook($args, $context = null)
     {
         extract($args);
 
@@ -266,7 +266,7 @@ class CacheHooks extends xarObject
      * @return string hook output in HTML
      * @throws BadParameterException
      */
-    public static function modifyhook($args)
+    public static function modifyhook($args, $context = null)
     {
         extract($args);
 
@@ -411,7 +411,7 @@ class CacheHooks extends xarObject
      * @throws BadParameterException
      * @todo - actually raise errors, get intelligent and specific about cache files to remove
      */
-    public static function updatehook($args)
+    public static function updatehook($args, $context = null)
     {
         extract($args);
 
@@ -611,7 +611,7 @@ class CacheHooks extends xarObject
      * @throws BadParameterException
      * @todo - actually raise errors, get intelligent and specific about cache files to remove
      */
-    public static function deletehook($args)
+    public static function deletehook($args, $context = null)
     {
         extract($args);
 
@@ -782,7 +782,7 @@ class CacheHooks extends xarObject
      * @throws BadParameterException
      * @todo - actually raise errors, get intelligent and specific about cache files to remove
      */
-    public static function updateconfighook($args)
+    public static function updateconfighook($args, $context = null)
     {
         extract($args);
 

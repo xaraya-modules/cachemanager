@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheHooks;
  * - array $args['extrainfo'] extra information
  * @return array updated extrainfo array
  */
-function xarcachemanager_adminapi_deletehook($args)
+function xarcachemanager_adminapi_deletehook($args, $context = null)
 {
-    return CacheHooks::deletehook($args);
+    return CacheHooks::deletehook($args, $context);
 }

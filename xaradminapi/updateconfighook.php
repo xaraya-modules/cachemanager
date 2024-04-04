@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheHooks;
  * - array $args['extrainfo'] extra information
  * @return array updated extrainfo array
  */
-function xarcachemanager_adminapi_updateconfighook($args)
+function xarcachemanager_adminapi_updateconfighook($args, $context = null)
 {
-    return CacheHooks::updateconfighook($args);
+    return CacheHooks::updateconfighook($args, $context);
 }

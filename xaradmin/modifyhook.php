@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheHooks;
  * - array $args['extrainfo'] extra information
  * @return string hook output in HTML
  */
-function xarcachemanager_admin_modifyhook($args)
+function xarcachemanager_admin_modifyhook($args, $context = null)
 {
-    return CacheHooks::modifyhook($args);
+    return CacheHooks::modifyhook($args, $context);
 }
