@@ -20,7 +20,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
  *
  * @return bool|void true on success of update
  */
-function xarcachemanager_admin_updateconfig()
+function xarcachemanager_admin_updateconfig(array $args = [], $context = null)
 {
     // Get parameters
     if (!xarVar::fetch('cacheenabled', 'isset', $cacheenabled, 0, xarVar::NOT_REQUIRED)) {
@@ -322,7 +322,7 @@ function xarcachemanager_admin_updateconfig()
         }
     }
 
-    xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'modifyconfig'));
+    xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'modifyconfig'), null, $context);
 
     return true;
 }

@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * @param array $args
  * @param $args['config'] array of config labels and values
  */
-function xarcachemanager_adminapi_save_cachingconfig($args)
+function xarcachemanager_adminapi_save_cachingconfig(array $args = [], $context = null)
 {
     return CacheManager::save_config($args);
 }

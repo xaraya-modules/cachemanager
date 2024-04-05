@@ -11,12 +11,12 @@
  * @link http://xaraya.com/index.php/release/1652.html
  */
 /**
-* utility function pass caching status to admin menu 
+* utility function pass caching status to admin menu
 *
 * @author jsb| mikespub
 * @return array containing the caching status.
 */
-function xarcachemanager_adminapi_getstatus()
+function xarcachemanager_adminapi_getstatus(array $args = [], $context = null)
 {
     $status = [];
 

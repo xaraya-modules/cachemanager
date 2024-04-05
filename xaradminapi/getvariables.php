@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\VariableCache;
  * @uses VariableCache::getConfig()
  * @return array variable caching configurations
  */
-function xarcachemanager_adminapi_getvariables($args)
+function xarcachemanager_adminapi_getvariables(array $args = [], $context = null)
 {
     extract($args);
 

@@ -16,7 +16,7 @@
 * @author jsb| mikespub
 * @return array containing the menulinks for the main menu items.
 */
-function xarcachemanager_adminapi_getmenulinks()
+function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null)
 {
     $menulinks = [];
 

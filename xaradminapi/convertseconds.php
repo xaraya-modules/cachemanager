@@ -24,7 +24,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
  * @param string $args['direction'] (from or to)
  * @return string $convertedtime (hh:mm:ss or seconds)
  */
-function xarcachemanager_adminapi_convertseconds($args)
+function xarcachemanager_adminapi_convertseconds(array $args = [], $context = null)
 {
     return CacheUtility::convertseconds($args);
 }

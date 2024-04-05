@@ -19,7 +19,7 @@ use Xaraya\Modules\CacheManager\CacheInfo;
  * @param array $args['type'] cachetype to get the size for
  * @return int size of the cache
 */
-function xarcachemanager_adminapi_getcachesize($args = ['type' => ''])
+function xarcachemanager_adminapi_getcachesize(array $args = ['type' => ''], $context = null)
 {
     $type = '';
     if (is_array($args)) {

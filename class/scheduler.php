@@ -21,9 +21,7 @@ use xarServer;
 
 class CacheScheduler extends xarObject
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * This is a poor-man's alternative for using wget in a cron job :

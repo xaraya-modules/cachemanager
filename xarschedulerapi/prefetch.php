@@ -21,7 +21,7 @@ use Xaraya\Modules\CacheManager\CacheScheduler;
  * @author mikespub
  * @access private
  */
-function xarcachemanager_schedulerapi_prefetch($args)
+function xarcachemanager_schedulerapi_prefetch(array $args = [], $context = null)
 {
     return CacheScheduler::prefetch($args);
 }

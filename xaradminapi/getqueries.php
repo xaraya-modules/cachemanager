@@ -19,7 +19,7 @@ use Xaraya\Modules\CacheManager\Config\QueryCache;
  * @uses QueryCache::getConfig()
  * @return array of query caching configurations
  */
-function xarcachemanager_adminapi_getqueries($args)
+function xarcachemanager_adminapi_getqueries(array $args = [], $context = null)
 {
     extract($args);
 

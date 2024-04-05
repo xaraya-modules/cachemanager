@@ -39,9 +39,7 @@ sys::import('modules.xarcachemanager.class.utility');
 
 class CacheHooks extends xarObject
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * regenerate the page output cache of URLs in the session-less list

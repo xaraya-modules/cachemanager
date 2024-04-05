@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * - string $args['confirm']
  * @return array|void
  */
-function xarcachemanager_admin_flushcache($args)
+function xarcachemanager_admin_flushcache(array $args = [], $context = null)
 {
     // Security Check
     if (!xarSecurity::check('AdminXarCache')) {
@@ -119,7 +119,7 @@ function xarcachemanager_admin_flushcache($args)
             return;
         }
         if (!empty($return_url)) {
-            xarResponse::Redirect($return_url);
+            xarController::redirect($return_url, null, $context);
             return;
         }
 

@@ -17,7 +17,7 @@ sys::import('modules.xarcachemanager.class.manager');
  *
  * @return array Storage types, with key set to storage type and value set to its settings
  */
-function xarcachemanager_adminapi_getstoragetypes()
+function xarcachemanager_adminapi_getstoragetypes(array $args = [], $context = null)
 {
     static $storagetypes;
     if (!empty($storagetypes)) {

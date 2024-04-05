@@ -476,7 +476,7 @@ function xarcachemanager_fs_setup($args)
 
     // caching config files
     $defaultConfigFile = sys::code() . 'modules/xarcachemanager/config.caching.php.dist';
-    $cachingConfigFile = $varCacheDir .'/config.caching.php';
+    $cachingConfigFile = $varCacheDir . '/config.caching.php';
 
     // confirm that the things are ready to be set up
     if (is_writable($varCacheDir)) {
@@ -534,8 +534,8 @@ function xarcachemanager_fs_setup($args)
             $old_umask = umask(0);
             mkdir($setupDir, 0o777);
             umask($old_umask);
-            if (!file_exists($setupDir.'/index.html')) {
-                @touch($setupDir.'/index.html');
+            if (!file_exists($setupDir . '/index.html')) {
+                @touch($setupDir . '/index.html');
             }
         }
     }

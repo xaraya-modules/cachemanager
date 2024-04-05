@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\ModuleCache;
  * @uses ModuleCache::getConfig()
  * @return array module caching configurations
  */
-function xarcachemanager_adminapi_getmodules($args)
+function xarcachemanager_adminapi_getmodules(array $args = [], $context = null)
 {
     extract($args);
 

@@ -60,11 +60,11 @@ class CacheUtility
         // convert to hours
         $hours = intval(intval($starttime) / 3600);
         // add leading 0
-        $convertedtime .= str_pad($hours, 2, '0', STR_PAD_LEFT). ':';
+        $convertedtime .= str_pad($hours, 2, '0', STR_PAD_LEFT) . ':';
         // get the minutes
         $minutes = intval(intval($starttime / 60) % 60);
         // then add to $hms (with a leading 0 if needed)
-        $convertedtime .= str_pad($minutes, 2, '0', STR_PAD_LEFT). ':';
+        $convertedtime .= str_pad($minutes, 2, '0', STR_PAD_LEFT) . ':';
         // get the seconds
         $seconds = intval($starttime % 60);
         // add to $hms, again with a leading 0 if needed

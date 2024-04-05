@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\BlockCache;
  * @uses BlockCache::getConfig()
  * @return array Block caching configurations
  */
-function xarcachemanager_adminapi_getblocks($args)
+function xarcachemanager_adminapi_getblocks(array $args = [], $context = null)
 {
     extract($args);
 

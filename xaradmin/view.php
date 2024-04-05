@@ -21,7 +21,7 @@ use Xaraya\Modules\CacheManager\CacheInfo;
  * - string $args['code']
  * @return array|void
  */
-function xarcachemanager_admin_view($args)
+function xarcachemanager_admin_view(array $args = [], $context = null)
 {
     extract($args);
 
@@ -36,10 +36,15 @@ function xarcachemanager_admin_view($args)
     }
 
     if (empty($tab)) {
-        xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'stats'));
+        xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'stats'), null, $context);
         return;
     } elseif (empty($key)) {
-        xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'stats', ['tab' => $tab]));
+        xarController::redirect(xarController::URL(
+            'xarcachemanager',
+            'admin',
+            'stats',
+            ['tab' => $tab]
+        ), null, $context);
         return;
     }
 

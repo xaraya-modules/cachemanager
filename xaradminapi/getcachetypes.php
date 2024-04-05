@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\CacheConfig;
  * @uses CacheConfig::getTypes()
  * @return array Cache types, with key set to cache type and value set to its settings
  */
-function xarcachemanager_adminapi_getcachetypes()
+function xarcachemanager_adminapi_getcachetypes(array $args = [], $context = null)
 {
     // return the cache types and their settings
     return CacheConfig::getTypes();

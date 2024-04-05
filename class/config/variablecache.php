@@ -32,9 +32,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
 
 class VariableCache extends CacheConfig
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * configure variable caching

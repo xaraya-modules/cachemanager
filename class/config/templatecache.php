@@ -25,9 +25,7 @@ use Xaraya\Modules\CacheManager\CacheConfig;
 
 class TemplateCache extends CacheConfig
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * configure template caching (TODO)
@@ -50,7 +48,7 @@ class TemplateCache extends CacheConfig
                 return;
             }
 
-            //xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'templates'));
+            //xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'templates'));
             //return true;
         }
 

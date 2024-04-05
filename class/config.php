@@ -26,9 +26,7 @@ class CacheConfig extends xarObject
     public static $typelist = ['page', 'block', 'module', 'object', 'variable'];
     public static $cachetypes = [];
 
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * @author jsb

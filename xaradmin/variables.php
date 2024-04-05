@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\VariableCache;
  * @uses VariableCache::modifyConfig()
  * @return array
  */
-function xarcachemanager_admin_variables($args)
+function xarcachemanager_admin_variables(array $args = [], $context = null)
 {
     return VariableCache::modifyConfig($args);
 }

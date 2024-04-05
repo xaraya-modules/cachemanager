@@ -21,7 +21,7 @@ use Xaraya\Modules\CacheManager\CacheInfo;
  * @param array $args['type'] cachetype to get the cache items from
  * @return array array of cache items
 */
-function xarcachemanager_adminapi_getcachelist($args = ['type' => ''])
+function xarcachemanager_adminapi_getcachelist(array $args = ['type' => ''], $context = null)
 {
     $type = '';
     if (is_array($args)) {

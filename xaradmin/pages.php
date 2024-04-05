@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\PageCache;
  * @uses PageCache::modifyConfig()
  * @return array
  */
-function xarcachemanager_admin_pages($args)
+function xarcachemanager_admin_pages(array $args = [], $context = null)
 {
     return PageCache::modifyConfig($args);
 }

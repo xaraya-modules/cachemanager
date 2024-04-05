@@ -21,7 +21,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * @uses CacheManager::restore_config()
  * @return boolean
  */
-function xarcachemanager_adminapi_restore_cachingconfig()
+function xarcachemanager_adminapi_restore_cachingconfig(array $args = [], $context = null)
 {
     return CacheManager::restore_config();
 }

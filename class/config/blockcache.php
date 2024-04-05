@@ -34,9 +34,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
 
 class BlockCache extends CacheConfig
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * configure block caching

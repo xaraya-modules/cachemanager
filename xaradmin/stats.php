@@ -24,7 +24,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * - int    $args['itemsperpage']
  * @return array|bool|void
  */
-function xarcachemanager_admin_stats($args)
+function xarcachemanager_admin_stats(array $args = [], $context = null)
 {
     if (!xarSecurity::check('AdminXarCache')) {
         return;
@@ -96,12 +96,12 @@ function xarcachemanager_admin_stats($args)
                     }
                 }
 
-                xarResponse::Redirect(xarController::URL(
+                xarController::redirect(xarController::URL(
                     'xarcachemanager',
                     'admin',
                     'stats',
                     ['tab' => $tab]
-                ));
+                ), null, $context);
                 return true;
             }
             if (!empty($data['status'][$enabled]) && !empty($data['settings'][$storage])) {
@@ -225,12 +225,12 @@ function xarcachemanager_admin_stats($args)
                     }
                 }
 
-                xarResponse::Redirect(xarController::URL(
+                xarController::redirect(xarController::URL(
                     'xarcachemanager',
                     'admin',
                     'stats',
                     ['tab' => 'autocache']
-                ));
+                ), null, $context);
                 return true;
             }
 

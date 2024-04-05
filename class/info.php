@@ -28,9 +28,7 @@ class CacheInfo extends xarObject
     // list of currently supported cache types - not including 'query', 'core', 'template' here
     public static $typelist = ['page', 'block', 'module', 'object', 'variable'];
 
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * Get the cache storage used by a particular cache type

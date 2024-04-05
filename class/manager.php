@@ -26,9 +26,7 @@ use sys;
 
 class CacheManager extends xarObject
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * Gets caching configuration settings in the config file or modVars

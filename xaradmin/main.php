@@ -17,14 +17,14 @@
  * @access public
  * @return true|void on success or void on falure
  */
-function xarcachemanager_admin_main()
+function xarcachemanager_admin_main(array $args = [], $context = null)
 {
     // Security Check
     if (!xarSecurity::check('AdminXarCache')) {
         return;
     }
 
-    xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'modifyconfig'));
+    xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'modifyconfig'), null, $context);
     // success
     return true;
 }

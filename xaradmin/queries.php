@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\QueryCache;
  * @uses QueryCache::modifyConfig()
  * @return array
  */
-function xarcachemanager_admin_queries($args)
+function xarcachemanager_admin_queries(array $args = [], $context = null)
 {
     return QueryCache::modifyConfig($args);
 }

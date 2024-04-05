@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\ObjectCache;
  * @uses ObjectCache::getConfig()
  * @return array object caching configurations
  */
-function xarcachemanager_adminapi_getobjects($args)
+function xarcachemanager_adminapi_getobjects(array $args = [], $context = null)
 {
     extract($args);
 

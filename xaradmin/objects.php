@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\ObjectCache;
  * @uses ObjectCache::modifyConfig()
  * @return array
  */
-function xarcachemanager_admin_objects($args)
+function xarcachemanager_admin_objects(array $args = [], $context = null)
 {
     return ObjectCache::modifyConfig($args);
 }

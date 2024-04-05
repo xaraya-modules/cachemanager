@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\Config\ModuleCache;
  * @uses ModuleCache::modifyConfig()
  * @return array
  */
-function xarcachemanager_admin_modules($args)
+function xarcachemanager_admin_modules(array $args = [], $context = null)
 {
     return ModuleCache::modifyConfig($args);
 }

@@ -27,9 +27,7 @@ use Xaraya\Modules\CacheManager\CacheConfig;
 
 class QueryCache extends CacheConfig
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * configure query caching (TODO)
@@ -62,14 +60,14 @@ class QueryCache extends CacheConfig
                     // stored in module variables (for now ?)
                     foreach ($querylist as $query => $time) {
                         if (empty($time) || !is_numeric($time)) {
-                            xarModVars::set($module, 'cache.'.$query, 0);
+                            xarModVars::set($module, 'cache.' . $query, 0);
                         } else {
-                            xarModVars::set($module, 'cache.'.$query, $time);
+                            xarModVars::set($module, 'cache.' . $query, $time);
                         }
                     }
                 }
             }
-            //xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'queries'));
+            //xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'queries'));
             //return true;
         }
 
@@ -117,7 +115,7 @@ class QueryCache extends CacheConfig
             $queries[$module] = [];
             foreach ($querylist as $query) {
                 // stored in module variables (for now ?)
-                $queries[$module][$query] = xarModVars::get($module, 'cache.'.$query);
+                $queries[$module][$query] = xarModVars::get($module, 'cache.' . $query);
             }
         }
 

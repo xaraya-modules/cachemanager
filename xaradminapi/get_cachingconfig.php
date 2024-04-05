@@ -26,7 +26,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * @param boolean $args['viahook'] config value requested as part of a hook call
  * @return array of caching configuration settings
  */
-function xarcachemanager_adminapi_get_cachingconfig($args)
+function xarcachemanager_adminapi_get_cachingconfig(array $args = [], $context = null)
 {
     return CacheManager::get_config($args);
 }

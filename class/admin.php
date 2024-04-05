@@ -22,9 +22,7 @@ use sys;
 
 class CacheAdmin extends xarObject
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * @uses xarcachemanager_admin_main()

@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
  * @access public
  * @return array|void $data (array of values for admin modify template) on success or false on failure
  */
-function xarcachemanager_admin_modifyconfig()
+function xarcachemanager_admin_modifyconfig(array $args = [], $context = null)
 {
     // Security Check
     if (!xarSecurity::check('AdminXarCache')) {

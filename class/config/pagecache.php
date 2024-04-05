@@ -37,9 +37,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
 
 class PageCache extends CacheConfig
 {
-    public static function init(array $args = [])
-    {
-    }
+    public static function init(array $args = []) {}
 
     /**
      * configure page caching (TODO)
@@ -208,7 +206,7 @@ class PageCache extends CacheConfig
                 }
             }
 
-            xarResponse::Redirect(xarController::URL('xarcachemanager', 'admin', 'pages'));
+            xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'pages'));
             return true;
         } elseif (!empty($data['settings']['PageCacheGroups'])) {
             $grouplist = explode(';', $data['settings']['PageCacheGroups']);

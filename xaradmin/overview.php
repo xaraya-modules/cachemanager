@@ -14,7 +14,7 @@
  * Overview displays standard Overview page
  * @return string
  */
-function xarcachemanager_admin_overview()
+function xarcachemanager_admin_overview(array $args = [], $context = null)
 {
     $data = [];
     //just return to main function that displays the overview
