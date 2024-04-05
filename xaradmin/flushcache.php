@@ -47,7 +47,7 @@ function cachemanager_admin_flushcache(array $args = [], $context = null)
         $data['cachetypes'] = $cachetypes;
         $data['cachekeys'] = [];
         foreach (array_keys($cachetypes) as $type) {
-            $data['cachekeys'][$type] = xarMod::apiFunc('cachemanager', 'admin', 'getcachekeys', $type);
+            $data['cachekeys'][$type] = xarMod::apiFunc('cachemanager', 'admin', 'getcachekeys', ['type' => $type]);
         }
 
         $data['instructions'] = xarMLS::translate("Please select a cache key to be flushed.");
@@ -133,7 +133,7 @@ function cachemanager_admin_flushcache(array $args = [], $context = null)
 
     $data['cachesize'] = [];
     foreach (array_keys($cachetypes) as $type) {
-        $cachesize = xarMod::apiFunc('cachemanager', 'admin', 'getcachesize', $type);
+        $cachesize = xarMod::apiFunc('cachemanager', 'admin', 'getcachesize', ['type' => $type]);
         if (!empty($cachesize)) {
             $data['cachesize'][$type] = round($cachesize / 1048576, 2);
         } else {
