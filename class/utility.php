@@ -2,8 +2,8 @@
 /**
  * Classes to utility methods for the cache system of Xaraya
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release

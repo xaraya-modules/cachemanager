@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.hooks');
+sys::import('modules.cachemanager.class.hooks');
 use Xaraya\Modules\CacheManager\CacheHooks;
 
 /**
@@ -20,7 +20,7 @@ use Xaraya\Modules\CacheManager\CacheHooks;
  * @uses CacheHooks::regenstatic()
  * @return void
  */
-function xarcachemanager_adminapi_regenstatic($nolimit = null)
+function cachemanager_adminapi_regenstatic($nolimit = null)
 {
     CacheHooks::regenstatic($nolimit);
 }

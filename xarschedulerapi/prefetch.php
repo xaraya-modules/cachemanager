@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.scheduler');
+sys::import('modules.cachemanager.class.scheduler');
 use Xaraya\Modules\CacheManager\CacheScheduler;
 
 /**
@@ -21,7 +21,7 @@ use Xaraya\Modules\CacheManager\CacheScheduler;
  * @author mikespub
  * @access private
  */
-function xarcachemanager_schedulerapi_prefetch(array $args = [], $context = null)
+function cachemanager_schedulerapi_prefetch(array $args = [], $context = null)
 {
     return CacheScheduler::prefetch($args);
 }

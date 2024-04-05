@@ -1,17 +1,17 @@
-{# @xarcachemanager/admin/pages.html.twig #}
+{# @cachemanager/admin/pages.html.twig #}
 
 {% block pages %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
 <a name="config"></a>
-<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span></div>
 <div class="xar-mod-body">
-    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    {{ include('@cachemanager/includes/admin-menu.html.twig') }}
     <h2>{{ xar_translate('Configure Page Caching') }}</h2>
 
     {% if not pages or pages|length < 1 %}
         {{ xar_translate('Page caching is currently disabled...') }}
     {% else %}
-    <form action="{{ xar_moduleurl('xarcachemanager','admin','pages') }}" method="post">
+    <form action="{{ xar_moduleurl('cachemanager','admin','pages') }}" method="post">
 
     {#  this just shows the current rules for now #}
     <fieldset>
@@ -30,7 +30,7 @@
       {% if not settings['PageHookedOnly'] %}
         <td>{{ xar_translate('All') }}</td>
       {% else %}
-        <td>{{ xar_translate('Hooked to xarCacheManager') }}</td>
+        <td>{{ xar_translate('Hooked to CacheManager') }}</td>
       {% endif %}
     </tr>
     <tr>
@@ -67,7 +67,7 @@
           {% for group in groups %}
               {% if group['id'] == 1 %}
                   {#  skip Everybody #}
-                  <xar:continue/>
+                  {# <xar:continue /> #}
               {% else %}
               <br/>
               {% if group['checked'] %}
@@ -99,7 +99,7 @@
         <label for="autoregenerate">{{ xar_translate('Auto-regenerate session-less URL cache') }}</label>
       </td>
       <td>
-        {% if xar_modulevar('xarcachemanager', 'AutoRegenSessionless') %}
+        {% if xar_modulevar('cachemanager', 'AutoRegenSessionless') %}
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
         {% else %}
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -151,7 +151,7 @@
       <td>
         {% if settings['AutoCacheKeepStats'] %}
           <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" checked="checked" />
-          [ <a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': 'autocache'}) }}">{{ xar_translate('view stats') }}</a> ]
+          [ <a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': 'autocache'}) }}">{{ xar_translate('view stats') }}</a> ]
         {% else %}
           <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" />
         {% endif %}

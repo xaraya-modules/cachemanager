@@ -2,8 +2,8 @@
 /**
  * Classes to manage config for the cache system of Xaraya
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -26,8 +26,8 @@ use xarMod;
 use xarModuleCache;
 use sys;
 
-sys::import('modules.xarcachemanager.class.config');
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.config');
+sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheUtility;
 
@@ -97,7 +97,7 @@ class ModuleCache extends CacheConfig
                     $newmodules[$name][$func]['cacheexpire'] = $expire;
                 }
             }
-            // save settings to modules in case xarcachemanager is removed later
+            // save settings to modules in case cachemanager is removed later
             xarModVars::set('modules', 'modulecache_settings', serialize($newmodules));
 
             // modules could be anywhere, we're not smart enough not know exactly where yet
@@ -108,8 +108,8 @@ class ModuleCache extends CacheConfig
             }
             // and flush the modules
             xarModuleCache::flushCached($key);
-            if (xarModVars::get('xarcachemanager', 'AutoRegenSessionless')) {
-                xarMod::apiFunc('xarcachemanager', 'admin', 'regenstatic');
+            if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+                xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
 
@@ -135,7 +135,7 @@ class ModuleCache extends CacheConfig
         }
 
         // Get default module functions to cache
-        $defaultmodulefunctions = unserialize(xarModVars::get('xarcachemanager', 'DefaultModuleCacheFunctions'));
+        $defaultmodulefunctions = unserialize(xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
 
         // Get all modules
         $modules = xarMod::apiFunc('modules', 'admin', 'getlist');

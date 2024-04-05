@@ -2,8 +2,8 @@
 /**
  * Classes to manage config for the cache system of Xaraya
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -28,9 +28,9 @@ use xarResponse;
 use xarMLS;
 use sys;
 
-sys::import('modules.xarcachemanager.class.config');
-sys::import('modules.xarcachemanager.class.manager');
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.config');
+sys::import('modules.cachemanager.class.manager');
+sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
@@ -63,7 +63,7 @@ class PageCache extends CacheConfig
         $cachingConfiguration = CacheManager::getConfigFromFile();
 
         $data['settings'] = xarMod::apiFunc(
-            'xarcachemanager',
+            'cachemanager',
             'admin',
             'config_tpl_prep',
             $cachingConfiguration
@@ -115,9 +115,9 @@ class PageCache extends CacheConfig
             // set option for auto regeneration of session-less url list cache on event invalidation
             xarVar::fetch('autoregenerate', 'isset', $autoregenerate, '', xarVar::NOT_REQUIRED);
             if ($autoregenerate) {
-                xarModVars::set('xarcachemanager', 'AutoRegenSessionless', 1);
+                xarModVars::set('cachemanager', 'AutoRegenSessionless', 1);
             } else {
-                xarModVars::set('xarcachemanager', 'AutoRegenSessionless', 0);
+                xarModVars::set('cachemanager', 'AutoRegenSessionless', 0);
             }
 
             xarVar::fetch('autocache', 'isset', $autocache, '', xarVar::NOT_REQUIRED);
@@ -193,7 +193,7 @@ class PageCache extends CacheConfig
                 $fp = fopen($outputCacheDir . '/autocache.log', 'w');
                 fclose($fp);
 
-                // make sure the xarcachemanager event handler is known to the event system
+                // make sure the cachemanager event handler is known to the event system
                 if (!xarMod::apiFunc('modules', 'admin', 'geteventhandlers')) {
                     return;
                 }
@@ -206,7 +206,7 @@ class PageCache extends CacheConfig
                 }
             }
 
-            xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'pages'));
+            xarController::redirect(xarController::URL('cachemanager', 'admin', 'pages'));
             return true;
         } elseif (!empty($data['settings']['PageCacheGroups'])) {
             $grouplist = explode(';', $data['settings']['PageCacheGroups']);

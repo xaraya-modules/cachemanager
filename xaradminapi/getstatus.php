@@ -7,7 +7,7 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
 /**
@@ -16,7 +16,7 @@
 * @author jsb| mikespub
 * @return array containing the caching status.
 */
-function xarcachemanager_adminapi_getstatus(array $args = [], $context = null)
+function cachemanager_adminapi_getstatus(array $args = [], $context = null)
 {
     $status = [];
 

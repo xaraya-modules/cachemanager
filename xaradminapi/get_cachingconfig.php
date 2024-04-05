@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 use Xaraya\Modules\CacheManager\CacheManager;
 
 /**
@@ -26,7 +26,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * @param boolean $args['viahook'] config value requested as part of a hook call
  * @return array of caching configuration settings
  */
-function xarcachemanager_adminapi_get_cachingconfig(array $args = [], $context = null)
+function cachemanager_adminapi_get_cachingconfig(array $args = [], $context = null)
 {
     return CacheManager::get_config($args);
 }

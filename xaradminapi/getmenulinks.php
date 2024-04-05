@@ -7,7 +7,7 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
 /**
@@ -16,7 +16,7 @@
 * @author jsb| mikespub
 * @return array containing the menulinks for the main menu items.
 */
-function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null)
+function cachemanager_adminapi_getmenulinks(array $args = [], $context = null)
 {
     $menulinks = [];
 
@@ -26,7 +26,7 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
     }
 
     $menulinks[] = ['url'   => xarController::URL(
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'flushcache'
     ),
@@ -36,7 +36,7 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
     if (xarCache::isOutputCacheEnabled()) {
         if (xarOutputCache::isPageCacheEnabled()) {
             $menulinks[] = ['url'   => xarController::URL(
-                'xarcachemanager',
+                'cachemanager',
                 'admin',
                 'pages'
             ),
@@ -45,7 +45,7 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
         }
         if (xarOutputCache::isBlockCacheEnabled()) {
             $menulinks[] = ['url'   => xarController::URL(
-                'xarcachemanager',
+                'cachemanager',
                 'admin',
                 'blocks'
             ),
@@ -54,7 +54,7 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
         }
         if (xarOutputCache::isModuleCacheEnabled()) {
             $menulinks[] = ['url'   => xarController::URL(
-                'xarcachemanager',
+                'cachemanager',
                 'admin',
                 'modules'
             ),
@@ -63,7 +63,7 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
         }
         if (xarOutputCache::isObjectCacheEnabled()) {
             $menulinks[] = ['url'   => xarController::URL(
-                'xarcachemanager',
+                'cachemanager',
                 'admin',
                 'objects'
             ),
@@ -73,14 +73,14 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
     }
     /*
         if (xarCache::isQueryCacheEnabled()) {
-            $menulinks[] = Array('url'   => xarController::URL('xarcachemanager',
+            $menulinks[] = Array('url'   => xarController::URL('cachemanager',
                                                       'admin',
                                                       'queries'),
                                  'title' => xarMLS::translate('Configure the caching options for queries'),
                                  'label' => xarMLS::translate('Query Caching'));
         }
         if (xarCache::isVariableCacheEnabled()) {
-            $menulinks[] = Array('url'   => xarController::URL('xarcachemanager',
+            $menulinks[] = Array('url'   => xarController::URL('cachemanager',
                                                       'admin',
                                                       'variables'),
                                  'title' => xarMLS::translate('Configure the caching options for variables'),
@@ -88,14 +88,14 @@ function xarcachemanager_adminapi_getmenulinks(array $args = [], $context = null
         }
     */
     $menulinks[] = ['url'   => xarController::URL(
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'stats'
     ),
                          'title' => xarMLS::translate('View cache statistics'),
                          'label' => xarMLS::translate('View Statistics'), ];
     $menulinks[] = ['url'   => xarController::URL(
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'modifyconfig'
     ),

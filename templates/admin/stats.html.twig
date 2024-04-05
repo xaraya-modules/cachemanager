@@ -1,10 +1,10 @@
-{# @xarcachemanager/admin/stats.html.twig #}
+{# @cachemanager/admin/stats.html.twig #}
 
 {% block stats %}
 {{ xar_style({scope: "module", module: "base", file: "navtabs"}) }}
-<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span></div>
 <div class="xar-mod-body">
-  {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+  {{ include('@cachemanager/includes/admin-menu.html.twig') }}
 
   {% if tab == 'page' %}
     <h2>Page Cache Statistics</h2>
@@ -22,19 +22,19 @@
     <h2>Cache Statistics</h2>
   {% endif %}
 
-    {{ include('@xarcachemanager/includes/stats-menu.html.twig') }}
+    {{ include('@cachemanager/includes/stats-menu.html.twig') }}
     
     <div style="border: 1px solid #ccc; text-align: left; width: 100%; border-top: none; padding-left: 5px;">
     {# <!-- Begin Overview Statistics --> #}
     <br />
     {% if not tab or tab == 'overview' %}
 
-        {{ include('@xarcachemanager/includes/stats-overview.html.twig') }}
+        {{ include('@cachemanager/includes/stats-overview.html.twig') }}
 
     {# <!--  Begin Page / Block / Module / Object / Variable Statistics --> #}
     {% elseif tab == 'page' or tab == 'block' or tab == 'module' or tab == 'object' or tab == 'variable' %}
 
-        {{ include('@xarcachemanager/includes/stats-details.html.twig') }}
+        {{ include('@cachemanager/includes/stats-details.html.twig') }}
 
     {# <!--  Begin Query Statistics --> #}
     {% elseif tab == 'query' %}
@@ -45,7 +45,7 @@
     {# <!--  Begin Auto-Cache Statistics --> #}
     {% elseif tab == 'autocache' %}
 
-        {{ include('@xarcachemanager/includes/stats-autocache.html.twig') }}
+        {{ include('@cachemanager/includes/stats-autocache.html.twig') }}
 
     {% endif %}
     </div>

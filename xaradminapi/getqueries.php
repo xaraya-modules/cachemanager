@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.config.querycache');
+sys::import('modules.cachemanager.class.config.querycache');
 use Xaraya\Modules\CacheManager\Config\QueryCache;
 
 /**
@@ -19,7 +19,7 @@ use Xaraya\Modules\CacheManager\Config\QueryCache;
  * @uses QueryCache::getConfig()
  * @return array of query caching configurations
  */
-function xarcachemanager_adminapi_getqueries(array $args = [], $context = null)
+function cachemanager_adminapi_getqueries(array $args = [], $context = null)
 {
     extract($args);
 

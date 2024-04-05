@@ -2,15 +2,15 @@
 <xar:template xmlns:xar="http://xaraya.com/2004/blocklayout">
 <xar:comment> License: GPL http://www.gnu.org/copyleft/gpl.html </xar:comment>
 <a name="config"></a>
-<div class="xar-mod-head"><span class="xar-mod-title"><xar:mlstring>xarCacheManager Administration</xar:mlstring></span></div>
+<div class="xar-mod-head"><span class="xar-mod-title"><xar:mlstring>CacheManager Administration</xar:mlstring></span></div>
 <div class="xar-mod-body">
-    <xar:template type="module" file="admin-menu" module="xarcachemanager" />
+    <xar:template type="module" file="admin-menu" module="cachemanager" />
     <h2><xar:mlstring>Configure Page Caching</xar:mlstring></h2>
 
     <xar:if condition="empty($pages) or count($pages) lt 1">
         <xar:mlstring>Page caching is currently disabled...</xar:mlstring>
     <xar:else/>
-    <form action="&xar-modurl-xarcachemanager-admin-pages;" method="post">
+    <form action="&xar-modurl-cachemanager-admin-pages;" method="post">
 
     <xar:comment>this just shows the current rules for now</xar:comment>
     <fieldset>
@@ -31,7 +31,7 @@
       <xar:if condition="empty($settings['PageHookedOnly'])">
         <td><xar:mlstring>All</xar:mlstring></td>
       <xar:else />
-        <td><xar:mlstring>Hooked to xarCacheManager</xar:mlstring></td>
+        <td><xar:mlstring>Hooked to CacheManager</xar:mlstring></td>
       </xar:if>
     </tr>
     <tr>
@@ -99,7 +99,7 @@
         <label for="autoregenerate"><xar:mlstring>Auto-regenerate session-less URL cache</xar:mlstring></label>
       </td>
       <td>
-        <xar:if condition="xarModVars::get('xarcachemanager','AutoRegenSessionless')">
+        <xar:if condition="xarModVars::get('cachemanager','AutoRegenSessionless')">
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
         <xar:else/>
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -151,7 +151,7 @@
       <td>
         <xar:if condition="!empty($settings['AutoCacheKeepStats'])">
           <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" checked="checked" />
-          [ <a href="#xarController::URL('xarcachemanager','admin','stats',array('tab' => 'autocache'))#"><xar:mlstring>view stats</xar:mlstring></a> ]
+          [ <a href="#xarController::URL('cachemanager','admin','stats',array('tab' => 'autocache'))#"><xar:mlstring>view stats</xar:mlstring></a> ]
         <xar:else/>
           <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" />
         </xar:if>

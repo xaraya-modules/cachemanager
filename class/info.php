@@ -2,8 +2,8 @@
 /**
  * Classes to provide info on the cache system of Xaraya
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -21,7 +21,7 @@ use DataObjectRESTHandler;
 use Throwable;
 use sys;
 
-sys::import('modules.xarcachemanager.class.config');
+sys::import('modules.cachemanager.class.config');
 
 class CacheInfo extends xarObject
 {
@@ -148,8 +148,8 @@ class CacheInfo extends xarObject
             $sort = null;
             ksort($items);
         } else {
-            sys::import('modules.xarcachemanager.xaradmin.stats');
-            xarcachemanager_stats_sortitems($items, $sort);
+            sys::import('modules.cachemanager.xaradmin.stats');
+            cachemanager_stats_sortitems($items, $sort);
         }
 
         return $items;

@@ -2,8 +2,8 @@
 /**
  * Classes to manage the output & variable cache system of Xaraya
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -97,7 +97,7 @@ class CacheManager extends xarObject
             // try to restore the missing file
             if (!self::restore_config()) {
                 $msg = xarMLS::translate('The #(1) file is missing.  Please restore #(1)
-                            from backup, or the xarcachemanager/config.caching.php.dist
+                            from backup, or the cachemanager/config.caching.php.dist
                             file.', $cachingConfigFile);
                 throw new Exception($msg);
             }
@@ -127,7 +127,7 @@ class CacheManager extends xarObject
         //get the modvars from the db
         if (!empty($keys)) {
             foreach ($keys as $key) {
-                $value = xarModVars::get('xarcachemanager', $key);
+                $value = xarModVars::get('cachemanager', $key);
                 if (substr($value, 0, 6) == 'array-') {
                     $value = substr($value, 6);
                     $value = unserialize($value);
@@ -140,7 +140,7 @@ class CacheManager extends xarObject
             return $cachingConfiguration;
         }
 
-        $modBaseInfo = xarMod::getBaseInfo('xarcachemanager');
+        $modBaseInfo = xarMod::getBaseInfo('cachemanager');
         //if (!isset($modBaseInfo)) return; // throw back
 
         $dbconn = xarDB::getConn();
@@ -192,7 +192,7 @@ class CacheManager extends xarObject
         if (!is_writable($cachingConfigFile)) {
             $msg = xarMLS::translate('The caching configuration file is not writable by the web server.
                    #(1) must be writable by the web server for
-                   the output caching to be managed by xarCacheManager.', $cachingConfigFile);
+                   the output caching to be managed by CacheManager.', $cachingConfigFile);
             throw new Exception($msg);
         }
 
@@ -202,10 +202,10 @@ class CacheManager extends xarObject
         // and replace the cachingConfig with the new values
         foreach ($configSettings as $configKey => $configValue) {
             if (is_numeric($configValue)) {
-                xarModVars::set('xarcachemanager', $configKey, $configValue);
+                xarModVars::set('cachemanager', $configKey, $configValue);
                 $cachingConfig = preg_replace('/\[\'' . $configKey . '\'\]\s*=\s*(|\")(.*)\\1;/', "['$configKey'] = $configValue;", $cachingConfig);
             } elseif (is_array($configValue)) {
-                xarModVars::set('xarcachemanager', $configKey, 'array-' . serialize($configValue));
+                xarModVars::set('cachemanager', $configKey, 'array-' . serialize($configValue));
                 $configValue = str_replace("'", "\\'", $configValue);
                 if (!empty($configValue)) {
                     $keyslist = array_keys($configValue);
@@ -224,7 +224,7 @@ class CacheManager extends xarObject
                 }
                 $cachingConfig = preg_replace('/\[\'' . $configKey . '\'\]\s*=\s*array\s*\((.*)\)\s*;/i', "['$configKey'] = array($configValue);", $cachingConfig);
             } else {
-                xarModVars::set('xarcachemanager', $configKey, $configValue);
+                xarModVars::set('cachemanager', $configKey, $configValue);
                 $configValue = str_replace("'", "\\'", $configValue);
                 $cachingConfig = preg_replace('/\[\'' . $configKey . '\'\]\s*=\s*(\'|\")(.*)\\1;/', "['$configKey'] = '$configValue';", $cachingConfig);
             }
@@ -247,7 +247,7 @@ class CacheManager extends xarObject
     public static function restore_config()
     {
         $varCacheDir = sys::varpath() . '/cache';
-        $defaultConfigFile = sys::code() . 'modules/xarcachemanager/config.caching.php.dist';
+        $defaultConfigFile = sys::code() . 'modules/cachemanager/config.caching.php.dist';
         $cachingConfigFile = $varCacheDir . '/config.caching.php';
 
         $configSettings = self::getConfigFromDatabase();
@@ -267,7 +267,7 @@ class CacheManager extends xarObject
             $msg = xarMLS::translate('The #(1) file is not writable by the web
                    web server. The #(1) file must be writable by the web
                    server process owner for output caching to be configured
-                   via the xarCacheManager module.
+                   via the CacheManager module.
                    Please change the permission on the #(1) file
                    so that the web server can write to it.', $cachingConfigFile);
             throw new Exception($msg);

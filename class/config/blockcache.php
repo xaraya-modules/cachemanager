@@ -2,8 +2,8 @@
 /**
  * Classes to manage config for the cache system of Xaraya
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -27,8 +27,8 @@ use xarDB;
 use xarBlockCache;
 use sys;
 
-sys::import('modules.xarcachemanager.class.config');
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.config');
+sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheUtility;
 
@@ -129,8 +129,8 @@ class BlockCache extends CacheConfig
             }
             // and flush the blocks
             xarBlockCache::flushCached($key);
-            if (xarModVars::get('xarcachemanager', 'AutoRegenSessionless')) {
-                xarMod::apiFunc('xarcachemanager', 'admin', 'regenstatic');
+            if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+                xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
 

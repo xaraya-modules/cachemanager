@@ -1,16 +1,16 @@
-{# @xarcachemanager/admin/blocks.html.twig #}
+{# @cachemanager/admin/blocks.html.twig #}
 
 {% block blocks %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
-<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span></div>
 <div class="xar-mod-body">
-    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    {{ include('@cachemanager/includes/admin-menu.html.twig') }}
     <h2>{{ xar_translate('Configure Block Caching') }}</h2>
 
     {% if not blocks or blocks|length < 1 %}
         {{ xar_translate('Block caching is currently disabled') }}
     {% else %}
-        <form action="{{ xar_moduleurl('xarcachemanager','admin','blocks') }}" method="post">
+        <form action="{{ xar_moduleurl('cachemanager','admin','blocks') }}" method="post">
         <fieldset>
             <legend>
             {{ xar_translate('Block Caching Options') }}

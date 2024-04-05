@@ -7,7 +7,7 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
 
@@ -53,7 +53,7 @@ sys::import('xaraya.core');
 // Load the core with all optional systems loaded
 xarCore::xarInit(xarCore::SYSTEM_ALL);
 
-sys::import('modules.xarcachemanager.class.hooks');
+sys::import('modules.cachemanager.class.hooks');
 use Xaraya\Modules\CacheManager\CacheHooks;
 
 $result = CacheHooks::regenstatic();

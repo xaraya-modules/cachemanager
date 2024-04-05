@@ -1,4 +1,4 @@
-{# @xarcachemanager/includes/stats-overview.html.twig #}
+{# @cachemanager/includes/stats-overview.html.twig #}
 
 {% block stats_overview %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
@@ -8,7 +8,7 @@
     <tr>
       <td valign="top">
 
-        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'page'}) }}">Page Cache</a></h3>
+        <h3><a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'page'}) }}">Page Cache</a></h3>
 
         {% if status['PageCachingEnabled'] %}
         <table class="xar-norm">
@@ -90,7 +90,7 @@
       </td>
       <td valign="top">
 
-        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'block'}) }}">Block Cache</a></h3>
+        <h3><a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'block'}) }}">Block Cache</a></h3>
 
         {% if status['BlockCachingEnabled'] %}
         <table class="xar-norm">
@@ -174,7 +174,7 @@
     <tr>
       <td valign="top">
 
-        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'module'}) }}">Module Cache</a></h3>
+        <h3><a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'module'}) }}">Module Cache</a></h3>
 
         {% if status['ModuleCachingEnabled'] %}
         <table class="xar-norm">
@@ -256,7 +256,7 @@
       </td>
       <td valign="top">
 
-        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'object'}) }}">Object Cache</a></h3>
+        <h3><a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'object'}) }}">Object Cache</a></h3>
 
         {% if status['ObjectCachingEnabled'] %}
         <table class="xar-norm">
@@ -340,7 +340,7 @@
     <tr>
       <td valign="top">
 
-        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'autocache'}) }}">Auto-Cache</a></h3>
+        <h3><a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'autocache'}) }}">Auto-Cache</a></h3>
 
         {% if status['AutoCachingEnabled'] %}
         <table class="xar-norm">
@@ -408,7 +408,7 @@
       </td>
       <td valign="top">
 
-        <h3><a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'variable'}) }}">Variable Cache</a></h3>
+        <h3><a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'variable'}) }}">Variable Cache</a></h3>
 
         {% if status['VariableCachingEnabled'] %}
         <table class="xar-norm">
@@ -537,7 +537,7 @@
     <p>
         Note: in-memory cache storage like apc, memcached or xcache shares the same statistics across all caches
     </p>
-    <form method="post" action="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats') }}">
+    <form method="post" action="{{ xar_moduleurl('cachemanager', 'admin', 'stats') }}">
       <input type="hidden" name="tab" id="tab" value="overview" />
       {{ xar_translate('Items per page') }}
       <input type="text" name="itemsperpage" id="itemsperpage" value="{{ itemsperpage }}" size="4" />

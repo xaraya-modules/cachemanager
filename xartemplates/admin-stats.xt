@@ -2,9 +2,9 @@
 <xar:template xmlns:xar="http://xaraya.com/2004/blocklayout">
 <!--  License: GPL http://www.gnu.org/copyleft/gpl.html  -->
 <xar:style scope="module" module="base" file="navtabs" />
-<div class="xar-mod-head"><span class="xar-mod-title"><xar:mlstring>xarCacheManager Administration</xar:mlstring></span></div>
+<div class="xar-mod-head"><span class="xar-mod-title"><xar:mlstring>CacheManager Administration</xar:mlstring></span></div>
 <div class="xar-mod-body">
-  <xar:template type="module" file="admin-menu" module="xarcachemanager" />
+  <xar:template type="module" file="admin-menu" module="cachemanager" />
 
   <xar:if condition="$tab eq 'page'">
     <h2>Page Cache Statistics</h2>
@@ -22,19 +22,19 @@
     <h2>Cache Statistics</h2>
   </xar:if>
 
-    <xar:template type="module" file="stats-menu" module="xarcachemanager" />
+    <xar:template type="module" file="stats-menu" module="cachemanager" />
     
     <div style="border: 1px solid #ccc; text-align: left; width: 100%; border-top: none; padding-left: 5px;">
     <!-- Begin Overview Statistics -->
     <br />
     <xar:if condition="empty($tab) or $tab eq 'overview'">
 
-        <xar:template type="module" file="stats-overview" module="xarcachemanager" />
+        <xar:template type="module" file="stats-overview" module="cachemanager" />
 
     <!--  Begin Page / Block / Module / Object / Variable Statistics -->
     <xar:elseif condition="$tab eq 'page' or $tab eq 'block' or $tab eq 'module' or $tab eq 'object' or $tab eq 'variable'" />
 
-        <xar:template type="module" file="stats-details" module="xarcachemanager" />
+        <xar:template type="module" file="stats-details" module="cachemanager" />
 
     <!--  Begin Query Statistics -->
     <xar:elseif condition="$tab eq 'query'" />
@@ -45,7 +45,7 @@
     <!--  Begin Auto-Cache Statistics -->
     <xar:elseif condition="$tab eq 'autocache'" />
 
-        <xar:template type="module" file="stats-autocache" module="xarcachemanager" />
+        <xar:template type="module" file="stats-autocache" module="cachemanager" />
 
     </xar:if>
     </div>

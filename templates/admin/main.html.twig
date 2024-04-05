@@ -1,19 +1,19 @@
-{# @xarcachemanager/admin/main.html.twig #}
+{# @cachemanager/admin/main.html.twig #}
 
 {% block main %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
 <div class="xar-mod-head">
-    <span class="xar-mod-title">{{ xar_translate('Administration - xarCacheManager') }}</span>
+    <span class="xar-mod-title">{{ xar_translate('Administration - CacheManager') }}</span>
 </div>
 <div class="xar-mod-body">
-  {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
-  <img src="{{ xar_imageurl('admin_generic.gif','xarcachemanager') }}" class="xar-module-icon" alt="official icon" width="96" height="96" />
+  {{ include('@cachemanager/includes/admin-menu.html.twig') }}
+  <img src="{{ xar_imageurl('admin_generic.gif','cachemanager') }}" class="xar-module-icon" alt="official icon" width="96" height="96" />
 
     <h2>{{ xar_translate('Overview') }}</h2>
 
 
     <h3>{{ xar_translate('What is it?') }}</h3>
-        <p>{{ xar_translate('The xarCacheManager module provides an administrative interface to control the settings of the xarCache system of Xaraya. It also provides hooks that allow the cache system to know when changes have been made to modules so that it can respond accordingly (event based cache expiration/invalidation).') }}</p>
+        <p>{{ xar_translate('The CacheManager module provides an administrative interface to control the settings of the xarCache system of Xaraya. It also provides hooks that allow the cache system to know when changes have been made to modules so that it can respond accordingly (event based cache expiration/invalidation).') }}</p>
         <p>{{ xar_translate('The output cache system is designed to reduce the amount of work a server system has to do under heavy load conditions. It saves the output used by Xaraya so that it does not need to go through the entire process to reproduce the same output over and over again. At this point, only page level output caching for anonymous users and block level output caching for all users are available. In time, the output cache system will also support module level output caching for all users, as well as more efficient serving of cached pages for anonymous users. Page level output caching for certain user groups is also planned to be available to sites that can take advantage of this.') }}</p>
         <p>{{ xar_translate('Please do not confuse output caching with Xaraya\'s variable or template caching systems. Each are different. In time, they will likely use the same caching infrastructure, but will still provide different caching for different purposes. General data caching is also planned for xarCache.  For more on the different points of caching in Xaraya, please refer to:') }}
             <a href="http://xaraya.com/~jsb/cachingPoints.html">http://xaraya.com/~jsb/cachingPoints.html</a>
@@ -22,7 +22,7 @@
 
     <h3>{{ xar_translate('How to use it?') }}</h3>
         <p>
-            {{ xar_translate('The xarCacheManager module has several tools for managing the xarCache system and your cached output files. The tools are organized under the following menu links:') }}
+            {{ xar_translate('The CacheManager module has several tools for managing the xarCache system and your cached output files. The tools are organized under the following menu links:') }}
             <ul>
 {# <!-- Not supported with Creole
                 <li>{{ xar_translate('Query Caching - Queries in the certain functions could be quite expensive for large sites. You can use this tool to set query caching to save the results of some expensive queries for reuse.  Please note that cached query results will only be invalidated based on expiration time.') }}</li>
@@ -36,10 +36,10 @@
         </p>
 
         <h3>{{ xar_translate('Included Blocks') }}</h3>
-            <p>{{ xar_translate('The xarCacheManager Module has no blocks included at this time.') }}</p>
+            <p>{{ xar_translate('The CacheManager Module has no blocks included at this time.') }}</p>
 
         <h3>{{ xar_translate('Included Hooks') }}</h3>
-            <p>{{ xar_translate('The xarCacheManager module provides create, update, delete and modify config API hooks and a modify GUI hook (currently only used for adding caching configuration administration to block instance modify pages). To activate these hooks, go to Admin panel -> Modules -> Configure Hooks and click on the xarcachemanager link. Select the modules you would like to enable the xarCacheManager hook functionality for (articles, categories, autolinks, blocks, html are likely candidates) and click the Save Changes button. Once hooked to xarCacheManager, when you create, update, or delete items of the module, or modify the configuration of a module, the call to the xarCacheManager hooks will flush the appropriate cache to insure that your changes will be instantly available on your site (not masked by cached output files).') }}</p>
+            <p>{{ xar_translate('The CacheManager module provides create, update, delete and modify config API hooks and a modify GUI hook (currently only used for adding caching configuration administration to block instance modify pages). To activate these hooks, go to Admin panel -> Modules -> Configure Hooks and click on the cachemanager link. Select the modules you would like to enable the CacheManager hook functionality for (articles, categories, autolinks, blocks, html are likely candidates) and click the Save Changes button. Once hooked to CacheManager, when you create, update, or delete items of the module, or modify the configuration of a module, the call to the CacheManager hooks will flush the appropriate cache to insure that your changes will be instantly available on your site (not masked by cached output files).') }}</p>
 
         <h3>{{ xar_translate('Additional Information') }}</h3>
             <p>{{ xar_translate('Please note that page level output caching is not appropriate for sites that require the serving of dynamic content to anonymous users. Example: if each page contains data that changes every second and must be presented to the anonymous viewer in the latest state, you do not want to use page level output caching. However, if it is acceptable to present the data with changes no older than 1 minute, you can enable page level output caching and set the Cache Expiration Time to 60 seconds. If your site serves the same page 100 times per minute this will measurably reduce the load on your systems to do so.') }}</p>
@@ -77,17 +77,17 @@
             {{ xar_translate('Further Information') }}
         </h3>
         <p>
-           {{ xar_translate('Further information on the xarcachemanager module can be found at') }}
+           {{ xar_translate('Further information on the cachemanager module can be found at') }}
         </p>
         <ul>
-            <li>{{ xar_translate('xarcachemanager Extension page at') }} <a title="{{ xar_translate('xarcachemanager Module - Xaraya Extension 1652') }}" href="http://www.xaraya.com/index.php/release/1652.html">Xaraya Extension and Releases</a>.
+            <li>{{ xar_translate('cachemanager Extension page at') }} <a title="{{ xar_translate('cachemanager Module - Xaraya Extension 1652') }}" href="http://www.xaraya.com/index.php/release/1652.html">Xaraya Extension and Releases</a>.
                 {{ xar_translate('Click on Version History tab at the bottom to get the latest release information.') }}
             </li>
-            <li>{{ xar_translate('Related tutorials and documentation on xarcachemanager found at') }} <a href="http://www.xaraya.com/index.php/keywords/xarcachemanager/" title="{{ xar_translate('Related documentation on xarcachemanager') }}">{{ xar_translate('Xaraya Documentation.') }}</a>
+            <li>{{ xar_translate('Related tutorials and documentation on cachemanager found at') }} <a href="http://www.xaraya.com/index.php/keywords/cachemanager/" title="{{ xar_translate('Related documentation on cachemanager') }}">{{ xar_translate('Xaraya Documentation.') }}</a>
             </li>
         </ul>
         <p class="xar-sub">
-            <strong>&#160;{{ xar_translate('xarcachemanager Overview') }}</strong><br />&#160;{{ xar_translate('Version') }} 1.0.1&#160; 2006-04-12
+            <strong>&#160;{{ xar_translate('cachemanager Overview') }}</strong><br />&#160;{{ xar_translate('Version') }} 1.0.1&#160; 2006-04-12
         </p>
 </div>
 {% endblock %}

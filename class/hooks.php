@@ -2,8 +2,8 @@
 /**
  * Classes to handle cache hooks
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -34,8 +34,8 @@ use BadParameterException;
 use Exception;
 use sys;
 
-sys::import('modules.xarcachemanager.class.manager');
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.manager');
+sys::import('modules.cachemanager.class.utility');
 
 class CacheHooks extends xarObject
 {
@@ -117,7 +117,7 @@ class CacheHooks extends xarObject
                 'object ID',
                 'admin',
                 'createhook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -146,7 +146,7 @@ class CacheHooks extends xarObject
                 'module name',
                 'admin',
                 'createhook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -248,7 +248,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarModVars::get('xarcachemanager', 'AutoRegenSessionless')) {
+        if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -388,7 +388,7 @@ class CacheHooks extends xarObject
             $blockCacheExpireTime = CacheUtility::convertFromSeconds($blockCacheExpireTime);
         }
         return xarTpl::module(
-            'xarcachemanager',
+            'cachemanager',
             'admin',
             'modifyhook',
             ['noCache' => $noCache,
@@ -400,7 +400,7 @@ class CacheHooks extends xarObject
 
     /**
      * update entry for a module item - hook for ('item','update','API')
-     * Optional $extrainfo['xarcachemanager_remark'] from arguments, or 'xarcachemanager_remark' from input
+     * Optional $extrainfo['cachemanager_remark'] from arguments, or 'cachemanager_remark' from input
      *
      * @param array $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
@@ -419,7 +419,7 @@ class CacheHooks extends xarObject
                 'object ID',
                 'admin',
                 'updatehook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -443,7 +443,7 @@ class CacheHooks extends xarObject
                 'module name',
                 'admin',
                 'updatehook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -591,7 +591,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && xarModVars::get('xarcachemanager', 'AutoRegenSessionless')) {
+        if (xarCache::isOutputCacheEnabled() && xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -619,7 +619,7 @@ class CacheHooks extends xarObject
                 'object ID',
                 'admin',
                 'deletehook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -643,7 +643,7 @@ class CacheHooks extends xarObject
                 'module name',
                 'admin',
                 'deletehook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -762,7 +762,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && xarModVars::get('xarcachemanager', 'AutoRegenSessionless')) {
+        if (xarCache::isOutputCacheEnabled() && xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -772,7 +772,7 @@ class CacheHooks extends xarObject
 
     /**
      * update entry for a module item - hook for ('item','updateconfig','API')
-     * Optional $extrainfo['xarcachemanager_remark'] from arguments, or 'xarcachemanager_remark' from input
+     * Optional $extrainfo['cachemanager_remark'] from arguments, or 'cachemanager_remark' from input
      *
      * @param array $args with mandatory arguments:
      * - array $args['extrainfo'] extra information
@@ -809,7 +809,7 @@ class CacheHooks extends xarObject
                 'module name',
                 'admin',
                 'updatehook',
-                'xarcachemanager'
+                'cachemanager'
             );
             throw new BadParameterException(null, $msg);
         }
@@ -865,7 +865,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarModVars::get('xarcachemanager', 'AutoRegenSessionless')) {
+        if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 

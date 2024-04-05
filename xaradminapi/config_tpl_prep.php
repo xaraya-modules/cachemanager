@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 use Xaraya\Modules\CacheManager\CacheManager;
 
 /**
@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * @param array $cachingConfiguration cachingConfiguration to be prep for a template
  * @return array of cachingConfiguration with '.' removed from keys or void
  */
-function xarcachemanager_adminapi_config_tpl_prep($cachingConfiguration)
+function cachemanager_adminapi_config_tpl_prep($cachingConfiguration)
 {
     return CacheManager::config_tpl_prep($cachingConfiguration);
 }

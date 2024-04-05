@@ -1,12 +1,12 @@
-{# @xarcachemanager/admin/queries.html.twig #}
+{# @cachemanager/admin/queries.html.twig #}
 
 {% block queries %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
-<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span></div>
 <div class="xar-mod-body">
-    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    {{ include('@cachemanager/includes/admin-menu.html.twig') }}
     <h2>{{ xar_translate('Configure Query Caching') }}</h2>
-    <form action="{{ xar_moduleurl('xarcachemanager', 'admin', 'queries') }}" method="post">
+    <form action="{{ xar_moduleurl('cachemanager', 'admin', 'queries') }}" method="post">
     <fieldset>
         <legend>
             {{ xar_translate('Query Caching Options') }}

@@ -7,11 +7,11 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.manager');
+sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 
@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
  * @access public
  * @return array|void $data (array of values for admin modify template) on success or false on failure
  */
-function xarcachemanager_admin_modifyconfig(array $args = [], $context = null)
+function cachemanager_admin_modifyconfig(array $args = [], $context = null)
 {
     // Security Check
     if (!xarSecurity::check('AdminXarCache')) {
@@ -32,7 +32,7 @@ function xarcachemanager_admin_modifyconfig(array $args = [], $context = null)
     $data = [];
 
     // get cache status
-    $data['status'] = xarMod::apiFunc('xarcachemanager', 'admin', 'getstatus');
+    $data['status'] = xarMod::apiFunc('cachemanager', 'admin', 'getstatus');
 
     $data['CookieName'] =  (xarConfigVars::get(null, 'Site.Session.CookieName') != '') ? xarConfigVars::get(null, 'Site.Session.CookieName') : 'XARAYASID';
     $data['cookieupdatelink'] = xarController::URL('base', 'admin', 'modifyconfig', ['tab' => 'security']);
@@ -105,7 +105,7 @@ function xarcachemanager_admin_modifyconfig(array $args = [], $context = null)
     if (empty($data['settings']['ModuleCacheFunctions'])) {
         $data['settings']['ModuleCacheFunctions'] = ['main' => 1, 'view' => 1, 'display' => 0];
     }
-    xarModVars::set('xarcachemanager', 'DefaultModuleCacheFunctions', serialize($data['settings']['ModuleCacheFunctions']));
+    xarModVars::set('cachemanager', 'DefaultModuleCacheFunctions', serialize($data['settings']['ModuleCacheFunctions']));
 
     if (!isset($data['settings']['ObjectTimeExpiration'])) {
         $data['settings']['ObjectTimeExpiration'] = 7200;
@@ -123,7 +123,7 @@ function xarcachemanager_admin_modifyconfig(array $args = [], $context = null)
     if (empty($data['settings']['ObjectCacheMethods'])) {
         $data['settings']['ObjectCacheMethods'] = ['view' => 1, 'display' => 1];
     }
-    xarModVars::set('xarcachemanager', 'DefaultObjectCacheMethods', serialize($data['settings']['ObjectCacheMethods']));
+    xarModVars::set('cachemanager', 'DefaultObjectCacheMethods', serialize($data['settings']['ObjectCacheMethods']));
 
     // convert the size limit from bytes to megabytes
     $data['settings']['OutputSizeLimit'] /= 1048576;
@@ -148,7 +148,7 @@ function xarcachemanager_admin_modifyconfig(array $args = [], $context = null)
     );
 
     // get the storage types supported on this server
-    $data['storagetypes'] = xarMod::apiFunc('xarcachemanager', 'admin', 'getstoragetypes');
+    $data['storagetypes'] = xarMod::apiFunc('cachemanager', 'admin', 'getstoragetypes');
 
     $data['authid'] = xarSec::genAuthKey();
     return $data;

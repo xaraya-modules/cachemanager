@@ -2,15 +2,15 @@
 <xar:template xmlns:xar="http://xaraya.com/2004/blocklayout">
 <xar:comment> License: GPL http://www.gnu.org/copyleft/gpl.html </xar:comment>
 <div class="xar-mod-head">
-    <span class="xar-mod-title"><xar:mlstring>xarCacheManager Administration</xar:mlstring></span>
+    <span class="xar-mod-title"><xar:mlstring>CacheManager Administration</xar:mlstring></span>
 </div>
 <div class="xar-mod-body">
-  <xar:template type="module" file="admin-menu" module="xarcachemanager" />
+  <xar:template type="module" file="admin-menu" module="cachemanager" />
   <h2><xar:mlstring>Configuration</xar:mlstring></h2>
   <xar:if condition="xarSession::getVar('statusmsg') != ''">
     <p>#xarSession::getVar('statusmsg')#</p>
   </xar:if>
-    <form action="{{ xar_moduleurl('xarcachemanager','admin','updateconfig') }}" method="post" enctype="application/x-www-form-urlencoded" >
+    <form action="{{ xar_moduleurl('cachemanager','admin','updateconfig') }}" method="post" enctype="application/x-www-form-urlencoded" >
         <fieldset>
             <legend><xar:mlstring>Global Settings</xar:mlstring></legend>
             <div class="xar-form-input-wrapper-after">
@@ -82,7 +82,7 @@
             </div>                        
             <div class="xar-form-input-wrapper">
                 <p>
-                    <strong>Warning: when you enable output caching here, it will NOT be disabled if you deactivate or remove the xarCacheManager module.</strong>
+                    <strong>Warning: when you enable output caching here, it will NOT be disabled if you deactivate or remove the CacheManager module.</strong>
                 </p>
             </div>
         </fieldset>
@@ -146,7 +146,7 @@
             </div>
             <xar:if condition="$settings.PageDisplayView eq 1 ">
             <div class="xar-form-input-wrapper-after">
-                <xar:if condition="xarModVars::get('xarcachemanager','FlushOnNewComment')">
+                <xar:if condition="xarModVars::get('cachemanager','FlushOnNewComment')">
                     <input type="checkbox" name="pageflushcomment" id="pageflushcomment" value="1" checked="checked" />
                 <xar:else />
                     <input type="checkbox" name="pageflushcomment" id="pageflushcomment" value="1" />
@@ -156,7 +156,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                <xar:if condition="xarModVars::get('xarcachemanager','FlushOnNewRating')">
+                <xar:if condition="xarModVars::get('cachemanager','FlushOnNewRating')">
                     <input type="checkbox" name="pageflushrating" id="pageflushrating" value="1" checked="checked" />
                 <xar:else />
                     <input type="checkbox" name="pageflushrating" id="pageflushrating" value="1" />
@@ -166,7 +166,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                <xar:if condition="xarModVars::get('xarcachemanager','FlushOnNewPollvote')">
+                <xar:if condition="xarModVars::get('cachemanager','FlushOnNewPollvote')">
                     <input type="checkbox" name="pageflushpollvote" id="pageflushpollvote" value="1" checked="checked" />
                 <xar:else />
                     <input type="checkbox" name="pageflushpollvote" id="pageflushpollvote" value="1" />
@@ -197,7 +197,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                <xar:if condition="xarModVars::get('xarcachemanager','AutoRegenSessionless')">
+                <xar:if condition="xarModVars::get('cachemanager','AutoRegenSessionless')">
                     <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
                 <xar:else />
                     <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -214,7 +214,7 @@
                 </xar:if>
                 <label for="pagehookedonly" title="#xarML('If enabled, xarCache will only cache the pages of modules that have been hooked to the xarCacheModule.
                 Note: this will not prevent cached pages from being served, only stop new pages from being cached.')#">
-                    &#160;<xar:mlstring>Only cache pages of modules hooked to xarCacheManager:</xar:mlstring>
+                    &#160;<xar:mlstring>Only cache pages of modules hooked to CacheManager:</xar:mlstring>
                 </label>
             </div>
         </fieldset>
@@ -329,7 +329,7 @@
             </xar:foreach>
 <!--
             <div class="xar-form-input-wrapper-after">
-                <xar:if condition="xarModVars::get('xarcachemanager','FlushOnNewModule')">
+                <xar:if condition="xarModVars::get('cachemanager','FlushOnNewModule')">
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" checked="checked" />
                 <xar:else />
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" />
@@ -343,7 +343,7 @@
             <xar:if condition="$status['ModuleCachingEnabled'] eq 1 and empty($checkconfig)">
             <div class="xar-form-input-wrapper">
                 <p>
-                    <strong>Please configure the specific <a href="#xarController::URL('xarcachemanager','admin','modules')#">module caching options</a> now.</strong>
+                    <strong>Please configure the specific <a href="#xarController::URL('cachemanager','admin','modules')#">module caching options</a> now.</strong>
                 </p>
             </div>
             </xar:if>
@@ -412,13 +412,13 @@
             <xar:if condition="$status['ObjectCachingEnabled'] eq 1 and empty($checkconfig)">
             <div class="xar-form-input-wrapper">
                 <p>
-                    <strong>Please configure the specific <a href="#xarController::URL('xarcachemanager','admin','objects')#">object caching options</a> now.</strong>
+                    <strong>Please configure the specific <a href="#xarController::URL('cachemanager','admin','objects')#">object caching options</a> now.</strong>
                 </p>
             </div>
             </xar:if>
 <!--
             <div class="xar-form-input-wrapper-after">
-                <xar:if condition="xarModVars::get('xarcachemanager','FlushOnNewObject')">
+                <xar:if condition="xarModVars::get('cachemanager','FlushOnNewObject')">
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" checked="checked" />
                 <xar:else />
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" />

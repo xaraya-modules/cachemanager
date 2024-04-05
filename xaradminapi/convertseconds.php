@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheUtility;
 
 /**
@@ -24,7 +24,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
  * @param string $args['direction'] (from or to)
  * @return string $convertedtime (hh:mm:ss or seconds)
  */
-function xarcachemanager_adminapi_convertseconds(array $args = [], $context = null)
+function cachemanager_adminapi_convertseconds(array $args = [], $context = null)
 {
     return CacheUtility::convertseconds($args);
 }

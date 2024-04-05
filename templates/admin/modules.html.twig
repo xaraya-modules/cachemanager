@@ -1,17 +1,17 @@
-{# @xarcachemanager/admin/modules.html.twig #}
+{# @cachemanager/admin/modules.html.twig #}
 
 {% block modules %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
-<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span></div>
 <div class="xar-mod-body">
-    {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+    {{ include('@cachemanager/includes/admin-menu.html.twig') }}
     <h2>{{ xar_translate('Configure Module Output Caching') }}</h2>
 
     {% if not modules or modules|length < 1 %}
       {{ xar_translate('Module caching is currently disabled') }}
     {% else %}
       {{ xar_javascript({module: "base", filename: "checkall.js"}) }}
-      <form action="{{ xar_moduleurl('xarcachemanager','admin','modules') }}" name="modulecache_form" id="modulecache_form" method="post">
+      <form action="{{ xar_moduleurl('cachemanager','admin','modules') }}" name="modulecache_form" id="modulecache_form" method="post">
         <fieldset>
         <legend>
             Module Caching Options

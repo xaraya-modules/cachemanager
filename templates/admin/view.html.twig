@@ -1,12 +1,12 @@
-{# @xarcachemanager/admin/view.html.twig #}
+{# @cachemanager/admin/view.html.twig #}
 
 {% block view %}
 {{ xar_style({scope: "module", module: "base", file: "navtabs"}) }}
-<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span></div>
+<div class="xar-mod-head"><span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span></div>
 <div class="xar-mod-body">
-  {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+  {{ include('@cachemanager/includes/admin-menu.html.twig') }}
   <h2>{{ xar_translate('View Cache Item') }}</h2>
-    {{ include('@xarcachemanager/includes/stats-menu.html.twig') }}
+    {{ include('@cachemanager/includes/stats-menu.html.twig') }}
 
     <div style="overflow:auto;">
     <table class="xar-full-width xar-border-thin" cellspacing="2" cellpadding="0" valign="top">
@@ -19,9 +19,9 @@
             <td colspan="2" style="font-weight:bold;">
                 Cache item:&#160;
                 {{ key }}
-                [ <a href="{{ xar_moduleurl('xarcachemanager','admin','flushcache',{('flushkey[' ~ tab ~ ']'): key, 'authid': authid, 'confirm': 1, 'return_url': return_url}) }}">flush key</a> ]
+                [ <a href="{{ xar_moduleurl('cachemanager','admin','flushcache',{('flushkey[' ~ tab ~ ']'): key, 'authid': authid, 'confirm': 1, 'return_url': return_url}) }}">flush key</a> ]
                 {{ code }}
-                [ <a href="{{ xar_moduleurl('xarcachemanager','admin','flushcache',{('flushkey[' ~ tab ~ ']'): key, ('cachecode[' ~ tab ~ ']'): code, 'authid': authid, 'confirm': 1, 'return_url': return_url}) }}">delete item</a> ]
+                [ <a href="{{ xar_moduleurl('cachemanager','admin','flushcache',{('flushkey[' ~ tab ~ ']'): key, ('cachecode[' ~ tab ~ ']'): code, 'authid': authid, 'confirm': 1, 'return_url': return_url}) }}">delete item</a> ]
             </td>
         </tr>
         {% if link %}

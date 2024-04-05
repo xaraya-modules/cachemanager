@@ -1,13 +1,13 @@
 <?php
 /**
- * xarCacheManager table setup
+ * CacheManager table setup
  *
  * @package modules
  * @copyright (C) 2002-2009 The Digital Development Foundation
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  * @author jsb
 */
@@ -16,7 +16,7 @@
  * Return cache tables
  * @return array
  */
-function xarcachemanager_xartables()
+function cachemanager_xartables()
 {
     // Initialise table array
     $xartable = [];

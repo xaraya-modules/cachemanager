@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.info');
+sys::import('modules.cachemanager.class.info');
 use Xaraya\Modules\CacheManager\CacheInfo;
 
 /**
@@ -21,7 +21,7 @@ use Xaraya\Modules\CacheManager\CacheInfo;
  * @param array $args['type'] cachetype to get the cache item from, with $args['key'] the cache key
  * @return array array of cacheitem
 */
-function xarcachemanager_adminapi_getcacheitem($args = ['type' => '', 'key' => '', 'code' => ''])
+function cachemanager_adminapi_getcacheitem($args = ['type' => '', 'key' => '', 'code' => ''])
 {
     $type = '';
     $key = '';

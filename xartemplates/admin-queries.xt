@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xar:template xmlns:xar="http://xaraya.com/2004/blocklayout">
 <xar:comment> License: GPL http://www.gnu.org/copyleft/gpl.html </xar:comment>
-<div class="xar-mod-head"><span class="xar-mod-title"><xar:mlstring>xarCacheManager Administration</xar:mlstring></span></div>
+<div class="xar-mod-head"><span class="xar-mod-title"><xar:mlstring>CacheManager Administration</xar:mlstring></span></div>
 <div class="xar-mod-body">
-    <xar:template type="module" file="admin-menu" module="xarcachemanager" />
+    <xar:template type="module" file="admin-menu" module="cachemanager" />
     <h2><xar:mlstring>Configure Query Caching</xar:mlstring></h2>
-    <form action="#xarController::URL('xarcachemanager', 'admin', 'queries')#" method="post">
+    <form action="#xarController::URL('cachemanager', 'admin', 'queries')#" method="post">
     <fieldset>
         <legend>
             <xar:mlstring>

@@ -1,17 +1,17 @@
-{# @xarcachemanager/admin/modifyconfig.html.twig #}
+{# @cachemanager/admin/modifyconfig.html.twig #}
 
 {% block modifyconfig %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
 <div class="xar-mod-head">
-    <span class="xar-mod-title">{{ xar_translate('xarCacheManager Administration') }}</span>
+    <span class="xar-mod-title">{{ xar_translate('CacheManager Administration') }}</span>
 </div>
 <div class="xar-mod-body">
-  {{ include('@xarcachemanager/includes/admin-menu.html.twig') }}
+  {{ include('@cachemanager/includes/admin-menu.html.twig') }}
   <h2>{{ xar_translate('Configuration') }}</h2>
   {% if xar_coremethod('xarSession', 'getVar', 'statusmsg') != '' %}
     <p>{{ xar_coremethod('xarSession', 'getVar', 'statusmsg') }}</p>
   {% endif %}
-    <form action="{{ xar_moduleurl('xarcachemanager','admin','updateconfig') }}" method="post" enctype="application/x-www-form-urlencoded" >
+    <form action="{{ xar_moduleurl('cachemanager','admin','updateconfig') }}" method="post" enctype="application/x-www-form-urlencoded" >
         <fieldset>
             <legend>{{ xar_translate('Global Settings') }}</legend>
             <div class="xar-form-input-wrapper-after">
@@ -75,7 +75,7 @@
             </div>                        
             <div class="xar-form-input-wrapper">
                 <p>
-                    <strong>Warning: when you enable output caching here, it will NOT be disabled if you deactivate or remove the xarCacheManager module.</strong>
+                    <strong>Warning: when you enable output caching here, it will NOT be disabled if you deactivate or remove the CacheManager module.</strong>
                 </p>
             </div>
         </fieldset>
@@ -139,7 +139,7 @@
             </div>
             {% if settings.PageDisplayView == 1  %}
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modulevar('xarcachemanager', 'FlushOnNewComment') %}
+                {% if xar_modulevar('cachemanager', 'FlushOnNewComment') %}
                     <input type="checkbox" name="pageflushcomment" id="pageflushcomment" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="pageflushcomment" id="pageflushcomment" value="1" />
@@ -149,7 +149,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modulevar('xarcachemanager', 'FlushOnNewRating') %}
+                {% if xar_modulevar('cachemanager', 'FlushOnNewRating') %}
                     <input type="checkbox" name="pageflushrating" id="pageflushrating" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="pageflushrating" id="pageflushrating" value="1" />
@@ -159,7 +159,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modulevar('xarcachemanager', 'FlushOnNewPollvote') %}
+                {% if xar_modulevar('cachemanager', 'FlushOnNewPollvote') %}
                     <input type="checkbox" name="pageflushpollvote" id="pageflushpollvote" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="pageflushpollvote" id="pageflushpollvote" value="1" />
@@ -190,7 +190,7 @@
                 </label>
             </div>
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modulevar('xarcachemanager', 'AutoRegenSessionless') %}
+                {% if xar_modulevar('cachemanager', 'AutoRegenSessionless') %}
                     <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -207,7 +207,7 @@
                 {% endif %}
                 <label for="pagehookedonly" title="{{ xar_translate('If enabled, xarCache will only cache the pages of modules that have been hooked to the xarCacheModule.
                 Note. this will not prevent cached pages from being served, only stop new pages from being cached.') }}">
-                    &#160;{{ xar_translate('Only cache pages of modules hooked to xarCacheManager:') }}
+                    &#160;{{ xar_translate('Only cache pages of modules hooked to CacheManager:') }}
                 </label>
             </div>
         </fieldset>
@@ -322,7 +322,7 @@
             {% endfor %}
 {# <!--
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modulevar('xarcachemanager', 'FlushOnNewModule') %}
+                {% if xar_modulevar('cachemanager', 'FlushOnNewModule') %}
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" />
@@ -336,7 +336,7 @@
             {% if status['ModuleCachingEnabled'] == 1 and not checkconfig %}
             <div class="xar-form-input-wrapper">
                 <p>
-                    <strong>Please configure the specific <a href="{{ xar_moduleurl('xarcachemanager','admin','modules') }}">module caching options</a> now.</strong>
+                    <strong>Please configure the specific <a href="{{ xar_moduleurl('cachemanager','admin','modules') }}">module caching options</a> now.</strong>
                 </p>
             </div>
             {% endif %}
@@ -405,13 +405,13 @@
             {% if status['ObjectCachingEnabled'] == 1 and not checkconfig %}
             <div class="xar-form-input-wrapper">
                 <p>
-                    <strong>Please configure the specific <a href="{{ xar_moduleurl('xarcachemanager','admin','objects') }}">object caching options</a> now.</strong>
+                    <strong>Please configure the specific <a href="{{ xar_moduleurl('cachemanager','admin','objects') }}">object caching options</a> now.</strong>
                 </p>
             </div>
             {% endif %}
 {# <!--
             <div class="xar-form-input-wrapper-after">
-                {% if xar_modulevar('xarcachemanager', 'FlushOnNewObject') %}
+                {% if xar_modulevar('cachemanager', 'FlushOnNewObject') %}
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" checked="checked" />
                 {% else %}
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" />

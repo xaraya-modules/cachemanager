@@ -3,7 +3,7 @@
 
 ### What is it?
 
-The xarCacheManager module provides an administrative interface to
+The CacheManager module provides an administrative interface to
 control the settings of the xarCache system of Xaraya. It also provides
 hooks that allow the cache system to know when changes have been made to
 modules so that it can respond accordingly (event based cache
@@ -29,7 +29,7 @@ refer to: <http://xaraya.com/~jsb/cachingPoints.html>
 
 ### How to use it?
 
-The xarCacheManager module has several tools for managing the xarCache
+The CacheManager module has several tools for managing the xarCache
 system and your cached output files. The tools are organized under the
 following menu links:
 
@@ -54,20 +54,20 @@ following menu links:
 
 ### Included Blocks
 
-The xarCacheManager Module has no blocks included at this time.
+The CacheManager Module has no blocks included at this time.
 
 ### Included Hooks
 
-The xarCacheManager module provides create, update, delete and modify
+The CacheManager module provides create, update, delete and modify
 config API hooks and a modify GUI hook (currently only used for adding
 caching configuration administration to block instance modify pages). To
 activate these hooks, go to Admin panel -\> Modules -\> Configure Hooks
-and click on the xarcachemanager link. Select the modules you would like
-to enable the xarCacheManager hook functionality for (articles,
+and click on the cachemanager link. Select the modules you would like
+to enable the CacheManager hook functionality for (articles,
 categories, autolinks, blocks, html are likely candidates) and click the
-Save Changes button. Once hooked to xarCacheManager, when you create,
+Save Changes button. Once hooked to CacheManager, when you create,
 update, or delete items of the module, or modify the configuration of a
-module, the call to the xarCacheManager hooks will flush the appropriate
+module, the call to the CacheManager hooks will flush the appropriate
 cache to insure that your changes will be instantly available on your
 site (not masked by cached output files).
 
@@ -142,16 +142,16 @@ Block/module level output caching related:
 
 ### Further Information
 
-Further information on the xarcachemanager module can be found at
+Further information on the cachemanager module can be found at
 
-  - xarcachemanager Extension page at [Xaraya Extension and
-    Releases](http://www.xaraya.com/index.php/release/1652.html "xarcachemanager Module - Xaraya Extension 1652").
+  - cachemanager Extension page at [Xaraya Extension and
+    Releases](http://www.xaraya.com/index.php/release/1652.html "cachemanager Module - Xaraya Extension 1652").
     Click on Version History tab at the bottom to get the latest release
     information.
-  - Related tutorials and documentation on xarcachemanager found at
+  - Related tutorials and documentation on cachemanager found at
     [Xaraya
-    Documentation.](http://www.xaraya.com/index.php/keywords/xarcachemanager/ "Related documentation on xarcachemanager")
+    Documentation.](http://www.xaraya.com/index.php/keywords/cachemanager/ "Related documentation on cachemanager")
 
-** xarcachemanager Overview**  
+** cachemanager Overview**  
  Version 1.0.1  2006-04-12
 

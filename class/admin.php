@@ -2,8 +2,8 @@
 /**
  * Classes to run admin gui functions
  *
- * @package modules\xarcachemanager
- * @subpackage xarcachemanager
+ * @package modules\cachemanager
+ * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
  * @version 2.4.0
  * @copyright see the html/credits.html file in this release
@@ -25,51 +25,51 @@ class CacheAdmin extends xarObject
     public static function init(array $args = []) {}
 
     /**
-     * @uses xarcachemanager_admin_main()
+     * @uses cachemanager_admin_main()
      */
     public static function main()
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'main');
+        return xarMod::guiFunc('cachemanager', 'admin', 'main');
     }
 
     /**
-     * @uses xarcachemanager_admin_overview()
+     * @uses cachemanager_admin_overview()
      */
     public static function overview()
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'overview');
+        return xarMod::guiFunc('cachemanager', 'admin', 'overview');
     }
 
     /**
-     * @uses xarcachemanager_admin_modifyconfig()
+     * @uses cachemanager_admin_modifyconfig()
      */
     public static function modifyconfig()
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'modifyconfig');
+        return xarMod::guiFunc('cachemanager', 'admin', 'modifyconfig');
     }
 
     /**
-     * @uses xarcachemanager_admin_updateconfig()
+     * @uses cachemanager_admin_updateconfig()
      */
     public static function updateconfig()
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'updateconfig');
+        return xarMod::guiFunc('cachemanager', 'admin', 'updateconfig');
     }
 
     /**
-     * @uses xarcachemanager_admin_stats()
+     * @uses cachemanager_admin_stats()
      */
     public static function stats(array $args = [])
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'stats', $args);
+        return xarMod::guiFunc('cachemanager', 'admin', 'stats', $args);
     }
 
     /**
-     * @uses xarcachemanager_admin_view()
+     * @uses cachemanager_admin_view()
      */
     public static function view(array $args = [])
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'view', $args);
+        return xarMod::guiFunc('cachemanager', 'admin', 'view', $args);
     }
 
     /**
@@ -77,12 +77,12 @@ class CacheAdmin extends xarObject
      */
     public static function pages(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.pagecache');
+        sys::import('modules.cachemanager.class.config.pagecache');
         $tplData = Config\PageCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'pages', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'pages', $tplData);
     }
 
     /**
@@ -90,12 +90,12 @@ class CacheAdmin extends xarObject
      */
     public static function blocks(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.blockcache');
+        sys::import('modules.cachemanager.class.config.blockcache');
         $tplData = Config\BlockCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'blocks', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'blocks', $tplData);
     }
 
     /**
@@ -103,12 +103,12 @@ class CacheAdmin extends xarObject
      */
     public static function modules(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.modulecache');
+        sys::import('modules.cachemanager.class.config.modulecache');
         $tplData = Config\ModuleCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'modules', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'modules', $tplData);
     }
 
     /**
@@ -116,12 +116,12 @@ class CacheAdmin extends xarObject
      */
     public static function objects(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.objectcache');
+        sys::import('modules.cachemanager.class.config.objectcache');
         $tplData = Config\ObjectCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'objects', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'objects', $tplData);
     }
 
     /**
@@ -129,12 +129,12 @@ class CacheAdmin extends xarObject
      */
     public static function variables(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.variablecache');
+        sys::import('modules.cachemanager.class.config.variablecache');
         $tplData = Config\VariableCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'variables', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'variables', $tplData);
     }
 
     /**
@@ -142,12 +142,12 @@ class CacheAdmin extends xarObject
      */
     public static function queries(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.querycache');
+        sys::import('modules.cachemanager.class.config.querycache');
         $tplData = Config\QueryCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'queries', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'queries', $tplData);
     }
 
     /**
@@ -155,19 +155,19 @@ class CacheAdmin extends xarObject
      */
     public static function templates(array $args = [])
     {
-        sys::import('modules.xarcachemanager.class.config.templatecache');
+        sys::import('modules.cachemanager.class.config.templatecache');
         $tplData = Config\TemplateCache::modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
-        return xarTpl::module('xarcachemanager', 'admin', 'templates', $tplData);
+        return xarTpl::module('cachemanager', 'admin', 'templates', $tplData);
     }
 
     /**
-     * @uses xarcachemanager_admin_flushcache()
+     * @uses cachemanager_admin_flushcache()
      */
     public static function flushcache(array $args = [])
     {
-        return xarMod::guiFunc('xarcachemanager', 'admin', 'flushcache', $args);
+        return xarMod::guiFunc('cachemanager', 'admin', 'flushcache', $args);
     }
 }

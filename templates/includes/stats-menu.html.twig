@@ -1,4 +1,4 @@
-{# @xarcachemanager/includes/stats-menu.html.twig #}
+{# @cachemanager/includes/stats-menu.html.twig #}
 
 {% block stats_menu %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
@@ -25,7 +25,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'overview'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'overview'}) }}" class="{{ linkclass }}">
                         Summary
                     </a>
                 </li> 
@@ -38,7 +38,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'page'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'page'}) }}" class="{{ linkclass }}">
                         Pages
                     </a>
                 </li>
@@ -51,7 +51,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'block'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'block'}) }}" class="{{ linkclass }}">
                         Blocks
                     </a>
                 </li>   
@@ -65,7 +65,7 @@
 		{% endif %}
  
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'module'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'module'}) }}" class="{{ linkclass }}">
                         Modules
                     </a>
                 </li>    
@@ -79,7 +79,7 @@
 		{% endif %}
 
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'object'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'object'}) }}" class="{{ linkclass }}">
                         Objects
                     </a>
                 </li>  
@@ -93,7 +93,7 @@
 		{% endif %}
 
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'variable'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'variable'}) }}" class="{{ linkclass }}">
                         Variables
                     </a>
                 </li>  
@@ -106,7 +106,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
                 <li class="{{ tabclass }}">
-                    <a href="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats', {'tab': 'autocache'}) }}" class="{{ linkclass }}">
+                    <a href="{{ xar_moduleurl('cachemanager', 'admin', 'stats', {'tab': 'autocache'}) }}" class="{{ linkclass }}">
                         Auto-Cache
                     </a>
                 </li> 

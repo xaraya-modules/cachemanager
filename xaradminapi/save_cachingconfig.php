@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 use Xaraya\Modules\CacheManager\CacheManager;
 
 /**
@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * @param array $args
  * @param $args['config'] array of config labels and values
  */
-function xarcachemanager_adminapi_save_cachingconfig(array $args = [], $context = null)
+function cachemanager_adminapi_save_cachingconfig(array $args = [], $context = null)
 {
     return CacheManager::save_config($args);
 }

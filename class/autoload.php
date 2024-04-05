@@ -1,13 +1,13 @@
 <?php
 /**
- * xarCacheManager Module
+ * CacheManager Module
  *
  * @package modules
  * @copyright (C) 2002-2009 The Digital Development Foundation
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
 
@@ -29,13 +29,13 @@ function autoload($class)
     $class = str_replace($namespace, '', $class);
 
     $class_array = [
-        'cachemanager'    => 'modules.xarcachemanager.class.manager',
-        'cacheadmin'      => 'modules.xarcachemanager.class.admin',
-        'cachehooks'      => 'modules.xarcachemanager.class.hooks',
-        'cachescheduler'  => 'modules.xarcachemanager.class.scheduler',
-        'cacheutility'    => 'modules.xarcachemanager.class.utility',
-        'cacheconfig'     => 'modules.xarcachemanager.class.config',
-        'cacheinfo'       => 'modules.xarcachemanager.class.info',
+        'cachemanager'    => 'modules.cachemanager.class.manager',
+        'cacheadmin'      => 'modules.cachemanager.class.admin',
+        'cachehooks'      => 'modules.cachemanager.class.hooks',
+        'cachescheduler'  => 'modules.cachemanager.class.scheduler',
+        'cacheutility'    => 'modules.cachemanager.class.utility',
+        'cacheconfig'     => 'modules.cachemanager.class.config',
+        'cacheinfo'       => 'modules.cachemanager.class.info',
     ];
 
     if (isset($class_array[$class])) {

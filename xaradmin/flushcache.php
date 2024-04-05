@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 use Xaraya\Modules\CacheManager\CacheManager;
 
 /**
@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * - string $args['confirm']
  * @return array|void
  */
-function xarcachemanager_admin_flushcache(array $args = [], $context = null)
+function cachemanager_admin_flushcache(array $args = [], $context = null)
 {
     // Security Check
     if (!xarSecurity::check('AdminXarCache')) {
@@ -38,7 +38,7 @@ function xarcachemanager_admin_flushcache(array $args = [], $context = null)
         return;
     }
 
-    $cachetypes = xarMod::apiFunc('xarcachemanager', 'admin', 'getcachetypes');
+    $cachetypes = xarMod::apiFunc('cachemanager', 'admin', 'getcachetypes');
 
     if (empty($confirm)) {
         $data = [];
@@ -47,7 +47,7 @@ function xarcachemanager_admin_flushcache(array $args = [], $context = null)
         $data['cachetypes'] = $cachetypes;
         $data['cachekeys'] = [];
         foreach (array_keys($cachetypes) as $type) {
-            $data['cachekeys'][$type] = xarMod::apiFunc('xarcachemanager', 'admin', 'getcachekeys', $type);
+            $data['cachekeys'][$type] = xarMod::apiFunc('cachemanager', 'admin', 'getcachekeys', $type);
         }
 
         $data['instructions'] = xarMLS::translate("Please select a cache key to be flushed.");
@@ -123,7 +123,7 @@ function xarcachemanager_admin_flushcache(array $args = [], $context = null)
             return;
         }
 
-        $return_url = xarController::URL('xarcachemanager', 'admin', 'flushcache');
+        $return_url = xarController::URL('cachemanager', 'admin', 'flushcache');
         $data['returnlink'] = ['url'   => $return_url,
                                     'title' => xarMLS::translate('Return to the cache key selector'),
                                     'label' => xarMLS::translate('Back'), ];
@@ -133,7 +133,7 @@ function xarcachemanager_admin_flushcache(array $args = [], $context = null)
 
     $data['cachesize'] = [];
     foreach (array_keys($cachetypes) as $type) {
-        $cachesize = xarMod::apiFunc('xarcachemanager', 'admin', 'getcachesize', $type);
+        $cachesize = xarMod::apiFunc('cachemanager', 'admin', 'getcachesize', $type);
         if (!empty($cachesize)) {
             $data['cachesize'][$type] = round($cachesize / 1048576, 2);
         } else {

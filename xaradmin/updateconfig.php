@@ -7,11 +7,11 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
-sys::import('modules.xarcachemanager.class.utility');
+sys::import('modules.cachemanager.class.manager');
+sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 
@@ -20,7 +20,7 @@ use Xaraya\Modules\CacheManager\CacheUtility;
  *
  * @return bool|void true on success of update
  */
-function xarcachemanager_admin_updateconfig(array $args = [], $context = null)
+function cachemanager_admin_updateconfig(array $args = [], $context = null)
 {
     // Get parameters
     if (!xarVar::fetch('cacheenabled', 'isset', $cacheenabled, 0, xarVar::NOT_REQUIRED)) {
@@ -247,28 +247,28 @@ function xarcachemanager_admin_updateconfig(array $args = [], $context = null)
     $configSettings['Module.LogFile'] = $modulelogfile;
     $configSettings['Module.SizeLimit'] = $modulesizelimit;
     // update cache defaults for module functions
-    $defaultmodulefunctions = unserialize(xarModVars::get('xarcachemanager', 'DefaultModuleCacheFunctions'));
+    $defaultmodulefunctions = unserialize(xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
     foreach ($defaultmodulefunctions as $func => $docache) {
         if (!isset($modulefunctions[$func])) {
             $modulefunctions[$func] = 0;
         }
     }
     $configSettings['Module.CacheFunctions'] = $modulefunctions;
-    xarModVars::set('xarcachemanager', 'DefaultModuleCacheFunctions', serialize($modulefunctions));
+    xarModVars::set('cachemanager', 'DefaultModuleCacheFunctions', serialize($modulefunctions));
 
     $configSettings['Object.TimeExpiration'] = $objectexpiretime;
     $configSettings['Object.CacheStorage'] = $objectcachestorage;
     $configSettings['Object.LogFile'] = $objectlogfile;
     $configSettings['Object.SizeLimit'] = $objectsizelimit;
     // update cache defaults for object methods
-    $defaultobjectmethods = unserialize(xarModVars::get('xarcachemanager', 'DefaultObjectCacheMethods'));
+    $defaultobjectmethods = unserialize(xarModVars::get('cachemanager', 'DefaultObjectCacheMethods'));
     foreach ($defaultobjectmethods as $method => $docache) {
         if (!isset($objectmethods[$method])) {
             $objectmethods[$method] = 0;
         }
     }
     $configSettings['Object.CacheMethods'] = $objectmethods;
-    xarModVars::set('xarcachemanager', 'DefaultObjectCacheMethods', serialize($objectmethods));
+    xarModVars::set('cachemanager', 'DefaultObjectCacheMethods', serialize($objectmethods));
 
     CacheManager::save_config(
         ['configSettings' => $configSettings,
@@ -278,32 +278,32 @@ function xarcachemanager_admin_updateconfig(array $args = [], $context = null)
     // see if we need to flush the cache when a new comment is added for some item
     xarVar::fetch('pageflushcomment', 'isset', $pageflushcomment, 0, xarVar::NOT_REQUIRED);
     if ($pageflushcomment && $pagedisplayview) {
-        xarModVars::set('xarcachemanager', 'FlushOnNewComment', 1);
+        xarModVars::set('cachemanager', 'FlushOnNewComment', 1);
     } else {
-        xarModVars::set('xarcachemanager', 'FlushOnNewComment', 0);
+        xarModVars::set('cachemanager', 'FlushOnNewComment', 0);
     }
 
     // see if we need to flush the cache when a new rating is added for some item
     xarVar::fetch('pageflushrating', 'isset', $pageflushrating, 0, xarVar::NOT_REQUIRED);
     if ($pageflushrating  && $pagedisplayview) {
-        xarModVars::set('xarcachemanager', 'FlushOnNewRating', 1);
+        xarModVars::set('cachemanager', 'FlushOnNewRating', 1);
     } else {
-        xarModVars::set('xarcachemanager', 'FlushOnNewRating', 0);
+        xarModVars::set('cachemanager', 'FlushOnNewRating', 0);
     }
 
     // see if we need to flush the cache when a new vote is cast on a poll hooked to some item
     xarVar::fetch('pageflushpollvote', 'isset', $pageflushpollvote, 0, xarVar::NOT_REQUIRED);
     if ($pageflushpollvote && $pagedisplayview) {
-        xarModVars::set('xarcachemanager', 'FlushOnNewPollvote', 1);
+        xarModVars::set('cachemanager', 'FlushOnNewPollvote', 1);
     } else {
-        xarModVars::set('xarcachemanager', 'FlushOnNewPollvote', 0);
+        xarModVars::set('cachemanager', 'FlushOnNewPollvote', 0);
     }
 
     // set option for auto regeneration of session-less url list cache on event invalidation
     if ($autoregenerate) {
-        xarModVars::set('xarcachemanager', 'AutoRegenSessionless', 1);
+        xarModVars::set('cachemanager', 'AutoRegenSessionless', 1);
     } else {
-        xarModVars::set('xarcachemanager', 'AutoRegenSessionless', 0);
+        xarModVars::set('cachemanager', 'AutoRegenSessionless', 0);
     }
 
     // flush adminpanels and base blocks to show new menu options if necessary
@@ -322,7 +322,7 @@ function xarcachemanager_admin_updateconfig(array $args = [], $context = null)
         }
     }
 
-    xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'modifyconfig'), null, $context);
+    xarController::redirect(xarController::URL('cachemanager', 'admin', 'modifyconfig'), null, $context);
 
     return true;
 }

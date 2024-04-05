@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 use Xaraya\Modules\CacheManager\CacheManager;
 
 /**
@@ -24,7 +24,7 @@ use Xaraya\Modules\CacheManager\CacheManager;
  * - int    $args['itemsperpage']
  * @return array|bool|void
  */
-function xarcachemanager_admin_stats(array $args = [], $context = null)
+function cachemanager_admin_stats(array $args = [], $context = null)
 {
     if (!xarSecurity::check('AdminXarCache')) {
         return;
@@ -50,16 +50,16 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
     // Get the output cache directory so you can view stats even if output caching is disabled
     $outputCacheDir = xarCache::getOutputCacheDir();
 
-    $numitems = xarModVars::get('xarcachemanager', 'itemsperpage');
+    $numitems = xarModVars::get('cachemanager', 'itemsperpage');
     if (empty($numitems)) {
         $numitems = 100;
-        xarModVars::set('xarcachemanager', 'itemsperpage', $numitems);
+        xarModVars::set('cachemanager', 'itemsperpage', $numitems);
     }
 
     $data = [];
 
     // get cache status
-    $data['status'] = xarMod::apiFunc('xarcachemanager', 'admin', 'getstatus');
+    $data['status'] = xarMod::apiFunc('cachemanager', 'admin', 'getstatus');
 
     $data['tab'] = $tab;
     $data['itemsperpage'] = $numitems;
@@ -97,7 +97,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                 }
 
                 xarController::redirect(xarController::URL(
-                    'xarcachemanager',
+                    'cachemanager',
                     'admin',
                     'stats',
                     ['tab' => $tab]
@@ -145,7 +145,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                 if (!empty($withlog) && !empty($data['settings'][$logfile]) && file_exists($data['settings'][$logfile]) && filesize($data['settings'][$logfile]) > 0) {
                     $data['withlog'] = 1;
                     $data['totals'] = [];
-                    xarcachemanager_stats_logfile($data['items'], $data['totals'], $data['settings'][$logfile], $tab);
+                    cachemanager_stats_logfile($data['items'], $data['totals'], $data['settings'][$logfile], $tab);
                     if (!empty($data['totals']['size'])) {
                         $data['totals']['size'] = round($data['totals']['size'] / 1048576, 2);
                     }
@@ -154,7 +154,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                     $data['withlog'] = null;
                     $data['loginfo'] = [];
                     // status field = 1
-                    xarcachemanager_stats_filestats($data['loginfo'], $data['settings'][$logfile], 1, 1);
+                    cachemanager_stats_filestats($data['loginfo'], $data['settings'][$logfile], 1, 1);
                     if (!empty($data['loginfo']['size'])) {
                         $data['loginfo']['size'] = round($data['loginfo']['size'] / 1048576, 2);
                     }
@@ -165,7 +165,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                     $sort = null;
                     ksort($data['items']);
                 } else {
-                    xarcachemanager_stats_sortitems($data['items'], $sort);
+                    cachemanager_stats_sortitems($data['items'], $sort);
                 }
                 // get pager
                 $count = count($data['items']);
@@ -183,7 +183,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                         $startnum,
                         $count,
                         xarController::URL(
-                            'xarcachemanager',
+                            'cachemanager',
                             'admin',
                             'stats',
                             ['tab' => $tab,
@@ -226,7 +226,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                 }
 
                 xarController::redirect(xarController::URL(
-                    'xarcachemanager',
+                    'cachemanager',
                     'admin',
                     'stats',
                     ['tab' => 'autocache']
@@ -245,13 +245,13 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
             if (file_exists($outputCacheDir . '/autocache.stats') &&
                 filesize($outputCacheDir . '/autocache.stats') > 0) {
                 // analyze statsfile
-                xarcachemanager_stats_autostats($data['items'], $data['totals'], $outputCacheDir . '/autocache.stats');
+                cachemanager_stats_autostats($data['items'], $data['totals'], $outputCacheDir . '/autocache.stats');
             }
             if (!empty($withlog) && file_exists($outputCacheDir . '/autocache.log') &&
                 filesize($outputCacheDir . '/autocache.log') > 0) {
                 $data['withlog'] = 1;
                 // analyze logfile and merge with stats items
-                xarcachemanager_stats_autolog($data['items'], $data['totals'], $outputCacheDir . '/autocache.log');
+                cachemanager_stats_autolog($data['items'], $data['totals'], $outputCacheDir . '/autocache.log');
             }
             if (count($data['items']) > 0) {
                 // sort items
@@ -259,7 +259,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                     $sort = null;
                     ksort($data['items']);
                 } else {
-                    xarcachemanager_stats_sortitems($data['items'], $sort);
+                    cachemanager_stats_sortitems($data['items'], $sort);
                 }
                 // get pager
                 $count = count($data['items']);
@@ -276,7 +276,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                         $startnum,
                         $count,
                         xarController::URL(
-                            'xarcachemanager',
+                            'cachemanager',
                             'admin',
                             'stats',
                             ['tab' => 'autocache',
@@ -296,7 +296,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                 return;
             }
             if (!empty($itemsperpage)) {
-                xarModVars::set('xarcachemanager', 'itemsperpage', $itemsperpage);
+                xarModVars::set('cachemanager', 'itemsperpage', $itemsperpage);
                 $data['itemsperpage'] = $itemsperpage;
             }
             // list of cache types to check
@@ -347,7 +347,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
                 if ($data['status'][$enabled] && !empty($data['settings'][$logfile])) {
                     $data[$logvar] = [];
                     // status field = 1
-                    xarcachemanager_stats_filestats($data[$logvar], $data['settings'][$logfile], 1, 1);
+                    cachemanager_stats_filestats($data[$logvar], $data['settings'][$logfile], 1, 1);
                     if (!empty($data[$logvar]['size'])) {
                         $data[$logvar]['size'] = round($data[$logvar]['size'] / 1048576, 2);
                     }
@@ -372,7 +372,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
             if ($data['status']['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheLogFile'])) {
                 $data['autocachelog'] = [];
                 // status field = 1
-                xarcachemanager_stats_filestats($data['autocachelog'], $data['settings']['AutoCacheLogFile'], 1, 1);
+                cachemanager_stats_filestats($data['autocachelog'], $data['settings']['AutoCacheLogFile'], 1, 1);
                 if (!empty($data['autocachelog']['size'])) {
                     $data['autocachelog']['size'] = round($data['autocachelog']['size'] / 1048576, 2);
                 }
@@ -385,7 +385,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
             if ($data['status']['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheStatFile'])) {
                 $data['autocachestat'] = [];
                 // hit field = 1, miss field = 2
-                xarcachemanager_stats_filestats($data['autocachestat'], $data['settings']['AutoCacheStatFile'], 1, 2);
+                cachemanager_stats_filestats($data['autocachestat'], $data['settings']['AutoCacheStatFile'], 1, 2);
                 if (!empty($data['autocachestat']['size'])) {
                     $data['autocachestat']['size'] = round($data['autocachestat']['size'] / 1048576, 2);
                 }
@@ -399,7 +399,7 @@ function xarcachemanager_admin_stats(array $args = [], $context = null)
 /**
  * count the total number of lines, hits and misses in a logfile
  */
-function xarcachemanager_stats_filestats(&$totals, $logfile, $hitfield = null, $missfield = null)
+function cachemanager_stats_filestats(&$totals, $logfile, $hitfield = null, $missfield = null)
 {
     $totals = ['size'  => 0,
                     'lines' => 0,
@@ -457,7 +457,7 @@ function xarcachemanager_stats_filestats(&$totals, $logfile, $hitfield = null, $
 /**
  * analyze cache storage logfile for hits and misses and merge with items list
  */
-function xarcachemanager_stats_logfile(&$items, &$totals, $logfile, $checktype)
+function cachemanager_stats_logfile(&$items, &$totals, $logfile, $checktype)
 {
     if (empty($logfile) || !file_exists($logfile) || filesize($logfile) < 1) {
         return;
@@ -589,7 +589,7 @@ function xarcachemanager_stats_logfile(&$items, &$totals, $logfile, $checktype)
 /**
  * analyze auto-cache statsfile for hits and misses
  */
-function xarcachemanager_stats_autostats(&$items, &$totals, $logfile)
+function cachemanager_stats_autostats(&$items, &$totals, $logfile)
 {
     if (empty($logfile) || !file_exists($logfile) || filesize($logfile) < 1) {
         return;
@@ -642,7 +642,7 @@ function xarcachemanager_stats_autostats(&$items, &$totals, $logfile)
 /**
  * analyze auto-cache logfile for hits and misses and merge with stats items
  */
-function xarcachemanager_stats_autolog(&$items, &$totals, $logfile)
+function cachemanager_stats_autolog(&$items, &$totals, $logfile)
 {
     if (empty($logfile) || !file_exists($logfile) || filesize($logfile) < 1) {
         return;
@@ -720,7 +720,7 @@ function xarcachemanager_stats_autolog(&$items, &$totals, $logfile)
 /**
  * sort items
  */
-function xarcachemanager_stats_sortitems(&$items, $sort)
+function cachemanager_stats_sortitems(&$items, $sort)
 {
     $sort = strtolower($sort);
 

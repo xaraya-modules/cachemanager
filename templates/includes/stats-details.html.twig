@@ -1,4 +1,4 @@
-{# @xarcachemanager/includes/stats-details.html.twig #}
+{# @cachemanager/includes/stats-details.html.twig #}
 
 {% block stats_details %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
@@ -12,23 +12,23 @@
     {% endif %}
     {% if loginfo['file'] %}
       &#160;Log Hit Ratio:&#160;<strong>{{ loginfo['ratio'] }}%</strong>&#160;of&#160;{{ loginfo['total'] }}
-      &#160;<a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab, 'withlog': 1}) }}">{{ xar_translate('Analyze Logfile') }}</a>
+      &#160;<a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab, 'withlog': 1}) }}">{{ xar_translate('Analyze Logfile') }}</a>
     {% else %}
       &#160;Log Hit Ratio:&#160;N/A
     {% endif %}
 
     <table class="xar-norm">
     <tr>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'size'}) }}">{{ xar_translate('Size') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'key'}) }}">{{ xar_translate('Key') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'code'}) }}">{{ xar_translate('Code') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'time'}) }}">{{ xar_translate('Last Modified') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'size'}) }}">{{ xar_translate('Size') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'key'}) }}">{{ xar_translate('Key') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'code'}) }}">{{ xar_translate('Code') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'time'}) }}">{{ xar_translate('Last Modified') }}</a></th>
     </tr>
     {% for id, item in items %}
     <tr>
       <td>
         {% if item.size > 0 %}
-          <a href="{{ xar_moduleurl('xarcachemanager','admin','view',{'tab': tab, 'key': item['key'], 'code': item['code']}) }}">{{ item['size'] }}</a>
+          <a href="{{ xar_moduleurl('cachemanager','admin','view',{'tab': tab, 'key': item['key'], 'code': item['code']}) }}">{{ item['size'] }}</a>
         {% else %}
           {{ item['size'] }}
         {% endif %}
@@ -45,7 +45,7 @@
     {% endif %}
 
   {% else %}
-    <form method="post" action="{{ xar_moduleurl('xarcachemanager', 'admin', 'stats') }}">
+    <form method="post" action="{{ xar_moduleurl('cachemanager', 'admin', 'stats') }}">
       {% if cacheinfo['ratio'] %}
         Cache Hit Ratio:&#160;<strong>{{ cacheinfo['ratio'] }}%</strong>&#160;of&#160;{{ cacheinfo['total'] }}
       {% else %}
@@ -59,25 +59,25 @@
 
     <table class="xar-norm">
     <tr>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'size'}) }}">{{ xar_translate('Size') }}</a></th>
-      <th colspan="4"><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'key'}) }}">{{ xar_translate('Key') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'code'}) }}">{{ xar_translate('Code') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'time'}) }}">{{ xar_translate('Last Modified') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'size'}) }}">{{ xar_translate('Size') }}</a></th>
+      <th colspan="4"><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'key'}) }}">{{ xar_translate('Key') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'code'}) }}">{{ xar_translate('Code') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'time'}) }}">{{ xar_translate('Last Modified') }}</a></th>
     </tr>
     <tr class="xar-alt">
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'ratio'}) }}">{{ xar_translate('Ratio') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'hit'}) }}">{{ xar_translate('Hit') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'miss'}) }}">{{ xar_translate('Miss') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'total'}) }}">{{ xar_translate('Total') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'pages'}) }}">{{ xar_translate('Pages') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'first'}) }}">{{ xar_translate('First Seen') }}</a></th>
-      <th><a href="{{ xar_moduleurl('xarcachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'last'}) }}">{{ xar_translate('Last Seen') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'ratio'}) }}">{{ xar_translate('Ratio') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'hit'}) }}">{{ xar_translate('Hit') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'miss'}) }}">{{ xar_translate('Miss') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'total'}) }}">{{ xar_translate('Total') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'pages'}) }}">{{ xar_translate('Pages') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'first'}) }}">{{ xar_translate('First Seen') }}</a></th>
+      <th><a href="{{ xar_moduleurl('cachemanager','admin','stats',{'tab': tab,'withlog': withlog,'sort': 'last'}) }}">{{ xar_translate('Last Seen') }}</a></th>
     </tr>
     {% for id, item in items %}
     <tr>
       <td>
         {% if item.size > 0 %}
-          <a href="{{ xar_moduleurl('xarcachemanager','admin','view',{'tab': tab, 'key': item['key'], 'code': item['code']}) }}">{{ item['size'] }}</a>
+          <a href="{{ xar_moduleurl('cachemanager','admin','view',{'tab': tab, 'key': item['key'], 'code': item['code']}) }}">{{ item['size'] }}</a>
         {% else %}
           {{ item['size'] }}
         {% endif %}

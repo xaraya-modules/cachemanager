@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.hooks');
+sys::import('modules.cachemanager.class.hooks');
 use Xaraya\Modules\CacheManager\CacheHooks;
 
 /**
@@ -22,7 +22,7 @@ use Xaraya\Modules\CacheManager\CacheHooks;
  * - array $args['extrainfo'] extra information
  * @return string hook output in HTML
  */
-function xarcachemanager_admin_modifyhook($args, $context = null)
+function cachemanager_admin_modifyhook($args, $context = null)
 {
     return CacheHooks::modifyhook($args, $context);
 }

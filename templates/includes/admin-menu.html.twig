@@ -1,11 +1,11 @@
-{# @xarcachemanager/includes/admin-menu.html.twig #}
+{# @cachemanager/includes/admin-menu.html.twig #}
 
 {% block admin_menu %}
 {#   License: GPL http://www.gnu.org/copyleft/gpl.html  #}
 {#  Common Administration menu #}
 {{ xar_style({scope: "module", module: "base", file: "tabs"}) }}
 {# @todo handle this in functions #}
-{% set status = xar_apifunc('xarcachemanager', 'admin', 'getstatus') %}
+{% set status = xar_apifunc('cachemanager', 'admin', 'getstatus') %}
 {% set info = xar_request().getInfo() %}
 {% set activetab = info[2] %}
 <div>
@@ -24,7 +24,7 @@
         {% endif %}
 
         <li class="{{ tabclass }}">
-          <a href="{{ xar_moduleurl('xarcachemanager','admin','flushcache') }}" class="{{ linkclass }}">
+          <a href="{{ xar_moduleurl('cachemanager','admin','flushcache') }}" class="{{ linkclass }}">
             Flush Cache
           </a>
         </li>
@@ -38,7 +38,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
             <li class="{{ tabclass }}">
-                <a href="{{ xar_moduleurl('xarcachemanager','admin','pages') }}" class="{{ linkclass }}">
+                <a href="{{ xar_moduleurl('cachemanager','admin','pages') }}" class="{{ linkclass }}">
                     Pages
                 </a>
             </li>
@@ -53,7 +53,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
             <li class="{{ tabclass }}">
-                <a href="{{ xar_moduleurl('xarcachemanager','admin','blocks') }}" class="{{ linkclass }}">
+                <a href="{{ xar_moduleurl('cachemanager','admin','blocks') }}" class="{{ linkclass }}">
                     Blocks
                 </a>
             </li>
@@ -68,7 +68,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
             <li class="{{ tabclass }}">
-                <a href="{{ xar_moduleurl('xarcachemanager','admin','modules') }}" class="{{ linkclass }}">
+                <a href="{{ xar_moduleurl('cachemanager','admin','modules') }}" class="{{ linkclass }}">
                     Modules
                 </a>
             </li>
@@ -83,7 +83,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
             <li class="{{ tabclass }}">
-                <a href="{{ xar_moduleurl('xarcachemanager','admin','objects') }}" class="{{ linkclass }}">
+                <a href="{{ xar_moduleurl('cachemanager','admin','objects') }}" class="{{ linkclass }}">
                     Objects
                 </a>
             </li>
@@ -98,7 +98,7 @@
 		    {% set linkclass = 'xar-norm xar-norm-outline' %}
 		{% endif %}
             <li class="{{ tabclass }}">
-                <a href="{{ xar_moduleurl('xarcachemanager','admin','variables') }}" class="{{ linkclass }}">
+                <a href="{{ xar_moduleurl('cachemanager','admin','variables') }}" class="{{ linkclass }}">
                     Variables
                 </a>
             </li>
@@ -106,7 +106,7 @@
 {# <!-- Not supported with Creole
        {% set tabclass = activetab=='queries'?'active'.'' %}
         <li class="{{ tabclass }}">
-          <a href="{{ xar_moduleurl('xarcachemanager','admin','queries') }}">
+          <a href="{{ xar_moduleurl('cachemanager','admin','queries') }}">
             Queries
           </a>
         </li>
@@ -119,7 +119,7 @@
 	    {% set linkclass = 'xar-norm xar-norm-outline' %}
 	{% endif %}
         <li class="{{ tabclass }}">
-          <a href="{{ xar_moduleurl('xarcachemanager','admin','stats') }}" class="{{ linkclass }}">
+          <a href="{{ xar_moduleurl('cachemanager','admin','stats') }}" class="{{ linkclass }}">
             Statistics
           </a>
         </li>
@@ -132,7 +132,7 @@
 	    {% set linkclass = 'xar-norm xar-norm-outline' %}
 	{% endif %}
         <li class="{{ tabclass }}">
-          <a href="{{ xar_moduleurl('xarcachemanager','admin','modifyconfig') }}" class="{{ linkclass }}">
+          <a href="{{ xar_moduleurl('cachemanager','admin','modifyconfig') }}" class="{{ linkclass }}">
             Modify Config
           </a>
         </li>
@@ -145,7 +145,7 @@
 	    {% set linkclass = 'xar-norm xar-norm-outline' %}
 	{% endif %}
        <li class="{{ tabclass }}">
-       <a href="{{ xar_moduleurl('xarcachemanager','admin','overview') }}" class="{{ linkclass }}">
+       <a href="{{ xar_moduleurl('cachemanager','admin','overview') }}" class="{{ linkclass }}">
             Overview
        </a>
       </li>

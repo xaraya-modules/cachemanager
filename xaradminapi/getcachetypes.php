@@ -7,10 +7,10 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.config');
+sys::import('modules.cachemanager.class.config');
 use Xaraya\Modules\CacheManager\CacheConfig;
 
 /**
@@ -18,7 +18,7 @@ use Xaraya\Modules\CacheManager\CacheConfig;
  * @uses CacheConfig::getTypes()
  * @return array Cache types, with key set to cache type and value set to its settings
  */
-function xarcachemanager_adminapi_getcachetypes(array $args = [], $context = null)
+function cachemanager_adminapi_getcachetypes(array $args = [], $context = null)
 {
     // return the cache types and their settings
     return CacheConfig::getTypes();

@@ -7,7 +7,7 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
 /**
@@ -17,14 +17,14 @@
  * @access public
  * @return true|void on success or void on falure
  */
-function xarcachemanager_admin_main(array $args = [], $context = null)
+function cachemanager_admin_main(array $args = [], $context = null)
 {
     // Security Check
     if (!xarSecurity::check('AdminXarCache')) {
         return;
     }
 
-    xarController::redirect(xarController::URL('xarcachemanager', 'admin', 'modifyconfig'), null, $context);
+    xarController::redirect(xarController::URL('cachemanager', 'admin', 'modifyconfig'), null, $context);
     // success
     return true;
 }

@@ -1,42 +1,42 @@
 <?php
 /**
- * xarCacheManager initialization functions
+ * CacheManager initialization functions
  *
  * @package modules
  * @copyright (C) 2002-2006 The Digital Development Foundation
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  * @author jsb | mikespub
  */
 use Xaraya\Modules\CacheManager\CacheManager;
 
 /**
- * initialise the xarcachemanager module
+ * initialise the cachemanager module
  * This function is only ever called once during the lifetime of a particular
  * module instance
  */
-function xarcachemanager_init()
+function cachemanager_init()
 {
     // set up the config.caching file and output cache directory structure
     $varCacheDir = sys::varpath() . '/cache';
-    if (!xarcachemanager_fs_setup(['varCacheDir' => $varCacheDir])) {
+    if (!cachemanager_fs_setup(['varCacheDir' => $varCacheDir])) {
         return false;
     }
 
     // Set up module variables
-    xarModVars::set('xarcachemanager', 'FlushOnNewComment', 0);
-    xarModVars::set('xarcachemanager', 'FlushOnNewRating', 0);
-    xarModVars::set('xarcachemanager', 'FlushOnNewPollvote', 0);
-    xarModVars::set('xarcachemanager', 'AutoRegenSessionless', 0);
+    xarModVars::set('cachemanager', 'FlushOnNewComment', 0);
+    xarModVars::set('cachemanager', 'FlushOnNewRating', 0);
+    xarModVars::set('cachemanager', 'FlushOnNewPollvote', 0);
+    xarModVars::set('cachemanager', 'AutoRegenSessionless', 0);
 
     if (!xarModHooks::register(
         'item',
         'create',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'createhook'
     )) {
@@ -46,7 +46,7 @@ function xarcachemanager_init()
         'item',
         'update',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'updatehook'
     )) {
@@ -56,7 +56,7 @@ function xarcachemanager_init()
         'item',
         'delete',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'deletehook'
     )) {
@@ -66,7 +66,7 @@ function xarcachemanager_init()
         'item',
         'modify',
         'GUI',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'modifyhook'
     )) {
@@ -76,80 +76,80 @@ function xarcachemanager_init()
         'module',
         'updateconfig',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'updateconfighook'
     )) {
         return false;
     }
 
-    // Enable xarcachemanager hooks for articles
+    // Enable cachemanager hooks for articles
     if (xarMod::isAvailable('articles')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'articles', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'articles', 'hookModName' => 'cachemanager']
         );
     }
-    // Enable xarcachemanager hooks for base
+    // Enable cachemanager hooks for base
     if (xarMod::isAvailable('base')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'base', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'base', 'hookModName' => 'cachemanager']
         );
     }
-    // Enable xarcachemanager hooks for blocks
+    // Enable cachemanager hooks for blocks
     if (xarMod::isAvailable('blocks')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'blocks', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'blocks', 'hookModName' => 'cachemanager']
         );
     }
-    // Enable xarcachemanager hooks for categories
+    // Enable cachemanager hooks for categories
     if (xarMod::isAvailable('categories')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'categories', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'categories', 'hookModName' => 'cachemanager']
         );
     }
-    // Enable xarcachemanager hooks for roles
+    // Enable cachemanager hooks for roles
     if (xarMod::isAvailable('roles')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'roles', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'roles', 'hookModName' => 'cachemanager']
         );
     }
-    // Enable xarcachemanager hooks for privileges
+    // Enable cachemanager hooks for privileges
     if (xarMod::isAvailable('privileges')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'privileges', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'privileges', 'hookModName' => 'cachemanager']
         );
     }
-    // Enable xarcachemanager hooks for dynamicdata
+    // Enable cachemanager hooks for dynamicdata
     if (xarMod::isAvailable('dynamicdata')) {
         xarMod::apiFunc(
             'modules',
             'admin',
             'enablehooks',
-            ['callerModName' => 'dynamicdata', 'hookModName' => 'xarcachemanager']
+            ['callerModName' => 'dynamicdata', 'hookModName' => 'cachemanager']
         );
     }
 
     // set up permissions masks.
-    xarMasks::register('ReadXarCache', 'All', 'xarcachemanager', 'Item', 'All:All:All', 'ACCESS_READ');
-    xarMasks::register('AdminXarCache', 'All', 'xarcachemanager', 'Item', 'All:All:All', 'ACCESS_ADMIN');
+    xarMasks::register('ReadXarCache', 'All', 'cachemanager', 'Item', 'All:All:All', 'ACCESS_READ');
+    xarMasks::register('AdminXarCache', 'All', 'cachemanager', 'Item', 'All:All:All', 'ACCESS_ADMIN');
     /*
         if (xarSystemVars::get('DB.UseADODBCache')){
             // Enable query caching for categories getcat
@@ -163,26 +163,26 @@ function xarcachemanager_init()
         }
     */
     // add the database storage table
-    xarcachemanager_create_cache_data();
+    cachemanager_create_cache_data();
 
     // Initialisation successful
     return true;
 }
 
 /**
- * upgrade the xarcachemanager module from an old version
+ * upgrade the cachemanager module from an old version
  * This function can be called multiple times
  */
-function xarcachemanager_upgrade($oldversion)
+function cachemanager_upgrade($oldversion)
 {
     $varCacheDir = sys::varpath() . '/cache';
-    $defaultConfigFile = sys::code() . 'modules/xarcachemanager/config.caching.php.dist';
+    $defaultConfigFile = sys::code() . 'modules/cachemanager/config.caching.php.dist';
     $cachingConfigFile = $varCacheDir . '/config.caching.php';
 
     // check to see if we've got the necessary permissions to upgrade
     if ((!file_exists($cachingConfigFile) && !is_writable($varCacheDir)) ||
         (file_exists($cachingConfigFile) && !is_writable($cachingConfigFile))) {
-        $msg = xarMLS::translate('The xarCacheManager module upgrade has failed.  
+        $msg = xarMLS::translate('The CacheManager module upgrade has failed.  
                    Please make #(1) writable by the web server process 
                    owner to complete the upgrade.  If #(1) does not exist, 
                    please make #(2) writable by the web server process and 
@@ -191,7 +191,7 @@ function xarcachemanager_upgrade($oldversion)
     }
     $cachingConfiguration = [];
 
-    sys::import('modules.xarcachemanager.class.manager');
+    sys::import('modules.cachemanager.class.manager');
     //use Xaraya\Modules\CacheManager\CacheManager;
     // parse the current distribution config file so we have default values
     include_once($defaultConfigFile);
@@ -234,7 +234,7 @@ function xarcachemanager_upgrade($oldversion)
                 'item',
                 'modify',
                 'GUI',
-                'xarcachemanager',
+                'cachemanager',
                 'admin',
                 'modifyhook'
             )) {
@@ -259,12 +259,12 @@ function xarcachemanager_upgrade($oldversion)
                 copy($defaultConfigFile, $cachingConfigFile);
             }
             // switch to the file based block caching enabler
-            if (xarModVars::get('xarcachemanager', 'CacheBlockOutput')) {
+            if (xarModVars::get('cachemanager', 'CacheBlockOutput')) {
                 $outputCacheDir = $varCacheDir . '/output/';
                 if (!file_exists($outputCacheDir . 'cache.blocklevel')) {
                     touch($outputCacheDir . 'cache.blocklevel');
                 }
-                xarModVars::delete('xarcachemanager', 'CacheBlockOutput');
+                xarModVars::delete('cachemanager', 'CacheBlockOutput');
             }
             // no break
         case '0.3.1':
@@ -286,7 +286,7 @@ function xarcachemanager_upgrade($oldversion)
             }
 
             // set up the new output sub-directorys
-            if (!xarcachemanager_fs_setup(['varCacheDir' => $varCacheDir])) {
+            if (!cachemanager_fs_setup(['varCacheDir' => $varCacheDir])) {
                 return false;
             }
 
@@ -296,7 +296,7 @@ function xarcachemanager_upgrade($oldversion)
         case '0.3.2':
             // Code to upgrade from the 0.3.2 version (base block level caching)
             // Double check the file system setup
-            if (!xarcachemanager_fs_setup(['varCacheDir' => $varCacheDir])) {
+            if (!cachemanager_fs_setup(['varCacheDir' => $varCacheDir])) {
                 return false;
             }
             // Bring the config file up to current version
@@ -318,7 +318,7 @@ function xarcachemanager_upgrade($oldversion)
             // no break
         case '0.3.3':
             // Code to upgrade from the 0.3.3 version (use xar_cache_data as optional replacement for filesystem)
-            xarcachemanager_create_cache_data();
+            cachemanager_create_cache_data();
 
             // Bring the config file up to current version
             if (file_exists($cachingConfigFile)) {
@@ -366,16 +366,16 @@ function xarcachemanager_upgrade($oldversion)
 }
 
 /**
- * delete the xarcachemanager module
+ * delete the cachemanager module
  * This function is only ever called once during the lifetime of a particular
  * module instance
  */
-function xarcachemanager_delete()
+function cachemanager_delete()
 {
     $varCacheDir = sys::varpath() . '/cache';
     $cacheOutputDir = $varCacheDir . '/output';
 
-    /* do not deactivate output caching when xarcachemanager is removed
+    /* do not deactivate output caching when cachemanager is removed
         if (is_dir($cacheOutputDir)) {
             //if still there, remove the cache.touch file, this turns everything off
             if (file_exists($cacheOutputDir . '/cache.touch')) {
@@ -383,7 +383,7 @@ function xarcachemanager_delete()
             }
 
             // clear out the cache
-            @xarcachemanager_rmdirr($cacheOutputDir);
+            @cachemanager_rmdirr($cacheOutputDir);
         }
 
         // remove the caching config file
@@ -397,7 +397,7 @@ function xarcachemanager_delete()
         'item',
         'create',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'createhook'
     )) {
@@ -407,7 +407,7 @@ function xarcachemanager_delete()
         'item',
         'update',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'updatehook'
     )) {
@@ -417,7 +417,7 @@ function xarcachemanager_delete()
         'item',
         'delete',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'deletehook'
     )) {
@@ -427,7 +427,7 @@ function xarcachemanager_delete()
         'item',
         'modify',
         'GUI',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'modifyhook'
     )) {
@@ -437,7 +437,7 @@ function xarcachemanager_delete()
         'module',
         'updateconfig',
         'API',
-        'xarcachemanager',
+        'cachemanager',
         'admin',
         'updateconfighook'
     )) {
@@ -445,10 +445,10 @@ function xarcachemanager_delete()
     }
 
     // Remove module variables
-    xarModVars::delete_all('xarcachemanager');
+    xarModVars::delete_all('cachemanager');
 
     // Remove Masks and Instances
-    xarMasks::removemasks('xarcachemanager');
+    xarMasks::removemasks('cachemanager');
 
     // Deletion successful
     return true;
@@ -462,7 +462,7 @@ function xarcachemanager_delete()
  * @return bool Returns true on success, false on failure
  * @todo special handling for "repair" during upgrades
  */
-function xarcachemanager_fs_setup($args)
+function cachemanager_fs_setup($args)
 {
     extract($args);
 
@@ -475,7 +475,7 @@ function xarcachemanager_fs_setup($args)
     $cacheOutputDir = $varCacheDir . '/output';
 
     // caching config files
-    $defaultConfigFile = sys::code() . 'modules/xarcachemanager/config.caching.php.dist';
+    $defaultConfigFile = sys::code() . 'modules/cachemanager/config.caching.php.dist';
     $cachingConfigFile = $varCacheDir . '/config.caching.php';
 
     // confirm that the things are ready to be set up
@@ -489,7 +489,7 @@ function xarcachemanager_fs_setup($args)
             $msg = xarMLS::translate(
                 'The #(1) directory must be writable by the web server 
                        for the install script to set up output caching for you. 
-                       The xarCacheManager module has not been installed, 
+                       The CacheManager module has not been installed, 
                        please make the #(1) directory writable by the web server
                        before re-trying to install this module.  
                        Alternatively, you can manually create the #(2) directory
@@ -550,7 +550,7 @@ function xarcachemanager_fs_setup($args)
  * @param     string   $dirname   The directory to delete
  * @return    bool     Returns true on success, false on failure
  */
-function xarcachemanager_rmdirr($dirname)
+function cachemanager_rmdirr($dirname)
 {
     // delete a file
     if (is_file($dirname)) {
@@ -567,7 +567,7 @@ function xarcachemanager_rmdirr($dirname)
 
         // Deep delete directories
         if (is_dir("$dirname/$entry")) {
-            xarcachemanager_rmdirr("$dirname/$entry");
+            cachemanager_rmdirr("$dirname/$entry");
         } else {
             unlink("$dirname/$entry");
         }
@@ -580,7 +580,7 @@ function xarcachemanager_rmdirr($dirname)
 
 // TODO: if we want to re-use this for compiled templates someday,
 //       this will need to move to the core somewhere...
-function xarcachemanager_create_cache_data()
+function cachemanager_create_cache_data()
 {
     // Set up database tables
     $dbconn = xarDB::getConn();

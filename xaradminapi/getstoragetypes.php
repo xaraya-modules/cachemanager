@@ -7,17 +7,17 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 
 /**
  * @author jsb
  *
  * @return array Storage types, with key set to storage type and value set to its settings
  */
-function xarcachemanager_adminapi_getstoragetypes(array $args = [], $context = null)
+function cachemanager_adminapi_getstoragetypes(array $args = [], $context = null)
 {
     static $storagetypes;
     if (!empty($storagetypes)) {

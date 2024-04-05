@@ -7,11 +7,11 @@
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://www.xaraya.com
  *
- * @subpackage xarCacheManager module
+ * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  * @author jsb
  */
-sys::import('modules.xarcachemanager.class.manager');
+sys::import('modules.cachemanager.class.manager');
 
 /**
  * construct an array of output cache subdirectories
@@ -20,7 +20,7 @@ sys::import('modules.xarcachemanager.class.manager');
  * @return array sorted array of cache sub directories, with key set to directory name and value set to path
  * @todo do not include empty directories in the array
  */
-function xarcachemanager_adminapi_getcachedirs($dir = false)
+function cachemanager_adminapi_getcachedirs($dir = false)
 {
     $cachedirs = [];
 
@@ -33,7 +33,7 @@ function xarcachemanager_adminapi_getcachedirs($dir = false)
                 if ($item[0] != '.') {
                     if (is_dir($dir . $item)) {
                         $cachedirs[$item] = $dir . $item;
-                        $cachedirs = array_merge($cachedirs, xarcachemanager_adminapi_getcachedirs($dir . $item));
+                        $cachedirs = array_merge($cachedirs, cachemanager_adminapi_getcachedirs($dir . $item));
                     }
                 }
             }
