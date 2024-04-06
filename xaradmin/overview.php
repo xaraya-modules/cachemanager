@@ -18,5 +18,6 @@ function cachemanager_admin_overview(array $args = [], $context = null)
 {
     $data = [];
     //just return to main function that displays the overview
+    $data['context'] ??= $context;
     return xarTpl::module('cachemanager', 'admin', 'main', $data, 'main');
 }
