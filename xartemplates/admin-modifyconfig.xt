@@ -10,7 +10,7 @@
   <xar:if condition="xarSession::getVar('statusmsg') != ''">
     <p>#xarSession::getVar('statusmsg')#</p>
   </xar:if>
-    <form action="{{ xar_moduleurl('cachemanager','admin','updateconfig') }}" method="post" enctype="application/x-www-form-urlencoded" >
+    <form action="#xarController::URL('cachemanager','admin','updateconfig')#" method="post" enctype="application/x-www-form-urlencoded" >
         <fieldset>
             <legend><xar:mlstring>Global Settings</xar:mlstring></legend>
             <div class="xar-form-input-wrapper-after">

@@ -39,6 +39,8 @@ function cachemanager_adminapi_getstatus(array $args = [], $context = null)
         $status['PageCachingEnabled'] = 1;
         if (file_exists($varCacheDir . '/output/autocache.log')) {
             $status['AutoCachingEnabled'] = 1;
+        } else {
+            $status['AutoCachingEnabled'] = 0;
         }
     } else {
         $status['PageCachingEnabled'] = 0;
