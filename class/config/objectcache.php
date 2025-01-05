@@ -132,7 +132,7 @@ class ObjectCache extends CacheConfig
         $objects = xarMod::apiFunc('dynamicdata', 'user', 'getobjects');
 
         // Get default object methods to cache
-        $defaultobjectmethods = unserialize(xarModVars::get('cachemanager', 'DefaultObjectCacheMethods'));
+        $defaultobjectmethods = unserialize((string) xarModVars::get('cachemanager', 'DefaultObjectCacheMethods'));
 
         // CHECKME: do we want to support settings for non-objects (like tables) ?
 

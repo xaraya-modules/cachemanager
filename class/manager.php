@@ -127,7 +127,7 @@ class CacheManager extends xarObject
         //get the modvars from the db
         if (!empty($keys)) {
             foreach ($keys as $key) {
-                $value = xarModVars::get('cachemanager', $key);
+                $value = (string) xarModVars::get('cachemanager', $key);
                 if (substr($value, 0, 6) == 'array-') {
                     $value = substr($value, 6);
                     $value = unserialize($value);

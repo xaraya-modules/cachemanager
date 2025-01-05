@@ -15,9 +15,9 @@
 
 namespace Xaraya\Modules\CacheManager;
 
+use Xaraya\Authentication\AuthToken;
 use xarObject;
 use xarCache;
-use DataObjectRESTHandler;
 use Throwable;
 use sys;
 
@@ -36,7 +36,7 @@ class CacheInfo extends xarObject
     protected static function getCacheStorage($type)
     {
         if ($type === 'token') {
-            return DataObjectRESTHandler::getTokenStorage();
+            return AuthToken::getTokenStorage();
         }
         // get cache type settings
         $cachetypes = CacheConfig::getTypes();
@@ -209,7 +209,7 @@ class CacheInfo extends xarObject
         if ($cachestorage->isCached($key, 0, 0)) {
             $value = $cachestorage->getCached($key);
             if ($type == 'module' || $type == 'object') {
-                $item = unserialize($value);
+                $item = unserialize((string) $value);
             } elseif ($type == 'variable') {
                 // check if we serialized it for storage
                 if (!empty($value) && is_string($value) && strpos($value, ':serial:') === 0) {

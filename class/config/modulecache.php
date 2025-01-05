@@ -135,7 +135,7 @@ class ModuleCache extends CacheConfig
         }
 
         // Get default module functions to cache
-        $defaultmodulefunctions = unserialize(xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
+        $defaultmodulefunctions = unserialize((string) xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
 
         // Get all modules
         $modules = xarMod::apiFunc('modules', 'admin', 'getlist');

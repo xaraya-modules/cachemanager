@@ -247,7 +247,7 @@ function cachemanager_admin_updateconfig(array $args = [], $context = null)
     $configSettings['Module.LogFile'] = $modulelogfile;
     $configSettings['Module.SizeLimit'] = $modulesizelimit;
     // update cache defaults for module functions
-    $defaultmodulefunctions = unserialize(xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
+    $defaultmodulefunctions = unserialize((string) xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
     foreach ($defaultmodulefunctions as $func => $docache) {
         if (!isset($modulefunctions[$func])) {
             $modulefunctions[$func] = 0;
@@ -261,7 +261,7 @@ function cachemanager_admin_updateconfig(array $args = [], $context = null)
     $configSettings['Object.LogFile'] = $objectlogfile;
     $configSettings['Object.SizeLimit'] = $objectsizelimit;
     // update cache defaults for object methods
-    $defaultobjectmethods = unserialize(xarModVars::get('cachemanager', 'DefaultObjectCacheMethods'));
+    $defaultobjectmethods = unserialize((string) xarModVars::get('cachemanager', 'DefaultObjectCacheMethods'));
     foreach ($defaultobjectmethods as $method => $docache) {
         if (!isset($objectmethods[$method])) {
             $objectmethods[$method] = 0;
