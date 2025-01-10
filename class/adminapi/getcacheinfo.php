@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @package modules\cachemanager
+ * @category Xaraya Web Applications Framework
+ * @version 2.5.7
+ * @copyright see the html/credits.html file in this release
+ * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
+ * @link https://github.com/mikespub/xaraya-modules
+**/
+
+namespace Xaraya\Modules\CacheManager\AdminApi;
+
+use Xaraya\Modules\CacheManager\CacheInfo;
+use Xaraya\Modules\MethodClass;
+use sys;
+use BadParameterException;
+
+sys::import('xaraya.modules.method');
+
+/**
+ * cachemanager adminapi getcacheinfo function
+ */
+class GetcacheinfoMethod extends MethodClass
+{
+    /** functions imported by bermuda_cleanup */
+
+    /**
+     * Construct an array of the current cache info
+     * @author jsb
+     * @uses \CacheInfo::getInfo()
+     * @param array $args ['type'] cachetype to start the search for cacheinfo
+     * @return array array of cacheinfo
+     */
+    public function __invoke(array $args = ['type' => ''])
+    {
+        $type = '';
+        if (is_array($args)) {
+            extract($args);
+        } else {
+            $type = $args;
+        }
+        $cacheInfo = CacheInfo::getCache($type);
+        return $cacheInfo->getInfo();
+    }
+}

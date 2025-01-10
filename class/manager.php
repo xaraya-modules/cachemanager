@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage the output & variable cache system of Xaraya
  *
@@ -103,10 +104,12 @@ class CacheManager extends xarObject
             }
         }
 
+        $cachingConfiguration = [];
         include $cachingConfigFile;
 
         // if we only want specific keys, reduce the array
         if (!empty($keys)) {
+            $filteredConfig = [];
             foreach ($keys as $key) {
                 $filteredConfig[$key] = $cachingConfiguration[$key];
             }

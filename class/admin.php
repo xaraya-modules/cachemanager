@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to run admin gui functions
  *
@@ -78,7 +79,8 @@ class CacheAdmin extends xarObject
     public static function pages(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.pagecache');
-        $tplData = Config\PageCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('page');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
@@ -91,7 +93,8 @@ class CacheAdmin extends xarObject
     public static function blocks(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.blockcache');
-        $tplData = Config\BlockCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('block');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
@@ -104,7 +107,8 @@ class CacheAdmin extends xarObject
     public static function modules(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.modulecache');
-        $tplData = Config\ModuleCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('module');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
@@ -117,7 +121,8 @@ class CacheAdmin extends xarObject
     public static function objects(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.objectcache');
-        $tplData = Config\ObjectCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('object');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
@@ -130,7 +135,8 @@ class CacheAdmin extends xarObject
     public static function variables(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.variablecache');
-        $tplData = Config\VariableCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('variable');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
@@ -143,7 +149,8 @@ class CacheAdmin extends xarObject
     public static function queries(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.querycache');
-        $tplData = Config\QueryCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('query');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }
@@ -156,7 +163,8 @@ class CacheAdmin extends xarObject
     public static function templates(array $args = [])
     {
         sys::import('modules.cachemanager.class.config.templatecache');
-        $tplData = Config\TemplateCache::modifyConfig($args);
+        $cache = CacheConfig::getCache('template');
+        $tplData = $cache->modifyConfig($args);
         if (!is_array($tplData)) {
             return $tplData;
         }

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -39,7 +40,7 @@ class ModuleCache extends CacheConfig
      * configure module caching
      * @return array|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -114,7 +115,7 @@ class ModuleCache extends CacheConfig
         }
 
         // Get all module caching configurations
-        $data['modules'] = static::getConfig();
+        $data['modules'] = $this->getConfig();
 
         $data['authid'] = xarSec::genAuthKey();
         return $data;
@@ -125,7 +126,7 @@ class ModuleCache extends CacheConfig
      *
      * @return array module caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         // Get all module cache settings
         $modulesettings = [];

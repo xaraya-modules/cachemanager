@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -33,7 +34,7 @@ class QueryCache extends CacheConfig
      * configure query caching (TODO)
      * @return array|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -72,7 +73,7 @@ class QueryCache extends CacheConfig
         }
 
         // Get some query caching configurations
-        $data['queries'] = static::getConfig();
+        $data['queries'] = $this->getConfig();
 
         $data['authid'] = xarSec::genAuthKey();
         return $data;
@@ -84,7 +85,7 @@ class QueryCache extends CacheConfig
      * @todo currently unsupported + refers to legacy modules
      * @return array of query caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         $queries = [];
 
@@ -97,15 +98,15 @@ class QueryCache extends CacheConfig
             'articles' => ['userapi.getall'], // TODO: round off current pubdate
             'categories' => ['userapi.getcat'],
             'comments' => ['userapi.get_author_count',
-                        'userapi.get_multiple', ],
+                'userapi.get_multiple', ],
             'dynamicdata' => [], // TODO: make dependent on arguments
             'privileges' => [],
             'roles' => ['userapi.countall',
-                        'userapi.getall',
-                        'userapi.countallactive',
-                        'userapi.getallactive', ],
+                'userapi.getall',
+                'userapi.countallactive',
+                'userapi.getallactive', ],
             'xarbb' => ['userapi.countposts',
-                        'userapi.getalltopics', ],
+                'userapi.getalltopics', ],
         ];
 
         foreach ($candidates as $module => $querylist) {

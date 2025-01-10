@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to provide info on the cache system of Xaraya
  *
@@ -27,22 +28,36 @@ class CacheInfo extends xarObject
 {
     // list of currently supported cache types - not including 'query', 'core', 'template' here
     public static $typelist = ['page', 'block', 'module', 'object', 'variable'];
+    public string $type;
 
     public static function init(array $args = []) {}
 
     /**
-     * Get the cache storage used by a particular cache type
+     * Summary of __construct
+     * @param string $type cache type to get info for
      */
-    protected static function getCacheStorage($type)
+    public function __construct(string $type)
     {
-        if ($type === 'token') {
+        $this->type = $type;
+    }
+
+    /**
+     * Get the cache storage used by a particular cache type
+     * @return \ixarCache_Storage|void
+     */
+    protected function getCacheStorage()
+    {
+        if (empty($this->type)) {
+            return;
+        }
+        if ($this->type === 'token') {
             return AuthToken::getTokenStorage();
         }
         // get cache type settings
-        $cachetypes = CacheConfig::getTypes();
+        $settings = $this->getSettings();
 
         // check if we have some settings for this cache type
-        if (empty($type) || empty($cachetypes[$type])) {
+        if (empty($settings)) {
             return;
         }
 
@@ -50,8 +65,8 @@ class CacheInfo extends xarObject
         $outputCacheDir = xarCache::getOutputCacheDir();
 
         // default cache storage is 'filesystem' if necessary
-        if (!empty($cachetypes[$type]['CacheStorage'])) {
-            $storage = $cachetypes[$type]['CacheStorage'];
+        if (!empty($settings['CacheStorage'])) {
+            $storage = $settings['CacheStorage'];
         } else {
             $storage = 'filesystem';
         }
@@ -59,7 +74,7 @@ class CacheInfo extends xarObject
         // get cache storage
         $cachestorage = xarCache::getStorage([
             'storage'  => $storage,
-            'type'     => $type,
+            'type'     => $this->type,
             'cachedir' => $outputCacheDir,
         ]);
 
@@ -67,19 +82,27 @@ class CacheInfo extends xarObject
     }
 
     /**
+     * Get cache type settings
+     * @return array<mixed>
+     */
+    protected function getSettings()
+    {
+        return CacheConfig::getSettings($this->type);
+    }
+
+    /**
      * Construct an array of the current cache info
      *
      * @author jsb
      *
-     * @param string $type cachetype to start the search for cacheinfo
      * @return array array of cacheinfo
     */
-    public static function getInfo($type)
+    public function getInfo()
     {
         $cacheinfo = [];
 
         // get cache storage
-        $cachestorage = static::getCacheStorage($type);
+        $cachestorage = $this->getCacheStorage();
         if (empty($cachestorage)) {
             return $cacheinfo;
         }
@@ -103,15 +126,14 @@ class CacheInfo extends xarObject
     /**
      * @author jsb
      *
-     * @param string $type cachetype to get the size for
      * @return int size of the cache
     */
-    public static function getSize($type)
+    public function getSize()
     {
         $cachesize = 0;
 
         // get cache storage
-        $cachestorage = static::getCacheStorage($type);
+        $cachestorage = $this->getCacheStorage();
         if (empty($cachestorage)) {
             return $cachesize;
         }
@@ -127,15 +149,14 @@ class CacheInfo extends xarObject
      *
      * @author jsb
      *
-     * @param string $type cachetype to get the cache items from
      * @return array array of cache items
     */
-    public static function getList($type)
+    public function getList($sort = null)
     {
         $items = [];
 
         // get cache storage
-        $cachestorage = static::getCacheStorage($type);
+        $cachestorage = $this->getCacheStorage();
         if (empty($cachestorage)) {
             return $items;
         }
@@ -160,15 +181,14 @@ class CacheInfo extends xarObject
      *
      * @author jsb
      *
-     * @param string $type cachetype to get the cache keys from
      * @return array sorted array of cachekeys
     */
-    public static function getKeys($type)
+    public function getKeys()
     {
         $cachekeys = [];
 
         // get cache storage
-        $cachestorage = static::getCacheStorage($type);
+        $cachestorage = $this->getCacheStorage();
         if (empty($cachestorage)) {
             return $cachekeys;
         }
@@ -187,17 +207,16 @@ class CacheInfo extends xarObject
      *
      * @author jsb
      *
-     * @param string $type cachetype to get the cache item from
      * @param string $key the cache key
      * @param string $code the cache code (optional)
      * @return array|string array of cacheitem
     */
-    public static function getItem($type, $key, $code = '')
+    public function getItem($key, $code = '')
     {
         $item = [];
 
         // get cache storage
-        $cachestorage = static::getCacheStorage($type);
+        $cachestorage = $this->getCacheStorage();
         if (empty($cachestorage)) {
             return $item;
         }
@@ -208,9 +227,9 @@ class CacheInfo extends xarObject
         }
         if ($cachestorage->isCached($key, 0, 0)) {
             $value = $cachestorage->getCached($key);
-            if ($type == 'module' || $type == 'object') {
+            if ($this->type == 'module' || $this->type == 'object') {
                 $item = unserialize((string) $value);
-            } elseif ($type == 'variable') {
+            } elseif ($this->type == 'variable') {
                 // check if we serialized it for storage
                 if (!empty($value) && is_string($value) && strpos($value, ':serial:') === 0) {
                     try {
@@ -222,7 +241,7 @@ class CacheInfo extends xarObject
                 } else {
                     $item = $value;
                 }
-            } elseif ($type == 'token' && !empty($value)) {
+            } elseif ($this->type == 'token' && !empty($value)) {
                 $item = @json_decode($value, true);
             } else {
                 // do nothing
@@ -231,5 +250,26 @@ class CacheInfo extends xarObject
         }
 
         return $item;
+    }
+
+    /**
+     * get caching configuration for a particular type
+     *
+     * @return CacheConfig
+     */
+    public function getConfig()
+    {
+        return CacheConfig::getCache($this->type);
+    }
+
+    /**
+     * Get cache info for a particular type
+     *
+     * @param string $type cache type to get info for
+     * @return self
+     */
+    public static function getCache(string $type)
+    {
+        return new self($type);
     }
 }

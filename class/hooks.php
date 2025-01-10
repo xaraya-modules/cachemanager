@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to handle cache hooks
  *
@@ -197,7 +198,7 @@ class CacheHooks extends xarObject
                 // get the objectname
                 sys::import('modules.dynamicdata.class.objects.descriptor');
                 $objectinfo = DataObjectDescriptor::getObjectID(['moduleid'  => $modid,
-                                                                 'itemtype' => $itemtype, ]);
+                    'itemtype' => $itemtype, ]);
                 // CHECKME: how do we know if we need to e.g. flush dyn_example pages here ?
                 // flush dynamicdata and objecturl pages
                 if (xarOutputCache::isPageCacheEnabled()) {
@@ -366,7 +367,7 @@ class CacheHooks extends xarObject
                     'user',
                     'read_type_init',
                     ['module' => $instance['module'],
-                                                  'type' => $instance['type'], ]
+                        'type' => $instance['type'], ]
                 );
                 if (!empty($initresult) && is_array($initresult)) {
                     if (isset($initresult['nocache'])) {
@@ -392,9 +393,9 @@ class CacheHooks extends xarObject
             'admin',
             'modifyhook',
             ['noCache' => $noCache,
-                                  'pageShared' => $pageShared,
-                                  'userShared' => $userShared,
-                                  'cacheExpire' => $blockCacheExpireTime, ]
+                'pageShared' => $pageShared,
+                'userShared' => $userShared,
+                'cacheExpire' => $blockCacheExpireTime, ]
         );
     }
 
@@ -544,7 +545,7 @@ class CacheHooks extends xarObject
                 // get the objectname
                 sys::import('modules.dynamicdata.class.objects.descriptor');
                 $objectinfo = DataObjectDescriptor::getObjectID(['moduleid'  => $modid,
-                                                                 'itemtype' => $itemtype, ]);
+                    'itemtype' => $itemtype, ]);
                 // CHECKME: how do we know if we need to e.g. flush dyn_example pages here ?
                 // flush dynamicdata and objecturl pages
                 if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
@@ -710,7 +711,7 @@ class CacheHooks extends xarObject
                 // get the objectname
                 sys::import('modules.dynamicdata.class.objects.descriptor');
                 $objectinfo = DataObjectDescriptor::getObjectID(['moduleid'  => $modid,
-                                                                 'itemtype' => $itemtype, ]);
+                    'itemtype' => $itemtype, ]);
                 // CHECKME: how do we know if we need to e.g. flush dyn_example pages here ?
                 // flush dynamicdata and objecturl pages
                 if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {

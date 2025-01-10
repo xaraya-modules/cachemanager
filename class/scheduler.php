@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pre-fetch pages for caching (executed by the scheduler module)
  *

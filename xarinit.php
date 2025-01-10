@@ -458,7 +458,8 @@ function cachemanager_delete()
  * Setup the config.caching file and the output directories
  *
  * @param array $args
- * @param string $args['varCacheDir']
+ * with
+ *     string $args['varCacheDir']
  * @return bool Returns true on success, false on failure
  * @todo special handling for "repair" during upgrades
  */

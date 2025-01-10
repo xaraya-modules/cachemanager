@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -31,7 +32,7 @@ class TemplateCache extends CacheConfig
      * configure template caching (TODO)
      * @return array|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -53,7 +54,7 @@ class TemplateCache extends CacheConfig
         }
 
         // Get some template caching configurations
-        $data['templates'] = static::getConfig();
+        $data['templates'] = $this->getConfig();
 
         $data['authid'] = xarSec::genAuthKey();
         return $data;
@@ -65,7 +66,7 @@ class TemplateCache extends CacheConfig
      * @todo currently unsupported
      * @return array of template caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         $templates = [];
 

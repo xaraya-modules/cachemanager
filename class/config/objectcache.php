@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -39,7 +40,7 @@ class ObjectCache extends CacheConfig
      * configure object caching
      * @return array|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -108,7 +109,7 @@ class ObjectCache extends CacheConfig
         }
 
         // Get all object caching configurations
-        $data['objects'] = static::getConfig();
+        $data['objects'] = $this->getConfig();
 
         $data['authid'] = xarSec::genAuthKey();
         return $data;
@@ -119,7 +120,7 @@ class ObjectCache extends CacheConfig
      *
      * @return array object caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         // Get all object cache settings
         $objectsettings = [];

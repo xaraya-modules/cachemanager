@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -40,7 +41,7 @@ class BlockCache extends CacheConfig
      * configure block caching
      * @return array|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -135,7 +136,7 @@ class BlockCache extends CacheConfig
         }
 
         // Get all block caching configurations
-        $data['blocks'] = static::getConfig();
+        $data['blocks'] = $this->getConfig();
 
         $data['authid'] = xarSec::genAuthKey();
         return $data;
@@ -146,7 +147,7 @@ class BlockCache extends CacheConfig
      *
      * @return array|void Block caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         $systemPrefix = xarDB::getPrefix();
         $blocksettings = $systemPrefix . '_cache_blocks';
@@ -206,7 +207,7 @@ class BlockCache extends CacheConfig
                         'user',
                         'read_type_init',
                         ['module' => $block['module'],
-                        'type' => $block['type'], ]
+                            'type' => $block['type'], ]
                     );
                     if (!empty($initresult) && is_array($initresult)) {
                         if (isset($initresult['nocache'])) {

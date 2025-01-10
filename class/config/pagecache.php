@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -43,7 +44,7 @@ class PageCache extends CacheConfig
      * configure page caching (TODO)
      * @return array|bool|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -259,8 +260,10 @@ class PageCache extends CacheConfig
             filesize($outputCacheDir . '/autocache.log') > 0) {
             $logs = file($outputCacheDir . '/autocache.log');
             $data['autocachehits'] = ['HIT' => 0,
-                                        'MISS' => 0, ];
+                'MISS' => 0, ];
             $autocacheproposed = [];
+            $start = null;
+            $end = null;
             foreach ($logs as $entry) {
                 if (empty($entry)) {
                     continue;
@@ -319,7 +322,7 @@ class PageCache extends CacheConfig
         }
 
         // Get some page caching configurations
-        //$data['pages'] = static::getConfig();
+        //$data['pages'] = $this->getConfig();
         $data['pages'] = ['todo' => 'something ?'];
 
         $data['authid'] = xarSec::genAuthKey();
@@ -331,7 +334,7 @@ class PageCache extends CacheConfig
      *
      * @return array page caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         return [];
     }

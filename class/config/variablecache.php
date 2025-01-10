@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to manage config for the cache system of Xaraya
  *
@@ -38,7 +39,7 @@ class VariableCache extends CacheConfig
      * configure variable caching
      * @return array|void
      */
-    public static function modifyConfig($args)
+    public function modifyConfig($args)
     {
         extract($args);
 
@@ -102,7 +103,7 @@ class VariableCache extends CacheConfig
         }
 
         // Get all variable caching configurations
-        $data['variables'] = static::getConfig();
+        $data['variables'] = $this->getConfig();
 
         $data['authid'] = xarSec::genAuthKey();
         return $data;
@@ -113,7 +114,7 @@ class VariableCache extends CacheConfig
      *
      * @return array variable caching configurations
      */
-    public static function getConfig()
+    public function getConfig()
     {
         // Get all variable cache settings
         $variablesettings = [];

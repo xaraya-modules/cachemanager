@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Classes to utility methods for the cache system of Xaraya
  *
@@ -25,16 +26,14 @@ class CacheUtility
      * @author Jon Haworth
      * @author jsb <jsb@xaraya.com>
      * @access public
-     * @param int|string $args['starttime'] (seconds or hh:mm:ss)
-     * @param string $args['direction'] (from or to)
-     * @return string|int|void $convertedtime (hh:mm:ss or seconds)
+     * @param int|string $starttime (seconds or hh:mm:ss)
+     * @param string $direction (from or to)
+     * @return string|int $convertedtime (hh:mm:ss or seconds)
      * @throws BadParameterException wrong direction
      * @todo maybe add support for days?
      */
-    public static function convertseconds(int|string $args): string|int
+    public static function convertseconds(int|string $starttime, string $direction): string|int
     {
-        extract($args);
-
         // if the value is set to zero, we can leave it that way
         if ($starttime === 0) {
             return $starttime;
