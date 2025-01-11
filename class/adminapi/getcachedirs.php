@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
+
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\MethodClass;
 use sys;
 use BadParameterException;
@@ -19,6 +21,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi getcachedirs function
+ * @extends MethodClass<AdminApi>
  */
 class GetcachedirsMethod extends MethodClass
 {

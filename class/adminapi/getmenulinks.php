@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
+
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\MethodClass;
 use xarSecurity;
 use xarController;
@@ -24,6 +26,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi getmenulinks function
+ * @extends MethodClass<AdminApi>
  */
 class GetmenulinksMethod extends MethodClass
 {

@@ -17,6 +17,7 @@
 namespace Xaraya\Modules\CacheManager;
 
 use Xaraya\Authentication\AuthToken;
+use xarMod;
 use xarObject;
 use xarCache;
 use Throwable;
@@ -118,7 +119,7 @@ class CacheInfo extends xarObject
         if (!empty($cacheinfo['size'])) {
             $cacheinfo['size'] = round($cacheinfo['size'] / 1048576, 2);
         }
-        $cacheinfo['storage'] = $cachestorage->storage;
+        $cacheinfo['storage'] = $cachestorage->getCacheType();
 
         return $cacheinfo;
     }
@@ -169,8 +170,8 @@ class CacheInfo extends xarObject
             $sort = null;
             ksort($items);
         } else {
-            sys::import('modules.cachemanager.xaradmin.stats');
-            cachemanager_stats_sortitems($items, $sort);
+            $statsApi = xarMod::getModule('cachemanager')->getStatsApi();
+            $statsApi->sortitems($items, $sort);
         }
 
         return $items;

@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
+
+use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheHooks;
 use Xaraya\Modules\MethodClass;
 use sys;
@@ -20,6 +22,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin modifyhook function
+ * @extends MethodClass<AdminGui>
  */
 class ModifyhookMethod extends MethodClass
 {

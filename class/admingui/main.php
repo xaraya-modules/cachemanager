@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
+
+use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\MethodClass;
 use xarSecurity;
 use xarController;
@@ -21,6 +23,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin main function
+ * @extends MethodClass<AdminGui>
  */
 class MainMethod extends MethodClass
 {

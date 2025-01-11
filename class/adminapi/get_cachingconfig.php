@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
+
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\MethodClass;
 use sys;
@@ -20,6 +22,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi get_cachingconfig function
+ * @extends MethodClass<AdminApi>
  */
 class GetCachingconfigMethod extends MethodClass
 {

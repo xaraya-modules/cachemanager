@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
+
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\MethodClass;
 use xarSecurity;
 use sys;
@@ -20,6 +22,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi getstatus function
+ * @extends MethodClass<AdminApi>
  */
 class GetstatusMethod extends MethodClass
 {

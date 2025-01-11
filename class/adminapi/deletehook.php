@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
+
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheHooks;
 use Xaraya\Modules\MethodClass;
 use sys;
@@ -20,6 +22,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi deletehook function
+ * @extends MethodClass<AdminApi>
  */
 class DeletehookMethod extends MethodClass
 {

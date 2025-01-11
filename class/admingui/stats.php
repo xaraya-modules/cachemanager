@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
+
+use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\StatsApi;
 use Xaraya\Modules\MethodClass;
@@ -30,6 +32,7 @@ sys::import('xaraya.modules.method');
 /**
  * cachemanager admin stats function
  * @extends MethodClass<\Xaraya\Modules\CacheManager\AdminGui>
+ * @extends MethodClass<AdminGui>
  */
 class StatsMethod extends MethodClass
 {

@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
+
+use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
@@ -29,6 +31,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin updateconfig function
+ * @extends MethodClass<AdminGui>
  */
 class UpdateconfigMethod extends MethodClass
 {

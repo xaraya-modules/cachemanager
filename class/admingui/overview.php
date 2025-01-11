@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
+
+use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\MethodClass;
 use xarTpl;
 use sys;
@@ -20,6 +22,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin overview function
+ * @extends MethodClass<AdminGui>
  */
 class OverviewMethod extends MethodClass
 {

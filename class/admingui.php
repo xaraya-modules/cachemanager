@@ -19,6 +19,21 @@ sys::import('modules.cachemanager.class.adminapi');
 
 /**
  * Handle the cachemanager admin GUI
+ *
+ * @method mixed blocks(array $args)
+ * @method mixed flushcache(array $args)
+ * @method mixed main(array $args)
+ * @method mixed modifyconfig(array $args)
+ * @method mixed modifyhook(array $args)
+ * @method mixed modules(array $args)
+ * @method mixed objects(array $args)
+ * @method mixed overview(array $args)
+ * @method mixed pages(array $args)
+ * @method mixed queries(array $args)
+ * @method mixed stats(array $args)
+ * @method mixed updateconfig(array $args)
+ * @method mixed variables(array $args)
+ * @method mixed view(array $args)
  * @extends AdminGuiClass<Module>
  */
 class AdminGui extends AdminGuiClass

@@ -11,6 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
+
+use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\MethodClass;
 use xarSecurity;
@@ -27,6 +29,7 @@ sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin flushcache function
+ * @extends MethodClass<AdminGui>
  */
 class FlushcacheMethod extends MethodClass
 {
