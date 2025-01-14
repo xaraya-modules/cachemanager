@@ -38,20 +38,20 @@ class QueryCache extends CacheConfig
     {
         extract($args);
 
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
         $data = [];
 
-        xarVar::fetch('submit', 'str', $submit, '');
+        $this->fetch('submit', 'str', $submit, '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!xarSec::confirmAuthKey()) {
+            if (!$this->confirmAuthKey()) {
                 return;
             }
 
-            xarVar::fetch('expire', 'isset', $expire, []);
+            $this->fetch('expire', 'isset', $expire, []);
             foreach ($expire as $module => $querylist) {
                 if ($module == 'core') {
                     // define some way to store configuration options for the core
@@ -68,14 +68,14 @@ class QueryCache extends CacheConfig
                     }
                 }
             }
-            //xarController::redirect(xarController::URL('cachemanager', 'admin', 'queries'));
+            //$this->redirect($this->getUrl('admin', 'queries'));
             //return true;
         }
 
         // Get some query caching configurations
         $data['queries'] = $this->getConfig();
 
-        $data['authid'] = xarSec::genAuthKey();
+        $data['authid'] = $this->genAuthKey();
         return $data;
     }
 

@@ -29,12 +29,14 @@ class ObjectsMethod extends MethodClass
 
     /**
      * configure object caching
-     * @uses \ObjectCache::modifyConfig()
+     * @uses ObjectCache::modifyConfig()
      * @return array
+     * @see AdminGui::objects()
      */
     public function __invoke(array $args = [])
     {
         $cache = CacheConfig::getCache('object');
+        $cache->setContext($this->getContext());
         return $cache->modifyConfig($args);
     }
 }

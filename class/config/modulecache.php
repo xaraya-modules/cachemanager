@@ -44,7 +44,7 @@ class ModuleCache extends CacheConfig
     {
         extract($args);
 
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -54,17 +54,17 @@ class ModuleCache extends CacheConfig
             return $data;
         }
 
-        xarVar::fetch('submit', 'str', $submit, '');
+        $this->fetch('submit', 'str', $submit, '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!xarSec::confirmAuthKey()) {
+            if (!$this->confirmAuthKey()) {
                 return;
             }
 
-            xarVar::fetch('docache', 'isset', $docache, []);
-            xarVar::fetch('usershared', 'isset', $usershared, []);
-            xarVar::fetch('params', 'isset', $params, []);
-            xarVar::fetch('cacheexpire', 'isset', $cacheexpire, []);
+            $this->fetch('docache', 'isset', $docache, []);
+            $this->fetch('usershared', 'isset', $usershared, []);
+            $this->fetch('params', 'isset', $params, []);
+            $this->fetch('cacheexpire', 'isset', $cacheexpire, []);
 
             $newmodules = [];
             // loop over something that should return values for every module
@@ -109,7 +109,7 @@ class ModuleCache extends CacheConfig
             }
             // and flush the modules
             xarModuleCache::flushCached($key);
-            if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+            if ($this->getModVar('AutoRegenSessionless')) {
                 xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
@@ -117,7 +117,7 @@ class ModuleCache extends CacheConfig
         // Get all module caching configurations
         $data['modules'] = $this->getConfig();
 
-        $data['authid'] = xarSec::genAuthKey();
+        $data['authid'] = $this->genAuthKey();
         return $data;
     }
 
@@ -136,7 +136,7 @@ class ModuleCache extends CacheConfig
         }
 
         // Get default module functions to cache
-        $defaultmodulefunctions = unserialize((string) xarModVars::get('cachemanager', 'DefaultModuleCacheFunctions'));
+        $defaultmodulefunctions = unserialize((string) $this->getModVar('DefaultModuleCacheFunctions'));
 
         // Get all modules
         $modules = xarMod::apiFunc('modules', 'admin', 'getlist');
@@ -185,7 +185,7 @@ class ModuleCache extends CacheConfig
                         // initialize the module settings from the function file if necessary
                         if (empty($modulesettings[$name][$func])) {
                             $settings = [];
-                            // try to find all xarVar::fetch() parameters in this function
+                            // try to find all $this->fetch() parameters in this function
                             $params = [];
                             $content = implode('', file($thisfile));
                             if (preg_match_all("/xarVar::fetch\(\s*'([^']+)'/", $content, $params)) {

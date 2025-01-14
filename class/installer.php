@@ -71,10 +71,10 @@ class Installer extends InstallerClass
         }
 
         // Set up module variables
-        xarModVars::set('cachemanager', 'FlushOnNewComment', 0);
-        xarModVars::set('cachemanager', 'FlushOnNewRating', 0);
-        xarModVars::set('cachemanager', 'FlushOnNewPollvote', 0);
-        xarModVars::set('cachemanager', 'AutoRegenSessionless', 0);
+        $this->setModVar('FlushOnNewComment', 0);
+        $this->setModVar('FlushOnNewRating', 0);
+        $this->setModVar('FlushOnNewPollvote', 0);
+        $this->setModVar('AutoRegenSessionless', 0);
 
         if (!xarModHooks::register(
             'item',
@@ -226,7 +226,7 @@ class Installer extends InstallerClass
         // check to see if we've got the necessary permissions to upgrade
         if ((!file_exists($cachingConfigFile) && !is_writable($varCacheDir)) ||
             (file_exists($cachingConfigFile) && !is_writable($cachingConfigFile))) {
-            $msg = xarMLS::translate('The CacheManager module upgrade has failed.  
+            $msg = $this->translate('The CacheManager module upgrade has failed.  
                        Please make #(1) writable by the web server process 
                        owner to complete the upgrade.  If #(1) does not exist, 
                        please make #(2) writable by the web server process and 
@@ -303,7 +303,7 @@ class Installer extends InstallerClass
                     copy($defaultConfigFile, $cachingConfigFile);
                 }
                 // switch to the file based block caching enabler
-                if (xarModVars::get('cachemanager', 'CacheBlockOutput')) {
+                if ($this->getModVar('CacheBlockOutput')) {
                     $outputCacheDir = $varCacheDir . '/output/';
                     if (!file_exists($outputCacheDir . 'cache.blocklevel')) {
                         touch($outputCacheDir . 'cache.blocklevel');
@@ -500,9 +500,8 @@ class Installer extends InstallerClass
 
     /**
      * Setup the config.caching file and the output directories
-     * @param array $args
-     * with
-     *     string $args['varCacheDir']
+     * @param array<mixed> $args
+     * @var string $args['varCacheDir']
      * @return bool Returns true on success, false on failure
      * @todo special handling for "repair" during upgrades
      */
@@ -530,7 +529,7 @@ class Installer extends InstallerClass
         } else {
             if (!is_dir($cacheOutputDir) || !file_exists($cachingConfigFile)) {
                 // tell them that cache needs to be writable or manually create output dir
-                $msg = xarMLS::translate(
+                $msg = $this->translate(
                     'The #(1) directory must be writable by the web server 
                            for the install script to set up output caching for you. 
                            The CacheManager module has not been installed, 
@@ -551,7 +550,7 @@ class Installer extends InstallerClass
 
         // confirm the caching config file is good to go
         if (!is_writable($cachingConfigFile)) {
-            $msg = xarMLS::translate('The #(1) file must be writable by the web server for 
+            $msg = $this->translate('The #(1) file must be writable by the web server for 
                        output caching to work.', $cachingConfigFile);
             throw new Exception($msg);
         }
@@ -567,7 +566,7 @@ class Installer extends InstallerClass
             // check if the directory already exists
             if (is_dir($setupDir)) {
                 if (!is_writable($setupDir)) {
-                    $msg = xarMLS::translate('The #(1) directory is not writable by the web 
+                    $msg = $this->translate('The #(1) directory is not writable by the web 
                                web server. The #(1) directory must be writable by the web 
                                server process owner for output caching to work. 
                                Please change the permission on the #(1) directory

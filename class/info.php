@@ -17,16 +17,21 @@
 namespace Xaraya\Modules\CacheManager;
 
 use Xaraya\Authentication\AuthToken;
+use Xaraya\Context\ContextInterface;
+use Xaraya\Context\ContextTrait;
 use xarMod;
 use xarObject;
 use xarCache;
 use Throwable;
 use sys;
 
+sys::import('xaraya.context.contexttrait');
 sys::import('modules.cachemanager.class.config');
 
-class CacheInfo extends xarObject
+class CacheInfo extends xarObject implements ContextInterface
 {
+    use ContextTrait;
+
     // list of currently supported cache types - not including 'query', 'core', 'template' here
     public static $typelist = ['page', 'block', 'module', 'object', 'variable'];
     public string $type;
@@ -170,7 +175,9 @@ class CacheInfo extends xarObject
             $sort = null;
             ksort($items);
         } else {
-            $statsApi = xarMod::getModule('cachemanager')->getStatsApi();
+            /** @var Module $module */
+            $module = xarMod::getModule('cachemanager');
+            $statsApi = $module->getStatsApi();
             $statsApi->sortitems($items, $sort);
         }
 

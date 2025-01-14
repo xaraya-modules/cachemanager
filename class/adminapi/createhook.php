@@ -30,8 +30,8 @@ class CreatehookMethod extends MethodClass
 
     /**
      * flush the appropriate cache when a module item is created- hook for ('item','create','API')
-     * @uses \CacheHooks::createhook()
-     * @param array $args with mandatory arguments:
+     * @uses CacheHooks::createhook()
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array

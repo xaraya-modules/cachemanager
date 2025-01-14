@@ -31,8 +31,8 @@ class UpdateconfighookMethod extends MethodClass
     /**
      * update entry for a module item - hook for ('item','updateconfig','API')
      * Optional $extrainfo['cachemanager_remark'] from arguments, or 'cachemanager_remark' from input
-     * @uses \CacheHooks::updateconfighook()
-     * @param array $args with mandatory arguments:
+     * @uses CacheHooks::updateconfighook()
+     * @param array<mixed> $args with mandatory arguments:
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array
      */

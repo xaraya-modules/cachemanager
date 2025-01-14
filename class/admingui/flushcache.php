@@ -11,8 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
-
 use Xaraya\Modules\CacheManager\AdminGui;
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\MethodClass;
 use xarSecurity;
@@ -38,29 +38,34 @@ class FlushcacheMethod extends MethodClass
     /**
      * Flush cache files for a given cacheKey
      * @author jsb
-     * @param array $args with optional arguments:
+     * @param array<mixed> $args with optional arguments:
      * - string $args['flushkey']
      * - string $args['cachecode']
      * - string $args['confirm']
      * @return array|void
+     * @see AdminGui::flushcache()
      */
     public function __invoke(array $args = [])
     {
         // Security Check
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
         extract($args);
 
-        if (!xarVar::fetch('flushkey', 'isset', $flushkey, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->fetch('flushkey', 'isset', $flushkey, '', xarVar::NOT_REQUIRED)) {
             return;
         }
-        if (!xarVar::fetch('confirm', 'str:1:', $confirm, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->fetch('confirm', 'str:1:', $confirm, '', xarVar::NOT_REQUIRED)) {
             return;
         }
+        $admingui = $this->getParent();
 
-        $cachetypes = xarMod::apiFunc('cachemanager', 'admin', 'getcachetypes');
+        /** @var AdminApi $adminapi */
+        $adminapi = $admingui->getModule()->getAdminAPI();
+
+        $cachetypes = $adminapi->getcachetypes();
 
         if (empty($confirm)) {
             $data = [];
@@ -69,23 +74,23 @@ class FlushcacheMethod extends MethodClass
             $data['cachetypes'] = $cachetypes;
             $data['cachekeys'] = [];
             foreach (array_keys($cachetypes) as $type) {
-                $data['cachekeys'][$type] = xarMod::apiFunc('cachemanager', 'admin', 'getcachekeys', ['type' => $type]);
+                $data['cachekeys'][$type] = $adminapi->getcachekeys(['type' => $type]);
             }
 
-            $data['instructions'] = xarMLS::translate("Please select a cache key to be flushed.");
-            $data['instructionhelp'] = xarMLS::translate("All cached files of output associated with this key will be deleted.");
+            $data['instructions'] = $this->translate("Please select a cache key to be flushed.");
+            $data['instructionhelp'] = $this->translate("All cached files of output associated with this key will be deleted.");
 
             // Generate a one-time authorisation code for this operation
-            $data['authid'] = xarSec::genAuthKey();
+            $data['authid'] = $this->genAuthKey();
         } else {
             // Confirm authorisation code.
-            if (!xarSec::confirmAuthKey()) {
+            if (!$this->confirmAuthKey()) {
                 return;
             }
 
             //Make sure their is an authkey selected
             if (empty($flushkey) || !is_array($flushkey)) {
-                $data['notice'] = xarMLS::translate("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
+                $data['notice'] = $this->translate("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
             } else {
                 // Get the output cache directory so you can flush items even if output caching is disabled
                 $outputCacheDir = xarCache::getOutputCacheDir();
@@ -96,7 +101,7 @@ class FlushcacheMethod extends MethodClass
                 );
 
                 // see if we need to delete an individual item instead of flushing the key
-                if (!xarVar::fetch('cachecode', 'isset', $cachecode, '', xarVar::NOT_REQUIRED)) {
+                if (!$this->fetch('cachecode', 'isset', $cachecode, '', xarVar::NOT_REQUIRED)) {
                     return;
                 }
 
@@ -131,31 +136,31 @@ class FlushcacheMethod extends MethodClass
                     $found++;
                 }
                 if (empty($found)) {
-                    $data['notice'] = xarMLS::translate("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
+                    $data['notice'] = $this->translate("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
                 } else {
-                    $data['notice'] = xarMLS::translate("The cached output for this key has been flushed.");
+                    $data['notice'] = $this->translate("The cached output for this key has been flushed.");
                 }
             }
 
-            if (!xarVar::fetch('return_url', 'isset', $return_url, null, xarVar::NOT_REQUIRED)) {
+            if (!$this->fetch('return_url', 'isset', $return_url, null, xarVar::NOT_REQUIRED)) {
                 return;
             }
             if (!empty($return_url)) {
-                xarController::redirect($return_url, null, $this->getContext());
+                $this->redirect($return_url);
                 return;
             }
 
-            $return_url = xarController::URL('cachemanager', 'admin', 'flushcache');
+            $return_url = $this->getUrl('admin', 'flushcache');
             $data['returnlink'] = ['url'   => $return_url,
-                'title' => xarMLS::translate('Return to the cache key selector'),
-                'label' => xarMLS::translate('Back'), ];
+                'title' => $this->translate('Return to the cache key selector'),
+                'label' => $this->translate('Back'), ];
 
             $data['message'] = true;
         }
 
         $data['cachesize'] = [];
         foreach (array_keys($cachetypes) as $type) {
-            $cachesize = xarMod::apiFunc('cachemanager', 'admin', 'getcachesize', ['type' => $type]);
+            $cachesize = $adminapi->getcachesize(['type' => $type]);
             if (!empty($cachesize)) {
                 $data['cachesize'][$type] = round($cachesize / 1048576, 2);
             } else {

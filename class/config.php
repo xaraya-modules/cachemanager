@@ -16,16 +16,22 @@
 
 namespace Xaraya\Modules\CacheManager;
 
+use Xaraya\Modules\CoreInterface;
+use Xaraya\Modules\CoreTrait;
 use xarObject;
 use sys;
 
+sys::import('xaraya.modules.coretrait');
 sys::import('modules.cachemanager.class.manager');
 
-class CacheConfig extends xarObject
+class CacheConfig extends xarObject implements CoreInterface
 {
+    use CoreTrait;
+
     // list of currently supported cache types - not including 'query', 'core', 'template' here
     public static $typelist = ['page', 'block', 'module', 'object', 'variable'];
     public static $cachetypes = [];
+    protected string $moduleName = 'cachemanager';
     public string $type;
 
     public static function init(array $args = []) {}
@@ -81,6 +87,7 @@ class CacheConfig extends xarObject
      */
     public function __construct(string $type)
     {
+        $this->setModName('cachemanager');
         $this->type = $type;
     }
 

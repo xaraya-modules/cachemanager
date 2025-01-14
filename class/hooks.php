@@ -101,7 +101,7 @@ class CacheHooks extends xarObject
     /**
      * flush the appropriate cache when a module item is created- hook for ('item','create','API')
      *
-     * @param array $args with mandatory arguments:
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array
@@ -249,7 +249,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+        if ($this->getModVar('AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -259,7 +259,7 @@ class CacheHooks extends xarObject
     /**
      * modify an entry for a module item - hook for ('item','modify','GUI')
      *
-     * @param array $args with mandatory arguments:
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return string hook output in HTML
@@ -403,7 +403,7 @@ class CacheHooks extends xarObject
      * update entry for a module item - hook for ('item','update','API')
      * Optional $extrainfo['cachemanager_remark'] from arguments, or 'cachemanager_remark' from input
      *
-     * @param array $args with mandatory arguments:
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array
@@ -592,7 +592,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+        if (xarCache::isOutputCacheEnabled() && $this->getModVar('AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -603,7 +603,7 @@ class CacheHooks extends xarObject
     /**
      * delete entry for a module item - hook for ('item','delete','API')
      *
-     * @param array $args with mandatory arguments:
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array
@@ -763,7 +763,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+        if (xarCache::isOutputCacheEnabled() && $this->getModVar('AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -775,7 +775,7 @@ class CacheHooks extends xarObject
      * update entry for a module item - hook for ('item','updateconfig','API')
      * Optional $extrainfo['cachemanager_remark'] from arguments, or 'cachemanager_remark' from input
      *
-     * @param array $args with mandatory arguments:
+     * @param array<mixed> $args with mandatory arguments:
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array
      * @throws BadParameterException
@@ -866,7 +866,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+        if ($this->getModVar('AutoRegenSessionless')) {
             self::regenstatic();
         }
 

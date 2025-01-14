@@ -31,8 +31,9 @@ class GetcachekeysMethod extends MethodClass
     /**
      * Construct an array of the current cache keys
      * @author jsb
-     * @uses \CacheInfo::getKeys()
-     * @param array $args ['type'] cachetype to get the cache keys from
+     * @uses CacheInfo::getKeys()
+     * @param array<mixed> $args
+     * @var string $type cachetype to get the cache keys from
      * @return array sorted array of cachekeys
      */
     public function __invoke(array $args = ['type' => ''])
@@ -44,6 +45,7 @@ class GetcachekeysMethod extends MethodClass
             $type = $args;
         }
         $cacheInfo = CacheInfo::getCache($type);
+        $cacheInfo->setContext($this->getContext());
         return $cacheInfo->getKeys();
     }
 }

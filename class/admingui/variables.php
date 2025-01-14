@@ -29,12 +29,14 @@ class VariablesMethod extends MethodClass
 
     /**
      * configure variable caching
-     * @uses \VariableCache::modifyConfig()
+     * @uses VariableCache::modifyConfig()
      * @return array
+     * @see AdminGui::variables()
      */
     public function __invoke(array $args = [])
     {
         $cache = CacheConfig::getCache('variable');
+        $cache->setContext($this->getContext());
         return $cache->modifyConfig($args);
     }
 }

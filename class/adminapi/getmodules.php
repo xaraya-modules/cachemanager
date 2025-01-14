@@ -30,7 +30,7 @@ class GetmodulesMethod extends MethodClass
 
     /**
      * get configuration of module caching for all modules
-     * @uses \ModuleCache::getConfig()
+     * @uses ModuleCache::getConfig()
      * @return array module caching configurations
      */
     public function __invoke(array $args = [])
@@ -39,6 +39,7 @@ class GetmodulesMethod extends MethodClass
 
         // Get all module cache settings
         $cache = CacheConfig::getCache('module');
+        $cache->setContext($this->getContext());
         return $cache->getConfig();
     }
 }

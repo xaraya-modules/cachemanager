@@ -30,7 +30,7 @@ class GetobjectsMethod extends MethodClass
 
     /**
      * get configuration of object caching for all objects
-     * @uses \ObjectCache::getConfig()
+     * @uses ObjectCache::getConfig()
      * @return array object caching configurations
      */
     public function __invoke(array $args = [])
@@ -39,6 +39,7 @@ class GetobjectsMethod extends MethodClass
 
         // Get all object cache settings
         $cache = CacheConfig::getCache('object');
+        $cache->setContext($this->getContext());
         return $cache->getConfig();
     }
 }

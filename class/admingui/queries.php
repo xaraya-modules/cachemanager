@@ -29,12 +29,14 @@ class QueriesMethod extends MethodClass
 
     /**
      * configure query caching (TODO)
-     * @uses \QueryCache::modifyConfig()
+     * @uses QueryCache::modifyConfig()
      * @return array
+     * @see AdminGui::queries()
      */
     public function __invoke(array $args = [])
     {
         $cache = CacheConfig::getCache('query');
+        $cache->setContext($this->getContext());
         return $cache->modifyConfig($args);
     }
 }

@@ -36,27 +36,27 @@ class TemplateCache extends CacheConfig
     {
         extract($args);
 
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
         $data = [];
 
-        xarVar::fetch('submit', 'str', $submit, '');
+        $this->fetch('submit', 'str', $submit, '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!xarSec::confirmAuthKey()) {
+            if (!$this->confirmAuthKey()) {
                 return;
             }
 
-            //xarController::redirect(xarController::URL('cachemanager', 'admin', 'templates'));
+            //$this->redirect($this->getUrl('admin', 'templates'));
             //return true;
         }
 
         // Get some template caching configurations
         $data['templates'] = $this->getConfig();
 
-        $data['authid'] = xarSec::genAuthKey();
+        $data['authid'] = $this->genAuthKey();
         return $data;
     }
 

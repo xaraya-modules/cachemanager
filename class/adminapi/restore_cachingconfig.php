@@ -32,7 +32,7 @@ class RestoreCachingconfigMethod extends MethodClass
      * Restore the caching configuration file
      * @author jsb <jsb@xaraya.com>
      * @access public
-     * @uses \CacheManager::restore_config()
+     * @uses CacheManager::restore_config()
      * @return bool
      */
     public function __invoke(array $args = [])

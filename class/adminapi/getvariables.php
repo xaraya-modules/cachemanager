@@ -30,7 +30,7 @@ class GetvariablesMethod extends MethodClass
 
     /**
      * get configuration of variable caching for all variables
-     * @uses \VariableCache::getConfig()
+     * @uses VariableCache::getConfig()
      * @return array variable caching configurations
      */
     public function __invoke(array $args = [])
@@ -39,6 +39,7 @@ class GetvariablesMethod extends MethodClass
 
         // Get all variable cache settings
         $cache = CacheConfig::getCache('variable');
+        $cache->setContext($this->getContext());
         return $cache->getConfig();
     }
 }

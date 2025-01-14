@@ -33,16 +33,17 @@ class MainMethod extends MethodClass
      * the main administration function
      * @author jsb | mikespub
      * @access public
-     * @return true|void on success or void on falure
+     * @return true|void on success or void on failure
+     * @see AdminGui::main()
      */
     public function __invoke(array $args = [])
     {
         // Security Check
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
-        xarController::redirect(xarController::URL('cachemanager', 'admin', 'modifyconfig'), null, $this->getContext());
+        $this->redirect($this->getUrl('admin', 'modifyconfig'));
         // success
         return true;
     }

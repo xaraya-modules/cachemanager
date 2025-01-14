@@ -31,7 +31,7 @@ class RegenstaticMethod extends MethodClass
     /**
      * regenerate the page output cache of URLs in the session-less list
      * @author jsb
-     * @uses \CacheHooks::regenstatic()
+     * @uses CacheHooks::regenstatic()
      * @return void
      */
     public function __invoke($nolimit = null)

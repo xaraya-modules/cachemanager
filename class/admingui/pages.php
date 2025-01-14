@@ -29,12 +29,14 @@ class PagesMethod extends MethodClass
 
     /**
      * configure page caching (TODO)
-     * @uses \PageCache::modifyConfig()
+     * @uses PageCache::modifyConfig()
      * @return array
+     * @see AdminGui::pages()
      */
     public function __invoke(array $args = [])
     {
         $cache = CacheConfig::getCache('page');
+        $cache->setContext($this->getContext());
         return $cache->modifyConfig($args);
     }
 }

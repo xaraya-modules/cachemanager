@@ -11,8 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
-
 use Xaraya\Modules\CacheManager\AdminGui;
+use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
@@ -41,18 +41,23 @@ class ModifyconfigMethod extends MethodClass
      * @author jsb | mikespub
      * @access public
      * @return array|void $data (array of values for admin modify template) on success or false on failure
+     * @see AdminGui::modifyconfig()
      */
     public function __invoke(array $args = [])
     {
         // Security Check
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
+        $admingui = $this->getParent();
+
+        /** @var AdminApi $adminapi */
+        $adminapi = $admingui->getModule()->getAdminAPI();
 
         $data = [];
 
         // get cache status
-        $data['status'] = xarMod::apiFunc('cachemanager', 'admin', 'getstatus');
+        $data['status'] = $adminapi->getstatus();
 
         $data['CookieName'] =  (xarConfigVars::get(null, 'Site.Session.CookieName') != '') ? xarConfigVars::get(null, 'Site.Session.CookieName') : 'XARAYASID';
         $data['cookieupdatelink'] = xarController::URL('base', 'admin', 'modifyconfig', ['tab' => 'security']);
@@ -125,7 +130,7 @@ class ModifyconfigMethod extends MethodClass
         if (empty($data['settings']['ModuleCacheFunctions'])) {
             $data['settings']['ModuleCacheFunctions'] = ['main' => 1, 'view' => 1, 'display' => 0];
         }
-        xarModVars::set('cachemanager', 'DefaultModuleCacheFunctions', serialize($data['settings']['ModuleCacheFunctions']));
+        $this->setModVar('DefaultModuleCacheFunctions', serialize($data['settings']['ModuleCacheFunctions']));
 
         if (!isset($data['settings']['ObjectTimeExpiration'])) {
             $data['settings']['ObjectTimeExpiration'] = 7200;
@@ -143,7 +148,7 @@ class ModifyconfigMethod extends MethodClass
         if (empty($data['settings']['ObjectCacheMethods'])) {
             $data['settings']['ObjectCacheMethods'] = ['view' => 1, 'display' => 1];
         }
-        xarModVars::set('cachemanager', 'DefaultObjectCacheMethods', serialize($data['settings']['ObjectCacheMethods']));
+        $this->setModVar('DefaultObjectCacheMethods', serialize($data['settings']['ObjectCacheMethods']));
 
         // convert the size limit from bytes to megabytes
         $data['settings']['OutputSizeLimit'] /= 1048576;
@@ -168,9 +173,9 @@ class ModifyconfigMethod extends MethodClass
         );
 
         // get the storage types supported on this server
-        $data['storagetypes'] = xarMod::apiFunc('cachemanager', 'admin', 'getstoragetypes');
+        $data['storagetypes'] = $adminapi->getstoragetypes();
 
-        $data['authid'] = xarSec::genAuthKey();
+        $data['authid'] = $this->genAuthKey();
         return $data;
     }
 }

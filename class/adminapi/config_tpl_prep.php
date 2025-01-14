@@ -32,7 +32,7 @@ class ConfigTplPrepMethod extends MethodClass
      * Save configuration settings in the config file and modVars
      * @author jsb <jsb@xaraya.com>
      * @access public
-     * @uses \CacheManager::config_tpl_prep()
+     * @uses CacheManager::config_tpl_prep()
      * @param array $cachingConfiguration cachingConfiguration to be prep for a template
      * @return array of cachingConfiguration with '.' removed from keys or void
      */

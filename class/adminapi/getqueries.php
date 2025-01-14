@@ -30,7 +30,7 @@ class GetqueriesMethod extends MethodClass
 
     /**
      * get configuration of query caching for expensive queries
-     * @uses \QueryCache::getConfig()
+     * @uses QueryCache::getConfig()
      * @return array of query caching configurations
      */
     public function __invoke(array $args = [])
@@ -39,6 +39,7 @@ class GetqueriesMethod extends MethodClass
 
         // Get all query cache settings
         $cache = CacheConfig::getCache('query');
+        $cache->setContext($this->getContext());
         return $cache->getConfig();
     }
 }

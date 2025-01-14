@@ -29,12 +29,14 @@ class ModulesMethod extends MethodClass
 
     /**
      * configure module caching
-     * @uses \ModuleCache::modifyConfig()
+     * @uses ModuleCache::modifyConfig()
      * @return array
+     * @see AdminGui::modules()
      */
     public function __invoke(array $args = [])
     {
         $cache = CacheConfig::getCache('module');
+        $cache->setContext($this->getContext());
         return $cache->modifyConfig($args);
     }
 }

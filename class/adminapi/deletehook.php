@@ -30,8 +30,8 @@ class DeletehookMethod extends MethodClass
 
     /**
      * delete entry for a module item - hook for ('item','delete','API')
-     * @uses \CacheHooks::deletehook()
-     * @param array $args with mandatory arguments:
+     * @uses CacheHooks::deletehook()
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array

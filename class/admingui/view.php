@@ -34,41 +34,41 @@ class ViewMethod extends MethodClass
 
     /**
      * show the content of cache items
-     * @param array $args with optional arguments:
+     * @param array<mixed> $args with optional arguments:
      * - string $args['tab']
      * - string $args['key']
      * - string $args['code']
      * @return array|void
+     * @see AdminGui::view()
      */
     public function __invoke(array $args = [])
     {
         extract($args);
 
-        if (!xarVar::fetch('tab', 'str', $tab, null, xarVar::NOT_REQUIRED)) {
+        if (!$this->fetch('tab', 'str', $tab, null, xarVar::NOT_REQUIRED)) {
             return;
         }
-        if (!xarVar::fetch('key', 'str', $key, null, xarVar::NOT_REQUIRED)) {
+        if (!$this->fetch('key', 'str', $key, null, xarVar::NOT_REQUIRED)) {
             return;
         }
-        if (!xarVar::fetch('code', 'str', $code, null, xarVar::NOT_REQUIRED)) {
+        if (!$this->fetch('code', 'str', $code, null, xarVar::NOT_REQUIRED)) {
             return;
         }
 
         if (empty($tab)) {
-            xarController::redirect(xarController::URL('cachemanager', 'admin', 'stats'), null, $this->getContext());
+            $this->redirect($this->getUrl('admin', 'stats'));
             return;
         }
         if (empty($key)) {
-            xarController::redirect(xarController::URL(
-                'cachemanager',
+            $this->redirect($this->getUrl(
                 'admin',
                 'stats',
                 ['tab' => $tab]
-            ), null, $this->getContext());
+            ));
             return;
         }
 
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -84,6 +84,7 @@ class ViewMethod extends MethodClass
         $data['script'] = [];
 
         $cacheInfo = CacheInfo::getCache($tab);
+        $cacheInfo->setContext($this->getContext());
         $content = $cacheInfo->getItem($key, $code);
         if (!empty($content)) {
             if ($tab == 'module' || $tab == 'object') {
@@ -100,8 +101,8 @@ class ViewMethod extends MethodClass
         }
 
         // Generate a one-time authorisation code for this operation
-        $data['authid'] = xarSec::genAuthKey();
-        $data['return_url'] = xarController::URL('cachemanager', 'admin', 'stats', ['tab' => $tab]);
+        $data['authid'] = $this->genAuthKey();
+        $data['return_url'] = $this->getUrl( 'admin', 'stats', ['tab' => $tab]);
         return $data;
     }
 }

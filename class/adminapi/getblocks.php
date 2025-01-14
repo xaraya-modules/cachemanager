@@ -30,7 +30,7 @@ class GetblocksMethod extends MethodClass
 
     /**
      * get configuration of block caching for all blocks
-     * @uses \BlockCache::getConfig()
+     * @uses BlockCache::getConfig()
      * @return array Block caching configurations
      */
     public function __invoke(array $args = [])
@@ -39,6 +39,7 @@ class GetblocksMethod extends MethodClass
 
         // Get all block cache settings
         $cache = CacheConfig::getCache('block');
+        $cache->setContext($this->getContext());
         return $cache->getConfig();
     }
 }

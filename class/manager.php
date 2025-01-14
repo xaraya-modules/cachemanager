@@ -36,10 +36,10 @@ class CacheManager extends xarObject
      * @access public
      * @param array<string, mixed> $args
      * with:
-     *     string $args['from'] source of configuration to get - file or db
-     *     array $args['keys'] array of config labels and values
-     *     boolean $args['tpl_prep'] prep the config for use in templates
-     *     boolean $args['viahook'] config value requested as part of a hook call
+     * @var string $args['from'] source of configuration to get - file or db
+     * @var array $args['keys'] array of config labels and values
+     * @var boolean $args['tpl_prep'] prep the config for use in templates
+     * @var boolean $args['viahook'] config value requested as part of a hook call
      * @return array|void of caching configuration settings
      * @throws Exception
      */

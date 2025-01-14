@@ -31,7 +31,7 @@ class GetcachetypesMethod extends MethodClass
     /**
      *
      * @author jsb
-     * @uses \CacheConfig::getTypes()
+     * @uses CacheConfig::getTypes()
      * @return array Cache types, with key set to cache type and value set to its settings
      */
     public function __invoke(array $args = [])

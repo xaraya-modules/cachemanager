@@ -29,12 +29,14 @@ class BlocksMethod extends MethodClass
 
     /**
      * configure block caching
-     * @uses \BlockCache::modifyConfig()
+     * @uses BlockCache::modifyConfig()
      * @return array
+     * @see AdminGui::blocks()
      */
     public function __invoke(array $args = [])
     {
         $cache = CacheConfig::getCache('block');
+        $cache->setContext($this->getContext());
         return $cache->modifyConfig($args);
     }
 }

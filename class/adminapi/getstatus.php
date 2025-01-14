@@ -38,7 +38,7 @@ class GetstatusMethod extends MethodClass
         $status = [];
 
         // Security Check
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return $status;
         }
 

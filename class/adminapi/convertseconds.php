@@ -33,11 +33,10 @@ class ConvertsecondsMethod extends MethodClass
      * @author Jon Haworth
      * @author jsb <jsb@xaraya.com>
      * @access public
-     * @uses \CacheUtility::convertseconds()
-     * @param array $args
-     * with
-     *     string $args ['starttime'] (seconds or hh:mm:ss)
-     *     string $args ['direction'] (from or to)
+     * @uses CacheUtility::convertseconds()
+     * @param array<mixed> $args
+     * @var string $args['starttime'] (seconds or hh:mm:ss)
+     * @var string $args['direction'] (from or to)
      * @return string $convertedtime (hh:mm:ss or seconds)
      */
     public function __invoke(array $args = [])

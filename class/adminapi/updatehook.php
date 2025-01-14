@@ -31,8 +31,8 @@ class UpdatehookMethod extends MethodClass
     /**
      * update entry for a module item - hook for ('item','update','API')
      * Optional $extrainfo['cachemanager_remark'] from arguments, or 'cachemanager_remark' from input
-     * @uses \CacheHooks::updatehook()
-     * @param array $args with mandatory arguments:
+     * @uses CacheHooks::updatehook()
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return array updated extrainfo array

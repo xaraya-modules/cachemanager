@@ -32,10 +32,9 @@ class SaveCachingconfigMethod extends MethodClass
      * Save configuration settings in the config file and modVars
      * @author jsb <jsb@xaraya.com>
      * @access public
-     * @uses \CacheManager::save_config()
-     * @param array $args
-     * with
-     *     mixed $args ['config'] array of config labels and values
+     * @uses CacheManager::save_config()
+     * @param array<mixed> $args
+     * @var mixed $args['config'] array of config labels and values
      */
     public function __invoke(array $args = [])
     {

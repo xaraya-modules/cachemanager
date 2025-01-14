@@ -30,11 +30,12 @@ class ModifyhookMethod extends MethodClass
 
     /**
      * modify an entry for a module item - hook for ('item','modify','GUI')
-     * @uses \CacheHooks::modifyhook()
-     * @param array $args with mandatory arguments:
+     * @uses CacheHooks::modifyhook()
+     * @param array<mixed> $args with mandatory arguments:
      * - int   $args['objectid'] ID of the object
      * - array $args['extrainfo'] extra information
      * @return string hook output in HTML
+     * @see AdminGui::modifyhook()
      */
     public function __invoke(array $args = [])
     {

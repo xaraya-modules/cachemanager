@@ -45,7 +45,7 @@ class BlockCache extends CacheConfig
     {
         extract($args);
 
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!$this->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -55,17 +55,17 @@ class BlockCache extends CacheConfig
             return $data;
         }
 
-        xarVar::fetch('submit', 'str', $submit, '');
+        $this->fetch('submit', 'str', $submit, '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!xarSec::confirmAuthKey()) {
+            if (!$this->confirmAuthKey()) {
                 return;
             }
 
-            xarVar::fetch('docache', 'isset', $docache, []);
-            xarVar::fetch('pageshared', 'isset', $pageshared, []);
-            xarVar::fetch('usershared', 'isset', $usershared, []);
-            xarVar::fetch('cacheexpire', 'isset', $cacheexpire, []);
+            $this->fetch('docache', 'isset', $docache, []);
+            $this->fetch('pageshared', 'isset', $pageshared, []);
+            $this->fetch('usershared', 'isset', $usershared, []);
+            $this->fetch('cacheexpire', 'isset', $cacheexpire, []);
 
             $newblocks = [];
             // loop over something that should return values for every block
@@ -130,7 +130,7 @@ class BlockCache extends CacheConfig
             }
             // and flush the blocks
             xarBlockCache::flushCached($key);
-            if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
+            if ($this->getModVar('AutoRegenSessionless')) {
                 xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
@@ -138,7 +138,7 @@ class BlockCache extends CacheConfig
         // Get all block caching configurations
         $data['blocks'] = $this->getConfig();
 
-        $data['authid'] = xarSec::genAuthKey();
+        $data['authid'] = $this->genAuthKey();
         return $data;
     }
 

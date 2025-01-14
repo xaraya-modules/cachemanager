@@ -31,8 +31,9 @@ class GetcachelistMethod extends MethodClass
     /**
      * Construct an array of the current cache items
      * @author jsb
-     * @uses \CacheInfo::getList()
-     * @param array $args ['type'] cachetype to get the cache items from
+     * @uses CacheInfo::getList()
+     * @param array<mixed> $args
+     * @var string $type cachetype to get the cache items from
      * @return array array of cache items
      */
     public function __invoke(array $args = ['type' => ''])
@@ -45,6 +46,7 @@ class GetcachelistMethod extends MethodClass
             $type = $args;
         }
         $cacheInfo = CacheInfo::getCache($type);
+        $cacheInfo->setContext($this->getContext());
         return $cacheInfo->getList($sort);
     }
 }

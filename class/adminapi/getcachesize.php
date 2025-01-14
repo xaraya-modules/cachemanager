@@ -31,8 +31,9 @@ class GetcachesizeMethod extends MethodClass
     /**
      *
      * @author jsb
-     * @uses \CacheInfo::getSize()
-     * @param array $args ['type'] cachetype to get the size for
+     * @uses CacheInfo::getSize()
+     * @param array<mixed> $args
+     * @var string $type cachetype to get the size for
      * @return int size of the cache
      */
     public function __invoke(array $args = ['type' => ''])
@@ -44,6 +45,7 @@ class GetcachesizeMethod extends MethodClass
             $type = $args;
         }
         $cacheInfo = CacheInfo::getCache($type);
+        $cacheInfo->setContext($this->getContext());
         return $cacheInfo->getSize();
     }
 }

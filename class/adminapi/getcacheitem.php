@@ -31,8 +31,9 @@ class GetcacheitemMethod extends MethodClass
     /**
      * Construct an array of the current cache item
      * @author jsb
-     * @uses \CacheInfo::getItem()
-     * @param array $args ['type'] cachetype to get the cache item from, with $args['key'] the cache key
+     * @uses CacheInfo::getItem()
+     * @param array<mixed> $args
+     * @var string $type cachetype to get the cache item from, with $args['key'] the cache key
      * @return array array of cacheitem
      */
     public function __invoke($args = ['type' => '', 'key' => '', 'code' => ''])
@@ -46,6 +47,7 @@ class GetcacheitemMethod extends MethodClass
             $type = $args;
         }
         $cacheInfo = CacheInfo::getCache($type);
+        $cacheInfo->setContext($this->getContext());
         return $cacheInfo->getItem($key, $code);
     }
 }
