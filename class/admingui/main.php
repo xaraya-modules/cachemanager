@@ -39,11 +39,11 @@ class MainMethod extends MethodClass
     public function __invoke(array $args = [])
     {
         // Security Check
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
-        $this->redirect($this->getUrl('admin', 'modifyconfig'));
+        $this->ctl()->redirect($this->mod()->getURL('admin', 'modifyconfig'));
         // success
         return true;
     }

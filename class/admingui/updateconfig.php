@@ -45,107 +45,107 @@ class UpdateconfigMethod extends MethodClass
     public function __invoke(array $args = [])
     {
         // Get parameters
-        if (!$this->fetch('cacheenabled', 'isset', $cacheenabled, 0, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('cacheenabled', $cacheenabled, 'isset', 0)) {
             return;
         }
-        if (!$this->fetch('cachetheme', 'str::24', $cachetheme, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('cachetheme', $cachetheme, 'str::24', '')) {
             return;
         }
-        if (!$this->fetch('cachesizelimit', 'float:0.25:', $cachesizelimit, 2, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-
-        if (!$this->fetch('cachepages', 'isset', $cachepages, 0, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pageexpiretime', 'str:1:9', $pageexpiretime, '00:30:00', xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pagedisplayview', 'int:0:1', $pagedisplayview, 0, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pagetimestamp', 'int:0:1', $pagetimestamp, 0, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('expireheader', 'int:0:1', $expireheader, 0, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pagehookedonly', 'int:0:1', $pagehookedonly, 0, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('autoregenerate', 'isset', $autoregenerate, 0, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pagecachestorage', 'str:1', $pagecachestorage, 'filesystem', xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pagelogfile', 'str', $pagelogfile, '', xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('pagesizelimit', 'float:0.25:', $pagesizelimit, 2, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('cachesizelimit', $cachesizelimit, 'float:0.25:', 2)) {
             return;
         }
 
-        if (!$this->fetch('cacheblocks', 'isset', $cacheblocks, 0, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('cachepages', $cachepages, 'isset', 0)) {
             return;
         }
-        if (!$this->fetch('blockexpiretime', 'str:1:9', $blockexpiretime, '0', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pageexpiretime', $pageexpiretime, 'str:1:9', '00:30:00')) {
             return;
         }
-        if (!$this->fetch('blockcachestorage', 'str:1', $blockcachestorage, 'filesystem', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pagedisplayview', $pagedisplayview, 'int:0:1', 0)) {
             return;
         }
-        if (!$this->fetch('blocklogfile', 'str', $blocklogfile, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pagetimestamp', $pagetimestamp, 'int:0:1', 0)) {
             return;
         }
-        if (!$this->fetch('blocksizelimit', 'float:0.25:', $blocksizelimit, 2, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('expireheader', $expireheader, 'int:0:1', 0)) {
             return;
         }
-
-        if (!$this->fetch('cachemodules', 'isset', $cachemodules, 0, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pagehookedonly', $pagehookedonly, 'int:0:1', 0)) {
             return;
         }
-        if (!$this->fetch('moduleexpiretime', 'str:1:9', $moduleexpiretime, '02:00:00', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('autoregenerate', $autoregenerate, 'isset', 0)) {
             return;
         }
-        if (!$this->fetch('modulecachestorage', 'str:1', $modulecachestorage, 'filesystem', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pagecachestorage', $pagecachestorage, 'str:1', 'filesystem')) {
             return;
         }
-        if (!$this->fetch('modulelogfile', 'str', $modulelogfile, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pagelogfile', $pagelogfile, 'str', '')) {
             return;
         }
-        if (!$this->fetch('modulesizelimit', 'float:0.25:', $modulesizelimit, 2, xarVar::NOT_REQUIRED)) {
-            return;
-        }
-        if (!$this->fetch('modulefunctions', 'isset', $modulefunctions, [], xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('pagesizelimit', $pagesizelimit, 'float:0.25:', 2)) {
             return;
         }
 
-        if (!$this->fetch('cacheobjects', 'isset', $cacheobjects, 0, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('cacheblocks', $cacheblocks, 'isset', 0)) {
             return;
         }
-        if (!$this->fetch('objectexpiretime', 'str:1:9', $objectexpiretime, '02:00:00', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('blockexpiretime', $blockexpiretime, 'str:1:9', '0')) {
             return;
         }
-        if (!$this->fetch('objectcachestorage', 'str:1', $objectcachestorage, 'filesystem', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('blockcachestorage', $blockcachestorage, 'str:1', 'filesystem')) {
             return;
         }
-        if (!$this->fetch('objectlogfile', 'str', $objectlogfile, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('blocklogfile', $blocklogfile, 'str', '')) {
             return;
         }
-        if (!$this->fetch('objectsizelimit', 'float:0.25:', $objectsizelimit, 2, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('blocksizelimit', $blocksizelimit, 'float:0.25:', 2)) {
             return;
         }
-        if (!$this->fetch('objectmethods', 'isset', $objectmethods, [], xarVar::NOT_REQUIRED)) {
+
+        if (!$this->var()->find('cachemodules', $cachemodules, 'isset', 0)) {
+            return;
+        }
+        if (!$this->var()->find('moduleexpiretime', $moduleexpiretime, 'str:1:9', '02:00:00')) {
+            return;
+        }
+        if (!$this->var()->find('modulecachestorage', $modulecachestorage, 'str:1', 'filesystem')) {
+            return;
+        }
+        if (!$this->var()->find('modulelogfile', $modulelogfile, 'str', '')) {
+            return;
+        }
+        if (!$this->var()->find('modulesizelimit', $modulesizelimit, 'float:0.25:', 2)) {
+            return;
+        }
+        if (!$this->var()->find('modulefunctions', $modulefunctions, 'isset', [])) {
+            return;
+        }
+
+        if (!$this->var()->find('cacheobjects', $cacheobjects, 'isset', 0)) {
+            return;
+        }
+        if (!$this->var()->find('objectexpiretime', $objectexpiretime, 'str:1:9', '02:00:00')) {
+            return;
+        }
+        if (!$this->var()->find('objectcachestorage', $objectcachestorage, 'str:1', 'filesystem')) {
+            return;
+        }
+        if (!$this->var()->find('objectlogfile', $objectlogfile, 'str', '')) {
+            return;
+        }
+        if (!$this->var()->find('objectsizelimit', $objectsizelimit, 'float:0.25:', 2)) {
+            return;
+        }
+        if (!$this->var()->find('objectmethods', $objectmethods, 'isset', [])) {
             return;
         }
 
         // Confirm authorisation code
-        if (!$this->confirmAuthKey()) {
+        if (!$this->sec()->confirmAuthKey()) {
             return;
         }
         // Security Check
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -269,28 +269,28 @@ class UpdateconfigMethod extends MethodClass
         $configSettings['Module.LogFile'] = $modulelogfile;
         $configSettings['Module.SizeLimit'] = $modulesizelimit;
         // update cache defaults for module functions
-        $defaultmodulefunctions = unserialize((string) $this->getModVar('DefaultModuleCacheFunctions'));
+        $defaultmodulefunctions = unserialize((string) $this->mod()->getVar('DefaultModuleCacheFunctions'));
         foreach ($defaultmodulefunctions as $func => $docache) {
             if (!isset($modulefunctions[$func])) {
                 $modulefunctions[$func] = 0;
             }
         }
         $configSettings['Module.CacheFunctions'] = $modulefunctions;
-        $this->setModVar('DefaultModuleCacheFunctions', serialize($modulefunctions));
+        $this->mod()->setVar('DefaultModuleCacheFunctions', serialize($modulefunctions));
 
         $configSettings['Object.TimeExpiration'] = $objectexpiretime;
         $configSettings['Object.CacheStorage'] = $objectcachestorage;
         $configSettings['Object.LogFile'] = $objectlogfile;
         $configSettings['Object.SizeLimit'] = $objectsizelimit;
         // update cache defaults for object methods
-        $defaultobjectmethods = unserialize((string) $this->getModVar('DefaultObjectCacheMethods'));
+        $defaultobjectmethods = unserialize((string) $this->mod()->getVar('DefaultObjectCacheMethods'));
         foreach ($defaultobjectmethods as $method => $docache) {
             if (!isset($objectmethods[$method])) {
                 $objectmethods[$method] = 0;
             }
         }
         $configSettings['Object.CacheMethods'] = $objectmethods;
-        $this->setModVar('DefaultObjectCacheMethods', serialize($objectmethods));
+        $this->mod()->setVar('DefaultObjectCacheMethods', serialize($objectmethods));
 
         CacheManager::save_config(
             ['configSettings' => $configSettings,
@@ -298,34 +298,34 @@ class UpdateconfigMethod extends MethodClass
         );
 
         // see if we need to flush the cache when a new comment is added for some item
-        $this->fetch('pageflushcomment', 'isset', $pageflushcomment, 0, xarVar::NOT_REQUIRED);
+        $this->var()->find('pageflushcomment', $pageflushcomment, 'isset', 0);
         if ($pageflushcomment && $pagedisplayview) {
-            $this->setModVar('FlushOnNewComment', 1);
+            $this->mod()->setVar('FlushOnNewComment', 1);
         } else {
-            $this->setModVar('FlushOnNewComment', 0);
+            $this->mod()->setVar('FlushOnNewComment', 0);
         }
 
         // see if we need to flush the cache when a new rating is added for some item
-        $this->fetch('pageflushrating', 'isset', $pageflushrating, 0, xarVar::NOT_REQUIRED);
+        $this->var()->find('pageflushrating', $pageflushrating, 'isset', 0);
         if ($pageflushrating  && $pagedisplayview) {
-            $this->setModVar('FlushOnNewRating', 1);
+            $this->mod()->setVar('FlushOnNewRating', 1);
         } else {
-            $this->setModVar('FlushOnNewRating', 0);
+            $this->mod()->setVar('FlushOnNewRating', 0);
         }
 
         // see if we need to flush the cache when a new vote is cast on a poll hooked to some item
-        $this->fetch('pageflushpollvote', 'isset', $pageflushpollvote, 0, xarVar::NOT_REQUIRED);
+        $this->var()->find('pageflushpollvote', $pageflushpollvote, 'isset', 0);
         if ($pageflushpollvote && $pagedisplayview) {
-            $this->setModVar('FlushOnNewPollvote', 1);
+            $this->mod()->setVar('FlushOnNewPollvote', 1);
         } else {
-            $this->setModVar('FlushOnNewPollvote', 0);
+            $this->mod()->setVar('FlushOnNewPollvote', 0);
         }
 
         // set option for auto regeneration of session-less url list cache on event invalidation
         if ($autoregenerate) {
-            $this->setModVar('AutoRegenSessionless', 1);
+            $this->mod()->setVar('AutoRegenSessionless', 1);
         } else {
-            $this->setModVar('AutoRegenSessionless', 0);
+            $this->mod()->setVar('AutoRegenSessionless', 0);
         }
 
         // flush adminpanels and base blocks to show new menu options if necessary
@@ -344,7 +344,7 @@ class UpdateconfigMethod extends MethodClass
             }
         }
 
-        $this->redirect($this->getUrl('admin', 'modifyconfig'));
+        $this->ctl()->redirect($this->mod()->getURL('admin', 'modifyconfig'));
 
         return true;
     }

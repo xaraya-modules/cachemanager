@@ -45,22 +45,22 @@ class ViewMethod extends MethodClass
     {
         extract($args);
 
-        if (!$this->fetch('tab', 'str', $tab, null, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('tab', $tab, 'str')) {
             return;
         }
-        if (!$this->fetch('key', 'str', $key, null, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('key', $key, 'str')) {
             return;
         }
-        if (!$this->fetch('code', 'str', $code, null, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('code', $code, 'str')) {
             return;
         }
 
         if (empty($tab)) {
-            $this->redirect($this->getUrl('admin', 'stats'));
+            $this->ctl()->redirect($this->mod()->getURL('admin', 'stats'));
             return;
         }
         if (empty($key)) {
-            $this->redirect($this->getUrl(
+            $this->ctl()->redirect($this->mod()->getURL(
                 'admin',
                 'stats',
                 ['tab' => $tab]
@@ -68,7 +68,7 @@ class ViewMethod extends MethodClass
             return;
         }
 
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -101,8 +101,8 @@ class ViewMethod extends MethodClass
         }
 
         // Generate a one-time authorisation code for this operation
-        $data['authid'] = $this->genAuthKey();
-        $data['return_url'] = $this->getUrl( 'admin', 'stats', ['tab' => $tab]);
+        $data['authid'] = $this->sec()->genAuthKey();
+        $data['return_url'] = $this->mod()->getURL( 'admin', 'stats', ['tab' => $tab]);
         return $data;
     }
 }

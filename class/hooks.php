@@ -249,7 +249,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if ($this->getModVar('AutoRegenSessionless')) {
+        if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -592,7 +592,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && $this->getModVar('AutoRegenSessionless')) {
+        if (xarCache::isOutputCacheEnabled() && xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -763,7 +763,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && $this->getModVar('AutoRegenSessionless')) {
+        if (xarCache::isOutputCacheEnabled() && xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 
@@ -866,7 +866,7 @@ class CacheHooks extends xarObject
                 break;
         }
 
-        if ($this->getModVar('AutoRegenSessionless')) {
+        if (xarModVars::get('cachemanager', 'AutoRegenSessionless')) {
             self::regenstatic();
         }
 

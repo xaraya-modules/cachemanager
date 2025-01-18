@@ -48,16 +48,16 @@ class FlushcacheMethod extends MethodClass
     public function __invoke(array $args = [])
     {
         // Security Check
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
         extract($args);
 
-        if (!$this->fetch('flushkey', 'isset', $flushkey, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('flushkey', $flushkey)) {
             return;
         }
-        if (!$this->fetch('confirm', 'str:1:', $confirm, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('confirm', $confirm, 'str:1:', '')) {
             return;
         }
         $admingui = $this->getParent();
@@ -77,20 +77,20 @@ class FlushcacheMethod extends MethodClass
                 $data['cachekeys'][$type] = $adminapi->getcachekeys(['type' => $type]);
             }
 
-            $data['instructions'] = $this->translate("Please select a cache key to be flushed.");
-            $data['instructionhelp'] = $this->translate("All cached files of output associated with this key will be deleted.");
+            $data['instructions'] = $this->ml("Please select a cache key to be flushed.");
+            $data['instructionhelp'] = $this->ml("All cached files of output associated with this key will be deleted.");
 
             // Generate a one-time authorisation code for this operation
-            $data['authid'] = $this->genAuthKey();
+            $data['authid'] = $this->sec()->genAuthKey();
         } else {
             // Confirm authorisation code.
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
 
             //Make sure their is an authkey selected
             if (empty($flushkey) || !is_array($flushkey)) {
-                $data['notice'] = $this->translate("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
+                $data['notice'] = $this->ml("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
             } else {
                 // Get the output cache directory so you can flush items even if output caching is disabled
                 $outputCacheDir = xarCache::getOutputCacheDir();
@@ -101,7 +101,7 @@ class FlushcacheMethod extends MethodClass
                 );
 
                 // see if we need to delete an individual item instead of flushing the key
-                if (!$this->fetch('cachecode', 'isset', $cachecode, '', xarVar::NOT_REQUIRED)) {
+                if (!$this->var()->find('cachecode', $cachecode)) {
                     return;
                 }
 
@@ -136,24 +136,24 @@ class FlushcacheMethod extends MethodClass
                     $found++;
                 }
                 if (empty($found)) {
-                    $data['notice'] = $this->translate("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
+                    $data['notice'] = $this->ml("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
                 } else {
-                    $data['notice'] = $this->translate("The cached output for this key has been flushed.");
+                    $data['notice'] = $this->ml("The cached output for this key has been flushed.");
                 }
             }
 
-            if (!$this->fetch('return_url', 'isset', $return_url, null, xarVar::NOT_REQUIRED)) {
+            if (!$this->var()->find('return_url', $return_url)) {
                 return;
             }
             if (!empty($return_url)) {
-                $this->redirect($return_url);
+                $this->ctl()->redirect($return_url);
                 return;
             }
 
-            $return_url = $this->getUrl('admin', 'flushcache');
+            $return_url = $this->mod()->getURL('admin', 'flushcache');
             $data['returnlink'] = ['url'   => $return_url,
-                'title' => $this->translate('Return to the cache key selector'),
-                'label' => $this->translate('Back'), ];
+                'title' => $this->ml('Return to the cache key selector'),
+                'label' => $this->ml('Back'), ];
 
             $data['message'] = true;
         }

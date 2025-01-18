@@ -38,6 +38,6 @@ class OverviewMethod extends MethodClass
         $data = [];
         //just return to main function that displays the overview
         $data['context'] ??= $this->getContext();
-        return xarTpl::module('cachemanager', 'admin', 'main', $data, 'main');
+        return $this->mod()->template('main', $data, 'main');
     }
 }

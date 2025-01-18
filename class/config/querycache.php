@@ -38,26 +38,26 @@ class QueryCache extends CacheConfig
     {
         extract($args);
 
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
         $data = [];
 
-        $this->fetch('submit', 'str', $submit, '');
+        $this->var()->get('submit', $submit, 'str', '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
 
-            $this->fetch('expire', 'isset', $expire, []);
+            $this->var()->get('expire', $expire, 'isset', []);
             foreach ($expire as $module => $querylist) {
                 if ($module == 'core') {
                     // define some way to store configuration options for the core
                     foreach ($querylist as $query => $time) {
                     }
-                } elseif (xarMod::isAvailable($module)) {
+                } elseif ($this->mod()->isAvailable($module)) {
                     // stored in module variables (for now ?)
                     foreach ($querylist as $query => $time) {
                         if (empty($time) || !is_numeric($time)) {
@@ -68,14 +68,14 @@ class QueryCache extends CacheConfig
                     }
                 }
             }
-            //$this->redirect($this->getUrl('admin', 'queries'));
+            //$this->ctl()->redirect($this->mod()->getURL('admin', 'queries'));
             //return true;
         }
 
         // Get some query caching configurations
         $data['queries'] = $this->getConfig();
 
-        $data['authid'] = $this->genAuthKey();
+        $data['authid'] = $this->sec()->genAuthKey();
         return $data;
     }
 
@@ -110,7 +110,7 @@ class QueryCache extends CacheConfig
         ];
 
         foreach ($candidates as $module => $querylist) {
-            if (!xarMod::isAvailable($module)) {
+            if (!$this->mod()->isAvailable($module)) {
                 continue;
             }
             $queries[$module] = [];

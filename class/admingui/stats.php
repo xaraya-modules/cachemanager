@@ -52,34 +52,34 @@ class StatsMethod extends MethodClass
      */
     public function __invoke(array $args = [])
     {
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
         extract($args);
-        if (!$this->fetch('tab', 'str', $tab, 'overview', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('tab', $tab, 'str', 'overview')) {
             return;
         }
-        if (!$this->fetch('sort', 'str', $sort, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('sort', $sort, 'str', '')) {
             return;
         }
-        if (!$this->fetch('reset', 'str', $reset, '', xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('reset', $reset, 'str', '')) {
             return;
         }
-        if (!$this->fetch('startnum', 'int', $startnum, 1, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('startnum', $startnum, 'int', 1)) {
             return;
         }
-        if (!$this->fetch('withlog', 'int', $withlog, 0, xarVar::NOT_REQUIRED)) {
+        if (!$this->var()->find('withlog', $withlog, 'int', 0)) {
             return;
         }
 
         // Get the output cache directory so you can view stats even if output caching is disabled
         $outputCacheDir = xarCache::getOutputCacheDir();
 
-        $numitems = $this->getModVar('itemsperpage');
+        $numitems = $this->mod()->getVar('itemsperpage');
         if (empty($numitems)) {
             $numitems = 100;
-            $this->setModVar('itemsperpage', $numitems);
+            $this->mod()->setVar('itemsperpage', $numitems);
         }
         $admingui = $this->getParent();
 
@@ -121,7 +121,7 @@ class StatsMethod extends MethodClass
 
                 if (!empty($reset)) {
                     // Confirm authorisation code
-                    if (!$this->confirmAuthKey()) {
+                    if (!$this->sec()->confirmAuthKey()) {
                         return;
                     }
 
@@ -132,7 +132,7 @@ class StatsMethod extends MethodClass
                         }
                     }
 
-                    $this->redirect($this->getUrl(
+                    $this->ctl()->redirect($this->mod()->getURL(
                         'admin',
                         'stats',
                         ['tab' => $tab]
@@ -175,7 +175,7 @@ class StatsMethod extends MethodClass
                     $data['cachekeys'] = array_keys($cachekeys);
                     unset($cachekeys);
                     // Generate a one-time authorisation code for this operation
-                    $data['authid'] = $this->genAuthKey();
+                    $data['authid'] = $this->sec()->genAuthKey();
                     // analyze logfile
                     if (!empty($withlog) && !empty($data['settings'][$logfile]) && file_exists($data['settings'][$logfile]) && filesize($data['settings'][$logfile]) > 0) {
                         $data['withlog'] = 1;
@@ -217,7 +217,7 @@ class StatsMethod extends MethodClass
                         $data['pager'] = xarTplPager::getPager(
                             $startnum,
                             $count,
-                            $this->getUrl(
+                            $this->mod()->getURL(
                                 'admin',
                                 'stats',
                                 ['tab' => $tab,
@@ -241,7 +241,7 @@ class StatsMethod extends MethodClass
             case 'autocache':
                 if (!empty($reset)) {
                     // Confirm authorisation code
-                    if (!$this->confirmAuthKey()) {
+                    if (!$this->sec()->confirmAuthKey()) {
                         return;
                     }
 
@@ -259,7 +259,7 @@ class StatsMethod extends MethodClass
                         }
                     }
 
-                    $this->redirect($this->getUrl(
+                    $this->ctl()->redirect($this->mod()->getURL(
                         'admin',
                         'stats',
                         ['tab' => 'autocache']
@@ -308,7 +308,7 @@ class StatsMethod extends MethodClass
                         $data['pager'] = xarTplPager::getPager(
                             $startnum,
                             $count,
-                            $this->getUrl(
+                            $this->mod()->getURL(
                                 'admin',
                                 'stats',
                                 ['tab' => 'autocache',
@@ -324,11 +324,11 @@ class StatsMethod extends MethodClass
             case 'overview':
             default:
                 // set items per page
-                if (!$this->fetch('itemsperpage', 'int', $itemsperpage, 0, xarVar::NOT_REQUIRED)) {
+                if (!$this->var()->find('itemsperpage', $itemsperpage, 'int', 0)) {
                     return;
                 }
                 if (!empty($itemsperpage)) {
-                    $this->setModVar('itemsperpage', $itemsperpage);
+                    $this->mod()->setVar('itemsperpage', $itemsperpage);
                     $data['itemsperpage'] = $itemsperpage;
                 }
                 // list of cache types to check

@@ -46,7 +46,7 @@ class ModifyconfigMethod extends MethodClass
     public function __invoke(array $args = [])
     {
         // Security Check
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
         $admingui = $this->getParent();
@@ -130,7 +130,7 @@ class ModifyconfigMethod extends MethodClass
         if (empty($data['settings']['ModuleCacheFunctions'])) {
             $data['settings']['ModuleCacheFunctions'] = ['main' => 1, 'view' => 1, 'display' => 0];
         }
-        $this->setModVar('DefaultModuleCacheFunctions', serialize($data['settings']['ModuleCacheFunctions']));
+        $this->mod()->setVar('DefaultModuleCacheFunctions', serialize($data['settings']['ModuleCacheFunctions']));
 
         if (!isset($data['settings']['ObjectTimeExpiration'])) {
             $data['settings']['ObjectTimeExpiration'] = 7200;
@@ -148,7 +148,7 @@ class ModifyconfigMethod extends MethodClass
         if (empty($data['settings']['ObjectCacheMethods'])) {
             $data['settings']['ObjectCacheMethods'] = ['view' => 1, 'display' => 1];
         }
-        $this->setModVar('DefaultObjectCacheMethods', serialize($data['settings']['ObjectCacheMethods']));
+        $this->mod()->setVar('DefaultObjectCacheMethods', serialize($data['settings']['ObjectCacheMethods']));
 
         // convert the size limit from bytes to megabytes
         $data['settings']['OutputSizeLimit'] /= 1048576;
@@ -175,7 +175,7 @@ class ModifyconfigMethod extends MethodClass
         // get the storage types supported on this server
         $data['storagetypes'] = $adminapi->getstoragetypes();
 
-        $data['authid'] = $this->genAuthKey();
+        $data['authid'] = $this->sec()->genAuthKey();
         return $data;
     }
 }

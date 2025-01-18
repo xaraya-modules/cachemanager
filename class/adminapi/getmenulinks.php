@@ -42,54 +42,54 @@ class GetmenulinksMethod extends MethodClass
         $menulinks = [];
 
         // Security Check
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return $menulinks;
         }
 
-        $menulinks[] = ['url'   => $this->getUrl('admin', 'flushcache'),
-            'title' => $this->translate('Flush the output cache of xarCache'),
-            'label' => $this->translate('Flush Cache'), ];
+        $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'flushcache'),
+            'title' => $this->ml('Flush the output cache of xarCache'),
+            'label' => $this->ml('Flush Cache'), ];
 
         if (xarCache::isOutputCacheEnabled()) {
             if (xarOutputCache::isPageCacheEnabled()) {
-                $menulinks[] = ['url'   => $this->getUrl('admin', 'pages'),
-                    'title' => $this->translate('Configure the caching options for pages'),
-                    'label' => $this->translate('Page Caching'), ];
+                $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'pages'),
+                    'title' => $this->ml('Configure the caching options for pages'),
+                    'label' => $this->ml('Page Caching'), ];
             }
             if (xarOutputCache::isBlockCacheEnabled()) {
-                $menulinks[] = ['url'   => $this->getUrl('admin', 'blocks'),
-                    'title' => $this->translate('Configure the caching options for each block'),
-                    'label' => $this->translate('Block Caching'), ];
+                $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'blocks'),
+                    'title' => $this->ml('Configure the caching options for each block'),
+                    'label' => $this->ml('Block Caching'), ];
             }
             if (xarOutputCache::isModuleCacheEnabled()) {
-                $menulinks[] = ['url'   => $this->getUrl('admin', 'modules'),
-                    'title' => $this->translate('Configure the caching options for modules'),
-                    'label' => $this->translate('Module Caching'), ];
+                $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'modules'),
+                    'title' => $this->ml('Configure the caching options for modules'),
+                    'label' => $this->ml('Module Caching'), ];
             }
             if (xarOutputCache::isObjectCacheEnabled()) {
-                $menulinks[] = ['url'   => $this->getUrl('admin', 'objects'),
-                    'title' => $this->translate('Configure the caching options for objects'),
-                    'label' => $this->translate('Object Caching'), ];
+                $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'objects'),
+                    'title' => $this->ml('Configure the caching options for objects'),
+                    'label' => $this->ml('Object Caching'), ];
             }
         }
         /*
             if (xarCache::isQueryCacheEnabled()) {
-                $menulinks[] = Array('url'   => $this->getUrl('admin', 'queries'),
-                                     'title' => $this->translate('Configure the caching options for queries'),
-                                     'label' => $this->translate('Query Caching'));
+                $menulinks[] = Array('url'   => $this->mod()->getURL('admin', 'queries'),
+                                     'title' => $this->ml('Configure the caching options for queries'),
+                                     'label' => $this->ml('Query Caching'));
             }
             if (xarCache::isVariableCacheEnabled()) {
-                $menulinks[] = Array('url'   => $this->getUrl('admin', 'variables'),
-                                     'title' => $this->translate('Configure the caching options for variables'),
-                                     'label' => $this->translate('Variable Caching'));
+                $menulinks[] = Array('url'   => $this->mod()->getURL('admin', 'variables'),
+                                     'title' => $this->ml('Configure the caching options for variables'),
+                                     'label' => $this->ml('Variable Caching'));
             }
         */
-        $menulinks[] = ['url'   => $this->getUrl('admin', 'stats'),
-            'title' => $this->translate('View cache statistics'),
-            'label' => $this->translate('View Statistics'), ];
-        $menulinks[] = ['url'   => $this->getUrl('admin', 'modifyconfig'),
-            'title' => $this->translate('Modify the xarCache configuration'),
-            'label' => $this->translate('Modify Config'), ];
+        $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'stats'),
+            'title' => $this->ml('View cache statistics'),
+            'label' => $this->ml('View Statistics'), ];
+        $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'modifyconfig'),
+            'title' => $this->ml('Modify the xarCache configuration'),
+            'label' => $this->ml('Modify Config'), ];
 
         return $menulinks;
     }

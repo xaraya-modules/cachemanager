@@ -71,10 +71,10 @@ class Installer extends InstallerClass
         }
 
         // Set up module variables
-        $this->setModVar('FlushOnNewComment', 0);
-        $this->setModVar('FlushOnNewRating', 0);
-        $this->setModVar('FlushOnNewPollvote', 0);
-        $this->setModVar('AutoRegenSessionless', 0);
+        $this->mod()->setVar('FlushOnNewComment', 0);
+        $this->mod()->setVar('FlushOnNewRating', 0);
+        $this->mod()->setVar('FlushOnNewPollvote', 0);
+        $this->mod()->setVar('AutoRegenSessionless', 0);
 
         if (!xarModHooks::register(
             'item',
@@ -128,7 +128,7 @@ class Installer extends InstallerClass
         }
 
         // Enable cachemanager hooks for articles
-        if (xarMod::isAvailable('articles')) {
+        if ($this->mod()->isAvailable('articles')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -137,7 +137,7 @@ class Installer extends InstallerClass
             );
         }
         // Enable cachemanager hooks for base
-        if (xarMod::isAvailable('base')) {
+        if ($this->mod()->isAvailable('base')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -146,7 +146,7 @@ class Installer extends InstallerClass
             );
         }
         // Enable cachemanager hooks for blocks
-        if (xarMod::isAvailable('blocks')) {
+        if ($this->mod()->isAvailable('blocks')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -155,7 +155,7 @@ class Installer extends InstallerClass
             );
         }
         // Enable cachemanager hooks for categories
-        if (xarMod::isAvailable('categories')) {
+        if ($this->mod()->isAvailable('categories')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -164,7 +164,7 @@ class Installer extends InstallerClass
             );
         }
         // Enable cachemanager hooks for roles
-        if (xarMod::isAvailable('roles')) {
+        if ($this->mod()->isAvailable('roles')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -173,7 +173,7 @@ class Installer extends InstallerClass
             );
         }
         // Enable cachemanager hooks for privileges
-        if (xarMod::isAvailable('privileges')) {
+        if ($this->mod()->isAvailable('privileges')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -182,7 +182,7 @@ class Installer extends InstallerClass
             );
         }
         // Enable cachemanager hooks for dynamicdata
-        if (xarMod::isAvailable('dynamicdata')) {
+        if ($this->mod()->isAvailable('dynamicdata')) {
             xarMod::apiFunc(
                 'modules',
                 'admin',
@@ -197,11 +197,11 @@ class Installer extends InstallerClass
         /*
             if (xarSystemVars::get('DB.UseADODBCache')){
                 // Enable query caching for categories getcat
-                if (xarMod::isAvailable('categories')) {
+                if ($this->mod()->isAvailable('categories')) {
                     xarModVars::set('categories','cache.userapi.getcat',60);
                 }
                 // Enable query caching for comments get_author_count
-                if (xarMod::isAvailable('comments')) {
+                if ($this->mod()->isAvailable('comments')) {
                     xarModVars::set('comments','cache.userapi.get_author_count',60);
                 }
             }
@@ -226,7 +226,7 @@ class Installer extends InstallerClass
         // check to see if we've got the necessary permissions to upgrade
         if ((!file_exists($cachingConfigFile) && !is_writable($varCacheDir)) ||
             (file_exists($cachingConfigFile) && !is_writable($cachingConfigFile))) {
-            $msg = $this->translate('The CacheManager module upgrade has failed.  
+            $msg = $this->ml('The CacheManager module upgrade has failed.  
                        Please make #(1) writable by the web server process 
                        owner to complete the upgrade.  If #(1) does not exist, 
                        please make #(2) writable by the web server process and 
@@ -303,7 +303,7 @@ class Installer extends InstallerClass
                     copy($defaultConfigFile, $cachingConfigFile);
                 }
                 // switch to the file based block caching enabler
-                if ($this->getModVar('CacheBlockOutput')) {
+                if ($this->mod()->getVar('CacheBlockOutput')) {
                     $outputCacheDir = $varCacheDir . '/output/';
                     if (!file_exists($outputCacheDir . 'cache.blocklevel')) {
                         touch($outputCacheDir . 'cache.blocklevel');
@@ -529,7 +529,7 @@ class Installer extends InstallerClass
         } else {
             if (!is_dir($cacheOutputDir) || !file_exists($cachingConfigFile)) {
                 // tell them that cache needs to be writable or manually create output dir
-                $msg = $this->translate(
+                $msg = $this->ml(
                     'The #(1) directory must be writable by the web server 
                            for the install script to set up output caching for you. 
                            The CacheManager module has not been installed, 
@@ -550,7 +550,7 @@ class Installer extends InstallerClass
 
         // confirm the caching config file is good to go
         if (!is_writable($cachingConfigFile)) {
-            $msg = $this->translate('The #(1) file must be writable by the web server for 
+            $msg = $this->ml('The #(1) file must be writable by the web server for 
                        output caching to work.', $cachingConfigFile);
             throw new Exception($msg);
         }
@@ -566,7 +566,7 @@ class Installer extends InstallerClass
             // check if the directory already exists
             if (is_dir($setupDir)) {
                 if (!is_writable($setupDir)) {
-                    $msg = $this->translate('The #(1) directory is not writable by the web 
+                    $msg = $this->ml('The #(1) directory is not writable by the web 
                                web server. The #(1) directory must be writable by the web 
                                server process owner for output caching to work. 
                                Please change the permission on the #(1) directory

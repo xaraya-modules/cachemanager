@@ -44,7 +44,7 @@ class ObjectCache extends CacheConfig
     {
         extract($args);
 
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -54,16 +54,16 @@ class ObjectCache extends CacheConfig
             return $data;
         }
 
-        $this->fetch('submit', 'str', $submit, '');
+        $this->var()->get('submit', $submit, 'str', '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
 
-            $this->fetch('docache', 'isset', $docache, []);
-            $this->fetch('usershared', 'isset', $usershared, []);
-            $this->fetch('cacheexpire', 'isset', $cacheexpire, []);
+            $this->var()->get('docache', $docache, 'isset', []);
+            $this->var()->get('usershared', $usershared, 'isset', []);
+            $this->var()->get('cacheexpire', $cacheexpire, 'isset', []);
 
             $newobjects = [];
             // loop over something that should return values for every object
@@ -103,7 +103,7 @@ class ObjectCache extends CacheConfig
             }
             // and flush the objects
             xarObjectCache::flushCached($key);
-            if ($this->getModVar('AutoRegenSessionless')) {
+            if ($this->mod()->getVar('AutoRegenSessionless')) {
                 xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
@@ -111,7 +111,7 @@ class ObjectCache extends CacheConfig
         // Get all object caching configurations
         $data['objects'] = $this->getConfig();
 
-        $data['authid'] = $this->genAuthKey();
+        $data['authid'] = $this->sec()->genAuthKey();
         return $data;
     }
 
@@ -133,7 +133,7 @@ class ObjectCache extends CacheConfig
         $objects = xarMod::apiFunc('dynamicdata', 'user', 'getobjects');
 
         // Get default object methods to cache
-        $defaultobjectmethods = unserialize((string) $this->getModVar('DefaultObjectCacheMethods'));
+        $defaultobjectmethods = unserialize((string) $this->mod()->getVar('DefaultObjectCacheMethods'));
 
         // CHECKME: do we want to support settings for non-objects (like tables) ?
 

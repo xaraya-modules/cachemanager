@@ -36,27 +36,27 @@ class TemplateCache extends CacheConfig
     {
         extract($args);
 
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
         $data = [];
 
-        $this->fetch('submit', 'str', $submit, '');
+        $this->var()->get('submit', $submit, 'str', '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
 
-            //$this->redirect($this->getUrl('admin', 'templates'));
+            //$this->ctl()->redirect($this->mod()->getURL('admin', 'templates'));
             //return true;
         }
 
         // Get some template caching configurations
         $data['templates'] = $this->getConfig();
 
-        $data['authid'] = $this->genAuthKey();
+        $data['authid'] = $this->sec()->genAuthKey();
         return $data;
     }
 

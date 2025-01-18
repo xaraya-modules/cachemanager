@@ -48,7 +48,7 @@ class PageCache extends CacheConfig
     {
         extract($args);
 
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -80,14 +80,14 @@ class PageCache extends CacheConfig
 
         $data['groups'] = xarMod::apiFunc('roles', 'user', 'getallgroups');
 
-        $this->fetch('submit', 'str', $submit, '');
+        $this->var()->get('submit', $submit, 'str', '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
 
-            $this->fetch('groups', 'isset', $groups, [], xarVar::NOT_REQUIRED);
+            $this->var()->find('groups', $groups, 'isset', []);
             $grouplist = [];
             foreach ($data['groups'] as $idx => $group) {
                 if (!empty($groups[$group['id']])) {
@@ -97,7 +97,7 @@ class PageCache extends CacheConfig
             }
             $cachegroups = join(';', $grouplist);
 
-            $this->fetch('sessionless', 'isset', $sessionless, '', xarVar::NOT_REQUIRED);
+            $this->var()->find('sessionless', $sessionless);
             $sessionlesslist = [];
             if (!empty($sessionless)) {
                 $urls = preg_split('/\s+/', $sessionless, -1, PREG_SPLIT_NO_EMPTY);
@@ -114,14 +114,14 @@ class PageCache extends CacheConfig
             }
 
             // set option for auto regeneration of session-less url list cache on event invalidation
-            $this->fetch('autoregenerate', 'isset', $autoregenerate, '', xarVar::NOT_REQUIRED);
+            $this->var()->find('autoregenerate', $autoregenerate);
             if ($autoregenerate) {
-                $this->setModVar('AutoRegenSessionless', 1);
+                $this->mod()->setVar('AutoRegenSessionless', 1);
             } else {
-                $this->setModVar('AutoRegenSessionless', 0);
+                $this->mod()->setVar('AutoRegenSessionless', 0);
             }
 
-            $this->fetch('autocache', 'isset', $autocache, '', xarVar::NOT_REQUIRED);
+            $this->var()->find('autocache', $autocache);
             if (empty($autocache['period'])) {
                 $autocache['period'] = 0;
             }
@@ -207,7 +207,7 @@ class PageCache extends CacheConfig
                 }
             }
 
-            $this->redirect($this->getUrl('admin', 'pages'));
+            $this->ctl()->redirect($this->mod()->getURL('admin', 'pages'));
             return true;
         } elseif (!empty($data['settings']['PageCacheGroups'])) {
             $grouplist = explode(';', $data['settings']['PageCacheGroups']);
@@ -219,7 +219,7 @@ class PageCache extends CacheConfig
         }
 
         if (!isset($data['settings']['PageSessionLess'])) {
-            $data['sessionless'] = $this->translate(
+            $data['sessionless'] = $this->ml(
                 "Please add the following line to your config.caching.php file :\n#(1)",
                 '$cachingConfiguration[\'Page.SessionLess\'] = array();'
             );
@@ -325,7 +325,7 @@ class PageCache extends CacheConfig
         //$data['pages'] = $this->getConfig();
         $data['pages'] = ['todo' => 'something ?'];
 
-        $data['authid'] = $this->genAuthKey();
+        $data['authid'] = $this->sec()->genAuthKey();
         return $data;
     }
 

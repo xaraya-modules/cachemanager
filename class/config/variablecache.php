@@ -43,7 +43,7 @@ class VariableCache extends CacheConfig
     {
         extract($args);
 
-        if (!$this->checkAccess('AdminXarCache')) {
+        if (!$this->sec()->checkAccess('AdminXarCache')) {
             return;
         }
 
@@ -53,25 +53,25 @@ class VariableCache extends CacheConfig
             return $data;
         }
 
-        $this->fetch('reset', 'str', $reset, '');
+        $this->var()->get('reset', $reset, 'str', '');
         if (!empty($reset)) {
             // Confirm authorisation code
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
             xarConfigVars::delete(null, 'Site.Variable.CacheSettings');
             xarModVars::delete('dynamicdata', 'variablecache_settings');
         }
 
-        $this->fetch('submit', 'str', $submit, '');
+        $this->var()->get('submit', $submit, 'str', '');
         if (!empty($submit)) {
             // Confirm authorisation code
-            if (!$this->confirmAuthKey()) {
+            if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
 
-            $this->fetch('docache', 'isset', $docache, []);
-            $this->fetch('cacheexpire', 'isset', $cacheexpire, []);
+            $this->var()->get('docache', $docache, 'isset', []);
+            $this->var()->get('cacheexpire', $cacheexpire, 'isset', []);
 
             $newvariables = [];
             // loop over something that should return values for every variable
@@ -105,7 +105,7 @@ class VariableCache extends CacheConfig
         // Get all variable caching configurations
         $data['variables'] = $this->getConfig();
 
-        $data['authid'] = $this->genAuthKey();
+        $data['authid'] = $this->sec()->genAuthKey();
         return $data;
     }
 
