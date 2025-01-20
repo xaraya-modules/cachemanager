@@ -26,7 +26,6 @@ sys::import('modules.cachemanager.class.manager');
 
 class CacheConfig extends xarObject implements ServicesInterface
 {
-    /** @use ServicesTrait<static> */
     use ServicesTrait;
 
     // list of currently supported cache types - not including 'query', 'core', 'template' here
