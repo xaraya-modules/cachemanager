@@ -60,10 +60,9 @@ class FlushcacheMethod extends MethodClass
         if (!$this->var()->find('confirm', $confirm, 'str:1:', '')) {
             return;
         }
-        $admingui = $this->getParent();
 
         /** @var AdminApi $adminapi */
-        $adminapi = $admingui->getModule()->getAdminAPI();
+        $adminapi = $this->adminapi();
 
         $cachetypes = $adminapi->getcachetypes();
 

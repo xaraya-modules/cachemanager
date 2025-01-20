@@ -81,10 +81,11 @@ class StatsMethod extends MethodClass
             $numitems = 100;
             $this->mod()->setVar('itemsperpage', $numitems);
         }
-        $admingui = $this->getParent();
+        /** @var AdminGui $admingui */
+        $admingui = $this->admingui();
 
         /** @var AdminApi $adminapi */
-        $adminapi = $admingui->getModule()->getAdminAPI();
+        $adminapi = $this->adminapi();
 
         $data = [];
 
@@ -98,8 +99,6 @@ class StatsMethod extends MethodClass
         $data['settings'] = CacheManager::get_config(
             ['from' => 'file', 'tpl_prep' => true]
         );
-
-        $admingui = $this->getParent();
 
         // get StatsApi component from AdminGui parent here
         $statsApi = $admingui->getStatsAPI();
