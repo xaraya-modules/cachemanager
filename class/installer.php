@@ -623,8 +623,8 @@ class Installer extends InstallerClass
     public function create_cache_data()
     {
         // Set up database tables
-        $dbconn = xarDB::getConn();
-        $xartable = xarDB::getTables();
+        $dbconn = $this->db()->getConn();
+        $xartable = $this->db()->getTables();
 
         // optional database storage for cached data (instead of filesystem)
         $cachedatatable = $xartable['cache_data'];
@@ -685,7 +685,7 @@ class Installer extends InstallerClass
             // TODO: verify if separate indexes work better here or not (varchar)
             $query = xarTableDDL::createIndex(
                 $cachedatatable,
-                ['name'   => 'i_' . xarDB::getPrefix() . '_cachedata_combo',
+                ['name'   => 'i_' . $this->db()->getPrefix() . '_cachedata_combo',
                     'fields' => ['xar_type',
                         'xar_key',
                         'xar_code', ], ]

@@ -37,9 +37,13 @@ use sys;
 
 sys::import('modules.cachemanager.class.manager');
 sys::import('modules.cachemanager.class.utility');
+sys::import('xaraya.services.hasdatabasetrait');
+use Xaraya\Services\HasDatabaseStaticTrait;
 
 class CacheHooks extends xarObject
 {
+    use HasDatabaseStaticTrait;
+
     public static function init(array $args = []) {}
 
     /**
@@ -342,9 +346,9 @@ class CacheHooks extends xarObject
             $itemid = $objectid;
         }
 
-        $systemPrefix = xarDB::getPrefix();
+        $systemPrefix = self::xarDB()->getPrefix();
         $blocksettings = $systemPrefix . '_cache_blocks';
-        $dbconn = xarDB::getConn();
+        $dbconn = self::xarDB()->getConn();
         $query = "SELECT nocache,
                  page,
                  theuser,
@@ -487,9 +491,9 @@ class CacheHooks extends xarObject
                         $cacheexpire = CacheUtility::convertToSeconds($cacheexpire);
                     }
 
-                    $systemPrefix = xarDB::getPrefix();
+                    $systemPrefix = self::xarDB()->getPrefix();
                     $blocksettings = $systemPrefix . '_cache_blocks';
-                    $dbconn = xarDB::getConn();
+                    $dbconn = self::xarDB()->getConn();
                     $query = "SELECT nocache
                                 FROM $blocksettings WHERE blockinstance_id = $objectid ";
                     $result = & $dbconn->Execute($query);
@@ -662,9 +666,9 @@ class CacheHooks extends xarObject
         switch ($modname) {
             case 'blocks':
                 // first, remove the corresponding block settings from the db
-                $systemPrefix = xarDB::getPrefix();
+                $systemPrefix = self::xarDB()->getPrefix();
                 $blocksettings = $systemPrefix . '_cache_blocks';
-                $dbconn = xarDB::getConn();
+                $dbconn = self::xarDB()->getConn();
                 $query = "SELECT nocache
                             FROM $blocksettings WHERE blockinstance_id = $objectid ";
                 $result = & $dbconn->Execute($query);

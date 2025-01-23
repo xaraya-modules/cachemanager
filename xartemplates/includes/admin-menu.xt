@@ -101,14 +101,14 @@
                 </a>
             </li>
         </xar:if>
-<!-- Not supported with Creole
+<xar:comment><!-- Not supported with Creole
        <xar:set name="tabclass">$activetab=='queries'?'active':''</xar:set>
         <li class="#$tabclass#">
           <a href="&xar-modurl-cachemanager-admin-queries;">
             Queries
           </a>
         </li>
--->
+--></xar:comment>
 	<xar:if condition="$activetab eq 'stats'">
 	    <xar:set name="tabclass">'xar-tab-active'</xar:set>
 	    <xar:set name="linkclass">'xar-accent xar-accent-outline'</xar:set>

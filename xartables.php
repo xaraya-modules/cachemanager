@@ -16,14 +16,15 @@
  * Return cache tables
  * @return array
  */
-function cachemanager_xartables()
+function cachemanager_xartables(?string $prefix = null)
 {
     // Initialise table array
     $xartable = [];
+    $prefix ??= xarDB::getPrefix();
 
     // Set the table names
-    $xartable['cache_blocks'] = xarDB::getPrefix() . '_cache_blocks'; // cfr. blocks module
-    $xartable['cache_data'] = xarDB::getPrefix() . '_cache_data';
+    $xartable['cache_blocks'] = $prefix . '_cache_blocks'; // cfr. blocks module
+    $xartable['cache_data'] = $prefix . '_cache_data';
 
     // Return the table information
     return $xartable;

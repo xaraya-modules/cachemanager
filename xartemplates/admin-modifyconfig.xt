@@ -327,7 +327,7 @@
                 </label>
             </div>
             </xar:foreach>
-<!--
+<xar:comment><!--
             <div class="xar-form-input-wrapper-after">
                 <xar:if condition="xarModVars::get('cachemanager','FlushOnNewModule')">
                     <input type="checkbox" name="moduleflushview" id="moduleflushview" value="1" checked="checked" />
@@ -338,7 +338,7 @@
                     &#160;<xar:mlstring>Flush Cached Views on Item Updates?</xar:mlstring>
                 </label>
             </div>
--->
+--></xar:comment>
             <xar:set name="checkconfig">xarModVars::get('modules','modulecache_settings')</xar:set>
             <xar:if condition="$status['ModuleCachingEnabled'] eq 1 and empty($checkconfig)">
             <div class="xar-form-input-wrapper">
@@ -416,7 +416,7 @@
                 </p>
             </div>
             </xar:if>
-<!--
+<xar:comment><!--
             <div class="xar-form-input-wrapper-after">
                 <xar:if condition="xarModVars::get('cachemanager','FlushOnNewObject')">
                     <input type="checkbox" name="objectflushview" id="objectflushview" value="1" checked="checked" />
@@ -427,7 +427,7 @@
                     &#160;<xar:mlstring>Flush Cached Views on Item Updates?</xar:mlstring>
                 </label>
             </div>
--->
+--></xar:comment>
         </fieldset>
         <div class="xar-form-input-wrapper-after">
             <input type="hidden" name="authid" id="authid" value="#$authid#" />

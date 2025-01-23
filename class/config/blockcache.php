@@ -97,9 +97,9 @@ class BlockCache extends CacheConfig
                 }
                 $newblocks[$bid]['cacheexpire'] = $expire;
             }
-            $systemPrefix = xarDB::getPrefix();
+            $systemPrefix = $this->db()->getPrefix();
             $blocksettings = $systemPrefix . '_cache_blocks';
-            $dbconn = xarDB::getConn();
+            $dbconn = $this->db()->getConn();
 
             // delete the whole cache blocks table and insert the new values
             $query = "DELETE FROM $blocksettings";
@@ -149,9 +149,9 @@ class BlockCache extends CacheConfig
      */
     public function getConfig()
     {
-        $systemPrefix = xarDB::getPrefix();
+        $systemPrefix = $this->db()->getPrefix();
         $blocksettings = $systemPrefix . '_cache_blocks';
-        $dbconn = xarDB::getConn();
+        $dbconn = $this->db()->getConn();
         $query = "SELECT blockinstance_id,
                 nocache,
                 page,
