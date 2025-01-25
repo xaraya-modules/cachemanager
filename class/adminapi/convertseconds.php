@@ -37,6 +37,7 @@ class ConvertsecondsMethod extends MethodClass
      * @var string $args['starttime'] (seconds or hh:mm:ss)
      * @var string $args['direction'] (from or to)
      * @return string $convertedtime (hh:mm:ss or seconds)
+     * @see AdminApi::convertseconds()
      */
     public function __invoke(array $args = [])
     {

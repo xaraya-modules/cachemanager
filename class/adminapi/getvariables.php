@@ -31,14 +31,15 @@ class GetvariablesMethod extends MethodClass
      * get configuration of variable caching for all variables
      * @uses VariableCache::getConfig()
      * @return array variable caching configurations
+     * @see AdminApi::getvariables()
      */
     public function __invoke(array $args = [])
     {
         extract($args);
 
         // Get all variable cache settings
-        $cache = CacheConfig::getCache('variable');
-        $cache->setContext($this->getContext());
-        return $cache->getConfig();
+        $cacheConfig = CacheConfig::getCache('variable');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->getConfig();
     }
 }

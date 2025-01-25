@@ -34,6 +34,7 @@ class GetcachesizeMethod extends MethodClass
      * @param array<mixed> $args
      * @var string $type cachetype to get the size for
      * @return int size of the cache
+     * @see AdminApi::getcachesize()
      */
     public function __invoke(array $args = ['type' => ''])
     {

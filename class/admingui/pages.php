@@ -34,8 +34,8 @@ class PagesMethod extends MethodClass
      */
     public function __invoke(array $args = [])
     {
-        $cache = CacheConfig::getCache('page');
-        $cache->setContext($this->getContext());
-        return $cache->modifyConfig($args);
+        $cacheConfig = CacheConfig::getCache('page');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->modifyConfig($args);
     }
 }

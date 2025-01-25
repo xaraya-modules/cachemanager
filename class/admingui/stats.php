@@ -213,7 +213,7 @@ class StatsMethod extends MethodClass
                         unset($keys);
                         unset($items);
                         sys::import('xaraya.pager');
-                        $data['pager'] = xarTplPager::getPager(
+                        $data['pager'] = $this->tpl()->getPager(
                             $startnum,
                             $count,
                             $this->mod()->getURL(
@@ -304,7 +304,7 @@ class StatsMethod extends MethodClass
                         $data['items'] = $items;
                         unset($keys);
                         unset($items);
-                        $data['pager'] = xarTplPager::getPager(
+                        $data['pager'] = $this->tpl()->getPager(
                             $startnum,
                             $count,
                             $this->mod()->getURL(

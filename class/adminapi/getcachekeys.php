@@ -34,6 +34,7 @@ class GetcachekeysMethod extends MethodClass
      * @param array<mixed> $args
      * @var string $type cachetype to get the cache keys from
      * @return array sorted array of cachekeys
+     * @see AdminApi::getcachekeys()
      */
     public function __invoke(array $args = ['type' => ''])
     {

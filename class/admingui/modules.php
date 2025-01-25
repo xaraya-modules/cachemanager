@@ -34,8 +34,8 @@ class ModulesMethod extends MethodClass
      */
     public function __invoke(array $args = [])
     {
-        $cache = CacheConfig::getCache('module');
-        $cache->setContext($this->getContext());
-        return $cache->modifyConfig($args);
+        $cacheConfig = CacheConfig::getCache('module');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->modifyConfig($args);
     }
 }

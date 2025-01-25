@@ -31,12 +31,13 @@ class GetcachedirsMethod extends MethodClass
      * @param mixed $dir directory to start the search for subdirectories in
      * @return array sorted array of cache sub directories, with key set to directory name and value set to path
      * @todo do not include empty directories in the array
+     * @see AdminApi::getcachedirs()
      */
     public function __invoke($dir = false)
     {
         $cachedirs = [];
 
-        if ($dir && is_dir($dir)) {
+        if (!empty($dir) && is_dir($dir)) {
             if (substr($dir, -1) != "/") {
                 $dir .= "/";
             }

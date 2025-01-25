@@ -31,14 +31,15 @@ class GetblocksMethod extends MethodClass
      * get configuration of block caching for all blocks
      * @uses BlockCache::getConfig()
      * @return array Block caching configurations
+     * @see AdminApi::getblocks()
      */
     public function __invoke(array $args = [])
     {
         extract($args);
 
         // Get all block cache settings
-        $cache = CacheConfig::getCache('block');
-        $cache->setContext($this->getContext());
-        return $cache->getConfig();
+        $cacheConfig = CacheConfig::getCache('block');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->getConfig();
     }
 }

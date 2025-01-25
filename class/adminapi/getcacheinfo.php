@@ -34,6 +34,7 @@ class GetcacheinfoMethod extends MethodClass
      * @param array<mixed> $args
      * @var string $type cachetype to start the search for cacheinfo
      * @return array array of cacheinfo
+     * @see AdminApi::getcacheinfo()
      */
     public function __invoke(array $args = ['type' => ''])
     {

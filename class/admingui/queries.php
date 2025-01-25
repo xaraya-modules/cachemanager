@@ -34,8 +34,8 @@ class QueriesMethod extends MethodClass
      */
     public function __invoke(array $args = [])
     {
-        $cache = CacheConfig::getCache('query');
-        $cache->setContext($this->getContext());
-        return $cache->modifyConfig($args);
+        $cacheConfig = CacheConfig::getCache('query');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->modifyConfig($args);
     }
 }

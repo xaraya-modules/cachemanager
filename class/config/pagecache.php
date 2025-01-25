@@ -25,7 +25,6 @@ use xarModVars;
 use xarMod;
 use xarServer;
 use xarController;
-use xarResponse;
 use xarMLS;
 use sys;
 

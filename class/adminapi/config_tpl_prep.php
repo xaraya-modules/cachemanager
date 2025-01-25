@@ -34,6 +34,7 @@ class ConfigTplPrepMethod extends MethodClass
      * @uses CacheManager::config_tpl_prep()
      * @param array $cachingConfiguration cachingConfiguration to be prep for a template
      * @return array of cachingConfiguration with '.' removed from keys or void
+     * @see AdminApi::configTplPrep()
      */
     public function __invoke(array $cachingConfiguration = [])
     {

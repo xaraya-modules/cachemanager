@@ -34,6 +34,7 @@ class GetcacheitemMethod extends MethodClass
      * @param array<mixed> $args
      * @var string $type cachetype to get the cache item from, with $args['key'] the cache key
      * @return array array of cacheitem
+     * @see AdminApi::getcacheitem()
      */
     public function __invoke($args = ['type' => '', 'key' => '', 'code' => ''])
     {

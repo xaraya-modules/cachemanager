@@ -38,6 +38,7 @@ class GetCachingconfigMethod extends MethodClass
      * @var bool $args['tpl_prep'] prep the config for use in templates
      * @var bool $args['viahook'] config value requested as part of a hook call
      * @return array of caching configuration settings
+     * @see AdminApi::getCachingconfig()
      */
     public function __invoke(array $args = [])
     {

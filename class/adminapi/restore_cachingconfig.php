@@ -33,6 +33,7 @@ class RestoreCachingconfigMethod extends MethodClass
      * @access public
      * @uses CacheManager::restore_config()
      * @return bool
+     * @see AdminApi::restoreCachingconfig()
      */
     public function __invoke(array $args = [])
     {

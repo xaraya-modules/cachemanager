@@ -25,7 +25,7 @@ sys::import('xaraya.modules.adminapi');
  * @method mixed deletehook(array $args)
  * @method mixed getCachingconfig(array $args)
  * @method mixed getblocks(array $args)
- * @method mixed getcachedirs(array $args)
+ * @method mixed getcachedirs(mixed $dir = false)
  * @method mixed getcacheinfo(array $args)
  * @method mixed getcacheitem(array $args)
  * @method mixed getcachekeys(array $args)

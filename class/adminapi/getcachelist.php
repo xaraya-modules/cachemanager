@@ -34,6 +34,7 @@ class GetcachelistMethod extends MethodClass
      * @param array<mixed> $args
      * @var string $type cachetype to get the cache items from
      * @return array array of cache items
+     * @see AdminApi::getcachelist()
      */
     public function __invoke(array $args = ['type' => ''])
     {

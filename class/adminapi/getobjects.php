@@ -31,14 +31,15 @@ class GetobjectsMethod extends MethodClass
      * get configuration of object caching for all objects
      * @uses ObjectCache::getConfig()
      * @return array object caching configurations
+     * @see AdminApi::getobjects()
      */
     public function __invoke(array $args = [])
     {
         extract($args);
 
         // Get all object cache settings
-        $cache = CacheConfig::getCache('object');
-        $cache->setContext($this->getContext());
-        return $cache->getConfig();
+        $cacheConfig = CacheConfig::getCache('object');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->getConfig();
     }
 }

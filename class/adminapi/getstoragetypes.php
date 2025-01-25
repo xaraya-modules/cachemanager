@@ -30,6 +30,7 @@ class GetstoragetypesMethod extends MethodClass
      *
      * @author jsb
      * @return array Storage types, with key set to storage type and value set to its settings
+     * @see AdminApi::getstoragetypes()
      */
     public function __invoke(array $args = [])
     {

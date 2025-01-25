@@ -31,6 +31,7 @@ class GetstatusMethod extends MethodClass
      * utility function pass caching status to admin menu
      * @author jsb| mikespub
      * @return array containing the caching status.
+     * @see AdminApi::getstatus()
      */
     public function __invoke(array $args = [])
     {

@@ -34,8 +34,8 @@ class BlocksMethod extends MethodClass
      */
     public function __invoke(array $args = [])
     {
-        $cache = CacheConfig::getCache('block');
-        $cache->setContext($this->getContext());
-        return $cache->modifyConfig($args);
+        $cacheConfig = CacheConfig::getCache('block');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->modifyConfig($args);
     }
 }

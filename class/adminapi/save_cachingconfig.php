@@ -34,6 +34,7 @@ class SaveCachingconfigMethod extends MethodClass
      * @uses CacheManager::save_config()
      * @param array<mixed> $args
      * @var mixed $args['config'] array of config labels and values
+     * @see AdminApi::saveCachingconfig()
      */
     public function __invoke(array $args = [])
     {

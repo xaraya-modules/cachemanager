@@ -31,14 +31,15 @@ class GetqueriesMethod extends MethodClass
      * get configuration of query caching for expensive queries
      * @uses QueryCache::getConfig()
      * @return array of query caching configurations
+     * @see AdminApi::getqueries()
      */
     public function __invoke(array $args = [])
     {
         extract($args);
 
         // Get all query cache settings
-        $cache = CacheConfig::getCache('query');
-        $cache->setContext($this->getContext());
-        return $cache->getConfig();
+        $cacheConfig = CacheConfig::getCache('query');
+        $cacheConfig->setContext($this->getContext());
+        return $cacheConfig->getConfig();
     }
 }
