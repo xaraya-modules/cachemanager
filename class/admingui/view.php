@@ -11,7 +11,6 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
-
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheInfo;
 use Xaraya\Modules\MethodClass;
@@ -102,7 +101,7 @@ class ViewMethod extends MethodClass
 
         // Generate a one-time authorisation code for this operation
         $data['authid'] = $this->sec()->genAuthKey();
-        $data['return_url'] = $this->mod()->getURL( 'admin', 'stats', ['tab' => $tab]);
+        $data['return_url'] = $this->mod()->getURL('admin', 'stats', ['tab' => $tab]);
         return $data;
     }
 }

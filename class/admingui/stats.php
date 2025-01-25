@@ -349,7 +349,7 @@ class StatsMethod extends MethodClass
                         'hits'    => 0,
                         'misses'  => 0,
                         'modtime' => 0, ];
-                    if ($data['status'][$enabled] && !empty($data['settings'][$storage])) {
+                    if (!empty($data['status'][$enabled]) && !empty($data['settings'][$storage])) {
                         if (empty($data['settings'][$provider])) {
                             $data['settings'][$provider] = null;
                         }
@@ -375,7 +375,7 @@ class StatsMethod extends MethodClass
                         $data[$cachevar]['ratio'] = 0.0;
                     }
                     // get logfile stats
-                    if ($data['status'][$enabled] && !empty($data['settings'][$logfile])) {
+                    if (!empty($data['status'][$enabled]) && !empty($data['settings'][$logfile])) {
                         $data[$logvar] = [];
                         // status field = 1
                         $statsApi->filestats($data[$logvar], $data['settings'][$logfile], 1, 1);
@@ -390,7 +390,7 @@ class StatsMethod extends MethodClass
                 $data['settings']['QueryCacheStorage'] = 'filesystem';
                 $data['querycache'] = ['size'  => 0,
                     'items' => 0, ];
-                if ($data['status']['QueryCachingEnabled'] && !empty($data['settings']['QueryCacheStorage'])) {
+                if (!empty($data['status']['QueryCachingEnabled']) && !empty($data['settings']['QueryCacheStorage'])) {
                     $querystorage = xarCache::getStorage(['storage'  => $data['settings']['QueryCacheStorage'],
                         'type'     => 'database',
                         'cachedir' => sys::varpath() . '/cache', ]);
@@ -400,7 +400,7 @@ class StatsMethod extends MethodClass
 
                 // get auto-cache stats
                 $data['settings']['AutoCacheLogFile'] = $outputCacheDir . '/autocache.log';
-                if ($data['status']['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheLogFile'])) {
+                if (!empty($data['status']['AutoCachingEnabled']) && !empty($data['settings']['AutoCacheLogFile'])) {
                     $data['autocachelog'] = [];
                     // status field = 1
                     $statsApi->filestats($data['autocachelog'], $data['settings']['AutoCacheLogFile'], 1, 1);
@@ -408,12 +408,12 @@ class StatsMethod extends MethodClass
                         $data['autocachelog']['size'] = round($data['autocachelog']['size'] / 1048576, 2);
                     }
                 }
-                if ($data['status']['AutoCachingEnabled'] && file_exists($outputCacheDir . '/autocache.stats')) {
+                if (!empty($data['status']['AutoCachingEnabled']) && file_exists($outputCacheDir . '/autocache.stats')) {
                     $data['settings']['AutoCacheStatFile'] = $outputCacheDir . '/autocache.stats';
                 } else {
                     $data['settings']['AutoCacheStatFile'] = '';
                 }
-                if ($data['status']['AutoCachingEnabled'] && !empty($data['settings']['AutoCacheStatFile'])) {
+                if (!empty($data['status']['AutoCachingEnabled']) && !empty($data['settings']['AutoCacheStatFile'])) {
                     $data['autocachestat'] = [];
                     // hit field = 1, miss field = 2
                     $statsApi->filestats($data['autocachestat'], $data['settings']['AutoCacheStatFile'], 1, 2);

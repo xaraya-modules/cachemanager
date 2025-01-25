@@ -11,7 +11,6 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
-
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\MethodClass;

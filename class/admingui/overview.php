@@ -11,7 +11,6 @@
 
 namespace Xaraya\Modules\CacheManager\AdminGui;
 
-
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\MethodClass;
 use xarTpl;

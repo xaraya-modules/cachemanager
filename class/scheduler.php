@@ -6,7 +6,7 @@
  * @package modules\cachemanager
  * @subpackage cachemanager
  * @category Xaraya Web Applications Framework
- * @version 2.4.0
+ * @version 2.6.2
  * @copyright see the html/credits.html file in this release
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link http://xaraya.info/index.php/release/182.html
@@ -16,13 +16,73 @@
 
 namespace Xaraya\Modules\CacheManager;
 
+use xarCache;
 use xarObject;
+use xarOutputCache;
+use xarPageCache;
 use xarMod;
 use xarServer;
+use sys;
 
 class CacheScheduler extends xarObject
 {
     public static function init(array $args = []) {}
+
+    /**
+     * regenerate the page output cache of URLs in the session-less list
+     * @author jsb
+     *
+     * @return string
+     */
+    public static function regenstatic($nolimit = null)
+    {
+        $method = __METHOD__;
+        $logs = [];
+        $logs[] = "$method start";
+        $urls = [];
+        $outputCacheDir = sys::varpath() . '/cache/output/';
+
+        // make sure output caching is really enabled, and that we are caching pages
+        if (!xarCache::isOutputCacheEnabled() || !xarOutputCache::isPageCacheEnabled()) {
+            $logs[] = "$method no page caching";
+            $logs[] = "$method stop";
+            return implode("\n", $logs);
+        }
+
+        // flush the static pages
+        xarPageCache::flushCached('static');
+
+        $configKeys = ['Page.SessionLess'];
+        $sessionlessurls = CacheManager::get_config(
+            ['keys' => $configKeys, 'from' => 'file', 'viahook' => true]
+        );
+
+        $urls = $sessionlessurls['Page.SessionLess'];
+
+        if (!$nolimit) {
+            // randomize the order of the urls just in case the timelimit cuts the
+            // process short - no need to always drop the same pages.
+            shuffle($urls);
+
+            // set a time limit for the regeneration
+            // TODO: make the timelimit variable and configurable.
+            $timelimit = time() + 10;
+        }
+
+        foreach ($urls as $url) {
+            $logs[] = "$method get $url";
+            // Make sure the url isn't empty before calling getfile()
+            if (strlen(trim($url))) {
+                xarMod::apiFunc('base', 'user', 'getfile', ['url' => $url, 'superrors' => true]);
+            }
+            if (!$nolimit && time() > $timelimit) {
+                break;
+            }
+        }
+        $logs[] = "$method stop";
+
+        return implode("\n", $logs);
+    }
 
     /**
      * This is a poor-man's alternative for using wget in a cron job :

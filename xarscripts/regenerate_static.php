@@ -53,10 +53,10 @@ sys::import('xaraya.core');
 // Load the core with all optional systems loaded
 xarCore::xarInit(xarCore::SYSTEM_ALL);
 
-sys::import('modules.cachemanager.class.hooks');
-use Xaraya\Modules\CacheManager\CacheHooks;
+sys::import('modules.cachemanager.class.scheduler');
+use Xaraya\Modules\CacheManager\CacheScheduler;
 
-$result = CacheHooks::regenstatic();
+$result = CacheScheduler::regenstatic();
 if (empty($result)) {
     $result = "Done";
 } elseif (is_array($result)) {

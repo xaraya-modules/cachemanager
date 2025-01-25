@@ -3,7 +3,7 @@
 /**
  * @package modules\cachemanager
  * @category Xaraya Web Applications Framework
- * @version 2.5.7
+ * @version 2.6.2
  * @copyright see the html/credits.html file in this release
  * @license GPL {@link http://www.gnu.org/licenses/gpl.html}
  * @link https://github.com/mikespub/xaraya-modules
@@ -11,9 +11,8 @@
 
 namespace Xaraya\Modules\CacheManager\AdminApi;
 
-
 use Xaraya\Modules\CacheManager\AdminApi;
-use Xaraya\Modules\CacheManager\CacheHooks;
+use Xaraya\Modules\CacheManager\CacheScheduler;
 use Xaraya\Modules\MethodClass;
 use sys;
 use BadParameterException;
@@ -31,11 +30,12 @@ class RegenstaticMethod extends MethodClass
     /**
      * regenerate the page output cache of URLs in the session-less list
      * @author jsb
-     * @uses CacheHooks::regenstatic()
+     * @uses CacheScheduler::regenstatic()
      * @return void
+     * @see AdminApi::regenstatic()
      */
-    public function __invoke($nolimit = null)
+    public function __invoke($nolimit = null): void
     {
-        CacheHooks::regenstatic($nolimit);
+        CacheScheduler::regenstatic($nolimit);
     }
 }
