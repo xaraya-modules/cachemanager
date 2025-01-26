@@ -25,13 +25,11 @@ use xarMLS;
 use Exception;
 use sys;
 
-sys::import('xaraya.services.hasdatabasetrait');
-use Xaraya\Services\HasDatabaseStaticTrait;
+sys::import('xaraya.facades.database');
+use Xaraya\Facades\xarDB3;
 
 class CacheManager extends xarObject
 {
-    use HasDatabaseStaticTrait;
-
     public static function init(array $args = []) {}
 
     /**
@@ -151,8 +149,8 @@ class CacheManager extends xarObject
         $modBaseInfo = xarMod::getBaseInfo('cachemanager');
         //if (!isset($modBaseInfo)) return; // throw back
 
-        $dbconn = self::xarDB()->getConn();
-        $tables = self::xarDB()->getTables();
+        $dbconn = xarDB3::getConn();
+        $tables = xarDB3::getTables();
         $module_varstable = $tables['module_vars'];
 
         $sql = "SELECT $module_varstable.xar_name, $module_varstable.xar_value FROM $module_varstable WHERE $module_varstable.xar_modid = ?";
