@@ -141,8 +141,8 @@ class ObjectCache extends CacheConfig
         foreach (array_keys($objects) as $id) {
             // TODO: filter on visibility, dummy datastores etc. ?
             if ($objects[$id]['objectid'] < 4 ||
-                $objects[$id]['moduleid'] == xarMod::getRegId('roles') ||
-                $objects[$id]['moduleid'] == xarMod::getRegId('privileges')) {
+                $objects[$id]['moduleid'] == xarMod::getRegID('roles') ||
+                $objects[$id]['moduleid'] == xarMod::getRegID('privileges')) {
                 continue;
             }
             // use the object name as key for easy lookup in xarObjectCache

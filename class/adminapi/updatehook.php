@@ -73,10 +73,10 @@ class UpdatehookMethod extends MethodClass
             if (!empty($extrainfo['module'])) {
                 $modname = $extrainfo['module'];
             } else {
-                $modname = xarMod::getName();
+                $modname = $this->mod()->getName();
             }
         }
-        $modid = xarMod::getRegId($modname);
+        $modid = $this->mod()->getRegID($modname);
         if (empty($modid)) {
             $msg = $this->ml(
                 'Invalid #(1) for #(2) function #(3)() in module #(4)',
@@ -211,7 +211,7 @@ class UpdatehookMethod extends MethodClass
             case 'html': // keep falling through
                 // delete cachekey of each module autolinks is hooked to.
                 if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
-                    $hooklist = xarMod::apiFunc('modules', 'admin', 'gethooklist');
+                    $hooklist = $this->mod()->apiFunc('modules', 'admin', 'gethooklist');
                     $modhooks = reset($hooklist[$modname]);
 
                     foreach ($modhooks as $hookedmodname => $hookedmod) {

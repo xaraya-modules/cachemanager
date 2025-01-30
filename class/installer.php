@@ -194,18 +194,7 @@ class Installer extends InstallerClass
         // set up permissions masks.
         xarMasks::register('ReadXarCache', 'All', 'cachemanager', 'Item', 'All:All:All', 'ACCESS_READ');
         xarMasks::register('AdminXarCache', 'All', 'cachemanager', 'Item', 'All:All:All', 'ACCESS_ADMIN');
-        /*
-            if (xarSystemVars::get('DB.UseADODBCache')){
-                // Enable query caching for categories getcat
-                if ($this->mod()->isAvailable('categories')) {
-                    xarModVars::set('categories','cache.userapi.getcat',60);
-                }
-                // Enable query caching for comments get_author_count
-                if ($this->mod()->isAvailable('comments')) {
-                    xarModVars::set('comments','cache.userapi.get_author_count',60);
-                }
-            }
-        */
+
         // add the database storage table
         $this->create_cache_data();
 

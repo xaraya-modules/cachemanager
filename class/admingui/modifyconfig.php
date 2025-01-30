@@ -58,7 +58,7 @@ class ModifyconfigMethod extends MethodClass
         // get cache status
         $data['status'] = $adminapi->getstatus();
 
-        $data['CookieName'] =  (xarConfigVars::get(null, 'Site.Session.CookieName') != '') ? xarConfigVars::get(null, 'Site.Session.CookieName') : 'XARAYASID';
+        $data['CookieName'] =  ($this->config()->getVar('Site.Session.CookieName') != '') ? $this->config()->getVar('Site.Session.CookieName') : 'XARAYASID';
         $data['cookieupdatelink'] = $this->ctl()->getModuleURL('base', 'admin', 'modifyconfig', ['tab' => 'security']);
         $data['defaultlocale'] = xarMLS::getSiteLocale();
         $data['localeupdatelink'] = $this->ctl()->getModuleURL('base', 'admin', 'modifyconfig', ['tab' => 'locales']);
@@ -164,7 +164,7 @@ class ModifyconfigMethod extends MethodClass
 
         // get the themes list
         $filter['Class'] = 2;
-        $data['themes'] = xarMod::apiFunc(
+        $data['themes'] = $this->mod()->apiFunc(
             'themes',
             'admin',
             'getlist',

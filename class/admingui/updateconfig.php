@@ -244,7 +244,7 @@ class UpdateconfigMethod extends MethodClass
         $configSettings = [];
         $configSettings['Output.DefaultTheme'] = $cachetheme;
         $configSettings['Output.SizeLimit'] = $cachesizelimit;
-        $configSettings['Output.CookieName'] = xarConfigVars::get(null, 'Site.Session.CookieName');
+        $configSettings['Output.CookieName'] = $this->config()->getVar('Site.Session.CookieName');
         if (empty($configSettings['Output.CookieName'])) {
             $configSettings['Output.CookieName'] = 'XARAYASID';
         }

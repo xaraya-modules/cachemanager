@@ -84,7 +84,7 @@ class ModifyhookMethod extends MethodClass
         // When called via hooks, the module name may be empty, so we get it from
         // the current module
         if (empty($extrainfo['module'])) {
-            $modname = xarMod::getName();
+            $modname = $this->mod()->getName();
         } else {
             $modname = $extrainfo['module'];
         }
@@ -94,7 +94,7 @@ class ModifyhookMethod extends MethodClass
             return '';
         }
 
-        $modid = xarMod::getRegId($modname);
+        $modid = $this->mod()->getRegID($modname);
         if (empty($modid)) {
             $msg = $this->ml(
                 'Invalid #(1) for #(2) function #(3)() in module #(4)',
@@ -135,10 +135,10 @@ class ModifyhookMethod extends MethodClass
             $userShared = 0;
             $blockCacheExpireTime = null;
             // Get the instance details.
-            $instance = xarMod::apiFunc('blocks', 'user', 'get', ['bid' => $itemid]);
+            $instance = $this->mod()->apiFunc('blocks', 'user', 'get', ['bid' => $itemid]);
             // Try loading some defaults from the block init array (cfr. articles/random)
             if (!empty($instance) && !empty($instance['module']) && !empty($instance['type'])) {
-                $initresult = xarMod::apiFunc(
+                $initresult = $this->mod()->apiFunc(
                     'blocks',
                     'user',
                     'read_type_init',
