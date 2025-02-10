@@ -16,7 +16,7 @@ final class AdminApiTest extends TestHelper
     public function testAdminApi(): void
     {
         $expected = AdminApi::class;
-        $adminapi = xarMod::getModule('cachemanager')->getAdminAPI();
+        $adminapi = xarMod::getModule('cachemanager')->adminapi();
         $this->assertEquals($expected, $adminapi::class);
     }
 

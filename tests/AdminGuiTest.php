@@ -19,7 +19,7 @@ final class AdminGuiTest extends TestHelper
     public function testAdminGui(): void
     {
         $expected = AdminGui::class;
-        $admingui = xarMod::getModule('cachemanager')->getAdminGUI();
+        $admingui = xarMod::getModule('cachemanager')->admingui();
         $this->assertEquals($expected, $admingui::class);
     }
 
