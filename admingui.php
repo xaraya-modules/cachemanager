@@ -15,7 +15,7 @@ use Xaraya\Modules\AdminGuiClass;
 use sys;
 
 sys::import('xaraya.modules.admingui');
-sys::import('modules.cachemanager.class.adminapi');
+sys::import('modules.cachemanager.adminapi');
 
 /**
  * Handle the cachemanager admin GUI
