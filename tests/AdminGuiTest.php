@@ -1,7 +1,12 @@
 <?php
 
+namespace Xaraya\Modules\CacheManager\Tests;
+
 use Xaraya\Modules\TestHelper;
 use Xaraya\Modules\CacheManager\AdminGui;
+use xarController;
+use xarMod;
+use xarTpl;
 
 final class AdminGuiTest extends TestHelper
 {

@@ -1,7 +1,10 @@
 <?php
 
+namespace Xaraya\Modules\CacheManager\Tests;
+
 use Xaraya\Modules\TestHelper;
 use Xaraya\Modules\CacheManager\AdminApi;
+use xarMod;
 
 final class AdminApiTest extends TestHelper
 {
