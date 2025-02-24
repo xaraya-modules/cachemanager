@@ -108,10 +108,10 @@ class UpdatehookMethod extends MethodClass
                 //  even when output caching has been temporarily disabled)
                 if (xarOutputCache::isBlockCacheEnabled() &&
                     $this->sec()->checkAccess('AdminXarCache', 0)) {
-                    $this->var()->fetch('nocache', 'isset', $nocache, 0, xarVar::NOT_REQUIRED);
-                    $this->var()->fetch('pageshared', 'isset', $pageshared, 0, xarVar::NOT_REQUIRED);
-                    $this->var()->fetch('usershared', 'isset', $usershared, 0, xarVar::NOT_REQUIRED);
-                    $this->var()->fetch('cacheexpire', 'str:1:9', $cacheexpire, null, xarVar::NOT_REQUIRED);
+                    $this->var()->find('nocache', $nocache, 'isset', 0);
+                    $this->var()->find('pageshared', $pageshared, 'isset', 0);
+                    $this->var()->find('usershared', $usershared, 'isset', 0);
+                    $this->var()->find('cacheexpire', $cacheexpire, 'str:1:9', null);
 
                     if (empty($nocache)) {
                         $nocache = 0;
