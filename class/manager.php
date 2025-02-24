@@ -147,7 +147,7 @@ class CacheManager extends xarObject
         }
 
         $modBaseInfo = xarMod::getBaseInfo('cachemanager');
-        //if (!isset($modBaseInfo)) return; // throw back
+        //if (empty($modBaseInfo)) return; // throw back
 
         $dbconn = xarDB3::getConn();
         $tables = xarDB3::getTables();
