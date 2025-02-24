@@ -297,7 +297,7 @@ class Installer extends InstallerClass
                     if (!file_exists($outputCacheDir . 'cache.blocklevel')) {
                         touch($outputCacheDir . 'cache.blocklevel');
                     }
-                    xarModVars::delete('cachemanager', 'CacheBlockOutput');
+                    $this->mod('cachemanager')->delVar('CacheBlockOutput');
                 }
                 // no break
             case '0.3.1':

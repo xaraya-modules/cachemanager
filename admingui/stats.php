@@ -57,21 +57,11 @@ class StatsMethod extends MethodClass
         }
 
         extract($args);
-        if (!$this->var()->find('tab', $tab, 'str', 'overview')) {
-            return;
-        }
-        if (!$this->var()->find('sort', $sort, 'str', '')) {
-            return;
-        }
-        if (!$this->var()->find('reset', $reset, 'str', '')) {
-            return;
-        }
-        if (!$this->var()->find('startnum', $startnum, 'int', 1)) {
-            return;
-        }
-        if (!$this->var()->find('withlog', $withlog, 'int', 0)) {
-            return;
-        }
+        $this->var()->find('tab', $tab, 'str', 'overview');
+        $this->var()->find('sort', $sort, 'str', '');
+        $this->var()->find('reset', $reset, 'str', '');
+        $this->var()->find('startnum', $startnum, 'int', 1);
+        $this->var()->find('withlog', $withlog, 'int', 0);
 
         // Get the output cache directory so you can view stats even if output caching is disabled
         $outputCacheDir = xarCache::getOutputCacheDir();
@@ -323,9 +313,7 @@ class StatsMethod extends MethodClass
             case 'overview':
             default:
                 // set items per page
-                if (!$this->var()->find('itemsperpage', $itemsperpage, 'int', 0)) {
-                    return;
-                }
+                $this->var()->find('itemsperpage', $itemsperpage, 'int', 0);
                 if (!empty($itemsperpage)) {
                     $this->mod()->setVar('itemsperpage', $itemsperpage);
                     $data['itemsperpage'] = $itemsperpage;

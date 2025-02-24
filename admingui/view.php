@@ -44,15 +44,9 @@ class ViewMethod extends MethodClass
     {
         extract($args);
 
-        if (!$this->var()->find('tab', $tab, 'str')) {
-            return;
-        }
-        if (!$this->var()->find('key', $key, 'str')) {
-            return;
-        }
-        if (!$this->var()->find('code', $code, 'str')) {
-            return;
-        }
+        $this->var()->find('tab', $tab, 'str');
+        $this->var()->find('key', $key, 'str');
+        $this->var()->find('code', $code, 'str');
 
         if (empty($tab)) {
             $this->ctl()->redirect($this->mod()->getURL('admin', 'stats'));

@@ -44,100 +44,40 @@ class UpdateconfigMethod extends MethodClass
     public function __invoke(array $args = [])
     {
         // Get parameters
-        if (!$this->var()->find('cacheenabled', $cacheenabled, 'isset', 0)) {
-            return;
-        }
-        if (!$this->var()->find('cachetheme', $cachetheme, 'str::24', '')) {
-            return;
-        }
-        if (!$this->var()->find('cachesizelimit', $cachesizelimit, 'float:0.25:', 2)) {
-            return;
-        }
+        $this->var()->find('cacheenabled', $cacheenabled, 'isset', 0);
+        $this->var()->find('cachetheme', $cachetheme, 'str::24', '');
+        $this->var()->find('cachesizelimit', $cachesizelimit, 'float:0.25:', 2);
 
-        if (!$this->var()->find('cachepages', $cachepages, 'isset', 0)) {
-            return;
-        }
-        if (!$this->var()->find('pageexpiretime', $pageexpiretime, 'str:1:9', '00:30:00')) {
-            return;
-        }
-        if (!$this->var()->find('pagedisplayview', $pagedisplayview, 'int:0:1', 0)) {
-            return;
-        }
-        if (!$this->var()->find('pagetimestamp', $pagetimestamp, 'int:0:1', 0)) {
-            return;
-        }
-        if (!$this->var()->find('expireheader', $expireheader, 'int:0:1', 0)) {
-            return;
-        }
-        if (!$this->var()->find('pagehookedonly', $pagehookedonly, 'int:0:1', 0)) {
-            return;
-        }
-        if (!$this->var()->find('autoregenerate', $autoregenerate, 'isset', 0)) {
-            return;
-        }
-        if (!$this->var()->find('pagecachestorage', $pagecachestorage, 'str:1', 'filesystem')) {
-            return;
-        }
-        if (!$this->var()->find('pagelogfile', $pagelogfile, 'str', '')) {
-            return;
-        }
-        if (!$this->var()->find('pagesizelimit', $pagesizelimit, 'float:0.25:', 2)) {
-            return;
-        }
+        $this->var()->find('cachepages', $cachepages, 'isset', 0);
+        $this->var()->find('pageexpiretime', $pageexpiretime, 'str:1:9', '00:30:00');
+        $this->var()->find('pagedisplayview', $pagedisplayview, 'int:0:1', 0);
+        $this->var()->find('pagetimestamp', $pagetimestamp, 'int:0:1', 0);
+        $this->var()->find('expireheader', $expireheader, 'int:0:1', 0);
+        $this->var()->find('pagehookedonly', $pagehookedonly, 'int:0:1', 0);
+        $this->var()->find('autoregenerate', $autoregenerate, 'isset', 0);
+        $this->var()->find('pagecachestorage', $pagecachestorage, 'str:1', 'filesystem');
+        $this->var()->find('pagelogfile', $pagelogfile, 'str', '');
+        $this->var()->find('pagesizelimit', $pagesizelimit, 'float:0.25:', 2);
 
-        if (!$this->var()->find('cacheblocks', $cacheblocks, 'isset', 0)) {
-            return;
-        }
-        if (!$this->var()->find('blockexpiretime', $blockexpiretime, 'str:1:9', '0')) {
-            return;
-        }
-        if (!$this->var()->find('blockcachestorage', $blockcachestorage, 'str:1', 'filesystem')) {
-            return;
-        }
-        if (!$this->var()->find('blocklogfile', $blocklogfile, 'str', '')) {
-            return;
-        }
-        if (!$this->var()->find('blocksizelimit', $blocksizelimit, 'float:0.25:', 2)) {
-            return;
-        }
+        $this->var()->find('cacheblocks', $cacheblocks, 'isset', 0);
+        $this->var()->find('blockexpiretime', $blockexpiretime, 'str:1:9', '0');
+        $this->var()->find('blockcachestorage', $blockcachestorage, 'str:1', 'filesystem');
+        $this->var()->find('blocklogfile', $blocklogfile, 'str', '');
+        $this->var()->find('blocksizelimit', $blocksizelimit, 'float:0.25:', 2);
 
-        if (!$this->var()->find('cachemodules', $cachemodules, 'isset', 0)) {
-            return;
-        }
-        if (!$this->var()->find('moduleexpiretime', $moduleexpiretime, 'str:1:9', '02:00:00')) {
-            return;
-        }
-        if (!$this->var()->find('modulecachestorage', $modulecachestorage, 'str:1', 'filesystem')) {
-            return;
-        }
-        if (!$this->var()->find('modulelogfile', $modulelogfile, 'str', '')) {
-            return;
-        }
-        if (!$this->var()->find('modulesizelimit', $modulesizelimit, 'float:0.25:', 2)) {
-            return;
-        }
-        if (!$this->var()->find('modulefunctions', $modulefunctions, 'isset', [])) {
-            return;
-        }
+        $this->var()->find('cachemodules', $cachemodules, 'isset', 0);
+        $this->var()->find('moduleexpiretime', $moduleexpiretime, 'str:1:9', '02:00:00');
+        $this->var()->find('modulecachestorage', $modulecachestorage, 'str:1', 'filesystem');
+        $this->var()->find('modulelogfile', $modulelogfile, 'str', '');
+        $this->var()->find('modulesizelimit', $modulesizelimit, 'float:0.25:', 2);
+        $this->var()->find('modulefunctions', $modulefunctions, 'isset', []);
 
-        if (!$this->var()->find('cacheobjects', $cacheobjects, 'isset', 0)) {
-            return;
-        }
-        if (!$this->var()->find('objectexpiretime', $objectexpiretime, 'str:1:9', '02:00:00')) {
-            return;
-        }
-        if (!$this->var()->find('objectcachestorage', $objectcachestorage, 'str:1', 'filesystem')) {
-            return;
-        }
-        if (!$this->var()->find('objectlogfile', $objectlogfile, 'str', '')) {
-            return;
-        }
-        if (!$this->var()->find('objectsizelimit', $objectsizelimit, 'float:0.25:', 2)) {
-            return;
-        }
-        if (!$this->var()->find('objectmethods', $objectmethods, 'isset', [])) {
-            return;
-        }
+        $this->var()->find('cacheobjects', $cacheobjects, 'isset', 0);
+        $this->var()->find('objectexpiretime', $objectexpiretime, 'str:1:9', '02:00:00');
+        $this->var()->find('objectcachestorage', $objectcachestorage, 'str:1', 'filesystem');
+        $this->var()->find('objectlogfile', $objectlogfile, 'str', '');
+        $this->var()->find('objectsizelimit', $objectsizelimit, 'float:0.25:', 2);
+        $this->var()->find('objectmethods', $objectmethods, 'isset', []);
 
         // Confirm authorisation code
         if (!$this->sec()->confirmAuthKey()) {

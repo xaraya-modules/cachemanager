@@ -60,7 +60,7 @@ class VariableCache extends CacheConfig
                 return;
             }
             xarConfigVars::delete(null, 'Site.Variable.CacheSettings');
-            xarModVars::delete('dynamicdata', 'variablecache_settings');
+            $this->mod('dynamicdata')->delVar('variablecache_settings');
         }
 
         $this->var()->get('submit', $submit, 'str', '');
@@ -94,7 +94,7 @@ class VariableCache extends CacheConfig
                 $newvariables[$name]['cacheexpire'] = $expire;
             }
             // save settings to dynamicdata in case cachemanager is removed later
-            xarModVars::set('dynamicdata', 'variablecache_settings', serialize($newvariables));
+            $this->mod('dynamicdata')->setVar('variablecache_settings', serialize($newvariables));
 
             // variables could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
@@ -118,7 +118,7 @@ class VariableCache extends CacheConfig
     {
         // Get all variable cache settings
         $variablesettings = [];
-        $serialsettings = xarModVars::get('dynamicdata', 'variablecache_settings');
+        $serialsettings = $this->mod('dynamicdata')->getVar('variablecache_settings');
         if (!empty($serialsettings)) {
             $variablesettings = unserialize($serialsettings);
         }

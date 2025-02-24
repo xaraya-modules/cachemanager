@@ -99,7 +99,7 @@ class ModuleCache extends CacheConfig
                 }
             }
             // save settings to modules in case cachemanager is removed later
-            xarModVars::set('modules', 'modulecache_settings', serialize($newmodules));
+            $this->mod('modules')->setVar('modulecache_settings', serialize($newmodules));
 
             // modules could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
@@ -130,7 +130,7 @@ class ModuleCache extends CacheConfig
     {
         // Get all module cache settings
         $modulesettings = [];
-        $serialsettings = xarModVars::get('modules', 'modulecache_settings');
+        $serialsettings = $this->mod('modules')->getVar('modulecache_settings');
         if (!empty($serialsettings)) {
             $modulesettings = unserialize($serialsettings);
         }

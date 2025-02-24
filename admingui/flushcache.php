@@ -54,12 +54,8 @@ class FlushcacheMethod extends MethodClass
 
         extract($args);
 
-        if (!$this->var()->find('flushkey', $flushkey)) {
-            return;
-        }
-        if (!$this->var()->find('confirm', $confirm, 'str:1:', '')) {
-            return;
-        }
+        $this->var()->find('flushkey', $flushkey);
+        $this->var()->find('confirm', $confirm, 'str:1:', '');
 
         /** @var AdminApi $adminapi */
         $adminapi = $this->adminapi();
@@ -100,9 +96,7 @@ class FlushcacheMethod extends MethodClass
                 );
 
                 // see if we need to delete an individual item instead of flushing the key
-                if (!$this->var()->find('cachecode', $cachecode)) {
-                    return;
-                }
+                $this->var()->find('cachecode', $cachecode);
 
                 $found = 0;
                 foreach ($flushkey as $type => $key) {
@@ -141,9 +135,7 @@ class FlushcacheMethod extends MethodClass
                 }
             }
 
-            if (!$this->var()->find('return_url', $return_url)) {
-                return;
-            }
+            $this->var()->find('return_url', $return_url);
             if (!empty($return_url)) {
                 $this->ctl()->redirect($return_url);
                 return;

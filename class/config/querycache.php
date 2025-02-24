@@ -61,9 +61,9 @@ class QueryCache extends CacheConfig
                     // stored in module variables (for now ?)
                     foreach ($querylist as $query => $time) {
                         if (empty($time) || !is_numeric($time)) {
-                            xarModVars::set($module, 'cache.' . $query, 0);
+                            $this->mod($module)->setVar('cache.' . $query, 0);
                         } else {
-                            xarModVars::set($module, 'cache.' . $query, $time);
+                            $this->mod($module)->setVar('cache.' . $query, $time);
                         }
                     }
                 }
@@ -116,7 +116,7 @@ class QueryCache extends CacheConfig
             $queries[$module] = [];
             foreach ($querylist as $query) {
                 // stored in module variables (for now ?)
-                $queries[$module][$query] = xarModVars::get($module, 'cache.' . $query);
+                $queries[$module][$query] = $this->mod($module)->getVar('cache.' . $query);
             }
         }
 

@@ -93,7 +93,7 @@ class ObjectCache extends CacheConfig
                 }
             }
             // save settings to dynamicdata in case cachemanager is removed later
-            xarModVars::set('dynamicdata', 'objectcache_settings', serialize($newobjects));
+            $this->mod('dynamicdata')->setVar('objectcache_settings', serialize($newobjects));
 
             // objects could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
@@ -124,7 +124,7 @@ class ObjectCache extends CacheConfig
     {
         // Get all object cache settings
         $objectsettings = [];
-        $serialsettings = xarModVars::get('dynamicdata', 'objectcache_settings');
+        $serialsettings = $this->mod('dynamicdata')->getVar('objectcache_settings');
         if (!empty($serialsettings)) {
             $objectsettings = unserialize($serialsettings);
         }
