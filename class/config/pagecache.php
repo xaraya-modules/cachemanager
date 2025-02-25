@@ -100,7 +100,7 @@ class PageCache extends CacheConfig
             $sessionlesslist = [];
             if (!empty($sessionless)) {
                 $urls = preg_split('/\s+/', $sessionless, -1, PREG_SPLIT_NO_EMPTY);
-                $baseurl = xarServer::getBaseURL();
+                $baseurl = $this->ctl()->getBaseURL();
                 foreach ($urls as $url) {
                     // jsb: hmmm, do we really want to limit the seesionless url list
                     // to those that are under the current baseurl?  I run my sites with
@@ -134,7 +134,7 @@ class PageCache extends CacheConfig
             $includelist = [];
             if (!empty($autocache['include'])) {
                 $urls = preg_split('/\s+/', $autocache['include'], -1, PREG_SPLIT_NO_EMPTY);
-                $baseurl = xarServer::getBaseURL();
+                $baseurl = $this->ctl()->getBaseURL();
                 foreach ($urls as $url) {
                     // jsb: cfr. above note on sessionless url check
                     if (empty($url) || !strstr($url, $baseurl)) {
@@ -146,7 +146,7 @@ class PageCache extends CacheConfig
             $excludelist = [];
             if (!empty($autocache['exclude'])) {
                 $urls = preg_split('/\s+/', $autocache['exclude'], -1, PREG_SPLIT_NO_EMPTY);
-                $baseurl = xarServer::getBaseURL();
+                $baseurl = $this->ctl()->getBaseURL();
                 foreach ($urls as $url) {
                     // jsb: cfr. above note on sessionless url check
                     if (empty($url) || !strstr($url, $baseurl)) {
@@ -240,7 +240,7 @@ class PageCache extends CacheConfig
             $data['settings']['AutoCacheMaxPages'] = 25;
         }
         if (!isset($data['settings']['AutoCacheInclude'])) {
-            $data['settings']['AutoCacheInclude'] = xarServer::getBaseURL() . "\n" . xarServer::getBaseURL() . 'index.php';
+            $data['settings']['AutoCacheInclude'] = $this->ctl()->getBaseURL() . "\n" . $this->ctl()->getBaseURL() . 'index.php';
         } elseif (is_array($data['settings']['AutoCacheInclude'])) {
             $data['settings']['AutoCacheInclude'] = join("\n", $data['settings']['AutoCacheInclude']);
         }
