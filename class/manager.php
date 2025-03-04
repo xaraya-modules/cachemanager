@@ -159,9 +159,8 @@ class CacheManager extends xarObject
             return;
         }
 
-        while (!$result->EOF) {
+        while ($result->next()) {
             [$name, $value] = $result->fields;
-            $result->MoveNext();
             if (substr($value, 0, 6) == 'array-') {
                 $value = substr($value, 6);
                 $value = unserialize($value);

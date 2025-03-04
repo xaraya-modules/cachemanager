@@ -170,9 +170,8 @@ class BlockCache extends CacheConfig
             $bid2key[$block['bid']] = $key;
         }
 
-        while (!$result->EOF) {
+        while ($result->next()) {
             [$bid, $nocache, $pageshared, $usershared, $cacheexpire] = $result->fields;
-            $result->MoveNext();
             if (!isset($bid2key[$bid])) {
                 continue;
             }

@@ -127,7 +127,7 @@ class ModifyhookMethod extends MethodClass
                  expire
                  FROM $blocksettings WHERE blockinstance_id = $itemid ";
         $result = & $dbconn->Execute($query);
-        if ($result && !$result->EOF) {
+        if ($result && $result->first()) {
             [$noCache, $pageShared, $userShared, $blockCacheExpireTime] = $result->fields;
         } else {
             $noCache = 0;
