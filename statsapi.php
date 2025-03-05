@@ -23,6 +23,12 @@ sys::import('xaraya.modules.adminapi');
  */
 class StatsApi extends AdminApiClass
 {
+    public function configure()
+    {
+        $this->setModType('stats');
+        // don't call xarMod:apiLoad() for cachemanager stats API
+    }
+
     /**
      * count the total number of lines, hits and misses in a logfile
      */
