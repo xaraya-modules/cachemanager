@@ -13,9 +13,7 @@ namespace Xaraya\Modules\CacheManager\AdminGui;
 
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\MethodClass;
-use xarTpl;
 use sys;
-use BadParameterException;
 
 sys::import('xaraya.modules.method');
 

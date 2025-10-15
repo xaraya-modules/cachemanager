@@ -15,16 +15,9 @@ use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarVar;
-use xarSec;
-use xarSecurity;
-use xarConfigVars;
 use xarMLS;
-use xarModVars;
 use xarCache;
-use xarController;
 use sys;
-use BadParameterException;
 
 sys::import('xaraya.modules.method');
 

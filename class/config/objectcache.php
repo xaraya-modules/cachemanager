@@ -16,13 +16,9 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarSecurity;
 use xarCache;
 use xarOutputCache;
 use xarPageCache;
-use xarVar;
-use xarSec;
-use xarModVars;
 use xarMod;
 use xarObjectCache;
 use sys;

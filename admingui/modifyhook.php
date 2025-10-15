@@ -14,12 +14,8 @@ namespace Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarSecurity;
 use xarCache;
 use xarOutputCache;
-use xarMod;
-use xarMLS;
-use xarTpl;
 use sys;
 use BadParameterException;
 

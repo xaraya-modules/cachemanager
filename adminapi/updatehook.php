@@ -15,18 +15,12 @@ use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheScheduler;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarSecurity;
 use xarCache;
 use xarOutputCache;
 use xarPageCache;
 use xarModuleCache;
 use xarBlockCache;
 use xarObjectCache;
-use xarVar;
-use xarMod;
-use xarModVars;
-use xarMLS;
-use DataObjectDescriptor;
 use sys;
 use BadParameterException;
 

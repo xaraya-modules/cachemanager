@@ -13,13 +13,9 @@ namespace Xaraya\Modules\CacheManager\AdminApi;
 
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\MethodClass;
-use xarSecurity;
-use xarController;
-use xarMLS;
 use xarCache;
 use xarOutputCache;
 use sys;
-use BadParameterException;
 
 sys::import('xaraya.modules.method');
 

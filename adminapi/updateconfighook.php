@@ -18,9 +18,6 @@ use xarCache;
 use xarOutputCache;
 use xarPageCache;
 use xarBlockCache;
-use xarMod;
-use xarModVars;
-use xarMLS;
 use sys;
 use BadParameterException;
 

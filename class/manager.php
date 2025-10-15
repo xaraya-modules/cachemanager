@@ -20,7 +20,6 @@ use xarObject;
 use xarSecurity;
 use xarMod;
 use xarModVars;
-use xarDB;
 use xarMLS;
 use Exception;
 use sys;

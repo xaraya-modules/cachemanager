@@ -15,7 +15,6 @@ use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\MethodClass;
 use sys;
-use BadParameterException;
 
 sys::import('xaraya.modules.method');
 

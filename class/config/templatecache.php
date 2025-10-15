@@ -16,9 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarSecurity;
-use xarVar;
-use xarSec;
 use sys;
 
 sys::import('modules.cachemanager.class.config');

@@ -20,10 +20,6 @@ use xarPageCache;
 use xarModuleCache;
 use xarBlockCache;
 use xarObjectCache;
-use xarMod;
-use xarModVars;
-use xarMLS;
-use DataObjectDescriptor;
 use sys;
 use BadParameterException;
 
