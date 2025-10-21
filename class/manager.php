@@ -24,8 +24,8 @@ use xarMLS;
 use Exception;
 use sys;
 
-sys::import('xaraya.facades.database');
-use Xaraya\Facades\xarDB3;
+sys::import('xaraya.services.xar');
+use Xaraya\Services\xar;
 
 class CacheManager extends xarObject
 {
@@ -148,8 +148,8 @@ class CacheManager extends xarObject
         $modBaseInfo = xarMod::getBaseInfo('cachemanager');
         //if (empty($modBaseInfo)) return; // throw back
 
-        $dbconn = xarDB3::getConn();
-        $tables = xarDB3::getTables();
+        $dbconn = xar::db()->getConn();
+        $tables = xar::db()->getTables();
         $module_varstable = $tables['module_vars'];
 
         $sql = "SELECT $module_varstable.xar_name, $module_varstable.xar_value FROM $module_varstable WHERE $module_varstable.xar_modid = ?";
