@@ -185,11 +185,6 @@ class PageCache extends CacheConfig
                 touch($outputCacheDir . '/autocache.start');
                 $fp = fopen($outputCacheDir . '/autocache.log', 'w');
                 fclose($fp);
-
-                // make sure the cachemanager event handler is known to the event system
-                if (!xarMod::apiFunc('modules', 'admin', 'geteventhandlers')) {
-                    return;
-                }
             }
 
             if (empty($autocache['keepstats'])) {
