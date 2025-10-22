@@ -15,19 +15,16 @@
 
 namespace Xaraya\Modules\CacheManager;
 
-use xarDB;
-
 class Tables
 {
     /**
      * Return cache tables
      * @return array
      */
-    public function __invoke(?string $prefix = null)
+    public function __invoke(string $prefix = 'xar')
     {
         // Initialise table array
         $xartable = [];
-        $prefix ??= xarDB::getPrefix();
 
         // Set the table names
         $xartable['cache_blocks'] = $prefix . '_cache_blocks'; // cfr. blocks module
