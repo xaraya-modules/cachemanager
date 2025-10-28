@@ -120,7 +120,7 @@ class VariableCache extends CacheConfig
         }
 
         // Get all variables
-        //$variables = xarMod::apiFunc('dynamicdata', 'user', 'getvariables');
+        //$variables = $this->mod()->apiFunc('dynamicdata', 'user', 'getvariables');
         $variables = array_keys(xarVariableCache::getCacheSettings());
 
         $variableconfig = [];

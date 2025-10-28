@@ -19,14 +19,14 @@ namespace Xaraya\Modules\CacheManager;
 use Xaraya\Authentication\AuthToken;
 use Xaraya\Context\ContextInterface;
 use Xaraya\Context\ContextTrait;
-use xarMod;
 use xarObject;
-use xarCache;
 use Throwable;
 use sys;
 
 sys::import('xaraya.context.contexttrait');
 sys::import('modules.cachemanager.class.config');
+sys::import('xaraya.services.xar');
+use Xaraya\Services\xar;
 
 class CacheInfo extends xarObject implements ContextInterface
 {
@@ -68,7 +68,7 @@ class CacheInfo extends xarObject implements ContextInterface
         }
 
         // Get the output cache directory so you can get cache keys even if output caching is disabled
-        $outputCacheDir = xarCache::getOutputCacheDir();
+        $outputCacheDir = xar::cache()->getOutputCacheDir();
 
         // default cache storage is 'filesystem' if necessary
         if (!empty($settings['CacheStorage'])) {
@@ -78,7 +78,7 @@ class CacheInfo extends xarObject implements ContextInterface
         }
 
         // get cache storage
-        $cachestorage = xarCache::getStorage([
+        $cachestorage = xar::cache()->getStorage([
             'storage'  => $storage,
             'type'     => $this->type,
             'cachedir' => $outputCacheDir,
@@ -176,7 +176,7 @@ class CacheInfo extends xarObject implements ContextInterface
             ksort($items);
         } else {
             /** @var Module $module */
-            $module = xarMod::getModule('cachemanager');
+            $module = xar::mod()->getModule('cachemanager');
             $statsApi = $module->getStatsApi();
             $statsApi->sortitems($items, $sort);
         }

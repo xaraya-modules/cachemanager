@@ -126,7 +126,7 @@ class BlockCache extends CacheConfig
             // and flush the blocks
             xarBlockCache::flushCached($key);
             if ($this->mod()->getVar('AutoRegenSessionless')) {
-                xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
+                $this->mod()->apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
 
@@ -159,7 +159,7 @@ class BlockCache extends CacheConfig
         }
 
         // Get all block instances
-        $blocks = xarMod::apiFunc('blocks', 'user', 'getall');
+        $blocks = $this->mod()->apiFunc('blocks', 'user', 'getall');
         $bid2key = [];
         foreach ($blocks as $key => $block) {
             $bid2key[$block['bid']] = $key;
@@ -196,7 +196,7 @@ class BlockCache extends CacheConfig
             if (!isset($block['nocache'])) {
                 // Try loading some defaults from the block init array (cfr. articles/random)
                 if (!empty($block['module']) && !empty($block['type'])) {
-                    $initresult = xarMod::apiFunc(
+                    $initresult = $this->mod()->apiFunc(
                         'blocks',
                         'user',
                         'read_type_init',

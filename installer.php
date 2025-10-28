@@ -126,7 +126,7 @@ class Installer extends InstallerClass
 
         // Enable cachemanager hooks for articles
         if ($this->mod()->isAvailable('articles')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
@@ -135,7 +135,7 @@ class Installer extends InstallerClass
         }
         // Enable cachemanager hooks for base
         if ($this->mod()->isAvailable('base')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
@@ -144,7 +144,7 @@ class Installer extends InstallerClass
         }
         // Enable cachemanager hooks for blocks
         if ($this->mod()->isAvailable('blocks')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
@@ -153,7 +153,7 @@ class Installer extends InstallerClass
         }
         // Enable cachemanager hooks for categories
         if ($this->mod()->isAvailable('categories')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
@@ -162,7 +162,7 @@ class Installer extends InstallerClass
         }
         // Enable cachemanager hooks for roles
         if ($this->mod()->isAvailable('roles')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
@@ -171,7 +171,7 @@ class Installer extends InstallerClass
         }
         // Enable cachemanager hooks for privileges
         if ($this->mod()->isAvailable('privileges')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
@@ -180,7 +180,7 @@ class Installer extends InstallerClass
         }
         // Enable cachemanager hooks for dynamicdata
         if ($this->mod()->isAvailable('dynamicdata')) {
-            xarMod::apiFunc(
+            $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',

@@ -14,7 +14,7 @@ namespace Xaraya\Modules\CacheManager;
 use Xaraya\Modules\ModuleClass;
 
 /**
- * Get cachemanager module classes via xarMod::getModule()
+ * Get cachemanager module classes via xar::mod()->getModule()
  */
 class Module extends ModuleClass
 {

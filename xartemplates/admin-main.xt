@@ -76,7 +76,7 @@
             </p>
             <ul>
                 <li><xar:mlstring>Add module output caching functions, reutilizing xarBlock*Cached functions when appropriate.</xar:mlstring></li>
-                <li><xar:mlstring>Add xarMod*Cached() calls in xarMod::guiFunc().</xar:mlstring></li>
+                <li><xar:mlstring>Add xarMod*Cached() calls in xar::mod()->guiFunc().</xar:mlstring></li>
                 <li><xar:mlstring>Provide Admin GUI hooks to modules beyond Blocks for the configuration of per module output cache settings.</xar:mlstring></li>
             </ul>
 

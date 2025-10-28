@@ -107,7 +107,7 @@ class ModuleCache extends CacheConfig
             // and flush the modules
             xarModuleCache::flushCached($key);
             if ($this->mod()->getVar('AutoRegenSessionless')) {
-                xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
+                $this->mod()->apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
 
@@ -136,7 +136,7 @@ class ModuleCache extends CacheConfig
         $defaultmodulefunctions = unserialize((string) $this->mod()->getVar('DefaultModuleCacheFunctions'));
 
         // Get all modules
-        $modules = xarMod::apiFunc('modules', 'admin', 'getlist');
+        $modules = $this->mod()->apiFunc('modules', 'admin', 'getlist');
 
         // Get all module functions (user GUI)
         $modulefunctions = [];

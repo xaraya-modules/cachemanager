@@ -136,7 +136,7 @@ Block/module level output caching related:
 
   - Add module output caching functions, reutilizing xarBlock\*Cached
     functions when appropriate.
-  - Add xarMod\*Cached() calls in xarMod::guiFunc().
+  - Add xar::mod()->\*Cached() calls in xar::mod()->guiFunc().
   - Provide Admin GUI hooks to modules beyond Blocks for the
     configuration of per module output cache settings.
 

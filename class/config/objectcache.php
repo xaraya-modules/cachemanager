@@ -100,7 +100,7 @@ class ObjectCache extends CacheConfig
             // and flush the objects
             xarObjectCache::flushCached($key);
             if ($this->mod()->getVar('AutoRegenSessionless')) {
-                xarMod::apiFunc('cachemanager', 'admin', 'regenstatic');
+                $this->mod()->apiFunc('cachemanager', 'admin', 'regenstatic');
             }
         }
 
@@ -126,7 +126,7 @@ class ObjectCache extends CacheConfig
         }
 
         // Get all objects
-        $objects = xarMod::apiFunc('dynamicdata', 'user', 'getobjects');
+        $objects = $this->mod()->apiFunc('dynamicdata', 'user', 'getobjects');
 
         // Get default object methods to cache
         $defaultobjectmethods = unserialize((string) $this->mod()->getVar('DefaultObjectCacheMethods'));
@@ -137,8 +137,8 @@ class ObjectCache extends CacheConfig
         foreach (array_keys($objects) as $id) {
             // TODO: filter on visibility, dummy datastores etc. ?
             if ($objects[$id]['objectid'] < 4 ||
-                $objects[$id]['moduleid'] == xarMod::getRegID('roles') ||
-                $objects[$id]['moduleid'] == xarMod::getRegID('privileges')) {
+                $objects[$id]['moduleid'] == $this->mod()->getRegID('roles') ||
+                $objects[$id]['moduleid'] == $this->mod()->getRegID('privileges')) {
                 continue;
             }
             // use the object name as key for easy lookup in xarObjectCache

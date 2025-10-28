@@ -24,7 +24,7 @@
 function cachemanager_restapi_getlist(array $args = [], $context = null)
 {
     $apilist = [];
-    // $func name as used in xarMod::apiFunc($module, $type, $func, $args)
+    // $func name as used in xar::mod()->apiFunc($module, $type, $func, $args)
     $apilist['getcachetypes'] = [
         'type' => 'admin',  // default = rest, other $type options are user, admin, ... as usual
         'path' => 'cachetypes',  // path to use in REST API operation /modules/{module}/{path} with path parameter
@@ -33,7 +33,7 @@ function cachemanager_restapi_getlist(array $args = [], $context = null)
         'description' => 'Call admin api function getcachetypes() in module cachemanager',
         'caching' => true,
     ];
-    // $func name as used in xarMod::apiFunc($module, $type, $func, $args)
+    // $func name as used in xar::mod()->apiFunc($module, $type, $func, $args)
     $apilist['getcacheinfo'] = [
         'type' => 'admin',  // default = rest, other $type options are user, admin, ... as usual
         'path' => 'cacheinfo/{type}',  // path to use in REST API operation /modules/{module}/{path} with path parameter
@@ -42,7 +42,7 @@ function cachemanager_restapi_getlist(array $args = [], $context = null)
         'description' => 'Call cachemanager api function getcacheinfo() in module blocks',
         'caching' => false,
     ];
-    // $func name as used in xarMod::apiFunc($module, $type, $func, $args)
+    // $func name as used in xar::mod()->apiFunc($module, $type, $func, $args)
     $apilist['getcachekeys'] = [
         'type' => 'admin',  // default = rest, other $type options are user, admin, ... as usual
         'path' => 'cachekeys/{type}',  // path to use in REST API operation /modules/{module}/{path} with path parameter
@@ -51,7 +51,7 @@ function cachemanager_restapi_getlist(array $args = [], $context = null)
         'description' => 'Call cachemanager api function getcachekeys() in module blocks',
         'caching' => false,
     ];
-    // $func name as used in xarMod::apiFunc($module, $type, $func, $args)
+    // $func name as used in xar::mod()->apiFunc($module, $type, $func, $args)
     $apilist['getcachelist'] = [
         'type' => 'admin',  // default = rest, other $type options are user, admin, ... as usual
         'path' => 'cachelist/{type}',  // path to use in REST API operation /modules/{module}/{path} with path parameter
@@ -60,7 +60,7 @@ function cachemanager_restapi_getlist(array $args = [], $context = null)
         'description' => 'Call cachemanager api function getcachelist() in module blocks',
         'caching' => false,
     ];
-    // $func name as used in xarMod::apiFunc($module, $type, $func, $args) - not here
+    // $func name as used in xar::mod()->apiFunc($module, $type, $func, $args) - not here
     $apilist['getcacheitemkey'] = [
         'type' => 'admin',  // default = rest, other $type options are user, admin, ... as usual
         'name' => 'getcacheitem',  // default = $api array key above
@@ -70,7 +70,7 @@ function cachemanager_restapi_getlist(array $args = [], $context = null)
         'description' => 'Call cachemanager api function getcacheitem() in module blocks',
         'caching' => false,
     ];
-    // $func name as used in xarMod::apiFunc($module, $type, $func, $args) - not here
+    // $func name as used in xar::mod()->apiFunc($module, $type, $func, $args) - not here
     $apilist['getcacheitemcode'] = [
         'type' => 'admin',  // default = rest, other $type options are user, admin, ... as usual
         'name' => 'getcacheitem',  // default = $api array key above

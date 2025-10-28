@@ -132,7 +132,7 @@ class CacheManager extends xarObject
         //get the modvars from the db
         if (!empty($keys)) {
             foreach ($keys as $key) {
-                $value = (string) xarModVars::get('cachemanager', $key);
+                $value = (string) xar::mod('cachemanager')->getVar($key);
                 if (substr($value, 0, 6) == 'array-') {
                     $value = substr($value, 6);
                     $value = unserialize($value);
@@ -145,7 +145,7 @@ class CacheManager extends xarObject
             return $cachingConfiguration;
         }
 
-        $modBaseInfo = xarMod::getBaseInfo('cachemanager');
+        $modBaseInfo = xar::mod()->getBaseInfo('cachemanager');
         //if (empty($modBaseInfo)) return; // throw back
 
         $dbconn = xar::db()->getConn();
@@ -206,10 +206,10 @@ class CacheManager extends xarObject
         // and replace the cachingConfig with the new values
         foreach ($configSettings as $configKey => $configValue) {
             if (is_numeric($configValue)) {
-                xarModVars::set('cachemanager', $configKey, $configValue);
+                xar::mod('cachemanager')->setVar($configKey, $configValue);
                 $cachingConfig = preg_replace('/\[\'' . $configKey . '\'\]\s*=\s*(|\")(.*)\\1;/', "['$configKey'] = $configValue;", $cachingConfig);
             } elseif (is_array($configValue)) {
-                xarModVars::set('cachemanager', $configKey, 'array-' . serialize($configValue));
+                xar::mod('cachemanager')->setVar($configKey, 'array-' . serialize($configValue));
                 $configValue = str_replace("'", "\\'", $configValue);
                 if (!empty($configValue)) {
                     $keyslist = array_keys($configValue);
@@ -228,7 +228,7 @@ class CacheManager extends xarObject
                 }
                 $cachingConfig = preg_replace('/\[\'' . $configKey . '\'\]\s*=\s*array\s*\((.*)\)\s*;/i', "['$configKey'] = array($configValue);", $cachingConfig);
             } else {
-                xarModVars::set('cachemanager', $configKey, $configValue);
+                xar::mod('cachemanager')->setVar($configKey, $configValue);
                 $configValue = str_replace("'", "\\'", $configValue);
                 $cachingConfig = preg_replace('/\[\'' . $configKey . '\'\]\s*=\s*(\'|\")(.*)\\1;/', "['$configKey'] = '$configValue';", $cachingConfig);
             }

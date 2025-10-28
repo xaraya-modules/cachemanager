@@ -55,7 +55,7 @@ class PageCache extends CacheConfig
 
         $cachingConfiguration = CacheManager::getConfigFromFile();
 
-        $data['settings'] = xarMod::apiFunc(
+        $data['settings'] = $this->mod()->apiFunc(
             'cachemanager',
             'admin',
             'config_tpl_prep',
@@ -63,14 +63,14 @@ class PageCache extends CacheConfig
         );
 
         $filter = ['Class' => 2];
-        $data['themes'] = xarMod::apiFunc(
+        $data['themes'] = $this->mod()->apiFunc(
             'themes',
             'admin',
             'getlist',
             $filter
         );
 
-        $data['groups'] = xarMod::apiFunc('roles', 'user', 'getallgroups');
+        $data['groups'] = $this->mod()->apiFunc('roles', 'user', 'getallgroups');
 
         $this->var()->get('submit', $submit, 'str', '');
         if (!empty($submit)) {
