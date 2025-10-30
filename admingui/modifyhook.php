@@ -14,8 +14,6 @@ namespace Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarCache;
-use xarOutputCache;
 use sys;
 use BadParameterException;
 
@@ -46,12 +44,12 @@ class ModifyhookMethod extends MethodClass
         }
 
         // Get the output cache directory so you can access it even if output caching is disabled
-        $outputCacheDir = xarCache::getOutputCacheDir();
+        $outputCacheDir = $this->cache()->getOutputCacheDir();
 
         // only display modify hooks if block level output caching has been enabled
         // (don't check if output caching is enabled here so config options can be tweaked
         //  even when output caching has been temporarily disabled)
-        if (!xarOutputCache::isBlockCacheEnabled()) {
+        if (!$this->cache()->withBlocks()) {
             return '';
         }
 

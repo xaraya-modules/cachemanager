@@ -13,8 +13,6 @@ namespace Xaraya\Modules\CacheManager\AdminApi;
 
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\MethodClass;
-use xarCache;
-use xarOutputCache;
 use sys;
 
 sys::import('xaraya.modules.method');
@@ -46,35 +44,35 @@ class GetmenulinksMethod extends MethodClass
             'title' => $this->ml('Flush the output cache of xarCache'),
             'label' => $this->ml('Flush Cache'), ];
 
-        if (xarCache::isOutputCacheEnabled()) {
-            if (xarOutputCache::isPageCacheEnabled()) {
+        if ($this->cache()->withOutput()) {
+            if ($this->cache()->withPages()) {
                 $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'pages'),
                     'title' => $this->ml('Configure the caching options for pages'),
                     'label' => $this->ml('Page Caching'), ];
             }
-            if (xarOutputCache::isBlockCacheEnabled()) {
+            if ($this->cache()->withBlocks()) {
                 $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'blocks'),
                     'title' => $this->ml('Configure the caching options for each block'),
                     'label' => $this->ml('Block Caching'), ];
             }
-            if (xarOutputCache::isModuleCacheEnabled()) {
+            if ($this->cache()->withModules()) {
                 $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'modules'),
                     'title' => $this->ml('Configure the caching options for modules'),
                     'label' => $this->ml('Module Caching'), ];
             }
-            if (xarOutputCache::isObjectCacheEnabled()) {
+            if ($this->cache()->withObjects()) {
                 $menulinks[] = ['url'   => $this->mod()->getURL('admin', 'objects'),
                     'title' => $this->ml('Configure the caching options for objects'),
                     'label' => $this->ml('Object Caching'), ];
             }
         }
         /*
-            if (xarCache::isQueryCacheEnabled()) {
+            if ($this->cache()->withQueries()) {
                 $menulinks[] = Array('url'   => $this->mod()->getURL('admin', 'queries'),
                                      'title' => $this->ml('Configure the caching options for queries'),
                                      'label' => $this->ml('Query Caching'));
             }
-            if (xarCache::isVariableCacheEnabled()) {
+            if ($this->cache()->withVariables()) {
                 $menulinks[] = Array('url'   => $this->mod()->getURL('admin', 'variables'),
                                      'title' => $this->ml('Configure the caching options for variables'),
                                      'label' => $this->ml('Variable Caching'));

@@ -16,9 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarCache;
-use xarOutputCache;
-use xarMod;
 use sys;
 
 sys::import('modules.cachemanager.class.config');
@@ -45,13 +42,13 @@ class PageCache extends CacheConfig
         }
 
         $data = [];
-        if (!xarCache::isOutputCacheEnabled() || !xarOutputCache::isPageCacheEnabled()) {
+        if (!$this->cache()->withOutput() || !$this->cache()->withPages()) {
             $data['pages'] = [];
             return $data;
         }
 
         // Get the output cache directory
-        $outputCacheDir = xarCache::getOutputCacheDir();
+        $outputCacheDir = $this->cache()->getOutputCacheDir();
 
         $cachingConfiguration = CacheManager::getConfigFromFile();
 

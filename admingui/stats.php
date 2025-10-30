@@ -16,7 +16,6 @@ use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\StatsApi;
 use Xaraya\Modules\MethodClass;
-use xarCache;
 use sys;
 
 sys::import('xaraya.modules.method');
@@ -56,7 +55,7 @@ class StatsMethod extends MethodClass
         $this->var()->find('withlog', $withlog, 'int', 0);
 
         // Get the output cache directory so you can view stats even if output caching is disabled
-        $outputCacheDir = xarCache::getOutputCacheDir();
+        $outputCacheDir = $this->cache()->getOutputCacheDir();
 
         $numitems = $this->mod()->getVar('itemsperpage');
         if (empty($numitems)) {
@@ -125,7 +124,7 @@ class StatsMethod extends MethodClass
                         $data['settings'][$provider] = null;
                     }
                     // get cache storage
-                    $cachestorage = xarCache::getStorage(['storage'   => $data['settings'][$storage],
+                    $cachestorage = $this->cache()->getStorage(['storage'   => $data['settings'][$storage],
                         'type'      => $tab,
                         'provider'  => $data['settings'][$provider],
                         'cachedir'  => $outputCacheDir,
@@ -333,7 +332,7 @@ class StatsMethod extends MethodClass
                         if (empty($data['settings'][$provider])) {
                             $data['settings'][$provider] = null;
                         }
-                        $cachestorage = xarCache::getStorage(['storage'   => $data['settings'][$storage],
+                        $cachestorage = $this->cache()->getStorage(['storage'   => $data['settings'][$storage],
                             'type'      => $type,
                             'provider'  => $data['settings'][$provider],
                             'cachedir'  => $outputCacheDir,
@@ -371,7 +370,7 @@ class StatsMethod extends MethodClass
                 $data['querycache'] = ['size'  => 0,
                     'items' => 0, ];
                 if (!empty($data['status']['QueryCachingEnabled']) && !empty($data['settings']['QueryCacheStorage'])) {
-                    $querystorage = xarCache::getStorage(['storage'  => $data['settings']['QueryCacheStorage'],
+                    $querystorage = $this->cache()->getStorage(['storage'  => $data['settings']['QueryCacheStorage'],
                         'type'     => 'database',
                         'cachedir' => sys::varpath() . '/cache', ]);
                     $data['querycache']['size'] = $querystorage->getCacheSize(true);

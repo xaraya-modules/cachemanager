@@ -16,11 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarCache;
-use xarOutputCache;
-use xarPageCache;
-use xarMod;
-use xarObjectCache;
 use sys;
 
 sys::import('modules.cachemanager.class.config');
@@ -45,7 +40,7 @@ class ObjectCache extends CacheConfig
         }
 
         $data = [];
-        if (!xarCache::isOutputCacheEnabled() || !xarOutputCache::isObjectCacheEnabled()) {
+        if (!$this->cache()->withOutput() || !$this->cache()->withObjects()) {
             $data['objects'] = [];
             return $data;
         }
@@ -94,11 +89,9 @@ class ObjectCache extends CacheConfig
             // objects could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
             // so just flush all pages
-            if (xarOutputCache::isPageCacheEnabled()) {
-                xarPageCache::flushCached($key);
-            }
+            $this->cache()->flushPages($key);
             // and flush the objects
-            xarObjectCache::flushCached($key);
+            $this->cache()->flushObjects($key);
             if ($this->mod()->getVar('AutoRegenSessionless')) {
                 $this->mod()->apiFunc('cachemanager', 'admin', 'regenstatic');
             }

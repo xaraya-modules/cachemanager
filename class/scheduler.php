@@ -16,10 +16,7 @@
 
 namespace Xaraya\Modules\CacheManager;
 
-use xarCache;
 use xarObject;
-use xarOutputCache;
-use xarPageCache;
 use sys;
 
 sys::import('xaraya.services.xar');
@@ -43,15 +40,16 @@ class CacheScheduler extends xarObject
         $urls = [];
         $outputCacheDir = sys::varpath() . '/cache/output/';
 
+        $xar = xar::getServicesClass();
         // make sure output caching is really enabled, and that we are caching pages
-        if (!xarCache::isOutputCacheEnabled() || !xarOutputCache::isPageCacheEnabled()) {
+        if (!$xar->cache()->withOutput() || !$xar->cache()->withPages()) {
             $logs[] = "$method no page caching";
             $logs[] = "$method stop";
             return implode("\n", $logs);
         }
 
         // flush the static pages
-        xarPageCache::flushCached('static');
+        $xar->cache()->flushPages('static');
 
         $configKeys = ['Page.SessionLess'];
         $sessionlessurls = CacheManager::get_config(
@@ -74,7 +72,7 @@ class CacheScheduler extends xarObject
             $logs[] = "$method get $url";
             // Make sure the url isn't empty before calling getfile()
             if (strlen(trim($url))) {
-                xar::mod()->apiFunc('base', 'user', 'getfile', ['url' => $url, 'superrors' => true]);
+                $xar->mod()->apiFunc('base', 'user', 'getfile', ['url' => $url, 'superrors' => true]);
             }
             if (!$nolimit && time() > $timelimit) {
                 break;
@@ -101,7 +99,7 @@ class CacheScheduler extends xarObject
 
         // default start page is the homepage
         if (empty($starturl)) {
-            $starturl = xar::ctl()->getBaseURL();
+            $starturl = $xar->ctl()->getBaseURL();
         }
         // default is go 1 level deep
         if (!isset($maxlevel)) {
@@ -111,8 +109,9 @@ class CacheScheduler extends xarObject
         if (!isset($wait)) {
             $wait = 2;
         }
+        $xar = xar::getServicesClass();
         // avoid the current page just in case...
-        $avoid = xar::ctl()->getCurrentURL([], false);
+        $avoid = $xar->ctl()->getCurrentURL([], false);
 
         $level = 0;
         $seen = [];
@@ -126,7 +125,7 @@ class CacheScheduler extends xarObject
 
                 $logs[] = "$method get $url";
                 // get the current page
-                $page = xar::mod()->apiFunc(
+                $page = $xar->mod()->apiFunc(
                     'base',
                     'user',
                     'getfile',
@@ -137,7 +136,7 @@ class CacheScheduler extends xarObject
                 }
 
                 // extract local links only (= default)
-                $links = xar::mod()->apiFunc(
+                $links = $xar->mod()->apiFunc(
                     'base',
                     'user',
                     'extractlinks',

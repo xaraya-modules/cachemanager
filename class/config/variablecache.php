@@ -16,9 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarCache;
-use xarConfigVars;
-use xarMod;
 use xarVariableCache;
 use sys;
 
@@ -44,7 +41,7 @@ class VariableCache extends CacheConfig
         }
 
         $data = [];
-        if (!xarCache::isVariableCacheEnabled()) {
+        if (!$this->cache()->withVariables()) {
             $data['variables'] = [];
             return $data;
         }
@@ -55,7 +52,7 @@ class VariableCache extends CacheConfig
             if (!$this->sec()->confirmAuthKey()) {
                 return;
             }
-            xarConfigVars::delete(null, 'Site.Variable.CacheSettings');
+            $this->config()->delVar('Site.Variable.CacheSettings');
             $this->mod('dynamicdata')->delVar('variablecache_settings');
         }
 
@@ -95,7 +92,7 @@ class VariableCache extends CacheConfig
             // variables could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
             // and flush the variables
-            xarVariableCache::flushCached($key);
+            $this->cache()->flushVariables($key);
         }
 
         // Get all variable caching configurations

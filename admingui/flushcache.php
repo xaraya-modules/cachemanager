@@ -15,7 +15,6 @@ use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\MethodClass;
-use xarCache;
 use sys;
 
 sys::import('xaraya.modules.method');
@@ -81,7 +80,7 @@ class FlushcacheMethod extends MethodClass
                 $data['notice'] = $this->ml("You must select a cache key to flush.  If there is no cache key to select the output cache is empty.");
             } else {
                 // Get the output cache directory so you can flush items even if output caching is disabled
-                $outputCacheDir = xarCache::getOutputCacheDir();
+                $outputCacheDir = $this->cache()->getOutputCacheDir();
 
                 // get the caching config settings from the config file
                 $data['settings'] = CacheManager::get_config(
@@ -106,7 +105,7 @@ class FlushcacheMethod extends MethodClass
                     }
 
                     // get cache storage
-                    $cachestorage = xarCache::getStorage(['storage'  => $data['settings'][$storage],
+                    $cachestorage = $this->cache()->getStorage(['storage'  => $data['settings'][$storage],
                         'type'     => $type,
                         'cachedir' => $outputCacheDir, ]);
                     if (empty($cachestorage)) {

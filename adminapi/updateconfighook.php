@@ -14,10 +14,6 @@ namespace Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheScheduler;
 use Xaraya\Modules\MethodClass;
-use xarCache;
-use xarOutputCache;
-use xarPageCache;
-use xarBlockCache;
 use sys;
 use BadParameterException;
 
@@ -47,7 +43,7 @@ class UpdateconfighookMethod extends MethodClass
             $extrainfo = [];
         }
 
-        if (!xarCache::isOutputCacheEnabled()) {
+        if (!$this->cache()->withOutput()) {
             // nothing more to do here
             return $extrainfo;
         }
@@ -86,24 +82,20 @@ class UpdateconfighookMethod extends MethodClass
         switch ($modname) {
             case 'base': // who knows what global impact a config change to base might make
                 // flush everything.
-                if (xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached('');
-                }
-                if (xarOutputCache::isBlockCacheEnabled()) {
-                    xarBlockCache::flushCached('');
-                }
+                $this->cache()->flushPages('');
+                $this->cache()->flushBlocks('');
                 break;
             case 'autolinks': // fall-through all hooked utility modules that are admin config modified
             case 'comments': // keep falling through
             case 'keywords': // keep falling through
                 // delete cachekey of each module autolinks is hooked to.
-                if (xarOutputCache::isPageCacheEnabled()) {
+                if ($this->cache()->withPages()) {
                     $hooklist = $this->mod()->apiFunc('modules', 'admin', 'gethooklist');
                     $modhooks = reset($hooklist[$modname]);
 
                     foreach ($modhooks as $hookedmodname => $hookedmod) {
                         $cacheKey = "$hookedmodname-";
-                        xarPageCache::flushCached($cacheKey);
+                        $this->cache()->flushPages($cacheKey);
                     }
                 }
                 // incase it's got a user view, like categories.
@@ -114,13 +106,9 @@ class UpdateconfighookMethod extends MethodClass
                 // identify pages that include the updated item and delete the cached files
                 // nothing fancy yet, just flush it out
                 $cacheKey = "$modname-";
-                if (xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached($cacheKey);
-                }
+                $this->cache()->flushPages($cacheKey);
                 // since we're modifying the config, we might get a new admin menulink
-                if (xarOutputCache::isBlockCacheEnabled()) {
-                    xarBlockCache::flushCached('base-block');
-                }
+                $this->cache()->flushBlocks('base-block');
                 break;
         }
 

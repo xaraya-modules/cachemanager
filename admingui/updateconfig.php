@@ -16,7 +16,6 @@ use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
 use xarMLS;
-use xarCache;
 use sys;
 
 sys::import('xaraya.modules.method');
@@ -263,10 +262,10 @@ class UpdateconfigMethod extends MethodClass
         // flush adminpanels and base blocks to show new menu options if necessary
         if ($cacheblocks) {
             // get the output cache directory so you can flush items even if output caching is disabled
-            $outputCacheDir = xarCache::getOutputCacheDir();
+            $outputCacheDir = $this->cache()->getOutputCacheDir();
 
             // get the cache storage for block caching
-            $cachestorage = xarCache::getStorage(['storage'  => $blockcachestorage,
+            $cachestorage = $this->cache()->getStorage(['storage'  => $blockcachestorage,
                 'type'     => 'block',
                 'cachedir' => $outputCacheDir, ]);
             if (!empty($cachestorage)) {

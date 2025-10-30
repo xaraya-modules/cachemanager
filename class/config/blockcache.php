@@ -16,11 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarCache;
-use xarOutputCache;
-use xarPageCache;
-use xarMod;
-use xarBlockCache;
 use sys;
 
 sys::import('modules.cachemanager.class.config');
@@ -45,7 +40,7 @@ class BlockCache extends CacheConfig
         }
 
         $data = [];
-        if (!xarCache::isOutputCacheEnabled() || !xarOutputCache::isBlockCacheEnabled()) {
+        if (!$this->cache()->withOutput() || !$this->cache()->withBlocks()) {
             $data['blocks'] = [];
             return $data;
         }
@@ -120,11 +115,9 @@ class BlockCache extends CacheConfig
             // blocks could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
             // so just flush all pages
-            if (xarOutputCache::isPageCacheEnabled()) {
-                xarPageCache::flushCached($key);
-            }
+            $this->cache()->flushPages($key);
             // and flush the blocks
-            xarBlockCache::flushCached($key);
+            $this->cache()->flushBlocks($key);
             if ($this->mod()->getVar('AutoRegenSessionless')) {
                 $this->mod()->apiFunc('cachemanager', 'admin', 'regenstatic');
             }

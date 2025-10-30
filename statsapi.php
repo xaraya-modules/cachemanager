@@ -246,7 +246,7 @@ class StatsApi extends AdminApiClass
             }
             $hit = intval($hit);
             $miss = intval($miss);
-            $page = xarVar::prepForDisplay($page);
+            $page = xarVarPrep::forDisplay($page);
             $items[$url] = ['page' => $page,
                 'hit' => $hit,
                 'miss' => $miss,
@@ -326,7 +326,7 @@ class StatsApi extends AdminApiClass
             if (strlen($page) > 105) {
                 $page = wordwrap($page, 105, "\n", 1);
             }
-            $items[$url]['page'] = xarVar::prepForDisplay($page);
+            $items[$url]['page'] = xarVarPrep::forDisplay($page);
             $items[$url]['total'] = $items[$url]['hit'] + $items[$url]['miss'];
             if (!empty($items[$url]['total'])) {
                 $items[$url]['ratio'] = sprintf("%.1f", 100.0 * $items[$url]['hit'] / $items[$url]['total']);

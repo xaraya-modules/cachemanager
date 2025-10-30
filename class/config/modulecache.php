@@ -16,12 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarCache;
-use xarOutputCache;
-use xarPageCache;
-use xarVar;
-use xarMod;
-use xarModuleCache;
 use sys;
 
 sys::import('modules.cachemanager.class.config');
@@ -46,7 +40,7 @@ class ModuleCache extends CacheConfig
         }
 
         $data = [];
-        if (!xarCache::isOutputCacheEnabled() || !xarOutputCache::isModuleCacheEnabled()) {
+        if (!$this->cache()->withOutput() || !$this->cache()->withModules()) {
             $data['modules'] = [];
             return $data;
         }
@@ -101,11 +95,9 @@ class ModuleCache extends CacheConfig
             // modules could be anywhere, we're not smart enough not know exactly where yet
             $key = '';
             // so just flush all pages
-            if (xarOutputCache::isPageCacheEnabled()) {
-                xarPageCache::flushCached($key);
-            }
+            $this->cache()->flushPages($key);
             // and flush the modules
-            xarModuleCache::flushCached($key);
+            $this->cache()->flushModules($key);
             if ($this->mod()->getVar('AutoRegenSessionless')) {
                 $this->mod()->apiFunc('cachemanager', 'admin', 'regenstatic');
             }

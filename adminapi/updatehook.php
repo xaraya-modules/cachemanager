@@ -15,12 +15,6 @@ use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheScheduler;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarCache;
-use xarOutputCache;
-use xarPageCache;
-use xarModuleCache;
-use xarBlockCache;
-use xarObjectCache;
 use sys;
 use BadParameterException;
 
@@ -95,12 +89,12 @@ class UpdatehookMethod extends MethodClass
         switch ($modname) {
             case 'blocks':
                 // Get the output cache directory so you can access it even if output caching is disabled
-                $outputCacheDir = xarCache::getOutputCacheDir();
+                $outputCacheDir = $this->cache()->getOutputCacheDir();
 
                 // first, if authorized, save the new settings
                 // (don't check if output caching is enabled here so config options can be tweaked
                 //  even when output caching has been temporarily disabled)
-                if (xarOutputCache::isBlockCacheEnabled() &&
+                if ($this->cache()->withBlocks() &&
                     $this->sec()->checkAccess('AdminXarCache', 0)) {
                     $this->var()->find('nocache', $nocache, 'isset', 0);
                     $this->var()->find('pageshared', $pageshared, 'isset', 0);
@@ -143,36 +137,24 @@ class UpdatehookMethod extends MethodClass
 
                 // blocks could be anywhere, we're not smart enough not know exactly where yet
                 // so just flush all pages
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached('');
-                }
+                $this->cache()->flushPages('');
                 // and flush the block
                 // FIXME: we can't filter on the middle of the key, only on the start of it
-                $cacheKey = "-blockid" . $objectid;
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isBlockCacheEnabled()) {
-                    xarBlockCache::flushCached('');
-                }
+                //$cacheKey = "-blockid" . $objectid;
+                $this->cache()->flushBlocks('');
                 break;
             case 'articles':
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached('articles-');
-                    // a status update might mean a new menulink and new base homepage
-                    xarPageCache::flushCached('base');
-                }
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isBlockCacheEnabled()) {
-                    // a status update might mean a new menulink and new base homepage
-                    xarBlockCache::flushCached('base');
-                }
+                $this->cache()->flushPages('articles-');
+                // a status update might mean a new menulink and new base homepage
+                $this->cache()->flushPages('base');
+                // a status update might mean a new menulink and new base homepage
+                $this->cache()->flushBlocks('base');
                 break;
             case 'privileges': // fall-through all modules that should flush the entire cache
             case 'roles':
                 // if security changes, flush everything, just in case.
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached('');
-                }
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isBlockCacheEnabled()) {
-                    xarBlockCache::flushCached('');
-                }
+                $this->cache()->flushPages('');
+                $this->cache()->flushBlocks('');
                 break;
             case 'dynamicdata':
                 // get the objectname
@@ -181,22 +163,16 @@ class UpdatehookMethod extends MethodClass
                     'itemtype' => $itemtype, ]);
                 // CHECKME: how do we know if we need to e.g. flush dyn_example pages here ?
                 // flush dynamicdata and objecturl pages
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached('dynamicdata-');
-                    if (!empty($objectinfo) && !empty($objectinfo['name'])) {
-                        xarPageCache::flushCached('objecturl-' . $objectinfo['name'] . '-');
-                    }
+                $this->cache()->flushPages('dynamicdata-');
+                if (!empty($objectinfo) && !empty($objectinfo['name'])) {
+                    $this->cache()->flushPages('objecturl-' . $objectinfo['name'] . '-');
                 }
                 // CHECKME: how do we know if we need to e.g. flush dyn_example module here ?
                 // flush dynamicdata module
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isModuleCacheEnabled()) {
-                    xarModuleCache::flushCached('dynamicdata-');
-                }
+                $this->cache()->flushModules('dynamicdata-');
                 // flush objects by name, e.g. dyn_example
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isObjectCacheEnabled()) {
-                    if (!empty($objectinfo) && !empty($objectinfo['name'])) {
-                        xarObjectCache::flushCached($objectinfo['name'] . '-');
-                    }
+                if (!empty($objectinfo) && !empty($objectinfo['name'])) {
+                    $this->cache()->flushObjects($objectinfo['name'] . '-');
                 }
                 break;
             case 'autolinks': // fall-through all hooked utility modules that are admin modified
@@ -204,13 +180,13 @@ class UpdatehookMethod extends MethodClass
             case 'keywords': // keep falling through
             case 'html': // keep falling through
                 // delete cachekey of each module autolinks is hooked to.
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
+                if ($this->cache()->withPages()) {
                     $hooklist = $this->mod()->apiFunc('modules', 'admin', 'gethooklist');
                     $modhooks = reset($hooklist[$modname]);
 
                     foreach ($modhooks as $hookedmodname => $hookedmod) {
                         $cacheKey = "$hookedmodname-";
-                        xarPageCache::flushCached($cacheKey);
+                        $this->cache()->flushPages($cacheKey);
                     }
                 }
                 // incase it's got a user view, like categories.
@@ -219,13 +195,11 @@ class UpdatehookMethod extends MethodClass
                 // identify pages that include the updated item and delete the cached files
                 // nothing fancy yet, just flush it out
                 $cacheKey = "$modname-";
-                if (xarCache::isOutputCacheEnabled() && xarOutputCache::isPageCacheEnabled()) {
-                    xarPageCache::flushCached($cacheKey);
-                }
+                $this->cache()->flushPages($cacheKey);
                 break;
         }
 
-        if (xarCache::isOutputCacheEnabled() && $this->mod()->getVar('AutoRegenSessionless')) {
+        if ($this->cache()->withOutput() && $this->mod()->getVar('AutoRegenSessionless')) {
             CacheScheduler::regenstatic();
         }
 
