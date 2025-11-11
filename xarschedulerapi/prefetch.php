@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Pre-fetch pages for caching (executed by the scheduler module)
  *
@@ -10,7 +11,6 @@
  * @subpackage CacheManager module
  * @link http://xaraya.com/index.php/release/1652.html
  */
-sys::import('modules.cachemanager.class.scheduler');
 use Xaraya\Modules\CacheManager\CacheScheduler;
 
 /**

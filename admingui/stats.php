@@ -18,8 +18,6 @@ use Xaraya\Modules\CacheManager\StatsApi;
 use Xaraya\Modules\MethodClass;
 use sys;
 
-sys::import('xaraya.modules.method');
-
 /**
  * cachemanager admin stats function
  * @extends MethodClass<\Xaraya\Modules\CacheManager\AdminGui>
@@ -193,7 +191,6 @@ class StatsMethod extends MethodClass
                         $data['items'] = $items;
                         unset($keys);
                         unset($items);
-                        sys::import('xaraya.pager');
                         $data['pager'] = $this->tpl()->getPager(
                             $startnum,
                             $count,
@@ -255,13 +252,13 @@ class StatsMethod extends MethodClass
                     'ratio' => 0,
                     'first' => 0,
                     'last' => 0, ];
-                if (file_exists($outputCacheDir . '/autocache.stats') &&
-                    filesize($outputCacheDir . '/autocache.stats') > 0) {
+                if (file_exists($outputCacheDir . '/autocache.stats')
+                    && filesize($outputCacheDir . '/autocache.stats') > 0) {
                     // analyze statsfile
                     $statsApi->autostats($data['items'], $data['totals'], $outputCacheDir . '/autocache.stats');
                 }
-                if (!empty($withlog) && file_exists($outputCacheDir . '/autocache.log') &&
-                    filesize($outputCacheDir . '/autocache.log') > 0) {
+                if (!empty($withlog) && file_exists($outputCacheDir . '/autocache.log')
+                    && filesize($outputCacheDir . '/autocache.log') > 0) {
                     $data['withlog'] = 1;
                     // analyze logfile and merge with stats items
                     $statsApi->autolog($data['items'], $data['totals'], $outputCacheDir . '/autocache.log');

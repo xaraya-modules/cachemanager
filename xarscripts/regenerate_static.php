@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Regenerate static pages from script
  *
@@ -41,19 +42,16 @@ include 'bootstrap.php';
  * Note: this happens first so we can serve cached pages to first-time visitors
  *       without loading the core
  */
-sys::import('xaraya.caching');
 // Note : we may already exit here if session-less page caching is enabled
 xarCache::init();
 
 /**
  * Load the Xaraya core
  */
-sys::import('xaraya.core');
 
 // Load the core with all optional systems loaded
 xarCore::xarInit(xarCore::SYSTEM_ALL);
 
-sys::import('modules.cachemanager.class.scheduler');
 use Xaraya\Modules\CacheManager\CacheScheduler;
 
 $result = CacheScheduler::regenstatic();

@@ -14,10 +14,7 @@ namespace Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheScheduler;
 use Xaraya\Modules\MethodClass;
-use sys;
 use BadParameterException;
-
-sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi deletehook function
@@ -122,7 +119,6 @@ class DeletehookMethod extends MethodClass
                 break;
             case 'dynamicdata':
                 // get the objectname
-                sys::import('modules.dynamicdata.class.objects.descriptor');
                 $objectinfo = $this->data()->getObjectID(['moduleid'  => $modid,
                     'itemtype' => $itemtype, ]);
                 // CHECKME: how do we know if we need to e.g. flush dyn_example pages here ?

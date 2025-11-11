@@ -16,10 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use sys;
-
-sys::import('modules.cachemanager.class.config');
-sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheUtility;
 
@@ -129,9 +125,9 @@ class ObjectCache extends CacheConfig
         $objectconfig = [];
         foreach (array_keys($objects) as $id) {
             // TODO: filter on visibility, dummy datastores etc. ?
-            if ($objects[$id]['objectid'] < 4 ||
-                $objects[$id]['moduleid'] == $this->mod()->getRegID('roles') ||
-                $objects[$id]['moduleid'] == $this->mod()->getRegID('privileges')) {
+            if ($objects[$id]['objectid'] < 4
+                || $objects[$id]['moduleid'] == $this->mod()->getRegID('roles')
+                || $objects[$id]['moduleid'] == $this->mod()->getRegID('privileges')) {
                 continue;
             }
             // use the object name as key for easy lookup in xarObjectCache

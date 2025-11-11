@@ -14,10 +14,7 @@ namespace Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use sys;
 use BadParameterException;
-
-sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin modifyhook function

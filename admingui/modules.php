@@ -14,9 +14,6 @@ namespace Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\MethodClass;
-use sys;
-
-sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin modules function

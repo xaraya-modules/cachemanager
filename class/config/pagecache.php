@@ -16,11 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use sys;
-
-sys::import('modules.cachemanager.class.config');
-sys::import('modules.cachemanager.class.manager');
-sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
@@ -174,10 +169,10 @@ class PageCache extends CacheConfig
                 if (file_exists($outputCacheDir . '/autocache.log')) {
                     unlink($outputCacheDir . '/autocache.log');
                 }
-            } elseif (!file_exists($outputCacheDir . '/autocache.start') ||
-                    !isset($data['settings']['AutoCachePeriod']) ||
+            } elseif (!file_exists($outputCacheDir . '/autocache.start')
+                    || !isset($data['settings']['AutoCachePeriod'])
                     // only re-initialise if the period changes
-                    $data['settings']['AutoCachePeriod'] != $autocache['period']) {
+                    || $data['settings']['AutoCachePeriod'] != $autocache['period']) {
                 // initialise autocache.start and autocache.log files
                 touch($outputCacheDir . '/autocache.start');
                 $fp = fopen($outputCacheDir . '/autocache.log', 'w');
@@ -240,8 +235,8 @@ class PageCache extends CacheConfig
 
         // Get some current information from the auto-cache log
         $data['autocachepages'] = [];
-        if (file_exists($outputCacheDir . '/autocache.log') &&
-            filesize($outputCacheDir . '/autocache.log') > 0) {
+        if (file_exists($outputCacheDir . '/autocache.log')
+            && filesize($outputCacheDir . '/autocache.log') > 0) {
             $logs = file($outputCacheDir . '/autocache.log');
             $data['autocachehits'] = ['HIT' => 0,
                 'MISS' => 0, ];
@@ -278,8 +273,8 @@ class PageCache extends CacheConfig
             // check that all required URLs are included
             if (!empty($cachingConfiguration['AutoCache.Include'])) {
                 foreach ($cachingConfiguration['AutoCache.Include'] as $url) {
-                    if (!isset($autocacheproposed[$url]) ||
-                        $autocacheproposed[$url] < $cachingConfiguration['AutoCache.Threshold']) {
+                    if (!isset($autocacheproposed[$url])
+                        || $autocacheproposed[$url] < $cachingConfiguration['AutoCache.Threshold']) {
                         $autocacheproposed[$url] = 99999999;
                     }
                 }
@@ -297,8 +292,8 @@ class PageCache extends CacheConfig
             $data['autocacheproposed'] = [];
             // build the list of URLs proposed for session-less caching
             foreach ($autocacheproposed as $url => $count) {
-                if (count($data['autocacheproposed']) >= $cachingConfiguration['AutoCache.MaxPages'] ||
-                    $count < $cachingConfiguration['AutoCache.Threshold']) {
+                if (count($data['autocacheproposed']) >= $cachingConfiguration['AutoCache.MaxPages']
+                    || $count < $cachingConfiguration['AutoCache.Threshold']) {
                     break;
                 }
                 $data['autocacheproposed'][$url] = $count;

@@ -16,10 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use sys;
-
-sys::import('modules.cachemanager.class.config');
-sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheUtility;
 

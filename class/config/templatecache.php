@@ -16,9 +16,6 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use sys;
-
-sys::import('modules.cachemanager.class.config');
 use Xaraya\Modules\CacheManager\CacheConfig;
 
 class TemplateCache extends CacheConfig

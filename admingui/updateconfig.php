@@ -18,8 +18,6 @@ use Xaraya\Modules\MethodClass;
 use xarMLS;
 use sys;
 
-sys::import('xaraya.modules.method');
-
 /**
  * cachemanager admin updateconfig function
  * @extends MethodClass<AdminGui>

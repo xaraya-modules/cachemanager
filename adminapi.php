@@ -12,9 +12,6 @@
 namespace Xaraya\Modules\CacheManager;
 
 use Xaraya\Modules\AdminApiClass;
-use sys;
-
-sys::import('xaraya.modules.adminapi');
 
 /**
  * Handle the cachemanager admin API

@@ -15,9 +15,6 @@ use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\MethodClass;
-use sys;
-
-sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin flushcache function

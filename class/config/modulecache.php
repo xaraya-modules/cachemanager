@@ -17,9 +17,6 @@
 namespace Xaraya\Modules\CacheManager\Config;
 
 use sys;
-
-sys::import('modules.cachemanager.class.config');
-sys::import('modules.cachemanager.class.utility');
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheUtility;
 
@@ -207,9 +204,9 @@ class ModuleCache extends CacheConfig
             // use the module name as key for easy lookup in xarModuleCache
             $name = $module['name'];
             // TODO: filter on something else ?
-            if ($name == 'authsystem' ||
-                $name == 'roles' ||
-                $name == 'privileges') {
+            if ($name == 'authsystem'
+                || $name == 'roles'
+                || $name == 'privileges') {
                 continue;
             }
             $moduleconfig[$name] = $module;

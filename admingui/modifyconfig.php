@@ -17,9 +17,6 @@ use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
 use xarMLS;
-use sys;
-
-sys::import('xaraya.modules.method');
 
 /**
  * cachemanager admin modifyconfig function

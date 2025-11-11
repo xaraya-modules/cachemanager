@@ -16,13 +16,10 @@ namespace Xaraya\Modules\CacheManager;
 use Xaraya\Modules\InstallerClass;
 use xarModVars;
 use xarModHooks;
-use xarMod;
 use xarMasks;
 use xarTableDDL;
 use sys;
 use Exception;
-
-sys::import('xaraya.modules.installer');
 
 /**
  * Handle module installer functions
@@ -210,8 +207,8 @@ class Installer extends InstallerClass
         $cachingConfigFile = $varCacheDir . '/config.caching.php';
 
         // check to see if we've got the necessary permissions to upgrade
-        if ((!file_exists($cachingConfigFile) && !is_writable($varCacheDir)) ||
-            (file_exists($cachingConfigFile) && !is_writable($cachingConfigFile))) {
+        if ((!file_exists($cachingConfigFile) && !is_writable($varCacheDir))
+            || (file_exists($cachingConfigFile) && !is_writable($cachingConfigFile))) {
             $msg = $this->ml('The CacheManager module upgrade has failed.  
                        Please make #(1) writable by the web server process 
                        owner to complete the upgrade.  If #(1) does not exist, 
@@ -221,7 +218,6 @@ class Installer extends InstallerClass
         }
         $cachingConfiguration = [];
 
-        sys::import('modules.cachemanager.class.manager');
         //use Xaraya\Modules\CacheManager\CacheManager;
         // parse the current distribution config file so we have default values
         include_once($defaultConfigFile);
@@ -618,7 +614,6 @@ class Installer extends InstallerClass
         $xartables = $dbconn->MetaTables();
         if (!in_array($cachedatatable, $xartables)) {
             // Load Table Maintenance API (still some issues with xarDataDict)
-            sys::import('xaraya.tableddl');
 
             $query = xarTableDDL::createTable(
                 $cachedatatable,

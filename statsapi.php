@@ -12,10 +12,6 @@
 namespace Xaraya\Modules\CacheManager;
 
 use Xaraya\Modules\AdminApiClass;
-use xarVar;
-use sys;
-
-sys::import('xaraya.modules.adminapi');
 
 /**
  * Handle the cachemanager stats API
@@ -188,12 +184,12 @@ class StatsApi extends AdminApiClass
                 }
                 $totals['hit'] += $stats[$key][$code]['hit'];
                 $totals['miss'] += $stats[$key][$code]['miss'];
-                if (empty($totals['first']) ||
-                    $totals['first'] > $stats[$key][$code]['first']) {
+                if (empty($totals['first'])
+                    || $totals['first'] > $stats[$key][$code]['first']) {
                     $totals['first'] = $stats[$key][$code]['first'];
                 }
-                if (empty($totals['last']) ||
-                    $totals['last'] < $stats[$key][$code]['last']) {
+                if (empty($totals['last'])
+                    || $totals['last'] < $stats[$key][$code]['last']) {
                     $totals['last'] = $stats[$key][$code]['last'];
                 }
             }
@@ -256,12 +252,12 @@ class StatsApi extends AdminApiClass
                 'last' => $last, ];
             $totals['hit'] += $hit;
             $totals['miss'] += $miss;
-            if (empty($totals['first']) ||
-                $totals['first'] > $first) {
+            if (empty($totals['first'])
+                || $totals['first'] > $first) {
                 $totals['first'] = $first;
             }
-            if (empty($totals['last']) ||
-                $totals['last'] < $last) {
+            if (empty($totals['last'])
+                || $totals['last'] < $last) {
                 $totals['last'] = $last;
             }
         }
@@ -303,12 +299,12 @@ class StatsApi extends AdminApiClass
                     'last'  => 0, ];
             }
             $items[$url][$status]++;
-            if (empty($items[$url]['first']) ||
-                $items[$url]['first'] > $time) {
+            if (empty($items[$url]['first'])
+                || $items[$url]['first'] > $time) {
                 $items[$url]['first'] = $time;
             }
-            if (empty($items[$url]['last']) ||
-                $items[$url]['last'] < $time) {
+            if (empty($items[$url]['last'])
+                || $items[$url]['last'] < $time) {
                 $items[$url]['last'] = $time;
             }
         }
@@ -335,12 +331,12 @@ class StatsApi extends AdminApiClass
             }
             $totals['hit'] += $items[$url]['hit'];
             $totals['miss'] += $items[$url]['miss'];
-            if (empty($totals['first']) ||
-                $totals['first'] > $items[$url]['first']) {
+            if (empty($totals['first'])
+                || $totals['first'] > $items[$url]['first']) {
                 $totals['first'] = $items[$url]['first'];
             }
-            if (empty($totals['last']) ||
-                $totals['last'] < $items[$url]['last']) {
+            if (empty($totals['last'])
+                || $totals['last'] < $items[$url]['last']) {
                 $totals['last'] = $items[$url]['last'];
             }
         }

@@ -21,11 +21,6 @@ use Xaraya\Context\ContextInterface;
 use Xaraya\Context\ContextTrait;
 use xarObject;
 use Throwable;
-use sys;
-
-sys::import('xaraya.context.contexttrait');
-sys::import('modules.cachemanager.class.config');
-sys::import('xaraya.services.xar');
 use Xaraya\Services\xar;
 
 class CacheInfo extends xarObject implements ContextInterface

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @package modules\cachemanager
  * @subpackage cachemanager

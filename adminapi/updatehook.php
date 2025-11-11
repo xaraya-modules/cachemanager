@@ -15,10 +15,7 @@ use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheScheduler;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use sys;
 use BadParameterException;
-
-sys::import('xaraya.modules.method');
 
 /**
  * cachemanager adminapi updatehook function
@@ -94,8 +91,8 @@ class UpdatehookMethod extends MethodClass
                 // first, if authorized, save the new settings
                 // (don't check if output caching is enabled here so config options can be tweaked
                 //  even when output caching has been temporarily disabled)
-                if ($this->cache()->withBlocks() &&
-                    $this->sec()->checkAccess('AdminXarCache', 0)) {
+                if ($this->cache()->withBlocks()
+                    && $this->sec()->checkAccess('AdminXarCache', 0)) {
                     $this->var()->find('nocache', $nocache, 'isset', 0);
                     $this->var()->find('pageshared', $pageshared, 'isset', 0);
                     $this->var()->find('usershared', $usershared, 'isset', 0);
@@ -158,7 +155,6 @@ class UpdatehookMethod extends MethodClass
                 break;
             case 'dynamicdata':
                 // get the objectname
-                sys::import('modules.dynamicdata.class.objects.descriptor');
                 $objectinfo = $this->data()->getObjectID(['moduleid'  => $modid,
                     'itemtype' => $itemtype, ]);
                 // CHECKME: how do we know if we need to e.g. flush dyn_example pages here ?

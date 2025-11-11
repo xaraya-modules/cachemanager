@@ -18,13 +18,9 @@ namespace Xaraya\Modules\CacheManager;
 
 use xarObject;
 use xarSecurity;
-use xarMod;
-use xarModVars;
 use xarMLS;
 use Exception;
 use sys;
-
-sys::import('xaraya.services.xar');
 use Xaraya\Services\xar;
 
 class CacheManager extends xarObject

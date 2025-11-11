@@ -19,10 +19,6 @@ namespace Xaraya\Modules\CacheManager;
 use Xaraya\Services\ServicesInterface;
 use Xaraya\Services\ServicesTrait;
 use xarObject;
-use sys;
-
-sys::import('xaraya.services.servicestrait');
-sys::import('modules.cachemanager.class.manager');
 
 class CacheConfig extends xarObject implements ServicesInterface
 {
