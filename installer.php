@@ -14,7 +14,6 @@
 namespace Xaraya\Modules\CacheManager;
 
 use Xaraya\Modules\InstallerClass;
-use xarModVars;
 use xarModHooks;
 use xarMasks;
 use xarTableDDL;
@@ -471,7 +470,7 @@ class Installer extends InstallerClass
         }
 
         // Remove module variables
-        xarModVars::delete_all('cachemanager');
+        $this->mod()->flushVars();
 
         // Remove Masks and Instances
         xarMasks::removemasks('cachemanager');

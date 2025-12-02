@@ -17,8 +17,6 @@
 namespace Xaraya\Modules\CacheManager;
 
 use xarObject;
-use xarSecurity;
-use xarMLS;
 use Exception;
 use sys;
 use Xaraya\Services\xar;
@@ -49,7 +47,7 @@ class CacheManager extends xarObject
             $viahook = false;
         }
         if (!$viahook) {
-            if (!xarSecurity::check('AdminXarCache')) {
+            if (!xar::sec()->checkAccess('AdminXarCache')) {
                 return;
             }
         }
@@ -95,7 +93,7 @@ class CacheManager extends xarObject
         if (!file_exists($cachingConfigFile)) {
             // try to restore the missing file
             if (!self::restore_config()) {
-                $msg = xarMLS::translate('The #(1) file is missing.  Please restore #(1)
+                $msg = xar::mls()->translate('The #(1) file is missing.  Please restore #(1)
                             from backup, or the cachemanager/config.caching.php.dist
                             file.', $cachingConfigFile);
                 throw new Exception($msg);
@@ -178,7 +176,7 @@ class CacheManager extends xarObject
     {
         extract($args);
 
-        if (!xarSecurity::check('AdminXarCache')) {
+        if (!xar::sec()->checkAccess('AdminXarCache')) {
             return;
         }
         if (empty($configSettings) || !is_array($configSettings)) {
@@ -190,7 +188,7 @@ class CacheManager extends xarObject
         }
 
         if (!is_writable($cachingConfigFile)) {
-            $msg = xarMLS::translate('The caching configuration file is not writable by the web server.
+            $msg = xar::mls()->translate('The caching configuration file is not writable by the web server.
                    #(1) must be writable by the web server for
                    the output caching to be managed by CacheManager.', $cachingConfigFile);
             throw new Exception($msg);
@@ -254,7 +252,7 @@ class CacheManager extends xarObject
 
         // Confirm the cache directory is writable
         if (!is_writable($varCacheDir)) {
-            $msg = xarMLS::translate('The #(1) directory is not writable by the web
+            $msg = xar::mls()->translate('The #(1) directory is not writable by the web
                    web server. The #(1) directory must be writable by the web
                    server process owner for output caching to work.
                    Please change the permission on the #(1) directory
@@ -264,7 +262,7 @@ class CacheManager extends xarObject
 
         // Confirm the config file is writable
         if (file_exists($cachingConfigFile) && !is_writable($cachingConfigFile)) {
-            $msg = xarMLS::translate('The #(1) file is not writable by the web
+            $msg = xar::mls()->translate('The #(1) file is not writable by the web
                    web server. The #(1) file must be writable by the web
                    server process owner for output caching to be configured
                    via the CacheManager module.

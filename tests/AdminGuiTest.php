@@ -4,9 +4,7 @@ namespace Xaraya\Modules\CacheManager\Tests;
 
 use Xaraya\Modules\TestHelper;
 use Xaraya\Modules\CacheManager\AdminGui;
-use xarController;
-use xarMod;
-use xarTpl;
+use Xaraya\Services\xar;
 
 final class AdminGuiTest extends TestHelper
 {
@@ -14,7 +12,8 @@ final class AdminGuiTest extends TestHelper
     {
         parent::setUpBeforeClass();
         // we need to load templates to get some output
-        xarTpl::init();
+        $xar = xar::getServicesClass();
+        $xar->tpl()->init();
     }
 
     protected function setUp(): void {}
@@ -23,8 +22,9 @@ final class AdminGuiTest extends TestHelper
 
     public function testAdminGui(): void
     {
+        $xar = xar::getServicesClass();
         $expected = AdminGui::class;
-        $admingui = xarMod::getModule('cachemanager')->admingui();
+        $admingui = $xar->mod()->getModule('cachemanager')->admingui();
         $this->assertEquals($expected, $admingui::class);
     }
 
@@ -35,15 +35,16 @@ final class AdminGuiTest extends TestHelper
         $admingui = $this->createMockWithAccess('cachemanager', AdminGui::class, 1);
         $admingui->setContext($context);
 
+        $xar = xar::getServicesClass();
         // this is required because Cachemanager admin_menu calls getstatus()
         // which does security check, and it redirects & exits
-        xarController::setCallback('redirectTo', [$this, 'hello']);
+        $xar->ctl()->setCallback('redirectTo', [$this, 'hello']);
 
         // use __call() here
         $args = ['hello' => 'world'];
         $data = $admingui->stats($args);
 
-        xarController::setCallback('redirectTo', null);
+        $xar->ctl()->setCallback('redirectTo', null);
 
         $expected = [
             'status',

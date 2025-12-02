@@ -4,7 +4,7 @@ namespace Xaraya\Modules\CacheManager\Tests;
 
 use Xaraya\Modules\TestHelper;
 use Xaraya\Modules\CacheManager\AdminApi;
-use xarMod;
+use Xaraya\Services\xar;
 
 final class AdminApiTest extends TestHelper
 {
@@ -18,8 +18,9 @@ final class AdminApiTest extends TestHelper
 
     public function testAdminApi(): void
     {
+        $xar = xar::getServicesClass();
         $expected = AdminApi::class;
-        $adminapi = xarMod::getModule('cachemanager')->adminapi();
+        $adminapi = $xar->mod()->getModule('cachemanager')->adminapi();
         $this->assertEquals($expected, $adminapi::class);
     }
 

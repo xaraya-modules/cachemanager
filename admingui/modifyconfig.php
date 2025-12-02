@@ -16,7 +16,6 @@ use Xaraya\Modules\CacheManager\AdminApi;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarMLS;
 
 /**
  * cachemanager admin modifyconfig function
@@ -50,7 +49,7 @@ class ModifyconfigMethod extends MethodClass
 
         $data['CookieName'] =  ($this->config()->getVar('Site.Session.CookieName') != '') ? $this->config()->getVar('Site.Session.CookieName') : 'XARAYASID';
         $data['cookieupdatelink'] = $this->ctl()->getModuleURL('base', 'admin', 'modifyconfig', ['tab' => 'security']);
-        $data['defaultlocale'] = xarMLS::getSiteLocale();
+        $data['defaultlocale'] = $this->mls()->getSiteLocale();
         $data['localeupdatelink'] = $this->ctl()->getModuleURL('base', 'admin', 'modifyconfig', ['tab' => 'locales']);
 
         // get the caching config settings from the config file

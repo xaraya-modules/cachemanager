@@ -22,7 +22,7 @@ class StatsApi extends AdminApiClass
     public function configure()
     {
         $this->setModType('stats');
-        // don't call xarMod:apiLoad() for cachemanager stats API
+        // don't call xar::mod()->apiLoad() for cachemanager stats API
     }
 
     /**

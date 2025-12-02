@@ -15,7 +15,6 @@ use Xaraya\Modules\CacheManager\AdminGui;
 use Xaraya\Modules\CacheManager\CacheManager;
 use Xaraya\Modules\CacheManager\CacheUtility;
 use Xaraya\Modules\MethodClass;
-use xarMLS;
 use sys;
 
 /**
@@ -178,7 +177,7 @@ class UpdateconfigMethod extends MethodClass
         if (empty($configSettings['Output.CookieName'])) {
             $configSettings['Output.CookieName'] = 'XARAYASID';
         }
-        $configSettings['Output.DefaultLocale'] = xarMLS::getSiteLocale();
+        $configSettings['Output.DefaultLocale'] = $this->mls()->getSiteLocale();
         $configSettings['Page.TimeExpiration'] = $pageexpiretime;
         $configSettings['Page.DisplayView'] = $pagedisplayview;
         $configSettings['Page.ShowTime'] = $pagetimestamp;
