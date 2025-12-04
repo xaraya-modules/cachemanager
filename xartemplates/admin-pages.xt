@@ -89,8 +89,8 @@
         <xar:mlstring>Enable session-less page caching of the following URLs for your first-time visitors</xar:mlstring>
         <br/>
         <xar:mlstring>Example :</xar:mlstring><br/>
-        #xarServer::getBaseURL()#<br/>
-        #xarServer::getBaseURL()#index.php<br/>
+        #$xar->ctl()->getBaseURL()#<br/>
+        #$xar->ctl()->getBaseURL()#index.php<br/>
         <textarea name="sessionless" id="sessionless" rows="10" cols="80">#$sessionless#</textarea>
       </td>
     </tr>
@@ -99,7 +99,7 @@
         <label for="autoregenerate"><xar:mlstring>Auto-regenerate session-less URL cache</xar:mlstring></label>
       </td>
       <td>
-        <xar:if condition="xarModVars::get('cachemanager','AutoRegenSessionless')">
+        <xar:if condition="$xar->mod('cachemanager')->getVar('AutoRegenSessionless')">
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" checked="checked" />
         <xar:else/>
           <input type="checkbox" name="autoregenerate" id="autoregenerate" value="1" />
@@ -123,7 +123,7 @@
   <td>
     <input type="text" name="autocache[period]" id="autocache_period" size="9" value="#$settings['AutoCachePeriod']#" />
     <xar:mlstring>hh:mm:ss</xar:mlstring>
-    [ <a href="#xarServer::getCurrentURL()##viewlog"><xar:mlstring>view log</xar:mlstring></a> ]
+    [ <a href="#$xar->ctl()->getCurrentURL()##viewlog"><xar:mlstring>view log</xar:mlstring></a> ]
   </td>
     </tr>
     <tr>
@@ -151,7 +151,7 @@
       <td>
         <xar:if condition="!empty($settings['AutoCacheKeepStats'])">
           <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" checked="checked" />
-          [ <a href="#xarController::URL('cachemanager','admin','stats',array('tab' => 'autocache'))#"><xar:mlstring>view stats</xar:mlstring></a> ]
+          [ <a href="#$xar->ctl()->URL('cachemanager','admin','stats',array('tab' => 'autocache'))#"><xar:mlstring>view stats</xar:mlstring></a> ]
         <xar:else/>
           <input type="checkbox" name="autocache[keepstats]" id="autocache_keepstats" value="1" />
         </xar:if>
@@ -181,17 +181,17 @@
     </fieldset>
     <div class="xar-form-input-wrapper">
         <input type="hidden" name="authid" value="#$authid#" />
-        <input type="submit" name="submit" value="#xarML('Submit')#" />
+        <input type="submit" name="submit" value="#$xar->ml('Submit')#" />
     </div>
     </form>
 
 <a name="viewlog"></a>
-    <h2><xar:mlstring>Current Auto-Cache Log</xar:mlstring> [ <a href="#xarServer::getCurrentURL()##config"><xar:mlstring>up</xar:mlstring></a> ]</h2>
+    <h2><xar:mlstring>Current Auto-Cache Log</xar:mlstring> [ <a href="#$xar->ctl()->getCurrentURL()##config"><xar:mlstring>up</xar:mlstring></a> ]</h2>
     <xar:if condition="!empty($autocachepages)">
     <p><xar:ml>
       <xar:mlstring>From #(1) to #(2)</xar:mlstring>
-      <xar:mlvar>#xarLocale::formatDate('%a, %d %B %Y %H:%M:%S %Z',$autocachestart)#</xar:mlvar>
-      <xar:mlvar>#xarLocale::formatDate('%a, %d %B %Y %H:%M:%S %Z',$autocacheend)#</xar:mlvar>
+      <xar:mlvar>#$xar->mls()->formatDate('%a, %d %B %Y %H:%M:%S %Z',$autocachestart)#</xar:mlvar>
+      <xar:mlvar>#$xar->mls()->formatDate('%a, %d %B %Y %H:%M:%S %Z',$autocacheend)#</xar:mlvar>
     </xar:ml></p>
     <table border="1" cellpadding="4" cellspacing="0">
     <tr>

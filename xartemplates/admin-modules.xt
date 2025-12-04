@@ -38,7 +38,7 @@
               </xar:if>
             </td>
             <td>
-              <a href="#xarController::URL($module['name'],'admin','main')#" title="#$module['name']# module (#$module['regid']#)">#$module['displayname']#</a>
+              <a href="#$xar->ctl()->URL($module['name'],'admin','main')#" title="#$module['name']# module (#$module['regid']#)">#$module['displayname']#</a>
             </td>
             <td>
               #$func#
@@ -78,7 +78,7 @@
           </td>
           <td>
             <input type="hidden" name="authid" value="#$authid#" />
-            <input type="submit" name="submit" value="#xarML('Submit')#" />
+            <input type="submit" name="submit" value="#$xar->ml('Submit')#" />
           </td>
           <td>
           </td>

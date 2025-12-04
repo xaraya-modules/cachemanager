@@ -8,7 +8,7 @@
 
   <xar:if condition="$message eq false">
 
-    <form action="#xarController::URL('cachemanager', 'admin', 'flushcache')#" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="#$xar->ctl()->URL('cachemanager', 'admin', 'flushcache')#" method="post" enctype="application/x-www-form-urlencoded">
       <fieldset>
             <legend>
                 <xar:mlstring>Select Cache for Flushing</xar:mlstring>
@@ -37,7 +37,7 @@
         <div class="xar-form-input-wrapper">
             <input type="hidden" name="authid" id="authid" value="#$authid#" />
             <input type="hidden" name="confirm" id="confirm" value="true" />
-            <input type="submit" value="#xarML('Flush Cache')#"  />
+            <input type="submit" value="#$xar->ml('Flush Cache')#"  />
        </div>
        </fieldset>
     </form>

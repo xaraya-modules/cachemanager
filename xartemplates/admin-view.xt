@@ -19,15 +19,15 @@
             <td colspan="2" style="font-weight:bold;">
                 Cache item:&#160;
                 #$key#
-                [ <a href="#xarController::URL('cachemanager','admin','flushcache',array('flushkey['.$tab.']' => $key, 'authid' => $authid, 'confirm' => 1, 'return_url' => $return_url))#">flush key</a> ]
+                [ <a href="#$xar->ctl()->URL('cachemanager','admin','flushcache',array('flushkey['.$tab.']' => $key, 'authid' => $authid, 'confirm' => 1, 'return_url' => $return_url))#">flush key</a> ]
                 #$code#
-                [ <a href="#xarController::URL('cachemanager','admin','flushcache',array('flushkey['.$tab.']' => $key, 'cachecode['.$tab.']' => $code, 'authid' => $authid, 'confirm' => 1, 'return_url' => $return_url))#">delete item</a> ]
+                [ <a href="#$xar->ctl()->URL('cachemanager','admin','flushcache',array('flushkey['.$tab.']' => $key, 'cachecode['.$tab.']' => $code, 'authid' => $authid, 'confirm' => 1, 'return_url' => $return_url))#">delete item</a> ]
             </td>
         </tr>
         <xar:if condition="!empty($link)">
             <tr>
                 <td colspan="2">
-                    <strong>Link:</strong>&#160;<a href="#xarVarPrep::html($link)#">#xarVarPrep::html($link)#</a>
+                    <strong>Link:</strong>&#160;<a href="#$xar->prep()->html($link)#">#$xar->prep()->html($link)#</a>
                 </td>
             </tr>
         </xar:if>
@@ -66,7 +66,7 @@
                     #$key#:&#160;&#160;
                 </td>
                 <td class="xar-align-left" valign="top" style="font-size:small">
-                   #xarVarPrep::text($line)#
+                   #$xar->prep()->text($line)#
                 </td>
             </tr>
             </xar:foreach>

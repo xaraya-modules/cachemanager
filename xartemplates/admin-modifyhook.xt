@@ -3,7 +3,7 @@
 <fieldset>
     <legend><xar:mlstring>Cache Options</xar:mlstring></legend>
     <div class="xar-form-input-wrapper">
-        <label for="nocache" class="xar-form-label" title="#xarML('Check this box if you do not want the output of this block to ever be cached.')#">
+        <label for="nocache" class="xar-form-label" title="#$xar->ml('Check this box if you do not want the output of this block to ever be cached.')#">
             <xar:mlstring>Do Not Cache Output:</xar:mlstring>
         </label>
         <xar:if condition="!empty($noCache)">
@@ -13,7 +13,7 @@
         </xar:if>
    </div>
    <div class="xar-form-input-wrapper">
-       <label for="pageshared" class="xar-form-label" title="#xarML('Check this box if the content of this block is NOT generated dynamically based on the URI query string.')#">
+       <label for="pageshared" class="xar-form-label" title="#$xar->ml('Check this box if the content of this block is NOT generated dynamically based on the URI query string.')#">
            <xar:mlstring>Cache Sharing Between Pages:</xar:mlstring>
        </label>
        <xar:if condition="$pageShared eq 1 ">
@@ -23,7 +23,7 @@
        </xar:if>
     </div>
    <div class="xar-form-input-wrapper">
-       <label for="usershared" class="xar-form-label" title="#xarML('If the output cache of this block can be shared between users, select an appropriate level.')#">
+       <label for="usershared" class="xar-form-label" title="#$xar->ml('If the output cache of this block can be shared between users, select an appropriate level.')#">
            <xar:mlstring>Cache Sharing Between Users:</xar:mlstring>
        </label>
        <select name="usershared" id="usershared" size="1">
@@ -49,7 +49,7 @@
         </select>
    </div>
    <div class="xar-form-input-wrapper">
-       <label for="cacheexpire" class="xar-form-label" title="#xarML('The maximum lifetime of the output cache of this block. Set to zero for no time based expiration.')#">
+       <label for="cacheexpire" class="xar-form-label" title="#$xar->ml('The maximum lifetime of the output cache of this block. Set to zero for no time based expiration.')#">
             <xar:mlstring>Output Cache Expiration Time (in hh:mm:ss):</xar:mlstring>
        </label>
        <input type="text" name="cacheexpire" id="cacheexpire" value="#$cacheExpire#" size="9" maxlength="9" />

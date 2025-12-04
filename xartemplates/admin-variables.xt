@@ -45,10 +45,10 @@
           <td>
 	    // TODO: add more variables + use in xarVariableCache settings afterwards<br/>
             <input type="hidden" name="authid" value="#$authid#" />
-            <input type="submit" name="submit" value="#xarML('Submit')#" />
+            <input type="submit" name="submit" value="#$xar->ml('Submit')#" />
           </td>
           <td class="xar-align-center">
-            <input type="submit" name="reset" value="#xarML('Reset All')#" />
+            <input type="submit" name="reset" value="#$xar->ml('Reset All')#" />
           </td>
         </tr>
         </table>

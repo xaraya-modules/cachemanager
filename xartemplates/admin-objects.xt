@@ -37,7 +37,7 @@
               </xar:if>
             </td>
             <td>
-              <a href="&xar-modurl-dynamicdata-admin-modifyprop;&amp;itemid=#$object['objectid']#" title="#$object['name']# object (#xarMod::getName($object['moduleid'])#.#$object['itemtype']#)">#$object['label']#</a>
+              <a href="&xar-modurl-dynamicdata-admin-modifyprop;&amp;itemid=#$object['objectid']#" title="#$object['name']# object (#$xar->mod()->getName($object['moduleid'])#.#$object['itemtype']#)">#$object['label']#</a>
             </td>
             <td>
               #$method#
@@ -74,7 +74,7 @@
           </td>
           <td>
             <input type="hidden" name="authid" value="#$authid#" />
-            <input type="submit" name="submit" value="#xarML('Submit')#" />
+            <input type="submit" name="submit" value="#$xar->ml('Submit')#" />
           </td>
           <td>
           </td>

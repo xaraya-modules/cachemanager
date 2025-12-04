@@ -3,8 +3,8 @@
 <xar:comment> License: GPL http://www.gnu.org/copyleft/gpl.html </xar:comment>
 <xar:comment>Common Administration menu</xar:comment>
 <xar:style scope="module" module="base" file="tabs" />
-<xar:set name="status">xarMod::apiFunc('cachemanager', 'admin', 'getstatus')</xar:set>
-<xar:set name="info">xarController::getRequest()->getInfo()</xar:set>
+<xar:set name="status">$xar->mod()->apiFunc('cachemanager', 'admin', 'getstatus')</xar:set>
+<xar:set name="info">$xar->req()->getRequest()->getInfo()</xar:set>
 <xar:set name="activetab">$info[2]</xar:set>
 <div>
   <ul class="xar-tabs">
@@ -22,7 +22,7 @@
         </xar:if>
 
         <li class="#$tabclass#">
-          <a href="#xarController::URL('cachemanager','admin','flushcache')#" class="#$linkclass#">
+          <a href="#$xar->ctl()->URL('cachemanager','admin','flushcache')#" class="#$linkclass#">
             Flush Cache
           </a>
         </li>
@@ -36,7 +36,7 @@
 		    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 		</xar:if>
             <li class="#$tabclass#">
-                <a href="#xarController::URL('cachemanager','admin','pages')#" class="#$linkclass#">
+                <a href="#$xar->ctl()->URL('cachemanager','admin','pages')#" class="#$linkclass#">
                     Pages
                 </a>
             </li>
@@ -51,7 +51,7 @@
 		    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 		</xar:if>
             <li class="#$tabclass#">
-                <a href="#xarController::URL('cachemanager','admin','blocks')#" class="#$linkclass#">
+                <a href="#$xar->ctl()->URL('cachemanager','admin','blocks')#" class="#$linkclass#">
                     Blocks
                 </a>
             </li>
@@ -66,7 +66,7 @@
 		    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 		</xar:if>
             <li class="#$tabclass#">
-                <a href="#xarController::URL('cachemanager','admin','modules')#" class="#$linkclass#">
+                <a href="#$xar->ctl()->URL('cachemanager','admin','modules')#" class="#$linkclass#">
                     Modules
                 </a>
             </li>
@@ -81,7 +81,7 @@
 		    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 		</xar:if>
             <li class="#$tabclass#">
-                <a href="#xarController::URL('cachemanager','admin','objects')#" class="#$linkclass#">
+                <a href="#$xar->ctl()->URL('cachemanager','admin','objects')#" class="#$linkclass#">
                     Objects
                 </a>
             </li>
@@ -96,7 +96,7 @@
 		    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 		</xar:if>
             <li class="#$tabclass#">
-                <a href="#xarController::URL('cachemanager','admin','variables')#" class="#$linkclass#">
+                <a href="#$xar->ctl()->URL('cachemanager','admin','variables')#" class="#$linkclass#">
                     Variables
                 </a>
             </li>
@@ -117,7 +117,7 @@
 	    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 	</xar:if>
         <li class="#$tabclass#">
-          <a href="#xarController::URL('cachemanager','admin','stats')#" class="#$linkclass#">
+          <a href="#$xar->ctl()->URL('cachemanager','admin','stats')#" class="#$linkclass#">
             Statistics
           </a>
         </li>
@@ -130,7 +130,7 @@
 	    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 	</xar:if>
         <li class="#$tabclass#">
-          <a href="#xarController::URL('cachemanager','admin','modifyconfig')#" class="#$linkclass#">
+          <a href="#$xar->ctl()->URL('cachemanager','admin','modifyconfig')#" class="#$linkclass#">
             Modify Config
           </a>
         </li>
@@ -143,7 +143,7 @@
 	    <xar:set name="linkclass">'xar-norm xar-norm-outline'</xar:set>
 	</xar:if>
        <li class="#$tabclass#">
-       <a href="#xarController::URL('cachemanager','admin','overview')#" class="#$linkclass#">
+       <a href="#$xar->ctl()->URL('cachemanager','admin','overview')#" class="#$linkclass#">
             Overview
        </a>
       </li>
