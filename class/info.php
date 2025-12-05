@@ -17,15 +17,15 @@
 namespace Xaraya\Modules\CacheManager;
 
 use Xaraya\Authentication\AuthToken;
-use Xaraya\Context\ContextInterface;
-use Xaraya\Context\ContextTrait;
+use Xaraya\Context\WithContextInterface;
+use Xaraya\Context\WithContextTrait;
 use xarObject;
 use Throwable;
 use Xaraya\Services\xar;
 
-class CacheInfo extends xarObject implements ContextInterface
+class CacheInfo extends xarObject implements WithContextInterface
 {
-    use ContextTrait;
+    use WithContextTrait;
 
     // list of currently supported cache types - not including 'query', 'core', 'template' here
     public static $typelist = ['page', 'block', 'module', 'object', 'variable'];
