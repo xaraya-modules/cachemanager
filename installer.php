@@ -69,64 +69,59 @@ class Installer extends InstallerClass
         $this->mod()->setVar('FlushOnNewPollvote', 0);
         $this->mod()->setVar('AutoRegenSessionless', 0);
 
-        if (!xarModHooks::register(
-            'item',
-            'create',
-            'API',
+        if (!$this->hooked()->registerObserver(
+            'ItemCreate',
             'cachemanager',
+            'API',
             'admin',
             'createhook'
         )) {
             return false;
         }
-        if (!xarModHooks::register(
-            'item',
-            'update',
-            'API',
+        if (!$this->hooked()->registerObserver(
+            'ItemUpdate',
             'cachemanager',
+            'API',
             'admin',
             'updatehook'
         )) {
             return false;
         }
-        if (!xarModHooks::register(
-            'item',
-            'delete',
-            'API',
+        if (!$this->hooked()->registerObserver(
+            'ItemDelete',
             'cachemanager',
+            'API',
             'admin',
             'deletehook'
         )) {
             return false;
         }
-        if (!xarModHooks::register(
-            'item',
-            'modify',
-            'GUI',
+        if (!$this->hooked()->registerObserver(
+            'ItemModify',
             'cachemanager',
+            'GUI',
             'admin',
             'modifyhook'
         )) {
             return false;
         }
-        if (!xarModHooks::register(
-            'module',
-            'updateconfig',
-            'API',
+        if (!$this->hooked()->registerObserver(
+            'ModuleUpdateconfig',
             'cachemanager',
+            'API',
             'admin',
             'updateconfighook'
         )) {
             return false;
         }
 
-        // Enable cachemanager hooks for articles
-        if ($this->mod()->isAvailable('articles')) {
+        // Enable cachemanager hooks for publications
+        if ($this->mod()->isAvailable('publications')) {
             $this->mod()->apiFunc(
                 'modules',
                 'admin',
                 'enablehooks',
-                ['callerModName' => 'articles', 'hookModName' => 'cachemanager']
+                ['callerModName' => 'publications', 'hookModName' => 'cachemanager']
             );
         }
         // Enable cachemanager hooks for base
@@ -255,11 +250,10 @@ class Installer extends InstallerClass
                     copy($defaultConfigFile, $cachingConfigFile);
                 }
                 // Register new Admin Modify GUI Hook
-                if (!xarModHooks::register(
-                    'item',
-                    'modify',
-                    'GUI',
+                if (!$this->hooked()->registerObserver(
+                    'ItemModify',
                     'cachemanager',
+                    'GUI',
                     'admin',
                     'modifyhook'
                 )) {
@@ -397,86 +391,32 @@ class Installer extends InstallerClass
      */
     public function delete()
     {
+        /* do not deactivate output caching when cachemanager is removed
         $varCacheDir = sys::varpath() . '/cache';
         $cacheOutputDir = $varCacheDir . '/output';
 
-        /* do not deactivate output caching when cachemanager is removed
-            if (is_dir($cacheOutputDir)) {
-                //if still there, remove the cache.touch file, this turns everything off
-                if (file_exists($cacheOutputDir . '/cache.touch')) {
-                    @unlink($cacheOutputDir . '/cache.touch');
-                }
-
-                // clear out the cache
-                @$this->rmdirr($cacheOutputDir);
+        if (is_dir($cacheOutputDir)) {
+            //if still there, remove the cache.touch file, this turns everything off
+            if (file_exists($cacheOutputDir . '/cache.touch')) {
+                @unlink($cacheOutputDir . '/cache.touch');
             }
 
-            // remove the caching config file
-            if (file_exists($varCacheDir . '/config.caching.php')) {
-                @unlink($varCacheDir . '/config.caching.php');
-            }
+            // clear out the cache
+            @$this->rmdirr($cacheOutputDir);
+        }
+
+        // remove the caching config file
+        if (file_exists($varCacheDir . '/config.caching.php')) {
+            @unlink($varCacheDir . '/config.caching.php');
+        }
         */
-
-        // Remove module hooks
-        if (!xarModHooks::unregister(
-            'item',
-            'create',
-            'API',
-            'cachemanager',
-            'admin',
-            'createhook'
-        )) {
-            return false;
-        }
-        if (!xarModHooks::unregister(
-            'item',
-            'update',
-            'API',
-            'cachemanager',
-            'admin',
-            'updatehook'
-        )) {
-            return false;
-        }
-        if (!xarModHooks::unregister(
-            'item',
-            'delete',
-            'API',
-            'cachemanager',
-            'admin',
-            'deletehook'
-        )) {
-            return false;
-        }
-        if (!xarModHooks::unregister(
-            'item',
-            'modify',
-            'GUI',
-            'cachemanager',
-            'admin',
-            'modifyhook'
-        )) {
-            return false;
-        }
-        if (!xarModHooks::unregister(
-            'module',
-            'updateconfig',
-            'API',
-            'cachemanager',
-            'admin',
-            'updateconfighook'
-        )) {
-            return false;
-        }
 
         // Remove module variables
         $this->mod()->flushVars();
 
-        // Remove Masks and Instances
-        xarMasks::removemasks('cachemanager');
-
-        // Deletion successful
-        return true;
+        // nothing special to do here - rely on standard deinstall to take care of everything
+        $module = 'cachemanager';
+        return $this->mod()->apiFunc('modules', 'admin', 'standarddeinstall', ['module' => $module]);
     }
 
     /**

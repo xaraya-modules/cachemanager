@@ -52,7 +52,8 @@ class CacheInfo extends xarObject implements WithContextInterface
             return;
         }
         if ($this->type === 'token') {
-            return AuthToken::getTokenStorage();
+            $authToken = new AuthToken();
+            return $authToken->getCacheStorage();
         }
         // get cache type settings
         $settings = $this->getSettings();

@@ -16,9 +16,9 @@
 
 namespace Xaraya\Modules\CacheManager\Config;
 
-use xarVariableCache;
 use Xaraya\Modules\CacheManager\CacheConfig;
 use Xaraya\Modules\CacheManager\CacheUtility;
+use Xaraya\Services\Caching\VariableCache as VariableCacheService;
 
 class VariableCache extends CacheConfig
 {
@@ -114,7 +114,13 @@ class VariableCache extends CacheConfig
 
         // Get all variables
         //$variables = $this->mod()->apiFunc('dynamicdata', 'user', 'getvariables');
-        $variables = array_keys(xarVariableCache::getCacheSettings());
+        if (!empty($this->cache()->variableCache)) {
+            $variables = array_keys($this->cache()->variableCache->getCacheSettings());
+        } else {
+            $variableCache = new VariableCacheService($this->getStaticServices());
+            $variableCache->init($this->cache()->getConfig());
+            $variables = array_keys($variableCache->getCacheSettings());
+        }
 
         $variableconfig = [];
         foreach ($variables as $name) {
